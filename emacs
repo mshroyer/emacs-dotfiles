@@ -14,6 +14,9 @@
 (setq mac-command-modifier 'option)
 (setq mac-option-modifier 'meta)
 
+;; Use Aspell for spell checking
+;(setq ispell-program-name "aspell")
+
 
 ;;; FILE HANDLING
 
@@ -80,7 +83,7 @@
 ;; Swap to C-j for raw newline, C-m for newline-and-indent
 (global-set-key "\C-m" 'newline-and-indent)
 (global-set-key "\C-j" 'newline)
-(global-set-key "\M-\C-m" 'indent-new-comment-line)
+(global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
 
 ;;; CUSTOM MODE HOOKS
@@ -89,6 +92,8 @@
 (add-hook 'text-mode-hook
           (lambda ()
             (paragraph-indent-minor-mode)
+;            (flyspell-mode)             ; Perform spell checking in
+;                                        ; text-mode buffers by default
             (define-key text-mode-map (kbd "TAB") 'self-insert-command)
             (setq tab-width 8)
             (auto-fill-mode t)
