@@ -1,0 +1,12 @@
+EMACS CONFIGURATION DIRECTORY
+=============================
+
+Thigs is my emacs configuration directory, `~/.emacs.d/`.  It contains
+my emacs configuration and abbreviation files, as well as any
+extensions for the editor that I have written or downloaded myself.
+
+To set this directory up as a local Emacs configuration, move it to
+your `~/.emacs.d/` and create the following symbolic links:
+
+	~/.emacs => ~/.emacs.d/emacs
+	~/.abbrev_defs => ~/.emacs.d/abbrev_defs
