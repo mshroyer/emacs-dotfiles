@@ -75,6 +75,10 @@
 
 ;;; EDITING OPTIONS
 
+;; Viper mode!
+;(setq viper-mode t)
+;(require 'viper)
+
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)
 (read-abbrev-file "~/.abbrev_defs")
@@ -94,7 +98,7 @@
 (setq c-indent-level 4)
 
 ;; Always use auto-fill in text mode; wrap to 75 characters by default
-(setq fill-column 75)
+(setq-default fill-column 75)
 
 ;; Show trailing whitespace
 (if (>= emacs-major-version 21)
