@@ -70,7 +70,8 @@
     (progn
       (require 'color-theme)
       (color-theme-initialize)
-      (color-theme-classic)))
+;      (color-theme-classic)))
+      (color-theme-charcoal-black)))
 
 
 ;;; EDITING OPTIONS
@@ -111,6 +112,11 @@
 
 
 ;;; CUSTOM MODE HOOKS
+
+;; Scheme mode...
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (setq scheme-program-name "/usr/local/bin/mzscheme")))
 
 ;; Text mode...
 (add-hook 'text-mode-hook
