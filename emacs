@@ -10,9 +10,6 @@
 
 ;;; SYSTEM
 
-;; Use Aspell for spell checking
-(setq ispell-program-name "/usr/local/bin/aspell")
-
 ;; Start server mode if we're running in a windowing environment
 (if window-system
     (progn
