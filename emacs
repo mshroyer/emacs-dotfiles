@@ -11,7 +11,7 @@
 ;;; SYSTEM
 
 ;; Use Aspell for spell checking
-;(setq ispell-program-name "aspell")
+(setq ispell-program-name "/usr/local/bin/aspell")
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -151,12 +151,22 @@
             (setq scheme-program-name "/usr/local/bin/mzscheme")
             (auto-fill-mode)))
 
+;; Perl mode...
+(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (setq cperl-indent-level 4)
+            (setq cperl-continued-statement-offset 8)))
+
 ;; Text mode...
 (add-hook 'text-mode-hook
           (lambda ()
             (paragraph-indent-minor-mode)
-;            (flyspell-mode)             ; Perform spell checking in
-;                                        ; text-mode buffers by default
+            (flyspell-mode)             ; Perform spell checking in
+                                        ; text-mode buffers by default
             (define-key text-mode-map (kbd "TAB") 'self-insert-command)
             (setq tab-width 8)
             (auto-fill-mode t)
