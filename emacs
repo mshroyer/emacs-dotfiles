@@ -145,7 +145,6 @@
 ;; Scheme mode...
 (add-hook 'scheme-mode-hook
           (lambda ()
-            (setq scheme-program-name "/usr/local/bin/mzscheme")
             (auto-fill-mode)))
 
 ;; Perl mode...
