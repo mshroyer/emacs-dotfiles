@@ -162,8 +162,6 @@
 (add-hook 'text-mode-hook
           (lambda ()
             (paragraph-indent-minor-mode)
-            (flyspell-mode)             ; Perform spell checking in
-                                        ; text-mode buffers by default
             (define-key text-mode-map (kbd "TAB") 'self-insert-command)
             (setq tab-width 8)
             (auto-fill-mode t)
