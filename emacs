@@ -14,7 +14,25 @@
 ;(setq ispell-program-name "aspell")
 
 ;; Start server mode if we're running in a windowing environment
-(if window-system (server-start))
+(if window-system
+    (progn
+      (server-start)
+
+      ;; Open files for "emacsclient" in a new frame...
+      (add-hook 'server-switch-hook
+                (lambda ()
+                  (let ((server-buf (current-buffer)))
+                    (bury-buffer)
+                    (switch-to-buffer-other-frame server-buf))))
+
+      ;; ...and delete that frame once we're done with the file.
+      (add-hook 'server-done-hook
+                (lambda ()
+                  (kill-buffer nil)     ; Close the buffer, too
+                  (delete-frame)
+                  (redraw-display)      ; Redraw the display to clear
+                                        ; messages from main frame minibuf
+                  ))))
 
 ;; Configure elisp load path to include my ~/.emacs.d/ files
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -47,6 +65,10 @@
 
 ;; Delete unnecessary auto-save files
 (setq delete-auto-save-files t)
+
+;; Don't leave those damn annoying backup files all over the place (I don't
+;; know how to emulate Vim's backupcopy=yes mode)
+(setq make-backup-files nil)
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
