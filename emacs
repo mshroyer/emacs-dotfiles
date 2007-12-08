@@ -24,6 +24,15 @@
       (normal-top-level-add-subdirs-to-load-path)))
 
 
+;;; LOCAL SETTINGS
+
+;; Retrieve any local configurations from ~/.emacs.local, if the file
+;; exists on this system
+(let ((local-settings "~/.emacs.local"))
+  (if (file-exists-p local-settings)
+      (load-file local-settings)))
+
+
 ;;; MAC OS X-SPECIFIC CONFIGURATIONS
 
 ;; Use the Option/Alt key for Meta in Emacs.app
@@ -70,8 +79,9 @@
     (progn
       (require 'color-theme)
       (color-theme-initialize)
-;      (color-theme-classic)))
-      (color-theme-charcoal-black)))
+      (if (fboundp 'color-theme-local)  ; Use the local color theme if one
+          (color-theme-local)           ; was defined in ~/.emacs.local
+        (color-theme-classic))))
 
 
 ;;; EDITING OPTIONS
@@ -116,7 +126,8 @@
 ;; Scheme mode...
 (add-hook 'scheme-mode-hook
           (lambda ()
-            (setq scheme-program-name "/usr/local/bin/mzscheme")))
+            (setq scheme-program-name "/usr/local/bin/mzscheme")
+            (auto-fill-mode)))
 
 ;; Text mode...
 (add-hook 'text-mode-hook
