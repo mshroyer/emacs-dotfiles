@@ -88,7 +88,7 @@
 (setq visible-bell t)
 
 ;; Don't make me type out long answers...
-(fset 'yes-or-no-p 'y-or-n-p)
+;(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Scroll one line at a time, like Vim
 (setq scroll-step 1)
@@ -141,11 +141,6 @@
 
 
 ;;; CUSTOM MODE HOOKS
-
-;; Scheme mode...
-(add-hook 'scheme-mode-hook
-          (lambda ()
-            (auto-fill-mode)))
 
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
