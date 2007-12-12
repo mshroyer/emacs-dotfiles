@@ -142,6 +142,77 @@
 
 ;;; CUSTOM MODE HOOKS
 
+(column-number-mode t)
+
+;; Use visual bell
+(setq visible-bell t)
+
+;; Don't make me type out long answers...
+;(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Scroll one line at a time, like Vim
+(setq scroll-step 1)
+
+;; Color themes!  (But only when running in a GUI, of course...)
+(if window-system
+    (progn
+      (require 'color-theme)
+      (color-theme-initialize)
+      (if (fboundp 'color-theme-local)  ; Use the local color theme if one
+          (color-theme-local)           ; was defined in ~/.emacs.local
+        (color-theme-classic))))
+
+
+;;; EDITING OPTIONS
+
+;; Viper mode!
+;(setq viper-mode t)
+;(require 'viper)
+
+;; Text mode abbreviations
+(setq-default abbrev-mode t)
+(read-abbrev-file "~/.abbrev_defs")
+(setq save-abbrevs t)
+
+;; Set up syntax coloring
+(global-font-lock-mode t)
+
+;; Turn on paren matching (this is a Lisp editor, is it not?)
+(show-paren-mode t)
+(setq show-paren-style 'mixed)
+
+;; Use spaces for indentation, not tab chracters
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq standard-indent 4)
+(setq c-indent-level 4)
+
+;; Always use auto-fill in text mode; wrap to 75 characters by default
+(setq-default fill-column 75)
+
+;; Show trailing whitespace
+(if (>= emacs-major-version 21)
+    (setq show-trailing-whitespace t))
+
+;; Swap to C-j for raw newline, C-m for newline-and-indent
+(global-set-key "\C-m" 'newline-and-indent)
+(global-set-key "\C-j" 'newline)
+(global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
+
+
+;;; CUSTOM MODE HOOKS AND SETTINGS
+
+;; Markdown mode...
+(autoload 'markdown-mode "markdown-mode.el")
+(setq auto-mode-alist
+      (append '(("\\.mkd$" . markdown-mode)
+                ("\\.markdown$" . markdown-mode))
+              auto-mode-alist))
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (auto-fill-mode)))
+      
+(column-number-mode t)
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
