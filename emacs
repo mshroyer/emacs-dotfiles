@@ -212,7 +212,6 @@
           (lambda ()
             (auto-fill-mode)))
       
-(column-number-mode t)
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
@@ -222,6 +221,11 @@
           (lambda ()
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)))
+
+;; Common Lisp mode...
+(add-hook 'lisp-mode-hook
+          (lambda ()
+            (setq lisp-indent-function 'common-lisp-indent-function)))
 
 ;; Text mode...
 (add-hook 'text-mode-hook
