@@ -301,3 +301,11 @@
           (insert (format (concat line char "\n") i i i i))
           (setq i (+ i 1))))))
   (beginning-of-buffer))
+
+
+;; Insert the current date
+(defun insert-date-string ()
+  "Unix `date`-command style timestamp."
+
+  (interactive)
+  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y")))
