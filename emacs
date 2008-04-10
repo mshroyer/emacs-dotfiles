@@ -140,66 +140,6 @@
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
 
-;;; CUSTOM MODE HOOKS
-
-(column-number-mode t)
-
-;; Use visual bell
-(setq visible-bell t)
-
-;; Don't make me type out long answers...
-;(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Scroll one line at a time, like Vim
-(setq scroll-step 1)
-
-;; Color themes!  (But only when running in a GUI, of course...)
-(if window-system
-    (progn
-      (require 'color-theme)
-      (color-theme-initialize)
-      (if (fboundp 'color-theme-local)  ; Use the local color theme if one
-          (color-theme-local)           ; was defined in ~/.emacs.local
-        (color-theme-classic))))
-
-
-;;; EDITING OPTIONS
-
-;; Viper mode!
-;(setq viper-mode t)
-;(require 'viper)
-
-;; Text mode abbreviations
-(setq-default abbrev-mode t)
-(read-abbrev-file "~/.abbrev_defs")
-(setq save-abbrevs t)
-
-;; Set up syntax coloring
-(global-font-lock-mode t)
-
-;; Turn on paren matching (this is a Lisp editor, is it not?)
-(show-paren-mode t)
-(setq show-paren-style 'mixed)
-
-;; Use spaces for indentation, not tab chracters
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq standard-indent 4)
-(setq c-indent-level 4)
-
-;; Always use auto-fill in text mode; wrap to 75 characters by default
-(setq-default fill-column 75)
-
-;; Show trailing whitespace
-(if (>= emacs-major-version 21)
-    (setq show-trailing-whitespace t))
-
-;; Swap to C-j for raw newline, C-m for newline-and-indent
-(global-set-key "\C-m" 'newline-and-indent)
-(global-set-key "\C-j" 'newline)
-(global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
-
-
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
 ;; Markdown mode...
@@ -211,7 +151,7 @@
 (add-hook 'markdown-mode-hook
           (lambda ()
             (auto-fill-mode)))
-      
+
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
@@ -228,14 +168,15 @@
             (setq lisp-indent-function 'common-lisp-indent-function)))
 
 ;; Text mode...
+(define-key text-mode-map (kbd "TAB") 'self-insert-command)
+(define-key text-mode-map "\C-m" 'newline)
+(define-key text-mode-map "\C-j" 'newline-and-indent)
+(define-key text-mode-map "\C-cn" 'new-journal-entry)
 (add-hook 'text-mode-hook
           (lambda ()
             (paragraph-indent-minor-mode)
-            (define-key text-mode-map (kbd "TAB") 'self-insert-command)
             (setq tab-width 8)
-            (auto-fill-mode t)
-            (define-key text-mode-map "\C-m" 'newline)
-            (define-key text-mode-map "\C-j" 'newline-and-indent)))
+            (auto-fill-mode t)))
 
 
 ;;; CUSTOM EXTENDED COMMANDS
@@ -303,9 +244,17 @@
   (beginning-of-buffer))
 
 
-;; Insert the current date
-(defun insert-date-string ()
-  "Unix `date`-command style timestamp."
+;; Create a new journal entry
+(defun new-journal-entry ()
+  "Make a new journal entry with a Unix `date`-style timestamp"
 
   (interactive)
+  (end-of-buffer)
+  (re-search-backward "[^ \t\n]")
+  (end-of-line)
+  (let ((beg (point)))
+    (end-of-buffer)
+    (delete-region beg (point)))
+  (dotimes (i 3)
+    (newline))
   (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y")))
