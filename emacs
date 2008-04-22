@@ -257,4 +257,6 @@
     (delete-region beg (point)))
   (dotimes (i 3)
     (newline))
-  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y")))
+  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
+  (dotimes (i 2)
+    (newline)))
