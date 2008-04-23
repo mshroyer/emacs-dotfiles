@@ -140,6 +140,12 @@
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
 
+;;; EXTENSIONS
+
+(require 'slime)
+(slime-setup)
+
+
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
 ;; Markdown mode...
