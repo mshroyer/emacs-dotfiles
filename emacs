@@ -158,6 +158,11 @@
           (lambda ()
             (auto-fill-mode)))
 
+;; C mode...
+(add-hook 'c-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode t)))
+
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
