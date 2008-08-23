@@ -8,6 +8,19 @@
 ;;; http://markshroyer.com/
 ;;;
 
+;;; UTILITY
+
+;; Generate a simple list of tab stops, 'stop-width characters in between
+;; and up to 'text-width characters long in total.
+(defun simple-tab-stop-list (stop-width text-width)
+  "Generate a simple list of tab stops"
+
+  (do ((stop stop-width (+ stop stop-width))
+        (stop-list nil))
+      ((> stop text-width) stop-list)
+    (setq stop-list (append stop-list (list stop)))))
+
+
 ;;; SYSTEM
 
 ;; Start server mode if we're running in a windowing environment
@@ -87,6 +100,10 @@
 ;; Use visual bell
 (setq visible-bell t)
 
+;; Show continuation lines
+(setq truncate-lines nil)
+(setq truncate-partial-width-windows nil)
+
 ;; Don't make me type out long answers...
 ;(fset 'yes-or-no-p 'y-or-n-p)
 
@@ -148,6 +165,16 @@
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
+;; Outline mode...
+(add-to-list 'auto-mode-alist '("\\.ol$" . outline-mode))
+
+;; HTML mode...
+(add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
+(add-hook 'html-mode-hook
+          (lambda ()
+            (auto-fill-mode nil)
+            (setq tab-width 4)))
+
 ;; Markdown mode...
 (autoload 'markdown-mode "markdown-mode.el")
 (setq auto-mode-alist
@@ -158,10 +185,25 @@
           (lambda ()
             (auto-fill-mode)))
 
+;; YAML mode...
+(add-hook 'yaml-mode-hook
+          (lambda ()
+            (local-set-key "\C-cn" 'new-yaml-ab-entry)
+            (setq indent-tabs-mode nil)
+            (setq tab-stop-list (simple-tab-stop-list 2 75))))
+
 ;; C mode...
 (add-hook 'c-mode-hook
           (lambda ()
             (setq indent-tabs-mode t)))
+
+;; ASM mode...
+(add-hook 'asm-mode-hook
+          (lambda ()
+            (setq tab-width 3)
+            (setq tab-stop-list (simple-tab-stop-list 3 75))
+            (setq indent-tabs-mode t)
+            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 
 ;; Perl mode...
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
@@ -272,3 +314,57 @@
   (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
   (dotimes (i 2)
     (newline)))
+
+
+;; New YAML address book item
+(defun new-yaml-ab-entry ()
+  "Make a new entry in a YAML address book"
+
+  (interactive)
+
+  (if (re-search-backward "^\\\.\\\.\\\.$" nil t)
+      (next-line)
+    (beginning-of-buffer))
+  (insert "---")
+  (newline)
+
+  (insert "name:")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "family: ")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "given: ")
+  (newline)
+
+  (insert "email: ")
+  (newline)
+
+  (insert "telephone:")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "mobile: ")
+  (newline)
+
+  (insert "address:")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "street: ")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "city: ")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "state: ")
+  (newline)
+  (tab-to-tab-stop)
+  (insert "zip: ")
+  (newline)
+
+  (insert "...")
+  (newline)
+
+  (re-search-backward "^---$")
+  (dotimes (i 2)
+    (next-line))
+  (end-of-line))
