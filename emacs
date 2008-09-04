@@ -156,6 +156,9 @@
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
+;; Recheck spelling after running ispell-key keyboard macro
+;(global-set-key "\M-$" 'flyspell-word)
+
 
 ;;; EXTENSIONS
 
@@ -173,7 +176,7 @@
 (add-hook 'html-mode-hook
           (lambda ()
             (auto-fill-mode nil)
-            (setq tab-width 4)))
+            (setq tab-width 2)))
 
 ;; Markdown mode...
 (autoload 'markdown-mode "markdown-mode.el")
@@ -214,6 +217,15 @@
           (lambda ()
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)))
+
+;; Python mode...
+(add-hook 'python-mode-hook
+          (lambda ()
+            (abbrev-mode nil)))
+
+;; JavaScript mode...
+(autoload 'javascript-mode "javascript" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 
 ;; Common Lisp mode...
 (add-hook 'lisp-mode-hook
@@ -368,3 +380,21 @@
   (dotimes (i 2)
     (next-line))
   (end-of-line))
+
+
+;; Consolidate flyspell commands
+(defun flyspell-enable ()
+  "Enable flyspell for the current buffer"
+
+  (interactive)
+
+  (flyspell-mode t)
+  (flyspell-buffer))
+
+(defun flyspell-word ()
+  "Check the current word's spelling and then re-run flyspell"
+
+  (interactive)
+
+  (command-execute 'ispell-word)
+  (flyspell-buffer))
