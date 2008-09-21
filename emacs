@@ -83,7 +83,6 @@
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
 
-
 ;;; GENERAL INTERFACE SETTINGS
 
 ;; Don't display startup message
@@ -118,6 +117,11 @@
       (if (fboundp 'color-theme-local)  ; Use the local color theme if one
           (color-theme-local)           ; was defined in ~/.emacs.local
         (color-theme-classic))))
+
+
+;;; SCMs
+
+;(require 'git-emacs)
 
 
 ;;; EDITING OPTIONS
@@ -159,6 +163,9 @@
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
+;; Allow easy saving and restoration of point to and from registers
+(global-set-key "\C-x r p" 'register-to-point)
+
 
 ;;; EXTENSIONS
 
@@ -198,7 +205,7 @@
 ;; C mode...
 (add-hook 'c-mode-hook
           (lambda ()
-            (setq indent-tabs-mode t)))
+            (setq indent-tabs-mode nil)))
 
 ;; ASM mode...
 (add-hook 'asm-mode-hook
