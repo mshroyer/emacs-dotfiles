@@ -121,7 +121,7 @@
 
 ;;; SCMs
 
-;(require 'git-emacs)
+;; (require 'git-emacs)
 
 
 ;;; EDITING OPTIONS
@@ -223,7 +223,8 @@
 (add-hook 'cperl-mode-hook
           (lambda ()
             (setq cperl-indent-level 4)
-            (setq cperl-continued-statement-offset 8)))
+            (setq cperl-continued-statement-offset 8)
+            (abbrev-mode nil)))
 
 ;; Python mode...
 (add-hook 'python-mode-hook
