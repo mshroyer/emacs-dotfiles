@@ -124,6 +124,12 @@
 ;; (require 'git-emacs)
 
 
+;;; Tramp
+
+(require 'tramp)
+(setq tramp-default-method "scp")
+
+
 ;;; EDITING OPTIONS
 
 ;; Viper mode!
@@ -239,6 +245,15 @@
 (add-hook 'lisp-mode-hook
           (lambda ()
             (setq lisp-indent-function 'common-lisp-indent-function)))
+
+;; Clojure mode...
+(autoload 'clojure-mode "clojure-mode" "Clojure editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+
+;; Groovy mode...
+(autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
+(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
 ;; Text mode...
 (define-key text-mode-map (kbd "TAB") 'self-insert-command)
