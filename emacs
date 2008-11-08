@@ -266,6 +266,11 @@
             (setq tab-width 8)
             (auto-fill-mode t)))
 
+;; LaTeX mode...
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (longlines-mode t)))
+
 
 ;;; CUSTOM EXTENDED COMMANDS
 
