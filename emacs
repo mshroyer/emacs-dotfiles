@@ -107,7 +107,11 @@
 ;(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Scroll one line at a time, like Vim
-(setq scroll-step 1)
+(setq scroll-conservatively 2)
+
+;; Show at least three lines of context around the cursor while scrolling
+;; (like :set scrolloff=3 in Vim)
+(setq scroll-margin 3)
 
 ;; Color themes!  (But only when running in a GUI, of course...)
 (if window-system
@@ -269,7 +273,8 @@
 ;; LaTeX mode...
 (add-hook 'LaTeX-mode-hook
           (lambda ()
-            (longlines-mode t)))
+            (setq tab-width 4)
+            (auto-fill-mode t)))
 
 
 ;;; CUSTOM EXTENDED COMMANDS
