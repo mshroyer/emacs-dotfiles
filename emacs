@@ -115,12 +115,11 @@
 
 ;; Color themes!  (But only when running in a GUI, of course...)
 (if window-system
-    (progn
-      (require 'color-theme)
-      (color-theme-initialize)
-      (if (fboundp 'color-theme-local)  ; Use the local color theme if one
-          (color-theme-local)           ; was defined in ~/.emacs.local
-        (color-theme-classic))))
+    (if (boundp 'color-theme-local)
+        (progn
+          (require 'color-theme)            ; Only load themes if one was
+          (color-theme-initialize)          ; defined in ~/.emacs.local
+          (funcall color-theme-local))))
 
 
 ;;; SCMs
