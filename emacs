@@ -23,6 +23,9 @@
 
 ;;; SYSTEM
 
+;; Change Emacs user directory
+(setq user-emacs-directory "~/emacs.d/")
+
 ;; Start server mode if we're running in a windowing environment
 (if window-system
     (progn
@@ -46,7 +49,7 @@
 
 ;; Configure elisp load path to include my ~/.emacs.d/ files
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-    (let* ((my-lisp-dir "~/.emacs.d/elisp/")
+    (let* ((my-lisp-dir (concat user-emacs-directory "elisp/"))
 	   (default-directory my-lisp-dir))
       (setq load-path (cons my-lisp-dir load-path))
       (normal-top-level-add-subdirs-to-load-path)))
