@@ -1,3 +1,4 @@
+;;; -*- Mode: Emacs-Lisp; -*-
 ;;;
 ;;; ~/.emacs
 ;;;
