@@ -430,8 +430,8 @@
 
   (interactive)
 
-  (flyspell-mode t)
-  (flyspell-buffer))
+  (flyspell-buffer)
+  (flyspell-mode t))
 
 (defun flyspell-word ()
   "Check the current word's spelling and then re-run flyspell"
