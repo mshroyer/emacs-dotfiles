@@ -87,6 +87,7 @@
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
 
+
 ;;; GENERAL INTERFACE SETTINGS
 
 ;; Don't display startup message
@@ -116,6 +117,10 @@
 ;; Show at least three lines of context around the cursor while scrolling
 ;; (like :set scrolloff=3 in Vim)
 (setq scroll-margin 3)
+
+;; Don't use transient mark mode / Zmacs mode (note that this disables
+;; region highlighting)
+(transient-mark-mode nil)
 
 ;; Color themes!  (But only when running in a GUI, of course...)
 (if window-system
