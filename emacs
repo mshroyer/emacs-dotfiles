@@ -113,7 +113,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Scroll one line at a time, like Vim
-(setq scroll-conservatively 2)
+;(setq scroll-conservatively 2)
 
 ;; Show at least three lines of context around the cursor while scrolling
 ;; (like :set scrolloff=3 in Vim)
