@@ -179,11 +179,11 @@
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
+;; Shortcut to enable flyspell for buffer
+(global-set-key "\C-cs" 'flyspell-enable)
+
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
-
-;; Allow easy saving and restoration of point to and from registers
-(global-set-key "\C-x r p" 'register-to-point)
 
 
 ;;; EXTENSIONS
@@ -440,3 +440,5 @@
 
   (command-execute 'ispell-word)
   (flyspell-buffer))
+
+(put 'set-goal-column 'disabled nil)
