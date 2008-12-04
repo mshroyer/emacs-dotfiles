@@ -121,7 +121,7 @@
 
 ;; Don't use transient mark mode / Zmacs mode (note that this disables
 ;; region highlighting)
-(transient-mark-mode nil)
+(transient-mark-mode -1)
 
 ;; Color themes!  (But only when running in a GUI, of course...)
 (if window-system
