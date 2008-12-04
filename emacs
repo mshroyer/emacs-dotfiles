@@ -98,6 +98,7 @@
 
 ;; Display current time and load average on mode line
 (display-time)
+
 ;; Show column number on the mode line
 (column-number-mode t)
 
@@ -109,7 +110,7 @@
 (setq truncate-partial-width-windows nil)
 
 ;; Don't make me type out long answers...
-;(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Scroll one line at a time, like Vim
 (setq scroll-conservatively 2)
