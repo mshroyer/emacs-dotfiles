@@ -121,7 +121,7 @@
 
 ;; Don't use transient mark mode / Zmacs mode (note that this disables
 ;; region highlighting)
-(transient-mark-mode -1)
+(transient-mark-mode 0)
 
 ;; Color themes!  (But only when running in a GUI, of course...)
 (if window-system
@@ -155,10 +155,10 @@
 (setq save-abbrevs t)
 
 ;; Set up syntax coloring
-(global-font-lock-mode t)
+(global-font-lock-mode 1)
 
 ;; Turn on paren matching (this is a Lisp editor, is it not?)
-(show-paren-mode t)
+(show-paren-mode 1)
 (setq show-paren-style 'mixed)
 
 ;; Use spaces for indentation, not tab chracters
@@ -201,7 +201,7 @@
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
 (add-hook 'html-mode-hook
           (lambda ()
-            (auto-fill-mode nil)
+            (auto-fill-mode 0)
             (setq tab-width 2)))
 
 ;; Markdown mode...
@@ -243,12 +243,12 @@
           (lambda ()
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)
-            (abbrev-mode nil)))
+            (abbrev-mode 0)))
 
 ;; Python mode...
 (add-hook 'python-mode-hook
           (lambda ()
-            (abbrev-mode nil)))
+            (abbrev-mode 0)))
 
 ;; JavaScript mode...
 (autoload 'javascript-mode "javascript" nil t)
@@ -277,13 +277,13 @@
           (lambda ()
             (paragraph-indent-minor-mode)
             (setq tab-width 8)
-            (auto-fill-mode t)))
+            (auto-fill-mode 1)))
 
 ;; LaTeX mode...
 (add-hook 'LaTeX-mode-hook
           (lambda ()
             (setq tab-width 4)
-            (auto-fill-mode t)))
+            (auto-fill-mode 1)))
 
 
 ;;; CUSTOM EXTENDED COMMANDS
@@ -431,7 +431,7 @@
   (interactive)
 
   (flyspell-buffer)
-  (flyspell-mode t))
+  (flyspell-mode 1))
 
 (defun flyspell-word ()
   "Check the current word's spelling and then re-run flyspell"
