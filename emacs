@@ -189,6 +189,9 @@
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
+;; Shortcuts for point-to-register and register-to-point
+(global-set-key "\C-x j" 'register-to-point)
+
 
 ;;; EXTENSIONS
 
