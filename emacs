@@ -24,8 +24,8 @@
 
 ;;; SYSTEM
 
-;; Change Emacs user directory
-(setq user-emacs-directory "~/emacs.d/")
+;; ;; Change Emacs user directory
+;; (setq user-emacs-directory "~/emacs.d/")
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -189,9 +189,6 @@
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
-;; Shortcuts for point-to-register and register-to-point
-(global-set-key "\C-xj" 'register-to-point)
-
 
 ;;; EXTENSIONS
 
@@ -202,6 +199,7 @@
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
 ;; Outline mode...
+(require 'outline)
 (add-to-list 'auto-mode-alist '("\\.ol$" . outline-mode))
 
 ;; HTML mode...
