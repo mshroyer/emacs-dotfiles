@@ -87,6 +87,10 @@
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
 
+;; ido mode for switching buffers and finding files
+(ido-mode 1)
+(setq ido-enable-flex-matching t)
+
 
 ;;; GENERAL INTERFACE SETTINGS
 
