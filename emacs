@@ -190,7 +190,7 @@
 ;(global-set-key "\M-$" 'flyspell-word)
 
 ;; Shortcuts for point-to-register and register-to-point
-(global-set-key "\C-x j" 'register-to-point)
+(global-set-key "\C-xj" 'register-to-point)
 
 
 ;;; EXTENSIONS
