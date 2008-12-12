@@ -25,7 +25,7 @@
 ;;; SYSTEM
 
 ;; ;; Change Emacs user directory
-;; (setq user-emacs-directory "~/emacs.d/")
+(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
