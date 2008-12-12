@@ -202,6 +202,12 @@
 (require 'outline)
 (add-to-list 'auto-mode-alist '("\\.ol$" . outline-mode))
 
+;; Org mode...
+(require 'org)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq org-cycle-separator-lines 1)
+(setq org-special-ctrl-a/e t)
+
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
 (add-hook 'html-mode-hook
