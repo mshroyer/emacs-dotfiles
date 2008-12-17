@@ -297,6 +297,14 @@
             (setq tab-width 4)
             (auto-fill-mode 1)))
 
+;; Diary mode...
+
+(add-hook 'diary-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-stop-list '(4 16))
+            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
+
 
 ;;; CUSTOM EXTENDED COMMANDS
 
