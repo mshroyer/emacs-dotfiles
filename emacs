@@ -24,7 +24,7 @@
 
 ;;; SYSTEM
 
-;; ;; Change Emacs user directory
+;; Change Emacs user directory
 (setq user-emacs-directory "~/.emacs.d/")
 
 ;; Start server mode if we're running in a windowing environment
@@ -165,9 +165,9 @@
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
 
-;; Use spaces for indentation, not tab chracters
+;; ;; Use spaces for indentation, not tab chracters
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default tab-width 8)
 (setq standard-indent 4)
 (setq c-indent-level 4)
 
@@ -229,7 +229,6 @@
 (add-hook 'yaml-mode-hook
           (lambda ()
             (local-set-key "\C-cn" 'new-yaml-ab-entry)
-            (setq indent-tabs-mode nil)
             (setq tab-stop-list (simple-tab-stop-list 2 75))))
 
 ;; C mode...
@@ -286,9 +285,11 @@
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
 (add-hook 'text-mode-hook
           (lambda ()
-            (paragraph-indent-minor-mode)
             (setq tab-width 8)
             (auto-fill-mode 1)))
+
+;; Paragraph indent text mode...
+(add-to-list 'auto-mode-alist '("\\.txt$" . paragraph-indent-text-mode))
 
 ;; LaTeX mode...
 (add-hook 'LaTeX-mode-hook
