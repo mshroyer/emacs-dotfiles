@@ -453,4 +453,9 @@
   (command-execute 'ispell-word)
   (flyspell-buffer))
 
+
+
+;;;; ENABLED COMMANDS
+
 (put 'set-goal-column 'disabled nil)
+(put 'upcase-region 'disabled nil)
