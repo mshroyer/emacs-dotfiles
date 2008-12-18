@@ -135,6 +135,12 @@
           (color-theme-initialize)          ; defined in ~/.emacs.local
           (funcall color-theme-local))))
 
+;; Don't mess around with this disabled commands nonsense
+(setq disabled-command-hook nil)
+
+;; Confirm that we want to quit Emacs
+(setq confirm-kill-emacs 'y-or-n-p)
+
 
 ;;; SCMs
 
@@ -461,9 +467,3 @@
   (command-execute 'ispell-word)
   (flyspell-buffer))
 
-
-
-;;;; ENABLED COMMANDS
-
-(put 'set-goal-column 'disabled nil)
-(put 'upcase-region 'disabled nil)
