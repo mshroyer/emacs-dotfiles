@@ -300,8 +300,11 @@
 ;; LaTeX mode...
 (add-hook 'LaTeX-mode-hook
           (lambda ()
+            (local-set-key "\C-m" 'newline-and-indent)
+            (local-set-key "\C-j" 'newline)
             (setq tab-width 4)
             (auto-fill-mode 1)))
+
 
 ;; Diary mode...
 
