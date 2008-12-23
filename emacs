@@ -198,8 +198,8 @@
 
 ;;; EXTENSIONS
 
-(require 'slime)
-(slime-setup)
+(if (require 'slime "slime" t)
+    (slime-setup))
 
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
