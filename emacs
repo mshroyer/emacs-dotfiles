@@ -214,7 +214,6 @@
 (global-set-key "\C-c a" 'org-agenda)
 (setq org-cycle-separator-lines 1)
 (setq org-special-ctrl-a/e t)
-(setq org-agenda-files '("~/org/projects.org"))
 
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
