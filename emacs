@@ -199,8 +199,8 @@
 
 ;;; EXTENSIONS
 
-(if (require 'slime "slime" t)
-    (slime-setup))
+(if (featurep 'slime)
+    (autoload 'slime "slime.el" "The Superior LISP mode for Emacs" t))
 
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
