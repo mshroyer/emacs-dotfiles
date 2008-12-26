@@ -101,6 +101,10 @@
 ;; Get rid of the toolbar
 (tool-bar-mode 0)
 
+;; Don't show the menu bar unless we're running in a window system
+(if (not window-system)
+    (menu-bar-mode 0))
+
 ;; Display current time and load average on mode line
 (display-time)
 
