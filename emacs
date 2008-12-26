@@ -218,6 +218,7 @@
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-ca" 'org-agenda)
+(define-key org-mode-map "\M-[z" 'org-shifttab)
 (setq org-cycle-separator-lines 1)
 (setq org-special-ctrl-a/e t)
 
