@@ -218,9 +218,34 @@
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-ca" 'org-agenda)
+; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
 (define-key org-mode-map "\M-[z" 'org-shifttab)
-(setq org-cycle-separator-lines 1)
-(setq org-special-ctrl-a/e t)
+(setq org-cycle-separator-lines 1
+      org-special-ctrl-a/e t
+      org-agenda-start-on-weekday 0
+      org-completion-use-ido t
+      org-agenda-window-setup 'current-window)
+; Always show context when creating sparse trees:
+(setq org-show-siblings t)
+
+;; Calendar mode...
+(global-set-key "\C-cl" 'calendar)
+(add-hook 'calendar-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
+;; Diary mode...
+(global-set-key "\C-cd" 'diary)
+(add-hook 'diary-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-stop-list '(4 16))
+            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
+(setq diary-display-function 'diary-fancy-display)
+
+;; Calc mode...
+(global-set-key "\C-cc" 'calc)
 
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
@@ -312,15 +337,6 @@
             (local-set-key "\C-j" 'newline)
             (setq tab-width 4)
             (auto-fill-mode 1)))
-
-
-;; Diary mode...
-
-(add-hook 'diary-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)
-            (setq tab-stop-list '(4 16))
-            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 
 
 ;;; CUSTOM EXTENDED COMMANDS
@@ -477,3 +493,4 @@
 
   (command-execute 'ispell-word)
   (flyspell-buffer))
+
