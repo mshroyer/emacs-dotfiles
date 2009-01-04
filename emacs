@@ -221,7 +221,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 ; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
 (define-key org-mode-map "\M-[z" 'org-shifttab)
-(setq org-cycle-separator-lines 1
+(setq org-cycle-separator-lines 2
       org-special-ctrl-a/e t
       org-agenda-start-on-weekday 0
       org-completion-use-ido t
