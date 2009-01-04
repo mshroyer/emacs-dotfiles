@@ -89,8 +89,9 @@
 
 ;; ido mode for switching buffers and finding files
 (ido-mode 1)
-(setq ido-enable-flex-matching t)
-(setq ido-max-directory-size 100000)
+(setq ido-enable-flex-matching t
+      ido-max-directory-size 100000
+      ido-auto-merge-work-directories-length -1)
 
 
 ;;; GENERAL INTERFACE SETTINGS
