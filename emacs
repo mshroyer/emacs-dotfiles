@@ -232,6 +232,29 @@
             (setq scroll-margin 0)))
 
 ;; Diary mode...
+(require 'diary-lib)
+
+(defun diary-range (first &optional last on-sexps off-sexps)
+  "Diary entry for a event spanning over a range of dates."
+  (and
+   (or (null first)
+       (not (calendar-date-compare (list date) (list first))))
+   (or (null last)
+       (not (calendar-date-compare (list last) (list date))))
+   (or (null on-sexps)
+       (eql on-sexps t)
+       (eval (cons 'or (mapcar #'(lambda (d)
+                                   (not (null (eval d)))) on-sexps))))
+   (or (null off-sexps)
+       (not (eval (cons 'or (mapcar #'(lambda (d)
+                                   (not (null (eval d)))) off-sexps)))))
+   (cons diary-marking-entries-flag entry)))
+
+(defun diary-weekdays (&rest args)
+  (if (find (calendar-day-of-week date) args)
+      (cons diary-marking-entries-flag entry)
+    nil))
+
 (global-set-key "\C-cd" 'diary)
 (add-hook 'diary-mode-hook
           (lambda ()
