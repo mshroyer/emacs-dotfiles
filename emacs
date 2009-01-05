@@ -149,12 +149,7 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 
 
-;;; SCMs
-
-;; (require 'git-emacs)
-
-
-;;; Tramp
+;;; TRAMP
 
 (require 'tramp)
 (setq tramp-default-method "scp")
