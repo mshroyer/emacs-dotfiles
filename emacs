@@ -216,6 +216,9 @@
 (global-set-key "\C-ca" 'org-agenda)
 ; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
 (define-key org-mode-map "\M-[z" 'org-shifttab)
+; Use C-ct as an alternative for C-cC-t, so that we don't have to use quite
+; as many keystrokes with GNU Screen's escape bound to C-t
+(define-key org-mode-map "\C-ct" 'org-todo)
 (setq org-cycle-separator-lines 2
       org-special-ctrl-a/e t
       org-agenda-start-on-weekday 0
