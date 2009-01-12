@@ -265,6 +265,8 @@
             (setq tab-stop-list '(4 16))
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 (setq diary-display-function 'diary-fancy-display)
+(add-hook 'list-diary-entries-hook 'include-other-diary-files)
+(add-hook 'mark-diary-entries-hook 'mark-included-diary-files)
 
 ;; Calc mode...
 (global-set-key "\C-cc" 'calc)
