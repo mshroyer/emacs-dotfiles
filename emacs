@@ -2,8 +2,7 @@
 ;;;
 ;;; ~/.emacs
 ;;;
-;;; My global Emacs configuration file.  Contains some settings
-;;; specific to Mac OS X.
+;;; My global Emacs configuration file.
 ;;;
 ;;; Mark Shroyer
 ;;; http://markshroyer.com/
@@ -90,7 +89,7 @@
 ;; ido mode for switching buffers and finding files
 (ido-mode 1)
 (setq ido-enable-flex-matching t
-      ido-max-directory-size 100000
+      ido-max-directory-size 1000000
       ido-auto-merge-work-directories-length -1)
 
 
