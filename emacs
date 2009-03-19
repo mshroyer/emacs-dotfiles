@@ -340,6 +340,10 @@
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
+;; Haskell mode...
+(if (featurep 'haskell-mode)
+    (setq haskell-indent-look-past-empty-line nil))
+
 ;; Text mode...
 (define-key text-mode-map (kbd "TAB") 'self-insert-command)
 (define-key text-mode-map "\C-m" 'newline)
