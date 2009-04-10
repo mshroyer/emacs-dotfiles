@@ -368,6 +368,16 @@
             (setq tab-width 4)
             (auto-fill-mode 1)))
 
+;; Mail mode...
+(add-to-list 'auto-mode-alist '("mutt-.*-[0-9]+-[0-9]+-[0-9]+$" . mail-mode))
+(add-hook 'mail-mode-hook
+          (lambda ()
+            (set-fill-column 72)
+            (flyspell-enable)
+            (end-of-buffer)
+            (dotimes (num 4 nil)
+              (previous-line))))
+
 
 ;;; CUSTOM EXTENDED COMMANDS
 
