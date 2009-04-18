@@ -206,6 +206,11 @@
     (autoload 'slime "slime.el" "The Superior LISP mode for Emacs" t))
 
 
+;;; CUSTOM COMMANDS
+
+(global-set-key "\C-cm" 'timestamp-insert)
+
+
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
 ;; Outline mode...
@@ -442,6 +447,19 @@
           (insert (format (concat line char "\n") i i i i))
           (setq i (+ i 1))))))
   (beginning-of-buffer))
+
+
+(defun timestamp-string ()
+  "Returns a Unix date(1)-format timestamp"
+
+  (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
+
+
+(defun timestamp-insert ()
+  "Inserts a Unix date(1)-format timestamp in the current buffer"
+
+  (interactive)
+  (insert (timestamp-string)))
 
 
 ;; Create a new journal entry
