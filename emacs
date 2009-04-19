@@ -269,6 +269,7 @@
 (add-hook 'diary-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
+            (make-local-variable 'tab-stop-list)
             (setq tab-stop-list '(4 16))
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 (setq diary-display-function 'diary-fancy-display)
@@ -299,6 +300,7 @@
 (add-hook 'yaml-mode-hook
           (lambda ()
             (local-set-key "\C-cn" 'new-yaml-ab-entry)
+            (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 2 75))))
 
 ;; C mode...
@@ -310,6 +312,7 @@
 (add-hook 'asm-mode-hook
           (lambda ()
             (setq tab-width 3)
+            (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 3 75))
             (setq indent-tabs-mode t)
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
