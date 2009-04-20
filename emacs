@@ -101,8 +101,9 @@
 ;; Don't display startup message
 (setq inhibit-startup-message t)
 
-;; Get rid of the toolbar
-(tool-bar-mode 0)
+;; Get rid of the toolbar, if applicable
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode 0))
 
 ;; Don't show the menu bar unless we're running in a window system
 (if (not window-system)
