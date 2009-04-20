@@ -196,6 +196,10 @@
 ;; Shortcut to enable flyspell for buffer
 (global-set-key "\C-cs" 'flyspell-enable)
 
+;; Another keystroke alias for this command, which should work reliably in
+;; the terminal.
+(global-set-key "\C-c," 'flyspell-goto-next-error)
+
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
