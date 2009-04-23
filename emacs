@@ -95,9 +95,6 @@
 
 ;;; GENERAL INTERFACE SETTINGS
 
-;; Use C-x C-m as shortcut for M-x
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-
 ;; Don't display startup message
 (setq inhibit-startup-message t)
 
