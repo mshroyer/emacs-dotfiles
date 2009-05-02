@@ -148,6 +148,9 @@
 ;; Confirm that we want to quit Emacs
 (setq confirm-kill-emacs 'y-or-n-p)
 
+;; Add a keystroke for renaming a buffer
+(global-set-key "\C-cr" 'rename-buffer)
+
 
 ;;; TRAMP
 
