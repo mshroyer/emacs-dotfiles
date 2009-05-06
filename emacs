@@ -204,6 +204,9 @@
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
+;; Global command for entering iimage-mode
+(global-set-key "\C-ci" 'iimage-mode)
+
 
 ;;; EXTENSIONS
 
