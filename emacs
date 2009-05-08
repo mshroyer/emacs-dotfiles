@@ -402,6 +402,12 @@
             (dotimes (num 4 nil)
               (previous-line))))
 
+;; Shell mode...
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
 
 ;;; CUSTOM EXTENDED COMMANDS
 
