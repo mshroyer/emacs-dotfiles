@@ -211,6 +211,10 @@
 ;; Global command for entering iimage-mode
 (global-set-key "\C-ci" 'iimage-mode)
 
+;; Don't nag about saving the personal dictionary every time we add a new
+;; word with ispell
+(setq ispell-silently-savep t)
+
 
 ;;; EXTENSIONS
 
