@@ -374,6 +374,11 @@
 (if (featurep 'haskell-mode)
     (setq haskell-indent-look-past-empty-line nil))
 
+;; Visual Basic mode...
+(autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
+(setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
+                                visual-basic-mode)) auto-mode-alist))
+
 ;; Text mode...
 (define-key text-mode-map (kbd "TAB") 'self-insert-command)
 (define-key text-mode-map "\C-m" 'newline)
