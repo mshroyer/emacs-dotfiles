@@ -337,10 +337,16 @@
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 
 ;; Perl mode...
+(defalias 'perl-mode 'cperl-mode)
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+(setq cperl-close-paren-offset -4
+      cperl-continued-statement-offset 4
+      cperl-indent-level 4
+      cperl-indent-parens-as-block t
+      cperl-tab-always-indent t)
 (add-hook 'cperl-mode-hook
           (lambda ()
             (setq cperl-indent-level 4)
