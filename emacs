@@ -338,7 +338,7 @@
 
 ;; Perl mode...
 (defalias 'perl-mode 'cperl-mode)
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm][wW]?\\|al\\|t\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
@@ -349,6 +349,7 @@
       cperl-tab-always-indent t)
 (add-hook 'cperl-mode-hook
           (lambda ()
+            (set-fill-column 78)
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)
             (abbrev-mode 0)))
