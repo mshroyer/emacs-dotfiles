@@ -352,7 +352,8 @@
             (set-fill-column 78)
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)
-            (abbrev-mode 0)))
+            (abbrev-mode 0)
+            (local-set-key "\C-cj" 'perl-sub-label)))
 
 ;; Python mode...
 (add-hook 'python-mode-hook
@@ -487,6 +488,65 @@
           (insert (format (concat line char "\n") i i i i))
           (setq i (+ i 1))))))
   (beginning-of-buffer))
+
+
+(defun prompt-user-selection (choices &optional message)
+  "Prompt user to make selection from given set of choices
+
+The selection is specified as an assoc list of single-character
+strings to choice descriptions, e.g.:
+
+\(prompt-user-selection '((\"1\" . \"one\")
+                         (\"2\" . \"two\"))\)
+
+Choices are case-sensitive.  The function keeps prompting until
+user makes a valid selection, or presses the quit keystroke.  The
+return value is the chosen assoc list element; to get just the
+user's choice, take the car of the return value.  An optional
+message argument causes this function to display the given
+message as a prompt above the list of choices.
+"
+
+  (let ((answer nil))
+    (while (null answer)
+
+      ;; Show a list of choices
+      (unless (null message)
+        (princ (concat message "\n\n") t))
+      (dolist (option choices)
+        (princ (concat (car option)
+                       ": "
+                       (cdr option)
+                       "\n")
+               t))
+
+      ;; Wait for the user to make a selection
+      (setq answer (assoc (char-to-string (read-char))
+                          choices)))
+    answer))
+
+
+(defun perl-sub-label ()
+  "Insert standard comment for a Perl sub
+
+Creates a comment for the current sub, if any, which follows the
+basic format outlined in _Perl Best Practices_.
+"
+
+  (interactive)
+  (move-end-of-line nil)
+  (if (search-backward-regexp "^sub\s")
+      (let* ((sub-choices '(("c" . "CLASS METHOD")
+                            ("i" . "INSTANCE METHOD")
+                            ("s" . "INTERFACE SUB")
+                            ("u" . "INTERNAL UTILITY")))
+             (sub-label (cdr (prompt-user-selection sub-choices
+                                                    "Choose subroutine type:"))))
+        (progn (insert "### " sub-label " ###\n"
+                       "# Purpose:  \n"
+                       "# Returns:  \n")
+               (previous-line 2)
+               (move-end-of-line nil)))))
 
 
 (defun timestamp-string ()
