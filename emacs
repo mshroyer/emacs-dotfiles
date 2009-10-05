@@ -543,9 +543,13 @@ basic format outlined in _Perl Best Practices_.
              (sub-label (cdr (prompt-user-selection sub-choices
                                                     "Choose subroutine type:"))))
         (progn (insert "### " sub-label " ###\n"
-                       "# Purpose:  \n"
-                       "# Returns:  \n")
-               (previous-line 2)
+                       "# Purpose    : \n"
+                       "# Returns    : \n"
+                       "# Parameters : \n"
+                       "# Throws     : No exceptions\n"
+                       "# Comments   : None\n"
+                       "# See Also   : N/A\n")
+               (previous-line 6)
                (move-end-of-line nil)))))
 
 
