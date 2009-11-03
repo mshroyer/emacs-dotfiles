@@ -386,6 +386,7 @@
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
                                 visual-basic-mode)) auto-mode-alist))
+(setq visual-basic-mode-indent 4)
 
 ;; Text mode...
 (define-key text-mode-map (kbd "TAB") 'self-insert-command)
@@ -400,7 +401,9 @@
 ;; Paragraph indent text mode...
 (add-to-list 'auto-mode-alist '("\\.txt$" . paragraph-indent-text-mode))
 
-;; LaTeX mode...
+;; AUCTeX / LaTeX mode...
+(load "auctex.el" t t t)
+(load "preview-latex.el" t t t)
 (add-hook 'LaTeX-mode-hook
           (lambda ()
             (local-set-key "\C-m" 'newline-and-indent)
