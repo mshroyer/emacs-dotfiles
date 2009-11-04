@@ -427,7 +427,11 @@
 
 ;;; EXTERNAL ELISP APPLICATIONS
 
+;; Periodic table of the elements
 (require 'eperiodic)
+
+;; Sudoku!
+(require 'sudoku)
 
 
 ;;; CUSTOM EXTENDED COMMANDS
