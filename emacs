@@ -75,9 +75,6 @@
 
 ;;; FILE HANDLING
 
-;; Use text mode as the default for new buffers
-(setq default-major-mode 'text-mode)
-
 ;; Delete unnecessary auto-save files
 (setq delete-auto-save-files t)
 
