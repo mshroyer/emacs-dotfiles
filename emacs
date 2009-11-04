@@ -428,6 +428,11 @@
             (setq scroll-margin 0)))
 
 
+;;; EXTERNAL ELISP APPLICATIONS
+
+(require 'eperiodic)
+
+
 ;;; CUSTOM EXTENDED COMMANDS
 
 ;; Show an ASCII table
