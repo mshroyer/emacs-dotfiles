@@ -312,6 +312,10 @@
             (auto-fill-mode)))
 
 ;; YAML mode...
+(autoload 'yaml-mode "yaml-mode.el")
+(setq auto-mode-alist
+      (append '(("\\.yaml$" . yaml-mode))
+              auto-mode-alist))
 (add-hook 'yaml-mode-hook
           (lambda ()
             (local-set-key "\C-cn" 'new-yaml-ab-entry)
