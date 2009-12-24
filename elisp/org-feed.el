@@ -5,7 +5,7 @@
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
 ;; Homepage: http://orgmode.org
-;; Version: 6.28e
+;; Version: 6.33f
 ;;
 ;; This file is part of GNU Emacs.
 ;;
@@ -83,7 +83,7 @@
 ;;
 ;;       #+DRAWERS: PROPERTIES LOGBOOK FEEDSTATUS
 ;;
-;;  Acknowledgments
+;;  Acknowledgements
 ;;  ----------------
 ;;
 ;;  org-feed.el is based on ideas by Brad Bozarth who implemented a
@@ -309,7 +309,7 @@ it can be a list structured like an entry in `org-feed-alist'."
 	  feed-buffer inbox-pos new-formatted
 	  entries old-status status new changed guid-alist e guid olds)
       (setq feed-buffer (org-feed-get-feed url))
-      (unless (and feed-buffer (bufferp feed-buffer))
+      (unless (and feed-buffer (bufferp (get-buffer feed-buffer)))
 	(error "Cannot get feed %s" name))
       (when retrieve-only
 	(throw 'exit feed-buffer))
@@ -506,7 +506,7 @@ and returns the full property list.
 If that property is already present, nothing changes."
   (if formatter
       (funcall formatter entry)
-    (let (dlines fmt tmp indent time
+    (let (dlines fmt tmp indent time name
 		 v-h v-t v-T v-u v-U v-a)
       (setq dlines (org-split-string (or (plist-get entry :description) "???")
 				     "\n")
@@ -542,25 +542,35 @@ If that property is already present, nothing changes."
 	(buffer-string)))))
 
 (defun org-feed-make-indented-block (s n)
-  "Add indentaton of N spaces to a multiline string S."
+  "Add indentation of N spaces to a multiline string S."
   (if (not (string-match "\n" s))
       s
     (mapconcat 'identity
 	       (org-split-string s "\n")
 	       (concat "\n" (make-string n ?\ )))))
 
+(defun org-feed-skip-http-headers (buffer)
+  "Remove HTTP headers from BUFFER, and return it.
+Assumes headers are indeed present!"
+  (with-current-buffer buffer
+    (widen)
+    (goto-char (point-min))
+    (search-forward "\n\n")
+    (delete-region (point-min) (point))
+    buffer))
+
 (defun org-feed-get-feed (url)
   "Get the RSS feed file at URL and return the buffer."
   (cond
    ((eq org-feed-retrieve-method 'url-retrieve-synchronously)
-    (url-retrieve-synchronously url))
+    (org-feed-skip-http-headers (url-retrieve-synchronously url)))
    ((eq org-feed-retrieve-method 'curl)
     (ignore-errors (kill-buffer org-feed-buffer))
-    (call-process "curl" nil org-feed-buffer nil url)
+    (call-process "curl" nil org-feed-buffer nil "--silent" url)
     org-feed-buffer)
    ((eq org-feed-retrieve-method 'wget)
     (ignore-errors (kill-buffer org-feed-buffer))
-    (call-process "curl" nil org-feed-buffer nil "-q" "-O" "-" url)
+    (call-process "wget" nil org-feed-buffer nil "-q" "-O" "-" url)
     org-feed-buffer)
    ((functionp org-feed-retrieve-method)
     (funcall org-feed-retrieve-method url))))
@@ -603,17 +613,13 @@ containing the properties `:guid' and `:item-full-text'."
 
 (defun org-feed-parse-atom-feed (buffer)
   "Parse BUFFER for Atom feed entries.
-Returns a list of enttries, with each entry a property list,
+Returns a list of entries, with each entry a property list,
 containing the properties `:guid' and `:item-full-text'.
 
 The `:item-full-text' property actually contains the sexp
 formatted as a string, not the original XML data."
   (with-current-buffer buffer
     (widen)
-    (goto-char (point-min))
-    ;; Skip HTTP headers
-    (search-forward "\n\n")
-    (delete-region (point-min) (point))
     (let ((feed (car (xml-parse-region (point-min) (point-max)))))
       (mapcar
        (lambda (entry)
@@ -654,6 +660,4 @@ formatted as a string, not the original XML data."
 (provide 'org-feed)
 
 ;; arch-tag: 0929b557-9bc4-47f4-9633-30a12dbb5ae2
-
 ;;; org-feed.el ends here
-

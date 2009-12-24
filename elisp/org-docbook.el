@@ -4,15 +4,14 @@
 ;;
 ;; Emacs Lisp Archive Entry
 ;; Filename: org-docbook.el
-;; Version: 6.28e
+;; Version: 6.33f
 ;; Author: Baoqiu Cui <cbaoqiu AT yahoo DOT com>
 ;; Maintainer: Baoqiu Cui <cbaoqiu AT yahoo DOT com>
 ;; Keywords: org, wp, docbook
 ;; Description: Converts an org-mode buffer into DocBook
-;; $Id: org-docbook.el 35 2009-03-23 01:03:21Z baoqiu $
 ;; URL:
 
-;; This file is NOT part of GNU Emacs.
+;; This file is part of GNU Emacs.
 
 ;; GNU Emacs is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -120,7 +119,7 @@ entities, you can set this variable to:
 ]>
 \"
 
-If you want to process DocBook documents without internet
+If you want to process DocBook documents without an Internet
 connection, it is suggested that you download the required entity
 file(s) and use system identifier(s) (external files) in the
 DOCTYPE declaration."
@@ -243,6 +242,11 @@ the variable to
   :group 'org-export-docbook
   :type 'string)
 
+;;; Hooks
+
+(defvar org-export-docbook-final-hook nil
+  "Hook run at the end of DocBook export, in the new buffer.")
+
 ;;; Autoload functions:
 
 ;;;###autoload
@@ -281,8 +285,7 @@ then use this command to convert it."
 			 beg end t 'string))
 	(setq reg (buffer-substring beg end)
 	      buf (get-buffer-create "*Org tmp*"))
-	(save-excursion
-	  (set-buffer buf)
+	(with-current-buffer buf
 	  (erase-buffer)
 	  (insert reg)
 	  (org-mode)
@@ -388,7 +391,7 @@ publishing directory."
 	(org-set-local 'buffer-file-name
 		       (with-current-buffer (buffer-base-buffer)
 			 buffer-file-name))
-      (error "Need a file name to be able to export.")))
+      (error "Need a file name to be able to export")))
 
   (message "Exporting...")
   (setq-default org-todo-line-regexp org-todo-line-regexp)
@@ -407,7 +410,7 @@ publishing directory."
 	 (rbeg (and region-p (region-beginning)))
 	 (rend (and region-p (region-end)))
 	 (subtree-p
-	  (if (plist-get opt-plist :ignore-subree-p)
+	  (if (plist-get opt-plist :ignore-subtree-p)
 	      nil
 	    (when region-p
 	      (save-excursion
@@ -569,6 +572,7 @@ publishing directory."
     (set-buffer buffer)
     (let ((inhibit-read-only t)) (erase-buffer))
     (fundamental-mode)
+    (org-install-letbind)
 
     (and (fboundp 'set-buffer-file-coding-system)
 	 (set-buffer-file-coding-system coding-system-for-write))
@@ -732,8 +736,12 @@ publishing directory."
 	  ;; Make targets to anchors.  Note that currently FOP does not
 	  ;; seem to support <anchor> tags when generating PDF output,
 	  ;; but this can be used in DocBook --> HTML conversion.
-	  (while (string-match "<<<?\\([^<>]*\\)>>>?\\((INVISIBLE)\\)?[ \t]*\n?" line)
+	  (setq start 0)
+	  (while (string-match
+		  "<<<?\\([^<>]*\\)>>>?\\((INVISIBLE)\\)?[ \t]*\n?" line start)
 	    (cond
+	     ((get-text-property (match-beginning 1) 'org-protected line)
+	      (setq start (match-end 1)))
 	     ((match-end 2)
 	      (setq line (replace-match
 			  (format "@<anchor xml:id=\"%s\"/>"
@@ -793,12 +801,13 @@ publishing directory."
 		   (setq id-file (org-id-find-id-file path)))
 	      ;; This is an id: link to another file (if it was the same file,
 	      ;; it would have become an internal link...)
-	      (setq id-file (file-relative-name
-			     id-file (file-name-directory org-current-export-file)))
-	      (setq id-file (concat (file-name-sans-extension id-file)
-				    org-export-docbook-extension))
-	      (setq rpl (format "<link xlink:href=\"%s#%s\">%s</link>"
-				id-file path (org-export-docbook-format-desc desc))))
+	      (save-match-data
+		(setq id-file (file-relative-name
+			       id-file (file-name-directory org-current-export-file)))
+		(setq id-file (concat (file-name-sans-extension id-file)
+				      org-export-docbook-extension))
+		(setq rpl (format "<link xlink:href=\"%s#%s\">%s</link>"
+				  id-file path (org-export-docbook-format-desc desc)))))
 	     ((member type '("http" "https"))
 	      ;; Standard URL, just check if we need to inline an image
 	      (if (and (or (eq t org-export-docbook-inline-images)
@@ -1100,7 +1109,7 @@ publishing directory."
 
       (unless (plist-get opt-plist :buffer-will-be-killed)
 	(normal-mode)
-	(if (eq major-mode default-major-mode)
+	(if (eq major-mode (default-value 'major-mode))
 	    (nxml-mode)))
 
       ;; Remove empty paragraphs and lists.  Replace them with a
@@ -1122,6 +1131,7 @@ publishing directory."
       (goto-char (point-max))
       (unless body-only
 	(insert "</article>"))
+      (run-hooks 'org-export-docbook-final-hook)
       (or to-buffer (save-buffer))
       (goto-char (point-min))
       (or (org-export-push-to-kill-ring "DocBook")
@@ -1400,4 +1410,5 @@ that need to be preserved in later phase of DocBook exporting."
 
 (provide 'org-docbook)
 
+;; arch-tag: a24a127c-d365-4c2a-9e9b-f7dcb0ebfdc3
 ;;; org-docbook.el ends here
