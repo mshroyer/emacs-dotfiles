@@ -390,13 +390,13 @@
 (setq visual-basic-mode-indent 4)
 
 ;; Text mode...
-(define-key text-mode-map (kbd "TAB") 'self-insert-command)
 (define-key text-mode-map "\C-m" 'newline)
 (define-key text-mode-map "\C-j" 'newline-and-indent)
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
 (add-hook 'text-mode-hook
           (lambda ()
-            (setq tab-width 8)
+            (setq tab-width 8
+                  indent-tabs-mode t)
             (auto-fill-mode 1)))
 
 ;; Paragraph indent text mode...
