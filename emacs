@@ -69,6 +69,11 @@
   (setq load-path (cons my-lisp-dir load-path)))
 
 
+;;; EXTENSIONS
+
+(require 'slime)
+
+
 ;;; LOCAL SETTINGS
 
 ;; Retrieve any local configurations from ~/.emacs.local, if the file
@@ -225,11 +230,6 @@
 ;; Don't nag about saving the personal dictionary every time we add a new
 ;; word with ispell
 (setq ispell-silently-savep t)
-
-
-;;; EXTENSIONS
-
-(require 'slime)
 
 
 ;;; CUSTOM COMMANDS
