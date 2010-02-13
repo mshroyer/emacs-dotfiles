@@ -7,6 +7,18 @@
 ;;; Mark Shroyer
 ;;; http://markshroyer.com/
 ;;;
+;;; foo
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
+
 
 ;;; UTILITY
 
@@ -217,8 +229,7 @@
 
 ;;; EXTENSIONS
 
-(if (featurep 'slime)
-    (autoload 'slime "slime.el" "The Superior LISP mode for Emacs" t))
+(require 'slime)
 
 
 ;;; CUSTOM COMMANDS
@@ -683,3 +694,5 @@ basic format outlined in _Perl Best Practices_.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
