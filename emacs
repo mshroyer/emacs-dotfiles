@@ -310,7 +310,11 @@
 (add-hook 'html-mode-hook
           (lambda ()
             (auto-fill-mode 0)
-            (setq tab-width 2)))
+            (setq indent-tabs-mode nil)
+            (set (make-local-variable 'sgml-basic-offset) 2)
+            (sgml-guess-indent)
+            (local-set-key "\C-m" 'newline-and-indent)
+            (local-set-key "\C-j" 'newline)))
 
 ;; Markdown mode...
 (autoload 'markdown-mode "markdown-mode.el")
