@@ -554,16 +554,14 @@ Otherwise it uses an external `tar' program.
   (let* ((dir (file-name-as-directory package-user-dir)))
     ;; Special case "package".
     (if (string= file-name "package")
-	;; (write-region (point-min) (point-max) (concat dir file-name ".el")
-	;; 	      nil nil nil nil)
-        (package-write-file-no-coding (concat dir file-name ".el") nil)
+	(write-region (point-min) (point-max) (concat dir file-name ".el")
+		      nil nil nil nil)
       (let ((pkg-dir (file-name-as-directory
 		      (concat dir file-name "-" version))))
 	(make-directory pkg-dir t)
-	;; (write-region (point-min) (point-max)
-	;; 	      (concat pkg-dir file-name ".el")
-	;; 	      nil nil nil 'excl)
-        (package-write-file-no-coding (concat pkg-dir file-name ".el") 'excl)
+	(write-region (point-min) (point-max)
+		      (concat pkg-dir file-name ".el")
+		      nil nil nil 'excl)
 	(let ((print-level nil)
 	      (print-length nil))
 	  (write-region
