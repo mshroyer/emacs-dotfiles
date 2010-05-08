@@ -584,7 +584,20 @@ basic format outlined in _Perl Best Practices_.
 (defun timestamp-string ()
   "Returns a Unix date(1)-format timestamp"
 
-  (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
+  (let* ((now (current-time))
+         (str-date (format-time-string "%a %b %e" now))
+         (str-time (format-time-string "%H:%M:%S" now))
+         (sys-tz   (format-time-string "%Z" now))
+         (str-year (format-time-string "%Y" now)))
+    (let ((str-tz (if (> (length sys-tz) 0)
+                      sys-tz
+                    (let ((off-tz (format-time-string "%z" now)))
+                      (cond ((equal off-tz "-0400") "EDT")
+                            ((equal off-tz "-0500") "EST")
+                            (t nil))))))
+      (if str-tz
+          (concat str-date " " str-time " " str-tz " " str-year)
+        (concat str-date " " str-time " " str-year)))))
 
 
 (defun timestamp-insert ()
@@ -608,7 +621,7 @@ basic format outlined in _Perl Best Practices_.
           (delete-region beg (point)))
         (dotimes (i 3)
           (newline))))
-  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
+  (insert (timestamp-string))
   (dotimes (i 2)
     (newline)))
 
