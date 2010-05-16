@@ -57,7 +57,7 @@ subsections (=head2, =head3, etc.)
 =head1 DIAGNOSTICS
 
 A list of every error and warning message that the application can generate
-(even teh ones that will "never happen"), with a full explanation of each
+(even the ones that will "never happen"), with a full explanation of each
 problem, one or more likely causes, and any suggested remedies.  If the
 application generates exit status codes (e.g., under Unix), then list the exit
 status associated with each error.
