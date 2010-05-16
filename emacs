@@ -369,7 +369,8 @@
             (setq cperl-indent-level 4)
             (setq cperl-continued-statement-offset 8)
             (abbrev-mode 0)
-            (local-set-key "\C-cj" 'perl-sub-label)))
+            (local-set-key "\C-cj" 'perl-doc-sub)
+            (local-set-key "\C-cp" 'perl-doc-pod)))
 
 ;; Python mode...
 (add-hook 'python-mode-hook
@@ -554,7 +555,7 @@ message as a prompt above the list of choices.
     answer))
 
 
-(defun perl-sub-label ()
+(defun perl-doc-sub ()
   "Insert standard comment for a Perl sub
 
 Creates a comment for the current sub, if any, which follows the
@@ -579,6 +580,35 @@ basic format outlined in _Perl Best Practices_.
                        "# See Also   : N/A\n")
                (previous-line 6)
                (move-end-of-line nil)))))
+
+
+(defun perl-doc-pod ()
+  "Insert a Perl POD documentation template for the current module"
+
+  (interactive)
+  (let* ((doc-choices '(("m" . "MODULE")
+                        ("a" . "APPLICATION")))
+         (doc-type (car (prompt-user-selection doc-choices
+                                               "Choose POD documentation template:")))
+         (doc-template-dir (concat user-emacs-directory "templates/documentation/"))
+         (doc-template-file (cond
+                             ((equal doc-type "m") "perl-pod-module")
+                             ((equal doc-type "a") "perl-pod-application")))
+         (lic-choices '(("n" . "NONE")
+                        ("p" . "PERL ARTISTIC")
+                        ("a" . "APACHE")))
+         (lic-type (car (prompt-user-selection lic-choices
+                                               "Choose a software license:")))
+         (lic-template-dir (concat user-emacs-directory "templates/license/"))
+         (lic-template-file (cond
+                             ((equal lic-type "p") "perl-artistic")
+                             ((equal lic-type "a") "apache"))))
+    (end-of-buffer)
+    (insert-file-contents (concat doc-template-dir doc-template-file))
+    (if lic-template-file
+        (progn
+          (end-of-buffer)
+          (insert-file-contents (concat lic-template-dir lic-template-file))))))
 
 
 (defun timestamp-string ()

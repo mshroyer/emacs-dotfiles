@@ -1,0 +1,164 @@
+__END__
+
+=head1 NAME
+
+appname - Description of application's purpose
+
+=head1 VERSION
+
+This documentation refers to appname version 0.0.1.
+
+=head1 USAGE
+
+    perl appname filename
+
+Brief but working examples showing most common usage...
+
+=head1 ARGUMENTS
+
+A complete list of every argument that must appear on the command line when
+the application is invoked, explaining what each one of them does, any
+restrictions on where each one may appear (i.e., flags that must appear before
+or after filenames), and how the various arguments and options may interact
+(e.g., mutual exclusions, required combinations, etc.)
+
+If all of the application's arguments are optional, this section may be
+omitted entirely.
+
+=over 4
+
+=item I<filename>
+
+Path to the input file.
+
+=back
+
+=head1 OPTIONS
+
+A complete list of every available option with which the application can be
+invoked, explaining what each does, and listing any restrictions, or
+interactions.
+
+If the application has no options, this section may be omitted entirely.
+
+=over 4
+
+=item B<-v>
+
+Verbose output.
+
+=back
+
+=head1 DESCRIPTION
+
+A full description of the application and its features.  May include numerous
+subsections (=head2, =head3, etc.)
+
+=head1 DIAGNOSTICS
+
+A list of every error and warning message that the application can generate
+(even teh ones that will "never happen"), with a full explanation of each
+problem, one or more likely causes, and any suggested remedies.  If the
+application generates exit status codes (e.g., under Unix), then list the exit
+status associated with each error.
+
+=head2 Error Messages
+
+=over 4
+
+=item B<missing foobar>
+
+The magic smoke has escaped.
+
+=back
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+A full explanation of any configuration system(s) used by the application,
+including the names and locations of any configuration files, and the meaning
+of any environment variables or properties that can be set.  These
+descriptions must also include details of any configuration langauge used.
+
+=head2 Configuration Files
+
+=over 4
+
+=item F<$HOME/.module.conf>
+
+=back
+
+=head2 Environment Variables
+
+=over 4
+
+=item B<PATH>
+
+Tells us where to find executables.
+
+=item B<HOME>
+
+Where do we live?
+
+=back
+
+=head1 DEPENDENCIES
+
+A list of all the modules that this application relies upon, including any
+restrictions on versions, and an indication of whether these required modules
+are part of the standard perl distribution, part of the application's
+distribution, or must be installed separately.
+
+=over 4
+
+=item L<Net::Wake>
+
+=back
+
+=head1 INCOMPATIBILITIES
+
+A list of any modules that this application cannot be used in conjunction
+with.  This may be due to name conflicts in the interface, or competition for
+system or program resources, or due to internal limitations of Perl (for
+example, many modules that use source code filters are mutually incompatible).
+
+=over 4
+
+=item L<Evil::Module>
+
+If this application is used with L<Evil::Module> installed, things will blow up.
+
+=back
+
+=head1 BUGS AND LIMITATIONS
+
+A list of known problems with the module, together with some indication of
+whether they are likely to be fixed in an upcoming release.
+
+Also a list of restrictions on the features the module does provide: data
+types that cannot be handled, performance issues and the circumstances in
+which they may arise, practical limitations on the size of data sets, special
+cases that are not (yet) handled, etc.
+
+The initial documentation usually just has:
+
+There are no known bugs in this module.
+Please report problems to Mark Shroyer <code@markshroyer.com>.
+Patches are welcome.
+
+=head1 SEE ALSO
+
+A list of other especially relevant scripts or applications belonging to the
+same distribution, if applicable.
+
+=over 4
+
+=item L<otherappname>
+
+=back
+
+=head1 AUTHOR
+
+Mark Shroyer <code@markshroyer.com>
+
+=head1 LICENSE AND COPYRIGHT
+
