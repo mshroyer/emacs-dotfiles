@@ -43,9 +43,9 @@ If the application has no options, this section may be omitted entirely.
 
 =over 4
 
-=item B<-v>
+=item B<-v>, B<--verbose>
 
-Verbose output.
+Show verbose output.
 
 =back
 
