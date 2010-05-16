@@ -91,11 +91,11 @@ descriptions must also include details of any configuration langauge used.
 
 =over 4
 
-=item B<PATH>
+=item B<$PATH>
 
 Tells us where to find executables.
 
-=item B<HOME>
+=item B<$HOME>
 
 Where do we live?
 
