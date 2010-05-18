@@ -416,7 +416,7 @@
             (auto-fill-mode 1)))
 
 ;; Paragraph indent text mode...
-(add-to-list 'auto-mode-alist '("\\.txt$" . paragraph-indent-text-mode))
+(add-to-list 'auto-mode-alist '("\\.txt$" . text-mode))
 
 ;; AUCTeX / LaTeX mode...
 (load "auctex.el" t t t)
