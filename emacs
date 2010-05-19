@@ -221,6 +221,10 @@
 ;; the terminal.
 (global-set-key "\C-c," 'flyspell-goto-next-error)
 
+;; Always start a new ispell process for flyspell checking; to not do so is
+;; unbearably slow with aspell on Windows.
+(setq flyspell-large-region 0)
+
 ;; Recheck spelling after running ispell-key keyboard macro
 ;(global-set-key "\M-$" 'flyspell-word)
 
