@@ -321,7 +321,10 @@
             (local-set-key "\C-j" 'newline)))
 
 ;; Markdown mode...
-(autoload 'markdown-mode "markdown-mode.el")
+(autoload 'markdown-mode
+  "markdown-mode.el"
+  "Major mode for editing Markdown files."
+  t)
 (setq auto-mode-alist
       (append '(("\\.mkd$" . markdown-mode)
                 ("\\.markdown$" . markdown-mode))
