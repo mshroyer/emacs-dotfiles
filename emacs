@@ -331,7 +331,7 @@
               auto-mode-alist))
 (add-hook 'markdown-mode-hook
           (lambda ()
-            (auto-fill-mode)))
+            (auto-fill-mode t)))
 
 ;; YAML mode...
 (autoload 'yaml-mode "yaml-mode.el")
