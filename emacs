@@ -403,8 +403,11 @@
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
 ;; Haskell mode...
-(if (featurep 'haskell-mode)
-    (setq haskell-indent-look-past-empty-line nil))
+(load "haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;(if (featurep 'haskell-mode)
+;    (setq haskell-indent-look-past-empty-line nil))
 
 ;; Visual Basic mode...
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
