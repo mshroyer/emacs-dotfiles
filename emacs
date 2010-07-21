@@ -32,6 +32,15 @@
       ((> stop text-width) stop-list)
     (setq stop-list (append stop-list (list stop)))))
 
+(defmacro add-paredit-hook (mode-name)
+  (let* ((hook-name (concat (symbol-name mode-name)
+                            "-hook"))
+         (hook (intern hook-name)))
+    `(if (or (featurep 'paredit) (fboundp 'paredit-mode))
+         (add-hook (quote ,hook)
+                   (lambda ()
+                     (paredit-mode t))))))
+
 
 ;;; SYSTEM
 
@@ -388,14 +397,19 @@
 (autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 
+;; Emacs Lisp mode...
+(add-paredit-hook emacs-lisp-mode)
+
 ;; Common Lisp mode...
 (add-hook 'lisp-mode-hook
           (lambda ()
             (setq lisp-indent-function 'common-lisp-indent-function)))
+(add-paredit-hook lisp-mode)
 
 ;; Clojure mode...
 (autoload 'clojure-mode "clojure-mode" "Clojure editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+(add-paredit-hook clojure-mode)
 
 ;; Groovy mode...
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
