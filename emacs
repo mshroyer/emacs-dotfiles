@@ -32,6 +32,8 @@
       ((> stop text-width) stop-list)
     (setq stop-list (append stop-list (list stop)))))
 
+;; Install the paredit minor mode as a hook for the given mode name, but
+;; only if paredit is available.
 (defmacro add-paredit-hook (mode-name)
   (let* ((hook-name (concat (symbol-name mode-name)
                             "-hook"))
@@ -86,8 +88,9 @@
                                         ; messages from main frame minibuf
                   ))))
 
-;; Set Emacs Lisp load-path according to the contents of the user-elisp
-;; tree
+;; Prepend user elisp directories to the elisp load path.  In particular,
+;; this gives ~/.emacs.d/elisp/ and its contents a higher precedence than
+;; ~/.emacs.d/elpa/* in the path.
 (setq load-path (append (flatten-path-tree user-elisp)
                         load-path))
 
