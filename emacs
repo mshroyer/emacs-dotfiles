@@ -41,11 +41,29 @@
                    (lambda ()
                      (paredit-mode t))))))
 
+;; Flattens an assoc-list tree of paths (such as the user-elisp paths)
+;; depth-first into a plain list of paths
+(defun flatten-path-tree (path-tree)
+  (if (null path-tree)
+      nil
+    (let ((sub-tree (car path-tree)))
+      (cons (car sub-tree)
+            (append (if (not (null (cdr sub-tree)))
+                        (mapcar (lambda (subpath)
+                                  (concat (car sub-tree) subpath))
+                                (flatten-path-tree (cdr sub-tree))))
+                    (flatten-path-tree (cdr path-tree)))))))
+
 
 ;;; SYSTEM
 
-;; Change Emacs user directory
+;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/")
+
+;; Tree(s) of paths containing user Emacs Lisp files
+(let ((el-d (concat user-emacs-directory "elisp/")))
+  (setq user-elisp
+        `((,el-d))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -68,14 +86,10 @@
                                         ; messages from main frame minibuf
                   ))))
 
-;; Configure elisp load path to include my ~/.emacs.d/ files
-;; (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-;;     (let* ((my-lisp-dir (concat user-emacs-directory "elisp/"))
-;; 	   (default-directory my-lisp-dir))
-;;       (setq load-path (cons my-lisp-dir load-path))
-;;       (normal-top-level-add-subdirs-to-load-path)))
-(let* ((my-lisp-dir (concat user-emacs-directory "elisp/")))
-  (setq load-path (cons my-lisp-dir load-path)))
+;; Set Emacs Lisp load-path according to the contents of the user-elisp
+;; tree
+(setq load-path (append (flatten-path-tree user-elisp)
+                        load-path))
 
 
 ;;; EXTENSIONS
