@@ -6,19 +6,6 @@
 ;;;
 ;;; Mark Shroyer
 ;;; http://markshroyer.com/
-;;;
-;;; foo
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
-
 
 ;;; UTILITY
 
@@ -72,12 +59,15 @@
 ;;; SYSTEM
 
 ;; User Emacs directories
-(setq user-emacs-directory "~/.emacs.d/")
+(setq user-emacs-directory "~/.emacs.d/"
+      generated-autoload-file (concat user-emacs-directory
+				      "loaddefs.el"))
 
 ;; Tree(s) of paths containing user Emacs Lisp files
 (let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
-        `((,el-d . (("slime"))))))
+        `((,el-d ("slime")
+                 ("clojure-mode")))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -102,12 +92,16 @@
 
 ;; Prepend user elisp directories to the elisp load path.  In particular,
 ;; this gives ~/.emacs.d/elisp/ and its contents a higher precedence than
-;; ~/.emacs.d/elpa/* in the path.
-(setq load-path (append (flatten-path-tree user-elisp)
-                        load-path))
+;; ~/.emacs.d/elpa/* in the path.  Then, install any autoloads contained in
+;; our user load paths.
+(let ((my-load-path (flatten-path-tree user-elisp)))
+  (setq load-path (append my-load-path load-path))
+  (apply #'update-directory-autoloads my-load-path))
 
 
 ;;; EXTENSIONS
+
+(load generated-autoload-file)
 
 (require 'slime)
 (require 'paredit)
@@ -424,7 +418,6 @@
             (abbrev-mode 0)))
 
 ;; JavaScript mode...
-(autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 
 ;; Emacs Lisp mode...
@@ -437,12 +430,9 @@
 (add-paredit-hook lisp-mode)
 
 ;; Clojure mode...
-(autoload 'clojure-mode "clojure-mode" "Clojure editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 (add-paredit-hook clojure-mode)
 
 ;; Groovy mode...
-(autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
