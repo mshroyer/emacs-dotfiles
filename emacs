@@ -22,6 +22,14 @@
 
 ;;; UTILITY
 
+(defun char (str i)
+  "Return character at position i in str"
+  (string-to-char (substring str i)))
+
+(defun last-char (str)
+  "Return last character in str"
+  (char str (- (length str) 1)))
+
 ;; Generate a simple list of tab stops, 'stop-width characters in between
 ;; and up to 'text-width characters long in total.
 (defun simple-tab-stop-list (stop-width text-width)
@@ -48,11 +56,15 @@
 (defun flatten-path-tree (path-tree)
   (if (null path-tree)
       nil
-    (let ((sub-tree (car path-tree)))
-      (cons (car sub-tree)
+    (let* ((sub-tree  (car path-tree))
+           (this-dir  (if (eql (last-char (car sub-tree))
+                               (string-to-char "/"))
+                          (car sub-tree)
+                        (concat (car sub-tree) "/"))))
+      (cons this-dir
             (append (if (not (null (cdr sub-tree)))
-                        (mapcar (lambda (subpath)
-                                  (concat (car sub-tree) subpath))
+                        (mapcar (lambda (sub-path)
+                                  (concat this-dir sub-path))
                                 (flatten-path-tree (cdr sub-tree))))
                     (flatten-path-tree (cdr path-tree)))))))
 
@@ -63,9 +75,9 @@
 (setq user-emacs-directory "~/.emacs.d/")
 
 ;; Tree(s) of paths containing user Emacs Lisp files
-(let ((el-d (concat user-emacs-directory "elisp/")))
+(let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
-        `((,el-d))))
+        `((,el-d . (("slime"))))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
