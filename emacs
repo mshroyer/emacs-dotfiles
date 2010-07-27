@@ -81,6 +81,7 @@
 ;;; EXTENSIONS
 
 (require 'slime)
+(require 'paredit)
 
 
 ;;; LOCAL SETTINGS
