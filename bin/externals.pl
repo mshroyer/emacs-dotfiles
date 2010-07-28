@@ -6,6 +6,7 @@
 use warnings;
 use strict;
 
+use File::Basename;
 use Cwd;
 
 our @externals = (
@@ -38,7 +39,12 @@ our @externals = (
 sub vcs_cvs_clone {
     my ($path, $repo, $branch) = @_;
 
-    `cvs -d ${repo} checkout -P -d ${path} ${branch}`;
+    my $ppath = dirname($path);
+    my $oldcwd = getcwd;
+    mkdir $ppath unless ( -d $ppath );
+    chdir $ppath;
+    `cvs -d ${repo} checkout -P ${branch}`;
+    chdir $oldcwd;
 }
 
 sub vcs_cvs_update {
