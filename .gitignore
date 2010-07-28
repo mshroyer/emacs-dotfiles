@@ -1,5 +1,5 @@
 auto-save-list/
 server/
 tramp
-loaddefs.el~
+loaddefs.el*
 \#*\#
