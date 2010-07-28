@@ -3,3 +3,6 @@ server/
 tramp
 loaddefs.el*
 \#*\#
+elisp/clojure-mode/
+elisp/org/
+elisp/slime/
