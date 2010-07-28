@@ -7,6 +7,8 @@
 ;;; Mark Shroyer
 ;;; http://markshroyer.com/
 
+(require 'cl)
+
 ;;; UTILITY
 
 (defun char (str i)
@@ -67,7 +69,8 @@
 (let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
         `((,el-d ("slime")
-                 ("clojure-mode")))))
+                 ("clojure-mode")
+                 ("org-mode/lisp")))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -94,7 +97,8 @@
 ;; this gives ~/.emacs.d/elisp/ and its contents a higher precedence than
 ;; ~/.emacs.d/elpa/* in the path.  Then, install any autoloads contained in
 ;; our user load paths.
-(let ((my-load-path (flatten-path-tree user-elisp)))
+(let ((my-load-path (remove-if-not #'file-exists-p
+                                   (flatten-path-tree user-elisp))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
