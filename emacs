@@ -60,6 +60,14 @@
 
 ;;; SYSTEM
 
+;; The HOME environment variable may not necessarily be set on Windows
+;; systems.  If it isn't already set, try to compose it from the Windows
+;; HOMEDRIVE and HOMEPATH variables.
+(when (and (or (eql system-type 'windows-nt)
+               (eql system-type 'msdos))
+           (not (getenv "HOME")))
+  (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
+
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/"
       generated-autoload-file (concat user-emacs-directory
