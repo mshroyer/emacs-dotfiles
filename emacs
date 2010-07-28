@@ -435,7 +435,8 @@
 (add-paredit-hook lisp-mode)
 
 ;; Clojure mode...
-(require 'swank-clojure nil t) ; Autoload won't work for this
+(when (featurep 'slime)
+  (require 'swank-clojure nil t))
 (add-paredit-hook clojure-mode)
 
 ;; Groovy mode...
