@@ -70,6 +70,7 @@
   (setq user-elisp
         `((,el-d ("slime")
                  ("clojure-mode")
+                 ("swank-clojure")
                  ("org-mode/lisp")))))
 
 ;; Start server mode if we're running in a windowing environment
@@ -107,7 +108,7 @@
 
 (load generated-autoload-file)
 
-(require 'slime)
+(require 'slime nil t)
 (require 'paredit)
 
 
@@ -434,6 +435,7 @@
 (add-paredit-hook lisp-mode)
 
 ;; Clojure mode...
+(require 'swank-clojure nil t) ; Autoload won't work for this
 (add-paredit-hook clojure-mode)
 
 ;; Groovy mode...

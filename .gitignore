@@ -4,5 +4,6 @@ tramp
 loaddefs.el*
 \#*\#
 elisp/clojure-mode/
-elisp/org/
+elisp/swank-clojure/
+elisp/org-mode/
 elisp/slime/
