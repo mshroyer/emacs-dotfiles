@@ -127,6 +127,10 @@
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
 
+;; Initialization
+(if (featurep 'slime)
+    (slime-setup))
+
 
 ;;; LOCAL SETTINGS
 
