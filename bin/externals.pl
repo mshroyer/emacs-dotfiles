@@ -77,6 +77,20 @@ sub vcs_cvs_update {
     popd();
 }
 
+sub vcs_darcs_checkout {
+    my ($path, $repo, $branch) = @_;
+
+    `darcs get "${repo}" "${path}"`;
+}
+
+sub vcs_darcs_update {
+    my ($path, $repo, $branch) = @_;
+
+    pushd($path);
+    `darcs pull`;
+    popd();
+}
+
 sub vcs_git_checkout {
     my ($path, $repo, $branch) = @_;
 
