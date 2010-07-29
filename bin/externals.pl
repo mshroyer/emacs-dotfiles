@@ -23,6 +23,11 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/haskellmode-emacs',
+        vcs    => 'darcs',
+        repo   => 'http://code.haskell.org/haskellmode-emacs',
+    },
+    {
         path   => 'elisp/org-mode',
         vcs    => 'git',
         repo   => 'git://repo.or.cz/org-mode.git',
@@ -152,8 +157,9 @@ EOF
             my $ext = $externals[$i];
             my $flag = ( -d $ext->{path} ) ? 'i' :
                     ( exists $ext->{install} ? '+' : ' ' );
-            printf "%2d. [%s] %s (%s %s)\n", $i+1, $flag,
-                    $ext->{path}, $ext->{vcs}, $ext->{branch};
+            printf "%2d. [%s] %s (%s)\n", $i+1, $flag, $ext->{path},
+                    ( exists $ext->{branch} ? $ext->{vcs} . ' ' . $ext->{branch}
+                              : $ext->{vcs} );
         }
 
         # Prompt for input
