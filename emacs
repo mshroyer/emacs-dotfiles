@@ -61,8 +61,8 @@
 ;;; SYSTEM
 
 ;; The HOME environment variable may not necessarily be set on Windows
-;; systems.  If it isn't already set, try to compose it from the Windows
-;; HOMEDRIVE and HOMEPATH variables.
+;; systems.  If it isn't already set, try to synthesize it from other
+;; standard Windows environment variables.
 (when (and (or (eql system-type 'windows-nt)
                (eql system-type 'msdos))
            (not (getenv "HOME")))
@@ -73,7 +73,8 @@
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
 
-;; Tree(s) of paths containing user Emacs Lisp files
+;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
+;; to the load path, but will not be scanned recursively.
 (let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
         `((,el-d ("slime" ("contrib"))
@@ -103,10 +104,8 @@
                                         ; messages from main frame minibuf
                   ))))
 
-;; Prepend user elisp directories to the elisp load path.  In particular,
-;; this gives ~/.emacs.d/elisp/ and its contents a higher precedence than
-;; ~/.emacs.d/elpa/* in the path.  Then, install any autoloads contained in
-;; our user load paths.
+;; Prepend user elisp directories to the elisp load path.  Then, prepare
+;; any autoloads contained in our user load paths.
 (let ((my-load-path (remove-if-not #'file-exists-p
                                    (flatten-path-tree user-elisp))))
   (setq load-path (append my-load-path load-path))
@@ -115,10 +114,14 @@
 
 ;;; EXTENSIONS
 
+;; Contains autoloads processed from the user-elisp tree.
 (load generated-autoload-file)
 
-(require 'slime nil t)
+;; Required features
 (require 'paredit)
+
+;; Optional features
+(require 'slime nil t)
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
 
