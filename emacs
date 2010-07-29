@@ -126,6 +126,7 @@
 (require 'slime nil t)
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
+(require 'epa-file nil t)
 
 ;; Initialization
 (if (featurep 'slime)
