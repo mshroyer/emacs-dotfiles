@@ -290,6 +290,12 @@
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
 
+;; Enable paredit in the minibuffer, but only for the command eval-expression
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (if (eql this-command 'eval-expression)
+                (paredit-mode t))))
+
 ;; Outline mode...
 (require 'outline)
 (add-to-list 'auto-mode-alist '("\\.ol$" . outline-mode))
