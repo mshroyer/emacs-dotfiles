@@ -36,6 +36,19 @@ our @externals = (
     },
 );
 
+my @dirstack = ();
+
+sub pushd {
+    my ($newpath) = @_;
+    push @dirstack, getcwd;
+    chdir $newpath;
+}
+
+sub popd {
+    my $oldpath = pop @dirstack;
+    chdir $oldpath if ( $oldpath );
+}
+
 sub vcs_cvs_checkout {
     my ($path, $repo, $branch) = @_;
 
@@ -46,11 +59,10 @@ sub vcs_cvs_checkout {
     my $branchopt = ( $branch eq 'trunk' ) ? "" : "-r ${branch}";
 
     my $ppath = dirname($path);
-    my $oldcwd = getcwd;
     mkdir $ppath unless ( -d $ppath );
-    chdir $ppath;
+    pushd($ppath);
     `cvs -d ${cvsroot} checkout -P ${branchopt} ${module}`;
-    chdir $oldcwd;
+    popd();
 }
 
 sub vcs_cvs_update {
@@ -60,10 +72,9 @@ sub vcs_cvs_update {
     my $cvsroot = $repo_words[0];
     my $module = $repo_words[1];
 
-    my $oldcwd = getcwd;
-    chdir $path;
+    pushd($path);
     `cvs update -Pd`;
-    chdir $oldcwd;
+    popd();
 }
 
 sub vcs_git_checkout {
@@ -71,21 +82,19 @@ sub vcs_git_checkout {
 
     `git clone "${repo}" "${path}"`;
     if ( $branch ne 'master' ) {
-        my $oldcwd = getcwd;
-        chdir $path;
+        pushd($path);
         `git branch --track ${branch} origin/${branch}`;
         `git checkout ${branch}`;
-        chdir $oldcwd;
+        popd();
     }
 }
 
 sub vcs_git_update {
     my ($path, $repo, $branch) = @_;
 
-    my $oldcwd = getcwd;
-    chdir $path;
+    pushd($path);
     `git pull origin ${branch}`;
-    chdir $oldcwd;
+    popd();
 }
 
 sub get_vcs_cmd {
@@ -116,11 +125,11 @@ my $command = shift @ARGV || '';
 if ( $command eq 'checkout' || $command eq 'co' ) {
     print <<"EOF";
 
-### Optional external Emacs resources are listed below ###
+### Optional external Emacs resources ###
 
 Externals marked with [i] are alread installed.  Enter an external's number to
-mark it for installation, then type x to install marked externals or q to quit
-without applying any changes.
+mark it for installation, then type x to checkout marked externals or q to
+quit without applying any changes.
 EOF
     do {
         print "\n";
