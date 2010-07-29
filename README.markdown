@@ -116,6 +116,10 @@ Adjust `ps-lpr-command` for your machine's `gswin32c.exe` executable path.
 				(height . 46)
 				(font . "Consolas-10.5")))
 
+### Enable a color theme ###
+
+    (setq color-theme-local 'color-theme-classic)
+
 ### M-x sudoku skill level ###
 
     (setq sudoku-level "medium")
