@@ -76,7 +76,7 @@
 ;; Tree(s) of paths containing user Emacs Lisp files
 (let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
-        `((,el-d ("slime")
+        `((,el-d ("slime" ("contrib"))
                  ("clojure-mode")
                  ("swank-clojure")
                  ("org-mode/lisp")
@@ -119,6 +119,8 @@
 
 (require 'slime nil t)
 (require 'paredit)
+(require 'eperiodic nil t)
+(require 'sudoku nil t)
 
 
 ;;; LOCAL SETTINGS
@@ -514,15 +516,6 @@
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
-
-
-;;; EXTERNAL ELISP APPLICATIONS
-
-;; Periodic table of the elements
-(require 'eperiodic)
-
-;; Sudoku!
-(require 'sudoku)
 
 
 ;;; CUSTOM EXTENDED COMMANDS
