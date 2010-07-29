@@ -77,7 +77,7 @@
 ;; to the load path, but will not be scanned recursively.
 (let ((el-d (concat user-emacs-directory "elisp")))
   (setq user-elisp
-        `((,el-d ("slime" ("contrib"))
+        `((,el-d ("slime")
                  ("clojure-mode")
                  ("swank-clojure")
                  ("org-mode/lisp")
@@ -130,7 +130,7 @@
 
 ;; Initialization
 (if (featurep 'slime)
-    (slime-setup))
+    (slime-setup '(inferior-slime)))
 
 
 ;;; LOCAL SETTINGS
@@ -306,6 +306,9 @@
 
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
+
+;; Inferior SLIME
+(add-paredit-hook inferior-slime-mode)
 
 ;; Enable paredit in the minibuffer, but only for the command eval-expression
 (add-hook 'minibuffer-setup-hook
