@@ -132,6 +132,7 @@ mark it for installation, then type x to checkout marked externals or q to
 quit without applying any changes.
 EOF
     do {
+        # Show externals menu
         print "\n";
         for ( my $i = 0; $i <= $#externals; $i++ ) {
             my $ext = $externals[$i];
@@ -140,13 +141,18 @@ EOF
             printf "%2d. [%s] %s (%s %s)\n", $i+1, $flag,
                     $ext->{path}, $ext->{vcs}, $ext->{branch};
         }
+
+        # Prompt for input
         print "\next> ";
         my $cmd = <STDIN>;
         chomp $cmd;
 
+        # Process input
         if ( lc($cmd) eq 'q' ) {
+            # Quit
             exit 0;
         } elsif ( lc($cmd) eq 'x' ) {
+            # Install marked externals
             for my $ext ( @externals ) {
                 if ( exists $ext->{install} ) {
                     print "\n### Checking out " . $ext->{path} . " ###\n";
@@ -161,6 +167,7 @@ EOF
             }
             exit 0;
         } elsif ( $cmd =~ m/^[1-9]\d*$/o && $cmd <= $#externals + 1 ) {
+            # Toggle mark on non-installed external
             my $ext = $externals[$cmd-1];
             if ( -d $ext->{path} ) {
                 print "\nThe external " . $ext->{path}
