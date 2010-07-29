@@ -465,6 +465,11 @@
                                 visual-basic-mode)) auto-mode-alist))
 (setq visual-basic-mode-indent 4)
 
+;; PowerShell mode...
+(autoload 'powershell-mode "powershell-mode" t)
+(setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
+                              auto-mode-alist))
+
 ;; Text mode...
 (define-key text-mode-map "\C-m" 'newline)
 (define-key text-mode-map "\C-j" 'newline-and-indent)
