@@ -79,7 +79,8 @@
         `((,el-d ("slime")
                  ("clojure-mode")
                  ("swank-clojure")
-                 ("org-mode/lisp")))))
+                 ("org-mode/lisp")
+                 ("haskellmode-emacs")))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
@@ -452,7 +453,7 @@
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
 ;; Haskell mode...
-(load "haskell-site-file")
+(load "haskell-site-file" t)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;(if (featurep 'haskell-mode)
