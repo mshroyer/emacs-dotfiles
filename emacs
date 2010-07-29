@@ -119,6 +119,8 @@
 
 ;; Required features
 (require 'paredit)
+(require 'git)
+(require 'git-blame)
 
 ;; Optional features
 (require 'slime nil t)
@@ -291,6 +293,11 @@
 ;;; CUSTOM COMMANDS
 
 (global-set-key "\C-cm" 'timestamp-insert)
+
+
+;;; MINOR MODES
+
+(setq git-blame-prefix-format "%h %28.28A:")
 
 
 ;;; CUSTOM MODE HOOKS AND SETTINGS
