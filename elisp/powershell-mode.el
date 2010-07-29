@@ -164,19 +164,19 @@
     powershell-mode-syntax-table) 
   "Syntax for PowerShell major mode") 
 
-(defvar powershell-imenu-expressions 
-  '((nil "^\\(?:function\\|Add-Class\\)\\s-+\\([-a-z0-9A-Z_^:.]+\\)[^-a-z0-9A-Z_^:.]" 1)) 
-  "alist of regexp identifying the start of powershell definitions" 
-) 
-(defun powershell-setup-imenu () 
-  "Installs powershell-imenu-expression." 
-  (require 'imenu t) 
-  ;; imenu doc says these 3 are buffer-local by default 
-  (setq imenu-generic-expression powershell-imenu-expressions) 
-  (imenu-add-menubar-index) 
-  (require 'which-func t) 
-  (which-function-mode t) 
-) 
+;; (defvar powershell-imenu-expressions 
+;;   '((nil "^\\(?:function\\|Add-Class\\)\\s-+\\([-a-z0-9A-Z_^:.]+\\)[^-a-z0-9A-Z_^:.]" 1)) 
+;;   "alist of regexp identifying the start of powershell definitions" 
+;; ) 
+;; (defun powershell-setup-imenu () 
+;;   "Installs powershell-imenu-expression." 
+;;   (require 'imenu t) 
+;;   ;; imenu doc says these 3 are buffer-local by default 
+;;   (setq imenu-generic-expression powershell-imenu-expressions) 
+;;   (imenu-add-menubar-index) 
+;;   (require 'which-func t) 
+;;   (which-function-mode t) 
+;; ) 
 
 (defun powershell-mode () 
   "Major mode for editing PowerShell files" 
@@ -203,7 +203,7 @@
    ; Set indentation defaults. 
   (make-local-variable 'powershell-indent-width) 
   (set (make-local-variable 'comment-start) "#") 
-  (powershell-setup-imenu) 
+;;  (powershell-setup-imenu) 
   (run-hooks 'powershell-mode-hook)) 
 
 (provide 'powershell-mode)
