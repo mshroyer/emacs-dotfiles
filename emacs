@@ -9,7 +9,7 @@
 
 (require 'cl)
 
-;;; UTILITY
+;;; UTILITY FUNCTIONS
 
 (defun char (str i)
   "Return character at position i in str"
@@ -112,7 +112,7 @@
   (apply #'update-directory-autoloads my-load-path))
 
 
-;;; EXTENSIONS
+;;; EMACS EXTENSIONS
 
 ;; Contains autoloads processed from the user-elisp tree.
 (load generated-autoload-file)
@@ -191,8 +191,8 @@
 (setq visible-bell t)
 
 ;; Show continuation lines
-(setq truncate-lines nil)
-(setq truncate-partial-width-windows nil)
+(setq truncate-lines nil
+      truncate-partial-width-windows nil)
 
 ;; Don't make me type out long answers...
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -256,10 +256,10 @@
 (setq show-paren-style 'mixed)
 
 ;; ;; Use spaces for indentation, not tab chracters
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 8)
-(setq standard-indent 4)
-(setq c-indent-level 4)
+(setq-default indent-tabs-mode nil
+              tab-width 8)
+(setq standard-indent 4
+      c-indent-level 4)
 
 ;; Always use auto-fill in text mode; wrap to 75 characters by default
 (setq-default fill-column 75)
