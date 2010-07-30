@@ -118,19 +118,40 @@
 (load generated-autoload-file)
 
 ;; Required features
+(require 'org)
+(require 'diary-lib)
 (require 'paredit)
 (require 'git)
 (require 'git-blame)
+(require 'tramp)
+
+;; Autoload features
+(autoload 'markdown-mode
+  "markdown-mode.el"
+  "Major mode for editing Markdown files."
+  t)
+(autoload 'yaml-mode
+  "yaml-mode.el"
+  "Major mode for editing YAML files."
+  t)
+(autoload 'visual-basic-mode
+  "visual-basic-mode"
+  "Visual Basic mode."
+  t)
+(autoload 'powershell-mode
+  "powershell-mode"
+  "Major mode for editing PowerShell scripts."
+  t)
 
 ;; Optional features
 (require 'slime nil t)
+(when (featurep 'slime)
+  (require 'swank-clojure nil t))
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
 
 ;; Initialization
-(if (featurep 'slime)
-    (slime-setup '(inferior-slime)))
 
 
 ;;; LOCAL SETTINGS
@@ -184,6 +205,12 @@
 ;; Display current time and load average on mode line
 (display-time)
 
+;; Enable paredit in the minibuffer, but only for the command eval-expression
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (if (eql this-command 'eval-expression)
+                (paredit-mode t))))
+
 ;; Show column number on the mode line
 (column-number-mode t)
 
@@ -231,17 +258,7 @@
 (global-set-key "\C-cr" 'rename-buffer)
 
 
-;;; TRAMP
-
-(require 'tramp)
-(setq tramp-default-method "scp")
-
-
 ;;; EDITING OPTIONS
-
-;; Viper mode!
-;(setq viper-mode t)
-;(require 'viper)
 
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)
@@ -252,7 +269,7 @@
 (global-font-lock-mode 1)
 
 ;; Turn on paren matching (this is a Lisp editor, is it not?)
-(show-paren-mode 1)
+(show-paren-mode t)
 (setq show-paren-style 'mixed)
 
 ;; ;; Use spaces for indentation, not tab chracters
@@ -268,7 +285,8 @@
 (if (>= emacs-major-version 21)
     (setq show-trailing-whitespace t))
 
-;; Swap to C-j for raw newline, C-m for newline-and-indent
+;; Swap to C-j for raw newline, C-m for newline-and-indent because we will
+;; typically want to indent when we press the Enter key
 (global-set-key "\C-m" 'newline-and-indent)
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
@@ -294,34 +312,33 @@
 ;; word with ispell
 (setq ispell-silently-savep t)
 
-
-;;; CUSTOM COMMANDS
-
-(global-set-key "\C-cm" 'timestamp-insert)
-
-
-;;; MINOR MODES
-
+;; Blame mode formatting
 (setq git-blame-prefix-format "%h %28.28A:")
 
 
-;;; CUSTOM MODE HOOKS AND SETTINGS
+;;; CUSTOM COMMANDS
 
-;; Inferior SLIME
-(add-paredit-hook inferior-slime-mode)
+(global-set-key "\C-cc" 'calc)
+(global-set-key "\C-cm" 'timestamp-insert)
 
-;; Enable paredit in the minibuffer, but only for the command eval-expression
-(add-hook 'minibuffer-setup-hook
-          (lambda ()
-            (if (eql this-command 'eval-expression)
-                (paredit-mode t))))
 
-;; Outline mode...
-(require 'outline)
-(add-to-list 'auto-mode-alist '("\\.ol$" . outline-mode))
+;;; SLIME
+
+;; Use Paredit in Inferior SLIME
+(when (featurep 'slime)
+  (add-paredit-hook inferior-slime-mode)
+  (slime-setup '(inferior-slime)))
+
+
+;;; TRAMP
+
+;; Assume SCP if no explicit method
+(setq tramp-default-method "scp")
+
+
+;;; EDITING MODE HOOKS AND SETTINGS
 
 ;; Org mode...
-(require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-ca" 'org-agenda)
 ; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
@@ -345,8 +362,6 @@
             (setq scroll-margin 0)))
 
 ;; Diary mode...
-(require 'diary-lib)
-
 (defun diary-range (first &optional last on-sexps off-sexps)
   "Diary entry for a event spanning over a range of dates."
   (and
@@ -379,9 +394,6 @@
 (add-hook 'list-diary-entries-hook 'include-other-diary-files)
 (add-hook 'mark-diary-entries-hook 'mark-included-diary-files)
 
-;; Calc mode...
-(global-set-key "\C-cc" 'calc)
-
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
 (add-hook 'html-mode-hook
@@ -394,10 +406,6 @@
             (local-set-key "\C-j" 'newline)))
 
 ;; Markdown mode...
-(autoload 'markdown-mode
-  "markdown-mode.el"
-  "Major mode for editing Markdown files."
-  t)
 (setq auto-mode-alist
       (append '(("\\.mkd$" . markdown-mode)
                 ("\\.markdown$" . markdown-mode))
@@ -407,7 +415,6 @@
             (auto-fill-mode t)))
 
 ;; YAML mode...
-(autoload 'yaml-mode "yaml-mode.el")
 (setq auto-mode-alist
       (append '(("\\.yaml$" . yaml-mode))
               auto-mode-alist))
@@ -470,8 +477,6 @@
 (add-paredit-hook lisp-mode)
 
 ;; Clojure mode...
-(when (featurep 'slime)
-  (require 'swank-clojure nil t))
 (add-paredit-hook clojure-mode)
 
 ;; Groovy mode...
@@ -486,13 +491,11 @@
 ;    (setq haskell-indent-look-past-empty-line nil))
 
 ;; Visual Basic mode...
-(autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
                                 visual-basic-mode)) auto-mode-alist))
 (setq visual-basic-mode-indent 4)
 
 ;; PowerShell mode...
-(autoload 'powershell-mode "powershell-mode" t)
 (setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
                               auto-mode-alist))
 
