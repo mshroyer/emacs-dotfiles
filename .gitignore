@@ -1,9 +1,10 @@
 *~
+\#*\#
+backups/
 auto-save-list/
 server/
 tramp
 loaddefs.el
-\#*\#
 elisp/clojure-mode/
 elisp/swank-clojure/
 elisp/org-mode/

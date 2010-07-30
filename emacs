@@ -183,14 +183,12 @@
 (setq make-backup-files t
       backup-by-copying t)
 
-;; If we have a ~/.saves directory, keep backup files there and enable
-;; backup versioning.
-(when (file-exists-p "~/.saves")
-  (setq backup-directory-alist '(("." . "~/.saves"))
-        version-control t
-        kept-new-versions 6
-        kept-old-versions 2
-        delete-old-versions t))
+;; Keep versioned backups in ~/.emacs.d/backups
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      version-control t
+      kept-new-versions 6
+      kept-old-versions 2
+      delete-old-versions t)
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
