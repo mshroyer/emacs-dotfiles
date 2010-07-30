@@ -173,8 +173,10 @@
 
 ;;; FILE HANDLING
 
-;; Delete unnecessary auto-save files
-(setq delete-auto-save-files t)
+;; Auto-save every four minutes, and delete auto-save files when the buffer
+;; is saved or killed
+(setq auto-save-interval 240
+      delete-auto-save-files t)
 
 ;; Like Vim's ":set backupcopy=yes"; save files in-place so things like
 ;; Mutt or Cygwin's permissions don't get screwed up.
