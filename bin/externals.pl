@@ -39,6 +39,12 @@ our @externals = (
         repo   => ':pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot slime',
         branch => 'trunk',
     },
+    {
+        path   => 'elisp/cperl-mode',
+        vcs    => 'git',
+        repo   => 'git://github.com/jrockway/cperl-mode.git',
+        branch => 'perl6-pugs',
+    },
 );
 
 my @dirstack = ();

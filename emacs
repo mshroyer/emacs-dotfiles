@@ -81,7 +81,8 @@
                  ("clojure-mode")
                  ("swank-clojure")
                  ("org-mode/lisp")
-                 ("haskellmode-emacs")))))
+                 ("haskellmode-emacs")
+                 ("cperl-mode")))))
 
 ;; Start server mode if we're running in a windowing environment
 (if window-system
