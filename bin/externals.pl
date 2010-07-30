@@ -99,13 +99,7 @@ sub vcs_darcs_update {
 sub vcs_git_checkout {
     my ($path, $repo, $branch) = @_;
 
-    `git clone "${repo}" "${path}"`;
-    if ( $branch ne 'master' ) {
-        pushd($path);
-        `git branch --track ${branch} origin/${branch}`;
-        `git checkout ${branch}`;
-        popd();
-    }
+    `git clone -b ${branch} "${repo}" "${path}"`;
 }
 
 sub vcs_git_update {
