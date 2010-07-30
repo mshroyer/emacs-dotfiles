@@ -155,9 +155,19 @@
 ;; Delete unnecessary auto-save files
 (setq delete-auto-save-files t)
 
-;; Don't leave those damn annoying backup files all over the place (I don't
-;; know how to emulate Vim's backupcopy=yes mode)
-(setq make-backup-files nil)
+;; Like Vim's ":set backupcopy=yes"; save files in-place so things like
+;; Mutt or Cygwin's permissions don't get screwed up.
+(setq make-backup-files t
+      backup-by-copying t)
+
+;; If we have a ~/.saves directory, keep backup files there and enable
+;; backup versioning.
+(when (file-exists-p "~/.saves")
+  (setq backup-directory-alist '(("." . "~/.saves"))
+        version-control t
+        kept-new-versions 6
+        kept-old-versions 2
+        delete-old-versions t))
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)

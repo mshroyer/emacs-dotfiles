@@ -1,7 +1,8 @@
+*~
 auto-save-list/
 server/
 tramp
-loaddefs.el*
+loaddefs.el
 \#*\#
 elisp/clojure-mode/
 elisp/swank-clojure/
