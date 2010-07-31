@@ -10,4 +10,4 @@ set HOME="%HOMEDRIVE%%HOMEPATH%"
 :setup
 cd "%HOME%"
 mklink .emacs       .emacs.d\emacs
-mklink .abbrev_defs .emacs.d\abbrev_defs
+

@@ -273,8 +273,8 @@
 
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)
-(read-abbrev-file "~/.abbrev_defs")
-(setq save-abbrevs t)
+(setq abbrev-file-name (concat user-emacs-directory "abbrev_defs")
+      save-abbrevs     t)
 
 ;; Set up syntax coloring
 (global-font-lock-mode 1)

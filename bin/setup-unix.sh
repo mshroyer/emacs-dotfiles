@@ -4,4 +4,4 @@
 
 cd ~
 ln -s .emacs.d/emacs       .emacs
-ln -s .emacs.d/abbrev_defs .abbrev_defs
+

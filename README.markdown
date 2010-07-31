@@ -11,12 +11,11 @@ Installation
 ------------
 
 To set this directory up as a local Emacs configuration, check it out as
-`~/.emacs.d/` and create the following symbolic links:
+`~/.emacs.d/` and create the following symbolic link:
 
 	~/.emacs       => ~/.emacs.d/emacs
-	~/.abbrev_defs => ~/.emacs.d/abbrev_defs
 	
-The `bin/` subdirectory contains scripts to create these links for you, on
+The `bin/` subdirectory contains scripts to create this link for you, on
 either Unix or Windows systems.  However, to use the Windows script
 `setup-win.cmd` you will need Windows Vista or later.
 
