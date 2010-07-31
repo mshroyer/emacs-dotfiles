@@ -13,7 +13,7 @@ Installation
 To set this directory up as a local Emacs configuration, check it out as
 `~/.emacs.d/` and create the following symbolic link:
 
-	~/.emacs       => ~/.emacs.d/emacs
+	~/.emacs => ~/.emacs.d/emacs
 	
 The `bin/` subdirectory contains scripts to create this link for you, on
 either Unix or Windows systems.  However, to use the Windows script
