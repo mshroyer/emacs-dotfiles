@@ -111,7 +111,9 @@ sub vcs_darcs_update {
 sub vcs_git_checkout {
     my ($path, $repo, $branch) = @_;
 
-    `git clone -b ${branch} "${repo}" "${path}"`;
+    my $branchopt = $branch ? "-b ${branch}" : "";
+
+    `git clone ${branchopt} "${repo}" "${path}"`;
 }
 
 sub vcs_git_update {
