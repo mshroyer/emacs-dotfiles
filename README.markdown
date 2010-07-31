@@ -41,9 +41,11 @@ up to date with their latest upstream versions.
 
 The Perl 5 script `externals.pl` in the `bin/` subdirectory can be used to
 selectively install these optional externals, as well as to update all
-presently installed such externals.  To install externals, change to your
-newly checked-out `~/.emacs.d` directory and run the script with the
-`checkout` command:
+presently installed such externals.  (Unfortunately I couldn't just use git
+submodules here because many of these external features are stored in other
+version control systems.)  To install externals, change to your newly
+checked-out `~/.emacs.d` directory and run the script with the `checkout`
+command:
 
     $ cd ~/.emacs.d
     $ bin/externals.pl checkout
