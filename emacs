@@ -57,6 +57,12 @@
                                 (flatten-path-tree (cdr sub-tree))))
                     (flatten-path-tree (cdr path-tree)))))))
 
+;; Check local-server-selection variable (possibly set in ~/.emacs.local)
+;; to decide whether we should run the server in question
+(defun should-start-server (server-name)
+  (and (boundp 'local-server-selection)
+       (member server-name local-server-selection)))
+
 
 ;;; SYSTEM
 
@@ -82,28 +88,8 @@
                  ("swank-clojure")
                  ("org-mode/lisp")
                  ("haskellmode-emacs")
-                 ("cperl-mode")))))
-
-;; Start server mode if we're running in a windowing environment
-(if window-system
-    (progn
-      (server-start)
-
-      ;; Open files for "emacsclient" in a new frame...
-      (add-hook 'server-switch-hook
-                (lambda ()
-                  (let ((server-buf (current-buffer)))
-                    (bury-buffer)
-                    (switch-to-buffer-other-frame server-buf))))
-
-      ;; ...and delete that frame once we're done with the file.
-      (add-hook 'server-done-hook
-                (lambda ()
-                  (kill-buffer nil)     ; Close the buffer, too
-                  (delete-frame)
-                  (redraw-display)      ; Redraw the display to clear
-                                        ; messages from main frame minibuf
-                  ))))
+                 ("cperl-mode")
+                 ("emacs_chrome/servers")))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -151,6 +137,7 @@
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
+(require 'edit-server nil t)
 
 ;; Initialization
 
@@ -848,6 +835,41 @@ for example.
 
   (command-execute 'ispell-word)
   (flyspell-buffer))
+
+
+;;; EDITOR SERVERS
+
+;; Builtin Emacs server
+(when (should-start-server :emacs)
+  (server-start)
+
+  ;; Open files for "emacsclient" in a new frame...
+  (add-hook 'server-switch-hook
+            (lambda ()
+              (let ((server-buf (current-buffer)))
+                (bury-buffer)
+                (switch-to-buffer-other-frame server-buf))))
+
+  ;; ...and delete that frame once we're done with the file.
+  (add-hook 'server-done-hook
+            (lambda ()
+              (kill-buffer nil)         ; Close the buffer, too
+              (delete-frame)
+              (redraw-display)          ; Redraw the display to clear
+                                        ; messages from main frame minibuf
+              )))
+
+;; Chrome "Edit with Emacs" server
+;; https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
+(when (and (featurep 'edit-server)
+           (should-start-server :chrome-edit))
+
+  (edit-server-start)
+
+  ;; Enable word wrap in the edit window
+  (add-hook 'edit-server-text-mode-hook
+            (lambda ()
+              (visual-line-mode t))))
 
 
 ;; Custom variables from the Emacs configuration editor

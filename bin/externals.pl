@@ -45,6 +45,12 @@ our @externals = (
         repo   => 'git://github.com/jrockway/cperl-mode.git',
         branch => 'perl6-pugs',
     },
+    {
+        path   => 'elisp/emacs_chrome',
+        vcs    => 'git',
+        repo   => 'git://github.com/stsquad/emacs_chrome.git',
+        branch => 'master',
+    },
 );
 
 my @dirstack = ();

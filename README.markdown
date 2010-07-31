@@ -87,6 +87,10 @@ prove useful:
 	(setq tramp-default-method "plink")
       (setq tramp-default-method "ssh"))
 
+### Specify edit servers to run ###
+
+    (setq local-server-selection '(:emacs :chrome-edit))
+
 ### Spell checker ###
 
     (setq ispell-program-name "C:/cygwin/bin/aspell.exe"
