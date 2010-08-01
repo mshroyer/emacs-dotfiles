@@ -264,8 +264,8 @@
       save-abbrevs     t)
 
 ;; Quick entry for commonly used symbols
-(defconst specialchar-en-dash (cdr (assoc "EN DASH" ucs-names)))
-(defconst specialchar-em-dash (cdr (assoc "EM DASH" ucs-names)))
+(defconst specialchar-en-dash #x2013)
+(defconst specialchar-em-dash #x2014)
 (global-set-key "\C-c-" (lambda (&optional arg)
                           (interactive "*P")
                           (if arg
