@@ -334,6 +334,10 @@
 ;; Use Paredit in Inferior SLIME
 (when (featurep 'slime)
   (add-paredit-hook inferior-slime-mode)
+  (add-hook 'inferior-slime-mode-hook
+            (lambda ()
+              (make-local-variable 'scroll-margin)
+              (setq scroll-margin 0)))
   (slime-setup '(inferior-slime)))
 
 
@@ -496,6 +500,10 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;(if (featurep 'haskell-mode)
 ;    (setq haskell-indent-look-past-empty-line nil))
+(add-hook 'inferior-haskell-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
 
 ;; Visual Basic mode...
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
