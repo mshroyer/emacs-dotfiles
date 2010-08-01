@@ -229,10 +229,6 @@
 ;; (like :set scrolloff=3 in Vim)
 (setq scroll-margin 3)
 
-;; Use smooth-scrolling.el for less annoying behavior...
-;(require 'smooth-scrolling)
-;(setq smooth-scroll-margin 3)
-
 ;; Don't use transient mark mode / Zmacs mode (note that this disables
 ;; region highlighting)
 (transient-mark-mode 0)
