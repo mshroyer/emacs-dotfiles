@@ -869,7 +869,8 @@ for example.
   ;; Enable word wrap in the edit window
   (add-hook 'edit-server-text-mode-hook
             (lambda ()
-              (visual-line-mode t))))
+              (auto-fill-mode nil)
+              (longlines-mode t))))
 
 
 ;; Custom variables from the Emacs configuration editor
