@@ -200,6 +200,12 @@
 (if (not window-system)
     (menu-bar-mode 0))
 
+;; Specify Unix system EOL mnemonics (these settings won't be the default
+;; on Windows versions of Emacs)
+(setq eol-mnemonic-unix ":"
+      eol-mnemonic-dos  "(DOS)"
+      eol-mnemonic-mac  "(MAC)")
+
 ;; Display current time and load average on mode line
 (display-time)
 
