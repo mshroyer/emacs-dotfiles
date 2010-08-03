@@ -75,6 +75,10 @@ method for making machine-local customizations to the Emacs startup.
 Provided below is a collection of some local customization recipes that may
 prove useful:
 
+### Default coding system for new files ###
+
+    (setf (default-value 'buffer-file-coding-system) 'utf-8-unix)
+
 ### Common Lisp implementation for SLIME ###
 
     (when (featurep 'slime)
