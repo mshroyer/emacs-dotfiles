@@ -108,6 +108,21 @@ sub vcs_darcs_update {
     popd();
 }
 
+sub vcs_bzr_checkout {
+    my ($path, $repo) = @_;
+
+    `bzr branch "${repo}" "${path}"`;
+}
+
+sub vcs_bzr_update {
+    my ($path, $repo) = @_;
+
+    pushd($path);
+    `bzr pull`;
+    popd();
+    print "\n";
+}
+
 sub vcs_git_checkout {
     my ($path, $repo, $branch) = @_;
 
