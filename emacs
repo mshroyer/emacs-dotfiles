@@ -829,6 +829,12 @@ for example.
   (end-of-line))
 
 
+;; Count words in region (like M-= except for words)
+(defun wc ()
+  (interactive)
+  (message "Word count: %s" (how-many "\\w+" (point-min) (point-max))))
+
+
 ;; Consolidate flyspell commands
 (defun flyspell-enable ()
   "Enable flyspell for the current buffer"
