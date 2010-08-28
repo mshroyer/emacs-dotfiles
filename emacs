@@ -76,21 +76,22 @@
 
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/"
+      user-elisp-directory (concat user-emacs-directory "elisp/")
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
 
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
-(let ((el-d (concat user-emacs-directory "elisp")))
-  (setq user-elisp
-        `((,el-d ("slime")
-                 ("clojure-mode")
-                 ("swank-clojure")
-                 ("org-mode/lisp")
-                 ("haskellmode-emacs")
-                 ("cperl-mode")
-                 ("emacs_chrome/servers")
-                 ("yasnippet")))))
+(setq user-elisp `((,user-elisp-directory
+                    ("slime")
+                    ("clojure-mode")
+                    ("swank-clojure")
+                    ("org-mode/lisp")
+                    ("haskellmode-emacs")
+                    ("cperl-mode")
+                    ("emacs_chrome/servers")
+                    ("yasnippet")
+                    ("scala-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -140,6 +141,7 @@
 (require 'epa-file nil t)
 (require 'edit-server nil t)
 (require 'yasnippet nil t)
+(require 'scala-mode nil t)
 
 ;; Initialization
 
@@ -502,6 +504,13 @@
 
 ;; Clojure mode...
 (add-paredit-hook clojure-mode)
+
+;; Scala mode...
+(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+(if (featurep 'yasnippet)
+    (add-hook 'scala-mode-hook
+              (lambda ()
+                (yas/minor-mode-on))))
 
 ;; Groovy mode...
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))

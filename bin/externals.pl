@@ -56,6 +56,11 @@ our @externals = (
         vcs    => 'svn',
         repo   => 'http://yasnippet.googlecode.com/svn/trunk/',
     },
+    {
+        path   => 'elisp/scala-mode',
+        vcs    => 'svn',
+        repo   => 'http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/emacs/',
+    },
 );
 
 my @dirstack = ();
