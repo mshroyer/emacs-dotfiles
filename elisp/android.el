@@ -70,10 +70,15 @@
                     (android-read-project-root)))
  (setq android-project-root root)
  (let ((jdb-command
-        (format "%s -attach localhost:%s -sourcepath%s"
-                android-jdb-command-name
-                port
-                (format "%s/src" root))))
+        (if (eql system-type 'windows-nt)
+            (format "%s -connect \"com.sun.jdi.SocketAttach:hostname=localhost,port=%s\" -sourcepath%s"
+                    android-jdb-command-name
+                    port
+                    (format "%s/src" root))
+          (format "%s -attach localhost:%s -sourcepath%s"
+                  android-jdb-command-name
+                  port
+                  (format "%s/src" root)))))
    (if (not (string= jdb-command (car android-jdb-history)))
        (push jdb-command android-jdb-history))
    (jdb jdb-command)))
