@@ -51,6 +51,11 @@ our @externals = (
         repo   => 'git://github.com/stsquad/emacs_chrome.git',
         branch => 'master',
     },
+    {
+        path   => 'elisp/yasnippet',
+        vcs    => 'svn',
+        repo   => 'http://yasnippet.googlecode.com/svn/trunk/',
+    },
 );
 
 my @dirstack = ();

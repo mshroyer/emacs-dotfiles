@@ -89,7 +89,8 @@
                  ("org-mode/lisp")
                  ("haskellmode-emacs")
                  ("cperl-mode")
-                 ("emacs_chrome/servers")))))
+                 ("emacs_chrome/servers")
+                 ("yasnippet")))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -138,6 +139,7 @@
 (require 'sudoku nil t)
 (require 'epa-file nil t)
 (require 'edit-server nil t)
+(require 'yasnippet nil t)
 
 ;; Initialization
 
