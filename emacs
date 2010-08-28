@@ -508,6 +508,9 @@
 ;; Scala mode...
 (when (featurep 'scala-mode)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+  (add-hook 'scala-mode-hook
+            (lambda ()
+              (local-set-key (kbd "RET") 'reindent-then-newline-and-indent)))
   (when (featurep 'yasnippet)
     (yas/load-directory (concat user-elisp-directory
                                 "scala-mode/contrib/yasnippet/"))
