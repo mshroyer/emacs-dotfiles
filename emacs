@@ -506,12 +506,14 @@
 (add-paredit-hook clojure-mode)
 
 ;; Scala mode...
-(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
-(when (and (featurep 'yasnippet) (featurep 'scala-mode))
-  (yas/load-directory (concat user-elisp-directory "scala-mode/contrib/yasnippet/"))
-  (add-hook 'scala-mode-hook
-            (lambda ()
-              (yas/minor-mode-on))))
+(when (featurep 'scala-mode)
+  (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+  (when (featurep 'yasnippet)
+    (yas/load-directory (concat user-elisp-directory
+                                "scala-mode/contrib/yasnippet/"))
+    (add-hook 'scala-mode-hook
+              (lambda ()
+                (yas/minor-mode-on)))))
 
 ;; Groovy mode...
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
