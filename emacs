@@ -91,7 +91,8 @@
                     ("cperl-mode")
                     ("emacs_chrome/servers")
                     ("yasnippet")
-                    ("scala-mode"))))
+                    ("scala-mode")
+                    ("android-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -113,6 +114,7 @@
 (require 'git)
 (require 'git-blame)
 (require 'tramp)
+(require 'android)
 
 ;; Autoload features
 (autoload 'markdown-mode
@@ -142,6 +144,7 @@
 (require 'edit-server nil t)
 (require 'yasnippet nil t)
 (require 'scala-mode nil t)
+(require 'android-mode nil t)
 
 ;; Initialization
 

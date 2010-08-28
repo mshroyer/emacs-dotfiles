@@ -61,6 +61,12 @@ our @externals = (
         vcs    => 'svn',
         repo   => 'http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/emacs/',
     },
+    {
+        path   => 'elisp/android-mode',
+        vcs    => 'git',
+        repo   => 'git://github.com/remvee/android-mode.git',
+        branch => 'master',
+    },
 );
 
 my @dirstack = ();
