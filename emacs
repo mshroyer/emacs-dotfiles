@@ -507,10 +507,11 @@
 
 ;; Scala mode...
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
-(if (featurep 'yasnippet)
-    (add-hook 'scala-mode-hook
-              (lambda ()
-                (yas/minor-mode-on))))
+(when (and (featurep 'yasnippet) (featurep 'scala-mode))
+  (yas/load-directory (concat user-elisp-directory "scala-mode/contrib/yasnippet/"))
+  (add-hook 'scala-mode-hook
+            (lambda ()
+              (yas/minor-mode-on))))
 
 ;; Groovy mode...
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
