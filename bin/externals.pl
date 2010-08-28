@@ -94,6 +94,20 @@ sub vcs_cvs_update {
     popd();
 }
 
+sub vcs_svn_checkout {
+    my ($path, $repo) = @_;
+
+    `svn checkout "${repo}" "${path}"`;
+}
+
+sub vcs_bzr_update {
+    my ($path, $repo) = @_;
+
+    pushd($path);
+    `svn update`;
+    popd();
+}
+
 sub vcs_darcs_checkout {
     my ($path, $repo, $branch) = @_;
 
