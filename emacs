@@ -133,6 +133,10 @@
   "powershell-mode"
   "Major mode for editing PowerShell scripts."
   t)
+(autoload 'php-mode
+  "php-mode"
+  "Major mode for editing php code."
+  t)
 
 ;; Optional features
 (require 'slime nil t)
@@ -544,6 +548,10 @@
 ;; PowerShell mode...
 (setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
                               auto-mode-alist))
+
+;; PHP mode...
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 ;; Text mode...
 (define-key text-mode-map "\C-m" 'newline)
