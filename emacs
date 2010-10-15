@@ -151,6 +151,8 @@
 (require 'android-mode nil t)
 
 ;; Initialization
+(let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
+  (load nxhtml-init t))
 
 
 ;;; LOCAL SETTINGS

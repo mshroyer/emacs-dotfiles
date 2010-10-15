@@ -67,6 +67,11 @@ our @externals = (
         repo   => 'git://github.com/remvee/android-mode.git',
         branch => 'master',
     },
+    {
+        path   => 'elisp/nxhtml',
+        vcs    => 'bzr',
+        repo   => 'https://code.launchpad.net/~nxhtml/nxhtml/main',
+    },
 );
 
 my @dirstack = ();
