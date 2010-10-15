@@ -10,19 +10,11 @@ written myself.
 Installation
 ------------
 
-To set this directory up as a local Emacs configuration, check it out as
-`~/.emacs.d/` and create the following symbolic link:
-
-	~/.emacs => ~/.emacs.d/emacs
-	
-The `bin/` subdirectory contains scripts to create this link for you, on
-either Unix or Windows systems.  However, to use the Windows script
-`setup-win.cmd` you will need Windows Vista or later.
-
-If you're running Emacs under Cygwin or SUA on Windows Vista or above, use
-the Windows symlink installation script / method rather than the Unix one.
-Windows NTFS symlinks will work in Cygwin and SUA, but Cygwin symlinks are
-not accessible to native Windows applications, including NT Emacs.
+Aside from checking out this repository to `~/.emacs.d/`, no special
+installation actions are required on Unix-like systems.  However, make sure
+you don't have an old `~/.emacs` or `~/.emacs.el` file sitting around on
+your system, as this will supersede `~/.emacs.d/init.el` in GNU Emacs's
+search path.
 
 Also, if you're installing on Windows, set the environment variable HOME to
 reference your home directory.  If this variable is not set my Emacs
@@ -68,7 +60,7 @@ concerned.
 Local Customizations
 --------------------
 
-My startup script will look for a file named `~/.emacs.local`; if it is
+My startup script will look for a file named `~/.emacs.local.el`; if it is
 found, this file will be loaded during Emacs startup.  This provides a
 method for making machine-local customizations to the Emacs startup.
 
