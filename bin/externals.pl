@@ -116,7 +116,7 @@ sub vcs_svn_checkout {
     `svn checkout "${repo}" "${path}"`;
 }
 
-sub vcs_bzr_update {
+sub vcs_svn_update {
     my ($path, $repo) = @_;
 
     pushd($path);
