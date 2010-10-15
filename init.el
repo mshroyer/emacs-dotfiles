@@ -57,7 +57,7 @@
                                 (flatten-path-tree (cdr sub-tree))))
                     (flatten-path-tree (cdr path-tree)))))))
 
-;; Check local-server-selection variable (possibly set in ~/.emacs.local)
+;; Check local-server-selection variable (possibly set in ~/.emacs.local.el)
 ;; to decide whether we should run the server in question
 (defun should-start-server (server-name)
   (and (boundp 'local-server-selection)
@@ -157,9 +157,9 @@
 
 ;;; LOCAL SETTINGS
 
-;; Retrieve any local configurations from ~/.emacs.local, if the file
+;; Retrieve any local configurations from ~/.emacs.local.el, if the file
 ;; exists on this system
-(let ((local-settings "~/.emacs.local"))
+(let ((local-settings "~/.emacs.local.el"))
   (if (file-exists-p local-settings)
       (load-file local-settings)))
 
