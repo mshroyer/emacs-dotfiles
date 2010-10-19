@@ -324,9 +324,6 @@
 ;; unbearably slow with aspell on Windows.
 (setq flyspell-large-region 0)
 
-;; Recheck spelling after running ispell-key keyboard macro
-;(global-set-key "\M-$" 'flyspell-word)
-
 ;; Global command for entering iimage-mode
 (global-set-key "\C-ci" 'iimage-mode)
 
@@ -882,14 +879,6 @@ for example.
 
   (flyspell-buffer)
   (flyspell-mode 1))
-
-(defun flyspell-word ()
-  "Check the current word's spelling and then re-run flyspell"
-
-  (interactive)
-
-  (command-execute 'ispell-word)
-  (flyspell-buffer))
 
 
 ;;; EDITOR SERVERS
