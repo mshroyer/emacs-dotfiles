@@ -157,6 +157,9 @@
 
 ;;; LOCAL SETTINGS
 
+;; Default values which may be overridden locally
+(defvar ctags-program-name "ctags")
+
 ;; Retrieve any local configurations from ~/.emacs.local.el, if the file
 ;; exists on this system
 (let ((local-settings "~/.emacs.local.el"))
@@ -655,6 +658,23 @@
           (insert (format (concat line char "\n") i i i i))
           (setq i (+ i 1))))))
   (beginning-of-buffer))
+
+
+;; Generate tags for directory with Exuberant Ctags
+(defun create-tags (dir-name)
+  "Create tags file with Exuberant Ctags."
+  (interactive "DDirectory: ")
+
+  ;; We have to manually expand the tilde for Windows...
+  (let ((dir-file (replace-regexp-in-string "^~"
+                                            (replace-regexp-in-string "\\\\"
+                                                                      "/"
+                                                                      (getenv "HOME"))
+                                            (directory-file-name dir-name))))
+    (shell-command (format "\"%s\" -f \"%s/TAGS\" -e -R \"%s\""
+                   ctags-program-name
+                   dir-file
+                   dir-file))))
 
 
 (defun prompt-user-selection (choices &optional message)
