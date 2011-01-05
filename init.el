@@ -88,6 +88,7 @@
                     ("swank-clojure")
                     ("org-mode/lisp")
                     ("haskellmode-emacs")
+                    ("erlang")
                     ("cperl-mode")
                     ("emacs_chrome/servers")
                     ("yasnippet")
