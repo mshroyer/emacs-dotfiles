@@ -34,6 +34,12 @@ our @externals = (
         branch => 'maint',
     },
     {
+        path   => 'elisp/gnus',
+        vcs    => 'git',
+        repo   => 'http://git.gnus.org/gnus.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/slime',
         vcs    => 'cvs',
         repo   => ':pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot slime',
