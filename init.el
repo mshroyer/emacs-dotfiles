@@ -335,6 +335,9 @@
 ;; word with ispell
 (setq ispell-silently-savep t)
 
+;; Don't spell check HTML/XML tags and attributes
+(set-default 'ispell-skip-html t)
+
 ;; Blame mode formatting
 (setq git-blame-prefix-format "%h %28.28A:")
 
@@ -898,8 +901,8 @@ for example.
 
   (interactive)
 
-  (flyspell-buffer)
-  (flyspell-mode 1))
+  (flyspell-mode 1)
+  (flyspell-buffer))
 
 
 ;;; EDITOR SERVERS
