@@ -141,8 +141,6 @@
 
 ;; Optional features
 (require 'slime nil t)
-(when (featurep 'slime)
-  (require 'swank-clojure nil t))
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
@@ -362,12 +360,12 @@
 
 ;; Use Paredit in Inferior SLIME
 (when (featurep 'slime)
-  (add-paredit-hook inferior-slime-mode)
-  (add-hook 'inferior-slime-mode-hook
+  (add-paredit-hook slime-repl-mode)
+  (add-hook 'slime-repl-mode-hook
             (lambda ()
               (make-local-variable 'scroll-margin)
               (setq scroll-margin 0)))
-  (slime-setup '(inferior-slime)))
+  (slime-setup '(slime-repl)))
 
 
 ;;; TRAMP

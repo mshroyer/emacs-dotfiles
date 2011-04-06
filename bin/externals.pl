@@ -13,13 +13,7 @@ our @externals = (
     {
         path   => 'elisp/clojure-mode',
         vcs    => 'git',
-        repo   => 'git://github.com/jochu/clojure-mode.git',
-        branch => 'master',
-    },
-    {
-        path   => 'elisp/swank-clojure',
-        vcs    => 'git',
-        repo   => 'git://github.com/jochu/swank-clojure.git',
+        repo   => 'git://github.com/technomancy/clojure-mode.git',
         branch => 'master',
     },
     {
