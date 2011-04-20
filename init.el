@@ -138,6 +138,14 @@
   "php-mode"
   "Major mode for editing php code."
   t)
+(autoload 'fsharp-mode
+  "fsharp"
+  "Major mode for editing F# code."
+  t)
+(autoload 'run-fsharp
+  "inf-fsharp"
+  "Run an inferior F# process."
+  t)
 
 ;; Optional features
 (require 'slime nil t)
@@ -541,6 +549,13 @@
 ;(if (featurep 'haskell-mode)
 ;    (setq haskell-indent-look-past-empty-line nil))
 (add-hook 'inferior-haskell-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
+;; F# mode...
+(add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
+(add-hook 'inferior-fsharp-mode-hooks
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
