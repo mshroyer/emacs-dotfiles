@@ -483,7 +483,9 @@
             (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 3 75))
             (setq indent-tabs-mode t)
-            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
+            (local-set-key (kbd "TAB") 'tab-to-tab-stop)
+            (global-set-key "\C-m" 'newline-and-indent)
+            (global-set-key "\C-j" 'newline)))
 
 ;; Perl mode...
 (defalias 'perl-mode 'cperl-mode)
