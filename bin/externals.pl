@@ -72,6 +72,11 @@ our @externals = (
         vcs    => 'bzr',
         repo   => 'https://code.launchpad.net/~nxhtml/nxhtml/main',
     },
+    {
+        path   => 'elisp/rudel',
+        vcs    => 'bzr',
+        repo   => 'bzr://rudel.bzr.sourceforge.net/bzrroot/rudel/trunk',
+    },
 );
 
 my @dirstack = ();
