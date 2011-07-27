@@ -476,7 +476,7 @@
             (setq indent-tabs-mode nil)))
 
 ;; ASM mode...
-(setq asm-comment-char 35)
+(setq asm-comment-char 59)
 (add-hook 'asm-mode-hook
           (lambda ()
             (setq tab-width 4)
