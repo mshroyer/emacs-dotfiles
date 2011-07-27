@@ -614,6 +614,24 @@
             (setq scroll-margin 0)))
 
 
+;;; HACKED BUILTIN FUNCTIONS
+
+;; Modify this asm-mode function so that FASM "private" labels (beginning
+;; with a period) are also indented correctly...
+(defun asm-colon ()
+  "Insert a colon; if it follows a label, delete the label's indentation."
+  (interactive)
+  (let ((labelp nil))
+    (save-excursion
+      (skip-syntax-backward "w_.")
+      (skip-syntax-backward " ")
+      (if (setq labelp (bolp)) (delete-horizontal-space)))
+    (call-interactively 'self-insert-command)
+    (when labelp
+      (delete-horizontal-space)
+      (tab-to-tab-stop))))
+
+
 ;;; CUSTOM EXTENDED COMMANDS
 
 ;; Show an ASCII table
