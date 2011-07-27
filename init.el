@@ -479,10 +479,9 @@
 (setq asm-comment-char 35)
 (add-hook 'asm-mode-hook
           (lambda ()
-            (setq tab-width 3)
+            (setq tab-width 4)
             (make-local-variable 'tab-stop-list)
-            (setq tab-stop-list (simple-tab-stop-list 3 75))
-            (setq indent-tabs-mode t)
+            (setq tab-stop-list (simple-tab-stop-list 4 75))
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)
             (global-set-key "\C-m" 'newline-and-indent)
             (global-set-key "\C-j" 'newline)))
