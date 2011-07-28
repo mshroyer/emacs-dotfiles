@@ -479,6 +479,7 @@
 (setq asm-comment-char 59)
 (add-hook 'asm-mode-hook
           (lambda ()
+            (setq fill-prefix ";; ")
             (setq tab-width 4)
             (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 4 75))
