@@ -538,6 +538,12 @@
             (setq lisp-indent-function 'common-lisp-indent-function)))
 (add-paredit-hook lisp-mode)
 
+;; Scheme mode...
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (setq lisp-indent-function 'scheme-indent-function)))
+(add-paredit-hook scheme-mode)
+
 ;; Clojure mode...
 (add-paredit-hook clojure-mode)
 
