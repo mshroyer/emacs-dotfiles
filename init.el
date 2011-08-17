@@ -148,11 +148,6 @@
   "inf-fsharp"
   "Run an inferior F# process."
   t)
-(autoload 'pymacs-apply "pymacs" nil t)
-(autoload 'pymacs-call "pymacs" nil t)
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
 
 ;; Optional features
 (require 'slime nil t)
@@ -164,6 +159,7 @@
 (require 'scala-mode nil t)
 (require 'android-mode nil t)
 (require 'chicken-slime nil t)
+(require 'pymacs nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
