@@ -84,6 +84,7 @@
 ;; to the load path, but will not be scanned recursively.
 (setq user-elisp `((,user-elisp-directory
                     ("slime")
+                    ("swank-chicken")
                     ("clojure-mode")
                     ("swank-clojure")
                     ("org-mode/lisp")
@@ -156,6 +157,7 @@
 (require 'yasnippet nil t)
 (require 'scala-mode nil t)
 (require 'android-mode nil t)
+(require 'chicken-slime nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
@@ -374,6 +376,14 @@
               (make-local-variable 'scroll-margin)
               (setq scroll-margin 0)))
   (slime-setup '(slime-repl)))
+
+;; Settings for swank-chicken if it's installed
+(when (featurep 'chicken-slime)
+  (setq swank-chicken-path (concat user-elisp-directory
+                                   "swank-chicken/swank-chicken.scm"))
+  (add-hook 'scheme-mode-hook
+            (lambda ()
+              (slime-mode t))))
 
 
 ;;; TRAMP

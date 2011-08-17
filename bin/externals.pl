@@ -40,6 +40,12 @@ our @externals = (
         branch => 'trunk',
     },
     {
+        path   => 'elisp/swank-chicken',
+        vcs    => 'git',
+        repo   => 'git://github.com/nickg/swank-chicken.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/cperl-mode',
         vcs    => 'git',
         repo   => 'git://github.com/jrockway/cperl-mode.git',
