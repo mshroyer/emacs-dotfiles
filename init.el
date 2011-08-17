@@ -392,6 +392,13 @@
               (slime-mode t))))
 
 
+;;; PYMACS
+
+(when (featurep 'pymacs)
+  (pymacs-load "ropemacs" "rope-")
+  (setq ropemacs-enable-autoimport t))
+
+
 ;;; TRAMP
 
 ;; Assume SCP if no explicit method
