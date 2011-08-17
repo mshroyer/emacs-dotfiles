@@ -548,6 +548,10 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (abbrev-mode 0)))
+(add-hook 'inferior-python-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
 
 ;; JavaScript mode...
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
