@@ -95,7 +95,8 @@
                     ("emacs_chrome/servers")
                     ("yasnippet")
                     ("scala-mode")
-                    ("android-mode"))))
+                    ("android-mode")
+                    ("nyan-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -160,6 +161,7 @@
 (require 'android-mode nil t)
 (require 'chicken-slime nil t)
 (require 'pymacs nil t)
+(require 'nyan-mode nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
