@@ -86,7 +86,8 @@ our @externals = (
     {
         path   => 'elisp/nyan-mode',
         vcs    => 'git',
-        repo   => 'git://github.com/TeMPOraL/nyan-mode.git',
+        repo   => 'git://github.com/markshroyer/nyan-mode.git',
+        branch => 'master',
     },
 );
 
