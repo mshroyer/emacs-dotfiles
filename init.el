@@ -600,6 +600,9 @@
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
+;; Erlang mode...
+(add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
+
 ;; C# mode...
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
