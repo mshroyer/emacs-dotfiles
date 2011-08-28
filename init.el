@@ -602,6 +602,10 @@
 
 ;; Erlang mode...
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
+(add-hook 'erlang-shell-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
 
 ;; C# mode...
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
