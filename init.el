@@ -600,6 +600,9 @@
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
+;; C# mode...
+(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+
 ;; F# mode...
 (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
 (add-hook 'inferior-fsharp-mode-hooks
