@@ -84,6 +84,12 @@ our @externals = (
         repo   => 'bzr://rudel.bzr.sourceforge.net/bzrroot/rudel/trunk',
     },
     {
+        path   => 'elisp/monky',
+        vcs    => 'git',
+        repo   => 'git://github.com/ananthakumaran/monky.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/nyan-mode',
         vcs    => 'git',
         repo   => 'git://github.com/TeMPOraL/nyan-mode.git',

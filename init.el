@@ -96,6 +96,7 @@
                     ("yasnippet")
                     ("scala-mode")
                     ("android-mode")
+                    ("monky")
                     ("nyan-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -161,6 +162,7 @@
 (require 'android-mode nil t)
 (require 'chicken-slime nil t)
 (require 'pymacs nil t)
+(require 'monky nil t)
 (require 'nyan-mode nil t)
 
 ;; Initialization
