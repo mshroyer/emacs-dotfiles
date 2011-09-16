@@ -86,8 +86,8 @@ our @externals = (
     {
         path   => 'elisp/magit',
         vcs    => 'git',
-        repo   => 'git://github.com/magit/magit.git',
-        branch => 'master',
+        repo   => 'git://github.com/markshroyer/magit.git',
+        branch => 'windows-cmd-fix',
     },
     {
         path   => 'elisp/egg',
