@@ -18,5 +18,7 @@ elisp/scala-mode/
 elisp/android-mode/
 elisp/nxhtml/
 elisp/pymacs/
+elisp/magit/
+elisp/egg/
 elisp/monky/
 elisp/nyan-mode/

@@ -84,6 +84,18 @@ our @externals = (
         repo   => 'bzr://rudel.bzr.sourceforge.net/bzrroot/rudel/trunk',
     },
     {
+        path   => 'elisp/magit',
+        vcs    => 'git',
+        repo   => 'git://github.com/magit/magit.git',
+        branch => 'master',
+    },
+    {
+        path   => 'elisp/egg',
+        vcs    => 'git',
+        repo   => 'git://github.com/byplayer/egg.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/monky',
         vcs    => 'git',
         repo   => 'git://github.com/ananthakumaran/monky.git',

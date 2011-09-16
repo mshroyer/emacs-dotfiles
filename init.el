@@ -96,6 +96,8 @@
                     ("yasnippet")
                     ("scala-mode")
                     ("android-mode")
+                    ("magit")
+                    ("egg")
                     ("monky")
                     ("nyan-mode"))))
 
@@ -162,6 +164,8 @@
 (require 'android-mode nil t)
 (require 'chicken-slime nil t)
 (require 'pymacs nil t)
+(require 'magit nil t)
+(require 'egg nil t)
 (require 'monky nil t)
 (require 'nyan-mode nil t)
 
