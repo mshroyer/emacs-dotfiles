@@ -152,6 +152,14 @@
   "inf-fsharp"
   "Run an inferior F# process."
   t)
+(autoload 'magit-status
+  "magit"
+  "Open a Magit status buffer"
+  t)
+(autoload 'egg-status
+  "egg"
+  "Open an Egg status buffer"
+  t)
 
 ;; Optional features
 (require 'slime nil t)
@@ -164,8 +172,6 @@
 (require 'android-mode nil t)
 (require 'chicken-slime nil t)
 (require 'pymacs nil t)
-(require 'magit nil t)
-(require 'egg nil t)
 (require 'monky nil t)
 (require 'nyan-mode nil t)
 
