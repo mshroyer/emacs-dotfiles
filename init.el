@@ -180,18 +180,6 @@
   (load nxhtml-init t))
 
 
-;;; LOCAL SETTINGS
-
-;; Default values which may be overridden locally
-(defvar ctags-program-name "ctags")
-
-;; Retrieve any local configurations from ~/.emacs.local.el, if the file
-;; exists on this system
-(let ((local-settings "~/.emacs.local.el"))
-  (if (file-exists-p local-settings)
-      (load-file local-settings)))
-
-
 ;;; MAC OS X-SPECIFIC CONFIGURATIONS
 
 ;; Use the Option/Alt key for Meta in Emacs.app
@@ -382,6 +370,11 @@
 (global-set-key "\C-cm" 'timestamp-insert)
 
 
+;;; EXTERNAL PROGRAMS
+
+(defvar ctags-program-name "ctags")
+
+
 ;;; SLIME
 
 ;; Use Paredit in Inferior SLIME
@@ -413,6 +406,15 @@
 
 ;; Assume SCP if no explicit method
 (setq tramp-default-method "scp")
+
+
+;;; LOCAL SETTINGS
+
+;; Retrieve any local configurations from ~/.emacs.local.el, if the file
+;; exists on this system
+(let ((local-settings "~/.emacs.local.el"))
+  (if (file-exists-p local-settings)
+      (load-file local-settings)))
 
 
 ;;; EDITING MODE HOOKS AND SETTINGS
