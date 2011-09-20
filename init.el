@@ -268,16 +268,6 @@
 ;; region highlighting)
 (transient-mark-mode 0)
 
-;; Color themes!  (But only when running in a GUI, of course...)
-(when (and window-system
-         (boundp 'color-theme-local)
-         (not (null color-theme-local)))
-
-  (require 'color-theme)            ; Only load themes if one was
-  (load "color-theme-solarized.el")
-  (color-theme-initialize)          ; defined in ~/.emacs.local
-  (funcall color-theme-local))
-
 ;; Don't mess around with this disabled commands nonsense
 (setq disabled-command-hook nil)
 
@@ -415,6 +405,16 @@
 (let ((local-settings "~/.emacs.local.el"))
   (if (file-exists-p local-settings)
       (load-file local-settings)))
+
+;; Color themes!  (But only when running in a GUI, of course...)
+(when (and window-system
+         (boundp 'color-theme-local)
+         (not (null color-theme-local)))
+
+  (require 'color-theme)            ; Only load themes if one was
+  (load "color-theme-solarized.el")
+  (color-theme-initialize)          ; defined in ~/.emacs.local
+  (funcall color-theme-local))
 
 
 ;;; EDITING MODE HOOKS AND SETTINGS
