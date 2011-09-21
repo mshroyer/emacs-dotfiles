@@ -584,6 +584,11 @@
           (lambda ()
             (setq lisp-indent-function 'scheme-indent-function)))
 (add-paredit-hook scheme-mode)
+(add-hook 'inferior-scheme-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+(add-paredit-hook inferior-scheme-mode)
 
 ;; Clojure mode...
 (add-paredit-hook clojure-mode)
