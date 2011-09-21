@@ -225,9 +225,11 @@
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode 0))
 
-;; Don't show the menu bar unless we're running in a window system
-(if (not window-system)
-    (menu-bar-mode 0))
+;; By default, if we aren't running in a window system, turn off the menu
+;; bar but enable xterm mouse control.
+(when (not window-system)
+  (menu-bar-mode 0)
+  (xterm-mouse-mode 1))
 
 ;; Specify Unix system EOL mnemonics (these settings won't be the default
 ;; on Windows versions of Emacs)
