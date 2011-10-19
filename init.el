@@ -95,6 +95,7 @@
                     ("emacs_chrome/servers")
                     ("yasnippet")
                     ("scala-mode")
+                    ("lua")
                     ("android-mode")
                     ("magit")
                     ("egg")
@@ -151,6 +152,10 @@
 (autoload 'run-fsharp
   "inf-fsharp"
   "Run an inferior F# process."
+  t)
+(autoload 'lua-mode
+  "lua-mode"
+  "Lua editing mode."
   t)
 (autoload 'magit-status
   "magit"
@@ -605,6 +610,10 @@
     (add-hook 'scala-mode-hook
               (lambda ()
                 (yas/minor-mode-on)))))
+
+;; Lua mode...
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 ;; Groovy mode...
 (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))

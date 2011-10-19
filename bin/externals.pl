@@ -68,6 +68,12 @@ our @externals = (
         repo   => 'http://lampsvn.epfl.ch/svn-repos/scala/scala-tool-support/trunk/src/emacs/',
     },
     {
+        path   => 'elisp/lua',
+        vcs    => 'git',
+        repo   => 'git://github.com/immerrr/lua-mode.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/android-mode',
         vcs    => 'git',
         repo   => 'git://github.com/remvee/android-mode.git',
