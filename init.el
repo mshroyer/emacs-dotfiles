@@ -543,6 +543,12 @@
             (global-set-key "\C-m" 'newline-and-indent)
             (global-set-key "\C-j" 'newline)))
 
+;; Go mode...
+(when (featurep 'go-mode)
+  (add-hook 'go-mode-hook
+            (lambda ()
+              (setq tab-width 4))))
+
 ;; Perl mode...
 (defalias 'perl-mode 'cperl-mode)
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm][wW]?\\|al\\|t\\)\\'" . cperl-mode))
