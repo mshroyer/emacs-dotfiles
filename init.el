@@ -187,9 +187,14 @@
 
 ;;; MAC OS X-SPECIFIC CONFIGURATIONS
 
-;; Use the Option/Alt key for Meta in Emacs.app
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'meta)
+(when (eq system-type 'darwin)
+  ;; Use the Option/Alt key for Meta in Emacs.app
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'meta)
+
+  ;; Rig up cmd-H so that it hides the application window, rather than mark
+  ;; the current paragraph...
+  (global-set-key "\M-h" 'ns-do-hide-emacs))
 
 
 ;;; FILE HANDLING
