@@ -188,7 +188,7 @@
 ;;; MAC OS X-SPECIFIC CONFIGURATIONS
 
 ;; Use the Option/Alt key for Meta in Emacs.app
-(setq mac-command-modifier 'option)
+(setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'meta)
 
 
