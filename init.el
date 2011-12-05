@@ -100,6 +100,7 @@
                     ("magit")
                     ("egg")
                     ("monky")
+                    ("color-theme-solarized")
                     ("nyan-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -178,6 +179,7 @@
 (require 'chicken-slime nil t)
 (require 'pymacs nil t)
 (require 'monky nil t)
+(require 'color-theme-solarized nil t)
 (require 'nyan-mode nil t)
 
 ;; Initialization
@@ -424,7 +426,6 @@
          (not (null color-theme-local)))
 
   (require 'color-theme)            ; Only load themes if one was
-  (load "color-theme-solarized.el")
   (color-theme-initialize)          ; defined in ~/.emacs.local
   (funcall color-theme-local))
 

@@ -108,6 +108,12 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/color-theme-solarized',
+        vcs    => 'git',
+        repo   => 'git://github.com/sellout/emacs-color-theme-solarized.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/nyan-mode',
         vcs    => 'git',
         repo   => 'git://github.com/TeMPOraL/nyan-mode.git',

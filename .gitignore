@@ -22,5 +22,6 @@ elisp/pymacs/
 elisp/magit/
 elisp/egg/
 elisp/monky/
+elisp/color-theme-solarized/
 elisp/nyan-mode/
 elisp/swank-chicken/
