@@ -535,7 +535,9 @@
              c-lineup-arglist-tabs-only))))
 (add-hook 'c-mode-hook
           (lambda ()
-            (setq indent-tabs-mode nil)))
+            (make-local-variable 'paragraph-start)
+            (setq indent-tabs-mode nil
+                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
 
 ;; ASM mode...
 (setq asm-comment-char 59)
