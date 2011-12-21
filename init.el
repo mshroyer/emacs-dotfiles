@@ -546,8 +546,8 @@
             (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 4 75))
             (local-set-key (kbd "TAB") 'tab-to-tab-stop)
-            (global-set-key "\C-m" 'newline-and-indent)
-            (global-set-key "\C-j" 'newline)))
+            (local-set-key "\C-m" 'newline-and-indent)
+            (local-set-key "\C-j" 'newline)))
 
 ;; Go mode...
 (when (featurep 'go-mode)
