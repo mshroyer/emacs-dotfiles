@@ -394,6 +394,74 @@
 (defvar ctags-program-name "ctags")
 
 
+;;; ORG/DIARY
+
+(setq org-agenda-include-diary t)
+(setq org-agenda-custom-commands
+      '(("a" agenda "Non-blocked items"
+         ((org-agenda-skip-function
+           (lambda ()
+             (org-agenda-skip-entry-if 'regexp "^\\*+[ ]+NEXT")))))
+        ("w" "Waiting-for items by context" todo "WAIT"
+         ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
+          (org-agenda-prefix-format "")
+          (org-agenda-todo-keyword-format "")))
+        ("d" "Non-dated action items by context" todo "TODO"
+         ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
+          (org-agenda-prefix-format "%16T:")
+          (org-agenda-todo-keyword-format "")
+          (org-agenda-skip-function
+           (lambda ()
+             (org-agenda-skip-entry-if 'scheduled)))))))
+
+; Hide tags in agenda list when %T is in the agenda prefix, and don't show
+; TODO keywords:
+(setq org-agenda-remove-tags 'prefix)
+(setq org-stuck-projects
+      '("+LEVEL=1/-DONE"
+        ("TODO" "WAIT")
+        nil
+        nil))
+; Show warnings of Org Mode deadlines a week in advance, by default
+(setq org-deadline-warning-days 7)
+; Only show holidays that I actually care about
+(require 'calendar)
+(setq calendar-holidays
+      '((holiday-fixed 1 1 "New Year's Day")
+        (holiday-float 1 1 3 "Martin Luther King Day")
+        (holiday-fixed 2 2 "Groundhog Day")
+        (holiday-fixed 2 14 "Valentine's Day")
+        (holiday-float 2 1 3 "President's Day")
+        (holiday-fixed 3 17 "St. Patrick's Day")
+        (holiday-fixed 4 1 "April Fools' Day")
+        (holiday-float 5 0 2 "Mother's Day")
+        (holiday-float 5 1 -1 "Memorial Day")
+        (holiday-fixed 6 14 "Flag Day")
+        (holiday-float 6 0 3 "Father's Day")
+        (holiday-fixed 7 4 "Independence Day")
+        (holiday-float 9 1 1 "Labor Day")
+        (holiday-float 10 1 2 "Columbus Day")
+        (holiday-fixed 10 31 "Halloween")
+        (holiday-fixed 11 11 "Veteran's Day")
+        (holiday-float 11 4 4 "Thanksgiving")
+        (holiday-easter-etc)
+        (holiday-fixed 12 25 "Christmas")
+        (holiday-chinese-new-year)
+        (solar-equinoxes-solstices)
+        (holiday-sexp calendar-daylight-savings-starts
+                      (format "Daylight Saving Time Begins %s"
+                              (solar-time-string
+                               (/ calendar-daylight-savings-starts-time
+                                  (float 60))
+                               calendar-standard-time-zone-name)))
+        (holiday-sexp calendar-daylight-savings-ends
+                      (format "Daylight Saving Time Ends %s"
+                              (solar-time-string
+                               (/ calendar-daylight-savings-ends-time
+                                  (float 60))
+                               calendar-daylight-time-zone-name)))))
+
+
 ;;; SLIME
 
 ;; Use Paredit in Inferior SLIME
