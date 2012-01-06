@@ -394,14 +394,14 @@
 (defvar ctags-program-name "ctags")
 
 
-;;; ORG/DIARY
+;;; ORG MODE/DIARY
 
-(setq org-agenda-include-diary t)
+(setq org-agenda-include-diary t
+      org-enforce-todo-dependencies t
+      org-agenda-dim-blocked-tasks t)
+
 (setq org-agenda-custom-commands
-      '(("a" agenda "Non-blocked items"
-         ((org-agenda-skip-function
-           (lambda ()
-             (org-agenda-skip-entry-if 'regexp "^\\*+[ ]+NEXT")))))
+      '(("a" agenda "Agenda")
         ("w" "Waiting-for items by context" todo "WAIT"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "")
@@ -409,10 +409,7 @@
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "%16T:")
-          (org-agenda-todo-keyword-format "")
-          (org-agenda-skip-function
-           (lambda ()
-             (org-agenda-skip-entry-if 'scheduled)))))))
+          (org-agenda-todo-keyword-format "")))))
 
 ; Hide tags in agenda list when %T is in the agenda prefix, and don't show
 ; TODO keywords:
