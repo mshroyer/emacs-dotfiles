@@ -24,7 +24,7 @@ our @externals = (
     {
         path   => 'elisp/org-mode',
         vcs    => 'git',
-        repo   => 'git://repo.or.cz/org-mode.git',
+        repo   => 'git://orgmode.org/org-mode.git',
         branch => 'maint',
     },
     {
