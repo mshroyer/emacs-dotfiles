@@ -118,6 +118,7 @@
 
 ;; Required features
 (require 'org)
+(require 'calendar)
 (require 'diary-lib)
 (require 'paredit)
 (require 'git)
@@ -396,22 +397,16 @@
 
 ;;; ORG MODE/DIARY
 
-(defun list> (a b)
-  (cond ((not (car a))
-         nil)
-        ((not (car b))
-         t)
-        ((< (car a) (car b))
-         nil)
-        ((> (car a) (car b))
-         t)
-        (t
-         (list> (cdr a) (cdr b)))))
-
 (setq org-agenda-include-diary t
       org-enforce-todo-dependencies t
       org-agenda-dim-blocked-tasks nil
       org-agenda-todo-ignore-scheduled nil
+      org-agenda-remove-tags 'prefix
+      org-deadline-warning-days 7
+      org-stuck-projects '("+LEVEL=1/-DONE"
+                           ("TODO" "WAIT")
+                           nil
+                           nil)
 
       org-agenda-custom-commands
       '(("a" agenda "Agenda")
@@ -431,7 +426,13 @@
                                       (if (re-search-forward org-scheduled-time-regexp
                                                              subtree-end t)
                                           (org-time-string-to-time (match-string 1))
-                                        nil))))
+                                        nil)))
+                    (time> (lambda (a b)
+                             (cond ((not (car a))       nil)
+                                   ((not (car b))       t)
+                                   ((< (car a) (car b)) nil)
+                                   ((> (car a) (car b)) t)
+                                   (t                   (list> (cdr a) (cdr b)))))))
                (save-excursion
                  ;; Hide TODO entries where either:
                  ;;
@@ -454,22 +455,11 @@
                  (if (and (org-block-todo-from-children-or-siblings-or-parent
                            '(:type todo-state-change :to done))
                           (not (and scheduled-time
-                                    (list> scheduled-time (current-time)))))
+                                    (funcall time> scheduled-time (current-time)))))
                      nil
                    subtree-end)))))))))
 
-; Hide tags in agenda list when %T is in the agenda prefix, and don't show
-; TODO keywords:
-(setq org-agenda-remove-tags 'prefix)
-(setq org-stuck-projects
-      '("+LEVEL=1/-DONE"
-        ("TODO" "WAIT")
-        nil
-        nil))
-; Show warnings of Org Mode deadlines a week in advance, by default
-(setq org-deadline-warning-days 7)
 ; Only show holidays that I actually care about
-(require 'calendar)
 (setq calendar-holidays
       '((holiday-fixed 1 1 "New Year's Day")
         (holiday-float 1 1 3 "Martin Luther King Day")
