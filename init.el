@@ -396,11 +396,24 @@
 
 ;;; ORG MODE/DIARY
 
+(defun list> (a b)
+  (cond ((not (car a))
+         nil)
+        ((not (car b))
+         t)
+        ((< (car a) (car b))
+         nil)
+        ((> (car a) (car b))
+         t)
+        (t
+         (list> (cdr a) (cdr b)))))
+
 (setq org-agenda-include-diary t
       org-enforce-todo-dependencies t
-      org-agenda-dim-blocked-tasks t)
+      org-agenda-dim-blocked-tasks nil
+      org-agenda-todo-ignore-scheduled nil
 
-(setq org-agenda-custom-commands
+      org-agenda-custom-commands
       '(("a" agenda "Agenda")
         ("w" "Waiting-for items by context" todo "WAIT"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
@@ -409,7 +422,41 @@
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "%16T:")
-          (org-agenda-todo-keyword-format "")))))
+          (org-agenda-todo-keyword-format "")
+          (org-agenda-skip-function
+           (lambda ()
+             (let* ((subtree-end (save-excursion
+                                   (org-end-of-subtree t)))
+                    (scheduled-time (save-excursion
+                                      (if (re-search-forward org-scheduled-time-regexp
+                                                             subtree-end t)
+                                          (org-time-string-to-time (match-string 1))
+                                        nil))))
+               (save-excursion
+                 ;; Hide TODO entries where either:
+                 ;;
+                 ;;  1. The task is blocked by another not done task, or
+                 ;;
+                 ;;  2. The task is scheduled with a timestamp still in the
+                 ;;     future
+                 ;;
+                 ;; We use a custom skip function rather than
+                 ;; org-agenda-dim-blocked-tasks for condition 1 because we
+                 ;; still want to show blocked deadline tasks on the agenda
+                 ;; view (and the 'invisible option isn't available in
+                 ;; Emacs 23's Org Mode); likewise we need custom
+                 ;; functionality for condition 2 rather than setting
+                 ;; org-agenda-todo-ignore-scheduled to 'future because
+                 ;; this considers a task scheduled for any time on the
+                 ;; current date as "present" (and 'future isn't available
+                 ;; in Emacs 23's Org Mode either).
+                 ;;
+                 (if (and (org-block-todo-from-children-or-siblings-or-parent
+                           '(:type todo-state-change :to done))
+                          (not (and scheduled-time
+                                    (list> scheduled-time (current-time)))))
+                     nil
+                   subtree-end)))))))))
 
 ; Hide tags in agenda list when %T is in the agenda prefix, and don't show
 ; TODO keywords:
