@@ -386,7 +386,7 @@
 
 ;;; CUSTOM COMMANDS
 
-(global-set-key "\C-cc" 'calc)
+(global-set-key "\C-cu" 'calc)
 (global-set-key "\C-cm" 'timestamp-insert)
 
 
@@ -396,6 +396,45 @@
 
 
 ;;; ORG MODE/DIARY
+
+(defun mshroyer/org-todo-active-p ()
+  "Determines whether the current todo item is active
+
+Returns non-nil if the todo item currently under the point can
+currently be worked on; returns nil if the item is blocked from
+completion by either dependency on another todo item or because
+it is scheduled at a future timestamp."
+  (let* ((subtree-end (save-excursion
+                        (org-end-of-subtree t)))
+         (scheduled-time (save-excursion
+                           (if (re-search-forward org-scheduled-time-regexp
+                                                  subtree-end t)
+                               (org-time-string-to-time (match-string 1))
+                             nil)))
+         (time> (lambda (a b)
+                  (cond ((not (car a))       nil)
+                        ((not (car b))       t)
+                        ((< (car a) (car b)) nil)
+                        ((> (car a) (car b)) t)
+                        (t (funcall time> (cdr a) (cdr b)))))))
+    (save-excursion
+      (and (org-block-todo-from-children-or-siblings-or-parent
+            '(:type todo-state-change :to done))
+           (not (and scheduled-time
+                     (funcall time> scheduled-time (org-current-time))))))))
+
+(defun mshroyer/org-show-unblocked-todo-tree ()
+  "Show currently unblocked action items
+
+Builds a sparse tree which highlights only action items which are
+not blocked by other tasks and which are not scheduled into the
+future."
+  (interactive)
+  (org-occur (concat "^" org-outline-regexp " *" org-not-done-regexp)
+             nil
+             'mshroyer/org-todo-active-p))
+
+(define-key org-mode-map "\C-cb" 'mshroyer/org-show-unblocked-todo-tree)
 
 (setq org-agenda-include-diary t
       org-enforce-todo-dependencies t
@@ -439,25 +478,23 @@
            ;;
            (lambda ()
              (let* ((subtree-end (save-excursion
-                                   (org-end-of-subtree t)))
-                    (scheduled-time (save-excursion
-                                      (if (re-search-forward org-scheduled-time-regexp
-                                                             subtree-end t)
-                                          (org-time-string-to-time (match-string 1))
-                                        nil)))
-                    (time> (lambda (a b)
-                             (cond ((not (car a))       nil)
-                                   ((not (car b))       t)
-                                   ((< (car a) (car b)) nil)
-                                   ((> (car a) (car b)) t)
-                                   (t (funcall time> (cdr a) (cdr b)))))))
-               (save-excursion
-                 (if (and (org-block-todo-from-children-or-siblings-or-parent
-                           '(:type todo-state-change :to done))
-                          (not (and scheduled-time
-                                    (funcall time> scheduled-time (org-current-time)))))
-                     nil
-                   subtree-end)))))))))
+                                   (org-end-of-subtree t))))
+               (if (mshroyer/org-todo-active-p)
+                   nil
+                 subtree-end))))))))
+
+;; Setup org capture, but only if we're using a newer version of Org Mode
+;; that includes this feature...
+(when (require 'org-capture nil t)
+  (setq org-default-notes-file (concat org-directory "/inbox.org")
+        org-capture-templates
+        '(("i" "Inbox" entry (file (concat org-directory "/inbox.org"))
+           "* %?\n"))
+        org-refile-use-outline-path t
+        org-outline-path-complete-in-steps nil
+        org-refile-targets
+        '((("~/org/todo.org") . (:level . 1))))
+  (define-key global-map "\C-cc" 'org-capture))
 
 ; Only show holidays that I actually care about
 (setq calendar-holidays
