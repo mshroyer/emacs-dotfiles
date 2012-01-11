@@ -455,6 +455,7 @@
                                  (concat org-directory file))
                                '("/todo.org" "/archive.org"))
       diary-file (concat org-directory "/diary")
+
       org-agenda-include-diary t
       org-enforce-todo-dependencies t
       org-agenda-dim-blocked-tasks nil
@@ -477,24 +478,6 @@
           (org-agenda-prefix-format "%16T:")
           (org-agenda-todo-keyword-format "")
           (org-agenda-skip-function
-           ;;
-           ;; Hide TODO entries where either:
-           ;;
-           ;;  1. The task is blocked by another not done task, or
-           ;;
-           ;;  2. The task is scheduled with a timestamp still in the
-           ;;     future
-           ;;
-           ;; We use a custom skip function rather than
-           ;; org-agenda-dim-blocked-tasks for condition 1 because we still
-           ;; want to show blocked deadline tasks on the agenda view (and
-           ;; the 'invisible option isn't available in Emacs 23's Org
-           ;; Mode); likewise we need custom functionality for condition 2
-           ;; rather than setting org-agenda-todo-ignore-scheduled to
-           ;; 'future because this considers a task scheduled for any time
-           ;; on the current date as "present" (and 'future isn't available
-           ;; in Emacs 23's Org Mode either).
-           ;;
            (lambda ()
              (let* ((subtree-end (save-excursion
                                    (org-end-of-subtree t))))
@@ -508,7 +491,15 @@
 Returns non-nil if the todo item currently under the point can
 currently be worked on; returns nil if the item is blocked from
 completion by either dependency on another todo item or because
-it is scheduled at a future timestamp."
+it is scheduled at a future timestamp.
+
+We use this as a custom skip function for org todo views rather
+than just setting org-agenda-dim-blocked-tasks because we still
+want to show blocked deadline tasks on the agenda view.
+Likewise, we use a custom implementation of future scheduled
+tasks logic rather than set org-agenda-todo-ignore-scheduled to
+'future because, because that only ignores tasks on future dates;
+it doesn't work for future timestamps on the current date."
   (let* ((subtree-end (save-excursion
                         (org-end-of-subtree t)))
          (scheduled-time (save-excursion
