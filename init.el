@@ -516,8 +516,12 @@ it doesn't work for future timestamps on the current date."
                         ((> (car a) (car b)) t)
                         (t (funcall time> (cdr a) (cdr b)))))))
     (save-excursion
-      (and (org-block-todo-from-children-or-siblings-or-parent
-            '(:type todo-state-change :to done))
+      (and (reduce (lambda (a b)
+                     (and a b))
+                   (mapcar (lambda (f)
+                             (funcall (symbol-function f)
+                                      '(:type todo-state-change :to done)))
+                           org-blocker-hook))
            (not (and scheduled-time
                      (funcall time> scheduled-time (org-current-time))))))))
 
