@@ -450,6 +450,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cb" 'org-iswitchb)
 
 (setq org-agenda-files (mapcar (lambda (file)
                                  (concat org-directory file))
@@ -530,7 +532,7 @@ future."
              nil
              'mshroyer/org-todo-active-p))
 
-(define-key org-mode-map "\C-cb" 'mshroyer/org-show-unblocked-todo-tree)
+(define-key org-mode-map "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
 
 ;; Setup org capture, but only if we're using a newer version of Org Mode
 ;; that includes this feature...
