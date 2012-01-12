@@ -89,6 +89,7 @@
                     ("swank-clojure")
                     ("pymacs")
                     ("org-mode/lisp")
+                    ("org-mode/contrib/lisp")
                     ("haskellmode-emacs")
                     ("erlang")
                     ("cperl-mode")
