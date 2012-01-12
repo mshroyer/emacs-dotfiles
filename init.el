@@ -453,6 +453,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
+(global-set-key "\C-ci" 'mshroyer/org-show-inbox)
 
 (setq org-agenda-files (mapcar (lambda (file)
                                  (concat org-directory file))
@@ -526,6 +528,11 @@ it doesn't work for future timestamps on the current date."
            (not (and scheduled-time
                      (funcall time> scheduled-time (org-current-time))))))))
 
+(defun mshroyer/org-show-inbox ()
+  "Show the Org Mode GTD inbox file"
+  (interactive)
+  (find-file (concat org-directory "/inbox.org")))
+
 (defun mshroyer/org-show-unblocked-todo-tree ()
   "Show currently unblocked action items
 
@@ -533,11 +540,10 @@ Builds a sparse tree which highlights only action items which are
 not blocked by other tasks and which are not scheduled into the
 future."
   (interactive)
+  (find-file (concat org-directory "/todo.org"))
   (org-occur (concat "^" org-outline-regexp " *" org-not-done-regexp)
              nil
              'mshroyer/org-todo-active-p))
-
-(define-key org-mode-map "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
 
 ;; Setup org capture, but only if we're using a newer version of Org Mode
 ;; that includes this feature...
