@@ -477,18 +477,13 @@
         ("w" "Waiting-for items by context" todo "WAIT"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "")
-          (org-agenda-todo-keyword-format "")))
+          (org-agenda-todo-keyword-format "")
+          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "%16T:")
           (org-agenda-todo-keyword-format "")
-          (org-agenda-skip-function
-           (lambda ()
-             (let* ((subtree-end (save-excursion
-                                   (org-end-of-subtree t))))
-               (if (mshroyer/org-todo-active-p)
-                   nil
-                 subtree-end))))))))
+          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))))
 
 (defun mshroyer/org-todo-active-p ()
   "Determines whether the current todo item is active
@@ -527,6 +522,14 @@ it doesn't work for future timestamps on the current date."
                            org-blocker-hook))
            (not (and scheduled-time
                      (funcall time> scheduled-time (org-current-time))))))))
+
+(defun mshroyer/org-skip-inactive ()
+  "Skip function based on mshroyer/org-todo-active-p"
+  (let ((subtree-end (save-excursion
+                       (org-end-of-subtree t))))
+    (if (mshroyer/org-todo-active-p)
+        nil
+      subtree-end)))
 
 (defun mshroyer/org-show-inbox ()
   "Show the Org Mode GTD inbox file"
