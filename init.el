@@ -389,6 +389,7 @@
 
 (global-set-key "\C-cu" 'calc)
 (global-set-key "\C-cm" 'timestamp-insert)
+(global-set-key "\C-cg" 'create-tags)
 
 
 ;;; EXTERNAL PROGRAMS
