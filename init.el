@@ -707,6 +707,12 @@ future."
             (setq indent-tabs-mode nil
                   paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
 
+;; GUD mode...
+(add-hook 'gud-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
 ;; ASM mode...
 (setq asm-comment-char 59)
 (add-hook 'asm-mode-hook
