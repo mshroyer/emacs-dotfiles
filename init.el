@@ -83,6 +83,7 @@
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
 (setq user-elisp `((,user-elisp-directory
+                    ("auto-complete")
                     ("slime")
                     ("swank-chicken")
                     ("clojure-mode")
@@ -170,6 +171,8 @@
   t)
 
 ;; Optional features
+(require 'auto-complete-config nil t)
+(require 'pymacs nil t)
 (require 'slime nil t)
 (require 'eperiodic nil t)
 (require 'sudoku nil t)
@@ -376,6 +379,12 @@
 
 ;; Blame mode formatting
 (setq git-blame-prefix-format "%h %28.28A:")
+
+;; Auto complete options
+(when (featurep 'auto-complete-config)
+  (add-to-list 'ac-dictionary-directories (concat user-elisp-directory
+                                                  "auto-complete/dict"))
+  (ac-config-default))
 
 ;; Yasnippet options
 (when (featurep 'yasnippet)
@@ -761,6 +770,10 @@ future."
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
+(when (featurep 'pymacs)
+  (pymacs-load "ropemacs" "rope-")
+  (setq ropemacs-enable-autoimport t))
+(setq python-check-command "pyflakes")
 
 ;; JavaScript mode...
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))

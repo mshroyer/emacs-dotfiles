@@ -11,6 +11,12 @@ use Cwd;
 
 our @externals = (
     {
+        path   => 'elisp/auto-complete',
+        vcs    => 'git',
+        repo   => 'git://github.com/m2ym/auto-complete.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/clojure-mode',
         vcs    => 'git',
         repo   => 'git://github.com/technomancy/clojure-mode.git',
