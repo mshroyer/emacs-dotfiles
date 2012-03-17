@@ -27,3 +27,4 @@ elisp/color-theme-solarized/
 elisp/nyan-mode/
 elisp/swank-chicken/
 swank/
+.DS_Store
