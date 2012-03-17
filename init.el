@@ -88,6 +88,7 @@
                     ("swank-chicken")
                     ("clojure-mode")
                     ("swank-clojure")
+                    ("fuel")
                     ("pymacs")
                     ("org-mode/lisp")
                     ("org-mode/contrib/lisp")
@@ -169,6 +170,7 @@
   "egg"
   "Open an Egg status buffer"
   t)
+(load-file (concat user-elisp-directory "fuel/fu.el"))
 
 ;; Optional features
 (require 'auto-complete-config nil t)
