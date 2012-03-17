@@ -28,3 +28,4 @@ elisp/nyan-mode/
 elisp/swank-chicken/
 swank/
 .DS_Store
+ac-comphist.dat
