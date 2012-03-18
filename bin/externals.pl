@@ -28,6 +28,12 @@ our @externals = (
         repo   => 'http://code.haskell.org/haskellmode-emacs',
     },
     {
+        path   => 'elisp/pymacs',
+        vcs    => 'git',
+        repo   => 'git://github.com/pinard/Pymacs.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/org-mode',
         vcs    => 'git',
         repo   => 'git://orgmode.org/org-mode.git',
