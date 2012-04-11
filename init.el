@@ -403,6 +403,7 @@
 (global-set-key "\C-cu" 'calc)
 (global-set-key "\C-cm" 'timestamp-insert)
 (global-set-key "\C-cg" 'create-tags)
+(global-set-key "\C-cp" 'compile)
 
 
 ;;; EXTERNAL PROGRAMS
@@ -902,9 +903,9 @@ future."
           (lambda ()
             (set-fill-column 72)
             (flyspell-enable)
-            (end-of-buffer)
-            (dotimes (num 4 nil)
-              (previous-line))))
+            (search-forward "-- ")
+            (previous-line)
+            (open-line 1)))
 
 ;; Shell mode...
 (add-hook 'shell-mode-hook
