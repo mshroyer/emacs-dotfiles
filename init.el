@@ -437,6 +437,14 @@
   (setq ropemacs-enable-autoimport t))
 
 
+;;; Factor FUEL
+
+(add-hook 'fuel-listener-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
+
 ;;; TRAMP
 
 ;; Assume SCP if no explicit method
