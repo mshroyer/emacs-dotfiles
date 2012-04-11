@@ -714,7 +714,6 @@ future."
             (setq tab-stop-list (simple-tab-stop-list 2 75))))
 
 ;; C mode...
-(define-key c-mode-map "\C-m" 'c-context-line-break)
 (setq-default c-block-comment-prefix "* ")
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
@@ -730,16 +729,22 @@ future."
             (arglist-cont-nonempty
              c-lineup-gcc-asm-reg
              c-lineup-arglist-tabs-only))))
+(c-add-style
+ "ilchymis"
+ '("gnu" (c-offsets-alist
+          (arglist-intro . +)
+          (arglist-cont  . 0)
+          (arglist-close . 0))))
+(add-hook 'c-initialization-hook
+          (lambda ()
+            (define-key c-mode-base-map "\C-m" 'c-context-line-break)
+            (setq c-default-style "ilchymis"
+                  c-basic-offset 2)))
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
             (setq indent-tabs-mode nil
-                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
-
-            ;; Custom indentation of C function argument lists
-            (add-to-list 'c-offsets-alist '(arglist-intro . +))
-            (add-to-list 'c-offsets-alist '(arglist-cont  . 0))
-            (add-to-list 'c-offsets-alist '(arglist-close . 0))))
+                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
