@@ -714,6 +714,7 @@ future."
             (setq tab-stop-list (simple-tab-stop-list 2 75))))
 
 ;; C mode...
+(define-key c-mode-map "\C-m" 'c-context-line-break)
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
   (let* ((anchor (c-langelem-pos c-syntactic-element))
@@ -736,7 +737,7 @@ future."
 
             ;; Custom indentation of C function argument lists
             (add-to-list 'c-offsets-alist '(arglist-intro . +))
-            (add-to-list 'c-offsets-alist '(arglist-cont . 0))
+            (add-to-list 'c-offsets-alist '(arglist-cont  . 0))
             (add-to-list 'c-offsets-alist '(arglist-close . 0))))
 
 ;; GUD mode...
