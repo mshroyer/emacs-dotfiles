@@ -715,6 +715,7 @@ future."
 
 ;; C mode...
 (define-key c-mode-map "\C-m" 'c-context-line-break)
+(setq-default c-block-comment-prefix "* ")
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
   (let* ((anchor (c-langelem-pos c-syntactic-element))
