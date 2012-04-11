@@ -732,7 +732,12 @@ future."
           (lambda ()
             (make-local-variable 'paragraph-start)
             (setq indent-tabs-mode nil
-                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
+                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
+
+            ;; Custom indentation of C function argument lists
+            (add-to-list 'c-offsets-alist '(arglist-intro . +))
+            (add-to-list 'c-offsets-alist '(arglist-cont . 0))
+            (add-to-list 'c-offsets-alist '(arglist-close . 0))))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
