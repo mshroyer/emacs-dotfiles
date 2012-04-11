@@ -104,7 +104,8 @@
                     ("egg")
                     ("monky")
                     ("color-theme-solarized")
-                    ("nyan-mode"))))
+                    ("nyan-mode")
+                    ("ocaml-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -153,6 +154,10 @@
 (autoload 'fsharp-mode
   "fsharp"
   "Major mode for editing F# code."
+  t)
+(autoload 'caml-mode
+  "ocaml"
+  "Major mode for editing Caml code."
   t)
 (autoload 'run-fsharp
   "inf-fsharp"
@@ -860,6 +865,10 @@ future."
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
+
+;; OCaml mode...
+(setq auto-mode-alist (append '(("\\.ml[iyl]?$" . caml-mode))
+                              auto-mode-alist))
 
 ;; Visual Basic mode...
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
