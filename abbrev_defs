@@ -1,49 +1,107 @@
 ;;-*-coding: emacs-mule;-*-
-(define-abbrev-table 'Buffer-menu-mode-abbrev-table '(    ))
+(define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'calendar-mode-abbrev-table '(    ))
+(define-abbrev-table 'awk-mode-abbrev-table
+  '(
+   ))
 
-(define-abbrev-table 'comint-mode-abbrev-table '(    ))
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+   ))
 
-(define-abbrev-table 'completion-list-mode-abbrev-table '(    ))
+(define-abbrev-table 'c-mode-abbrev-table
+  '(
+   ))
 
-(define-abbrev-table 'diary-fancy-display-mode-abbrev-table '(    ))
+(define-abbrev-table 'calendar-mode-abbrev-table '())
 
-(define-abbrev-table 'diary-mode-abbrev-table '(    ))
+(define-abbrev-table 'change-log-mode-abbrev-table '())
 
-(define-abbrev-table 'fundamental-mode-abbrev-table '(    ))
+(define-abbrev-table 'clojure-mode-abbrev-table '())
 
-(define-abbrev-table 'global-abbrev-table '(    ))
+(define-abbrev-table 'comint-mode-abbrev-table '())
 
-(define-abbrev-table 'ledger-mode-abbrev-table '(    ))
+(define-abbrev-table 'completion-list-mode-abbrev-table '())
 
-(define-abbrev-table 'ledger-reconcile-mode-abbrev-table '(    ))
+(define-abbrev-table 'diary-fancy-display-mode-abbrev-table '())
 
-(define-abbrev-table 'ledger-report-mode-abbrev-table '(    ))
+(define-abbrev-table 'diary-mode-abbrev-table '())
 
-(define-abbrev-table 'lisp-mode-abbrev-table '(    ))
+(define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
 
-(define-abbrev-table 'message-mode-abbrev-table '(    ))
+(define-abbrev-table 'factor-messages-mode-abbrev-table '())
 
-(define-abbrev-table 'org-mode-abbrev-table '(    ))
+(define-abbrev-table 'fuel-listener-mode-abbrev-table '())
 
-(define-abbrev-table 'outline-mode-abbrev-table '(    ))
+(define-abbrev-table 'fundamental-mode-abbrev-table '())
 
-(define-abbrev-table 'shell-mode-abbrev-table '(    ))
+(define-abbrev-table 'git-log-edit-mode-abbrev-table '())
 
-(define-abbrev-table 'special-mode-abbrev-table '(    ))
+(define-abbrev-table 'global-abbrev-table '())
 
-(define-abbrev-table 'text-mode-abbrev-table '(    ("desiree" "DÅÈsirÅÈe" nil 0)
+(define-abbrev-table 'idl-mode-abbrev-table '())
+
+(define-abbrev-table 'java-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'ledger-mode-abbrev-table '())
+
+(define-abbrev-table 'ledger-reconcile-mode-abbrev-table '())
+
+(define-abbrev-table 'ledger-report-mode-abbrev-table '())
+
+(define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'message-mode-abbrev-table '())
+
+(define-abbrev-table 'objc-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'org-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
+
+(define-abbrev-table 'pike-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'select-tags-table-mode-abbrev-table '())
+
+(define-abbrev-table 'shell-mode-abbrev-table '())
+
+(define-abbrev-table 'sldb-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-connection-list-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-inspector-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-thread-control-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-xref-mode-abbrev-table '())
+
+(define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'text-mode-abbrev-table
+  '(
+    ("desiree" "DÅÈsirÅÈe" nil 0)
     ("jose" "JosÅÈ" nil 0)
-    ))
+   ))
 
-(define-abbrev-table 'vc-annotate-mode-abbrev-table '(    ))
+(define-abbrev-table 'vc-annotate-mode-abbrev-table '())
 
-(define-abbrev-table 'vc-dired-mode-abbrev-table '(    ))
+(define-abbrev-table 'vc-dired-mode-abbrev-table '())
 
-(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '(    ))
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
-(define-abbrev-table 'visual-basic-mode-abbrev-table '(    ("add" "Add" nil 0)
+(define-abbrev-table 'vc-hg-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'visual-basic-mode-abbrev-table
+  '(
+    ("add" "Add" nil 0)
     ("aggregate" "Aggregate" nil 0)
     ("and" "And" nil 0)
     ("app" "App" nil 0)
@@ -341,5 +399,5 @@
     ("workspaces" "Workspaces" nil 0)
     ("write" "Write" nil 0)
     ("year" "Year" nil 0)
-    ))
+   ))
 
