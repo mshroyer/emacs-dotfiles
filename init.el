@@ -104,8 +104,7 @@
                     ("egg")
                     ("monky")
                     ("color-theme-solarized")
-                    ("nyan-mode")
-                    ("ocaml-mode"))))
+                    ("nyan-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -159,6 +158,7 @@
   "ocaml"
   "Major mode for editing Caml code."
   t)
+(autoload 'camldebug "camldebug" (interactive) "Debug caml mode")
 (autoload 'run-fsharp
   "inf-fsharp"
   "Run an inferior F# process."
