@@ -739,7 +739,7 @@ future."
           (lambda ()
             (define-key c-mode-base-map "\C-m" 'c-context-line-break)
             (setq c-default-style "ilchymis"
-                  c-basic-offset 2)))
+                  c-basic-offset 4)))
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
