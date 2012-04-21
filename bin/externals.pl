@@ -24,8 +24,9 @@ our @externals = (
     },
     {
         path   => 'elisp/haskellmode-emacs',
-        vcs    => 'darcs',
-        repo   => 'http://code.haskell.org/haskellmode-emacs',
+        vcs    => 'git',
+        repo   => 'git://github.com/haskell/haskell-mode.git',
+        branch => 'master',
     },
     {
         path   => 'elisp/pymacs',
