@@ -230,7 +230,9 @@ sub vcs_git_update {
     my ($path, $repo, $branch) = @_;
 
     pushd($path);
-    `git pull origin ${branch}`;
+    if ( -d ".git" ) {
+        `git pull origin ${branch}`;
+    }
     popd();
 }
 
