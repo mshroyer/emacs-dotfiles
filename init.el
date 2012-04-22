@@ -105,7 +105,7 @@
                     ("monky")
                     ("color-theme-solarized")
                     ("nyan-mode")
-                    ("ocaml-mode"))))
+                    ("tuareg-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -155,13 +155,21 @@
   "fsharp"
   "Major mode for editing F# code."
   t)
-(autoload 'caml-mode
-  "ocaml"
-  "Major mode for editing Caml code."
-  t)
 (autoload 'run-fsharp
   "inf-fsharp"
   "Run an inferior F# process."
+  t)
+(autoload 'tuareg-mode
+  "tuareg"
+  "Major mode for editing OCaml code."
+  t)
+(autoload 'tuareg-run-ocaml
+  "tuareg"
+  "Run an inferior OCaml process."
+  t)
+(autoload 'ocamldebug
+  "ocamldebug"
+  "Run the OCaml debugger"
   t)
 (autoload 'lua-mode
   "lua-mode"
@@ -878,9 +886,13 @@ future."
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
-;; OCaml mode...
-(setq auto-mode-alist (append '(("\\.ml[iyl]?$" . caml-mode))
+;; Tuareg mode...
+(setq auto-mode-alist (append '(("\\.ml[iylp]?$" . tuareg-mode))
                               auto-mode-alist))
+(add-hook 'tuareg-interactive-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
 
 ;; Visual Basic mode...
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .

@@ -29,6 +29,11 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/tuareg-mode',
+        vcs    => 'svn',
+        repo   => 'svn://svn.forge.ocamlcore.org/svn/tuareg/trunk',
+    },
+    {
         path   => 'elisp/pymacs',
         vcs    => 'git',
         repo   => 'git://github.com/pinard/Pymacs.git',
