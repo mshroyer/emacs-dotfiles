@@ -739,15 +739,15 @@ future."
              c-lineup-arglist-tabs-only))))
 (c-add-style
  "ilchymis"
- '("gnu" (c-offsets-alist
-          (arglist-intro . +)
-          (arglist-cont  . 0)
-          (arglist-close . 0))))
+ '("gnu"
+   (c-offsets-alist . ((arglist-intro . +)
+                       (arglist-cont  . 0)
+                       (arglist-close . 0)))
+   (c-basic-offset  . 4)))
 (add-hook 'c-initialization-hook
           (lambda ()
             (define-key c-mode-base-map "\C-m" 'c-context-line-break)
-            (setq c-default-style "ilchymis"
-                  c-basic-offset 4)))
+            (setq c-default-style "ilchymis")))
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
