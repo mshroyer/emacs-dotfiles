@@ -752,6 +752,7 @@ future."
           (lambda ()
             (make-local-variable 'paragraph-start)
             (setq indent-tabs-mode nil
+                  show-trailing-whitespace t
                   paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
 
 ;; GUD mode...
@@ -801,7 +802,8 @@ future."
 ;; Python mode...
 (add-hook 'python-mode-hook
           (lambda ()
-            (abbrev-mode 0)))
+            (abbrev-mode 0)
+            (setq show-trailing-whitespace t)))
 (add-hook 'inferior-python-mode-hook
           (lambda ()
             (make-local-variable 'scroll-margin)
