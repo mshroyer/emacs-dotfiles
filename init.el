@@ -1286,14 +1286,23 @@ for example.
                 (bury-buffer)
                 (switch-to-buffer-other-frame server-buf))))
 
-  ;; ...and delete that frame once we're done with the file.
+  ;; ...and clean up when we're done with the client.
   (add-hook 'server-done-hook
-            (lambda ()
-              (kill-buffer nil)         ; Close the buffer, too
-              (delete-frame)
-              (redraw-display)          ; Redraw the display to clear
-                                        ; messages from main frame minibuf
-              )))
+            (if (>= emacs-major-version 23)
+
+                ;; It seems that Emacs 23 takes care of closing the
+                ;; emacslcient frame for us, so if we're using that version
+                ;; we don't need to explicitly delete the frame; doing so
+                ;; will inadvertently delete the last used GUI emacsclient
+                ;; frame as well.
+                (lambda ()
+                  (kill-buffer nil)
+                  (redraw-display))
+
+              (lambda ()
+                (kill-buffer nil)
+                (delete-frame)
+                (redraw-display)))))
 
 ;; Chrome "Edit with Emacs" server
 ;; https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
