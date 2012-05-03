@@ -473,14 +473,32 @@
   (if (file-exists-p local-settings)
       (load-file local-settings)))
 
-;; Color themes!  (But only when running in a GUI, of course...)
-(when (and window-system
-         (boundp 'color-theme-local)
-         (not (null color-theme-local)))
+;; Borrowed from: http://goo.gl/Q3qpr
+(defun mrc-xwin-look (frame)
+  "Setup to use if running in an X window"
+  (when (and (boundp 'color-theme-local)
+             (not (null color-theme-local)))
+    (require 'color-theme)
+    (color-theme-initialize)
+    (funcall color-theme-local)))
 
-  (require 'color-theme)            ; Only load themes if one was
-  (color-theme-initialize)          ; defined in ~/.emacs.local
-  (funcall color-theme-local))
+(defun mrc-terminal-look (frame)
+  "Setup to use if running in a terminal")
+
+(defun mrc-setup-frame (frame)
+  (set-variable 'color-theme-is-global nil)
+  (select-frame frame)
+  (cond
+   ((window-system)
+    (mrc-xwin-look frame)
+    (tool-bar-mode -1))
+   (t (mrc-terminal-look frame))))
+
+(add-hook 'after-make-frame-functions 'mrc-setup-frame)
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (mrc-setup-frame (selected-frame))))
 
 
 ;;; ORG MODE / DIARY
