@@ -825,7 +825,8 @@ future."
 (add-hook 'inferior-python-mode-hook
           (lambda ()
             (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+            (setq scroll-margin         0
+                  comint-process-echoes t)))
 (when (featurep 'pymacs)
   (pymacs-load "ropemacs" "rope-")
   (setq ropemacs-enable-autoimport t))
