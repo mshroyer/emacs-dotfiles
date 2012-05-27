@@ -151,6 +151,10 @@
   "php-mode"
   "Major mode for editing php code."
   t)
+(autoload 'vala-mode
+  "vala-mode"
+  "Major mode for editing Vala code."
+  t)
 (autoload 'fsharp-mode
   "fsharp"
   "Major mode for editing F# code."
@@ -896,6 +900,12 @@ future."
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
+
+;; Vala mode...
+(add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
+(add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
+(add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
+(add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8))
 
 ;; C# mode...
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
