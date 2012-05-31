@@ -512,7 +512,7 @@
 
 (setq org-agenda-files (mapcar (lambda (file)
                                  (concat org-directory file))
-                               '("/todo.org" "/archive.org"))
+                               '("/todo.org"))
       diary-file (concat org-directory "/diary")
 
       org-agenda-include-diary t
