@@ -952,15 +952,13 @@ future."
 (add-to-list 'auto-mode-alist '("\\.txt$" . text-mode))
 
 ;; AUCTeX / LaTeX mode...
-(load "auctex.el" t t t)
-(load "preview-latex.el" t t t)
-(add-to-list 'LaTeX-verbatim-environments "Verbatim")
-(add-hook 'LaTeX-mode-hook
-          (lambda ()
-            (local-set-key "\C-m" 'newline-and-indent)
-            (local-set-key "\C-j" 'newline)
-            (setq tab-width 4)
-            (auto-fill-mode 1)))
+(when (featurep 'tex-site)
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (local-set-key "\C-m" 'newline-and-indent)
+              (local-set-key "\C-j" 'newline)
+              (setq tab-width 4)
+              (auto-fill-mode 1))))
 
 ;; Mail mode...
 (add-to-list 'auto-mode-alist '("mutt-.*" . mail-mode))
@@ -1362,6 +1360,7 @@ for example.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
