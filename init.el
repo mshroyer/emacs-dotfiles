@@ -724,6 +724,12 @@ future."
             (local-set-key "\C-m" 'newline-and-indent)
             (local-set-key "\C-j" 'newline)))
 
+;; ERC mode...
+(add-hook 'erc-mode-hook
+          (lambda ()
+            (make-local-variable 'scroll-margin)
+            (setq scroll-margin 0)))
+
 ;; Markdown mode...
 (setq auto-mode-alist
       (append '(("\\.mk?d$" . markdown-mode)
@@ -957,7 +963,8 @@ future."
             (lambda ()
               (local-set-key "\C-m" 'newline-and-indent)
               (local-set-key "\C-j" 'newline)
-              (setq tab-width 4)
+              (setq tab-width        8
+                    indent-tabs-mode nil)
               (auto-fill-mode 1))))
 
 ;; Mail mode...
