@@ -439,6 +439,9 @@
               (setq scroll-margin 0)))
   (slime-setup '(slime-repl)))
 
+;; For connecting to swank-clojure
+(setq slime-net-coding-system 'utf-8-unix)
+
 ;; Settings for swank-chicken if it's installed
 (when (featurep 'chicken-slime)
   (setq swank-chicken-path (concat user-elisp-directory
