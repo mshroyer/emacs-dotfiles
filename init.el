@@ -29,6 +29,17 @@
       ((> stop text-width) stop-list)
     (setq stop-list (append stop-list (list stop)))))
 
+;; Modify paredit settings so that square and curly braces are
+;; automatically handled as well, for e.g. Clojure REPL
+(defun fix-paredit-repl ()
+  (interactive)
+  (local-set-key "{" 'paredit-open-curly)
+  (local-set-key "}" 'paredit-close-curly)
+  (modify-syntax-entry ?\{ "(}") 
+  (modify-syntax-entry ?\} "){")
+  (modify-syntax-entry ?\[ "(]")
+  (modify-syntax-entry ?\] ")["))
+
 ;; Install the paredit minor mode as a hook for the given mode name, but
 ;; only if paredit is available.
 (defmacro add-paredit-hook (mode-name)
