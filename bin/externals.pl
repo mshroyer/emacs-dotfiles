@@ -11,6 +11,12 @@ use Cwd;
 
 our @externals = (
     {
+        path   => 'elisp/evil',
+        vcs    => 'git',
+        repo   => 'git://gitorious.org/evil/evil.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/auto-complete',
         vcs    => 'git',
         repo   => 'git://github.com/m2ym/auto-complete.git',

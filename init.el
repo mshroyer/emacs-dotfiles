@@ -94,6 +94,7 @@
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
 (setq user-elisp `((,user-elisp-directory
+                    ("evil")
                     ("auto-complete")
                     ("slime")
                     ("swank-chicken")
@@ -201,6 +202,7 @@
 (load-file (concat user-elisp-directory "fuel/fu.el"))
 
 ;; Optional features
+(require 'evil nil t)
 (require 'auto-complete-config nil t)
 (require 'pymacs nil t)
 (require 'slime nil t)
