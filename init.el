@@ -973,6 +973,9 @@ future."
 ;; Paragraph indent text mode...
 (add-to-list 'auto-mode-alist '("\\.txt$" . text-mode))
 
+;; Octave mode...
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+
 ;; AUCTeX / LaTeX mode...
 (when (featurep 'tex-site)
   (add-hook 'LaTeX-mode-hook
