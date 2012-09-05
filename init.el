@@ -142,6 +142,8 @@
 (require 'git-blame)
 (require 'tramp)
 (require 'android)
+(require 'semantic)
+(require 'semantic/ia)
 
 ;; Autoload features
 (autoload 'markdown-mode
@@ -417,7 +419,10 @@
 (when (featurep 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories (concat user-elisp-directory
                                                   "auto-complete/dict"))
-  (ac-config-default))
+  (ac-config-default)
+
+  (setq ac-auto-start nil)
+  (ac-set-trigger-key "TAB"))
 
 ;; Yasnippet options
 (when (featurep 'yasnippet)
@@ -796,9 +801,11 @@ future."
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
+            (setq paragraph-start
+                  "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
             (setq indent-tabs-mode nil
                   show-trailing-whitespace t
-                  paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")))
+                  ac-sources (append '(ac-source-semantic) ac-sources))))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
