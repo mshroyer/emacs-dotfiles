@@ -3,6 +3,7 @@
 backups/
 auto-save-list/
 server/
+session.*
 tramp
 loaddefs.el
 elpa/
