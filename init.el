@@ -1408,6 +1408,7 @@ for example.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
+ '(ecb-options-version "2.40")
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
