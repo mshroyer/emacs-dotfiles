@@ -813,7 +813,8 @@ future."
                   "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
             (setq indent-tabs-mode nil
                   show-trailing-whitespace t
-                  ac-sources (append '(ac-source-semantic) ac-sources))))
+                  ac-sources (append '(ac-source-semantic) ac-sources))
+            (semantic-mode t)))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
