@@ -447,6 +447,14 @@
 (defvar ctags-program-name "ctags")
 
 
+;;; CEDET
+
+(global-semantic-idle-completions-mode 1)
+(global-semantic-decoration-mode 1)
+(global-semantic-highlight-func-mode 1)
+(global-semantic-show-unmatched-syntax-mode 1)
+
+
 ;;; SLIME
 
 ;; Use Paredit in Inferior SLIME
