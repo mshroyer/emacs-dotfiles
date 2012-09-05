@@ -17,6 +17,12 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/ecb',
+        vcs    => 'cvs',
+        repo   => ':pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb ecb',
+        branch => 'trunk',
+    },
+    {
         path   => 'elisp/auto-complete',
         vcs    => 'git',
         repo   => 'git://github.com/m2ym/auto-complete.git',

@@ -94,6 +94,7 @@
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
 (setq user-elisp `((,user-elisp-directory
+                    ("ecb")
                     ("evil")
                     ("auto-complete")
                     ("slime")
