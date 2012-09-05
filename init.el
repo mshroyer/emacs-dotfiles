@@ -454,6 +454,8 @@
 (global-semantic-highlight-func-mode 1)
 (global-semantic-show-unmatched-syntax-mode 1)
 
+(global-ede-mode 1)
+
 (define-key semantic-mode-map (kbd "C-c , .") 'semantic-ia-fast-jump)
 
 
