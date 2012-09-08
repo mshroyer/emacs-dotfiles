@@ -10,6 +10,7 @@ elpa/
 semanticdb/
 elisp/auto-complete/
 elisp/ecb/
+elisp/ess/
 elisp/clojure-mode/
 elisp/swank-clojure/
 elisp/org-mode/

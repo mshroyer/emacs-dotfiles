@@ -97,6 +97,7 @@
                     ("ecb")
                     ("evil")
                     ("auto-complete")
+                    ("ess/lisp")
                     ("slime")
                     ("swank-chicken")
                     ("clojure-mode")
@@ -207,6 +208,7 @@
 ;; Optional features
 (require 'evil nil t)
 (require 'auto-complete-config nil t)
+(require 'ess-site nil t)
 (require 'pymacs nil t)
 (require 'slime nil t)
 (require 'eperiodic nil t)

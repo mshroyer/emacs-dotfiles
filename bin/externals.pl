@@ -29,6 +29,11 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/ess',
+        vcs    => 'svn',
+        repo   => 'https://svn.r-project.org/ESS/trunk',
+    },
+    {
         path   => 'elisp/clojure-mode',
         vcs    => 'git',
         repo   => 'git://github.com/technomancy/clojure-mode.git',
