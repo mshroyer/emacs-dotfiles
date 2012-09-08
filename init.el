@@ -74,6 +74,11 @@
   (and (boundp 'local-server-selection)
        (member server-name local-server-selection)))
 
+(defun zero-scroll-margin ()
+  "Zeros the scroll margin in the current buffer"
+  (make-local-variable 'scroll-margin)
+  (setq scroll-margin 0))
+
 
 ;;; SYSTEM
 
@@ -998,6 +1003,10 @@ future."
 
 ;; Octave mode...
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(add-hook 'inferior-octave-mode-hook #'zero-scroll-margin)
+
+;; ESS / R-mode...
+(add-hook 'inferior-ess-mode-hook #'zero-scroll-margin)
 
 ;; AUCTeX / LaTeX mode...
 (when (featurep 'tex-site)
