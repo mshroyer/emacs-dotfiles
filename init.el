@@ -123,6 +123,7 @@
                     ("egg")
                     ("monky")
                     ("color-theme-solarized")
+                    ("color-theme-wombat")
                     ("nyan-mode")
                     ("tuareg-mode"))))
 
@@ -227,6 +228,7 @@
 (require 'pymacs nil t)
 (require 'monky nil t)
 (require 'color-theme-solarized nil t)
+(require 'color-theme-wombat nil t)
 (require 'nyan-mode nil t)
 
 ;; Initialization

@@ -30,6 +30,7 @@ elisp/magit/
 elisp/egg/
 elisp/monky/
 elisp/color-theme-solarized/
+elisp/color-theme-wombat/
 elisp/nyan-mode/
 elisp/swank-chicken/
 swank/

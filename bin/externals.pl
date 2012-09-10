@@ -149,6 +149,12 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/color-theme-wombat',
+        vcs    => 'git',
+        repo   => 'git://github.com/jasonblewis/color-theme-wombat.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/nyan-mode',
         vcs    => 'git',
         repo   => 'git://github.com/TeMPOraL/nyan-mode.git',
