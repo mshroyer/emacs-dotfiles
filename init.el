@@ -151,6 +151,7 @@
 (require 'android)
 (require 'semantic)
 (require 'semantic/ia)
+(require 'folding)
 
 ;; Autoload features
 (autoload 'markdown-mode
