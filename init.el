@@ -1050,11 +1050,9 @@ future."
             (previous-line)
             (open-line 1)))
 
-;; Shell mode...
-(add-hook 'shell-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+;; Shell and Term mode...
+(add-hook 'shell-mode-hook #'zero-scroll-margin)
+(add-hook 'term-mode-hook #'zero-scroll-margin)
 
 
 ;;; HACKED BUILTIN FUNCTIONS
