@@ -460,9 +460,9 @@
 ;;; CEDET
 
 (global-semantic-idle-completions-mode 1)
-(global-semantic-decoration-mode 1)
+(global-semantic-decoration-mode 0)
 (global-semantic-highlight-func-mode 1)
-(global-semantic-show-unmatched-syntax-mode 1)
+(global-semantic-show-unmatched-syntax-mode 0)
 
 (global-ede-mode 1)
 
