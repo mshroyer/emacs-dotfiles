@@ -775,6 +775,7 @@ future."
             (local-set-key "\C-j" 'newline)))
 
 ;; ERC mode...
+(require 'erc)
 (add-hook 'erc-mode-hook
           (lambda ()
             (make-local-variable 'scroll-margin)
@@ -793,6 +794,16 @@ future."
                                       erc-dangerous-host-face
                                       erc-notice-face
                                       erc-prompt-face))
+; Enable chat logging
+(add-to-list 'erc-modules 'log)
+(setq erc-log-channels-directory "~/log/"
+      erc-save-buffer-on-part t
+      erc-log-insert-log-on-open nil)
+
+; Automatically save ERC buffers when exiting Emacs
+;; (defadvice save-buffers-kill-emacs (before save-logs (arg) activate)
+;;   (save-some-buffers t (lambda ()
+;;                          (when (eq major-mode 'erc-mode) t))))
 
 ;; Markdown mode...
 (setq auto-mode-alist
