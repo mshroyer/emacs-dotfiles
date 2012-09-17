@@ -784,6 +784,7 @@ future."
 ; from http://www.emacswiki.org/emacs/ErcChannelTracking)
 (setq erc-format-query-as-channel-p t
       erc-track-priority-faces-only 'all
+      erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
       erc-track-faces-priority-list '(erc-error-face
                                       erc-current-nick-face
                                       erc-keyword-face
