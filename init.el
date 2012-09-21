@@ -397,7 +397,7 @@
 
 ;; Swap to C-j for raw newline, C-m for newline-and-indent because we will
 ;; typically want to indent when we press the Enter key
-(global-set-key "\C-m" 'newline-and-indent)
+(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
 
@@ -925,6 +925,23 @@ future."
 
 ;; Emacs Lisp mode...
 (add-paredit-hook emacs-lisp-mode)
+
+; Taken from http://paste.lisp.org/display/120878:
+;
+; When `paredit-mode' is enabled it takes precedence over the major
+; mode effectively rebinding C-j to `paredit-newline' instead of
+; `eval-print-last-sexp'.  I do not want this overridden in
+; lisp-interaction-mode.  So, use the buffer-local
+; `minor-mode-overriding-map-alist' to remove the C-j mapping from
+; the standard `paredit-mode' bindings.
+(add-hook 'lisp-interaction-mode-hook
+	  (lambda ()
+	    (paredit-mode 1)
+	    (show-paren-mode 1)
+	    (setq minor-mode-overriding-map-alist
+		  `((paredit-mode
+		     ,@(remove (cons ?\C-j 'paredit-newline)
+			       paredit-mode-map))))))
 
 ;; Common Lisp mode...
 (add-hook 'lisp-mode-hook
