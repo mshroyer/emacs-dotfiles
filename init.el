@@ -358,6 +358,10 @@
   (let ((use-dialog-box nil))
     ad-do-it))
 
+;; Don't limit expression evaluation output
+(setq eval-expression-print-length nil
+      eval-expression-print-level  nil)
+
 
 ;;; EDITING OPTIONS
 
