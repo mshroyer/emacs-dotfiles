@@ -330,6 +330,10 @@
 ;; (like :set scrolloff=3 in Vim)
 (setq scroll-margin 3)
 
+;; Custom key bindings for line scrolling without moving point
+(global-set-key (kbd "C-.") #'mshroyer/scroll-up)
+(global-set-key (kbd "C-,") #'mshroyer/scroll-down)
+
 ;; Don't use transient mark mode / Zmacs mode (note that this disables
 ;; region highlighting)
 (transient-mark-mode 0)
@@ -1418,6 +1422,18 @@ for example.
 
   (flyspell-mode 1)
   (flyspell-buffer))
+
+;; Taken from: http://www.emacswiki.org/emacs/Scrolling
+;; (Emacs 23 doesn't have scroll-down-line?)
+(defun mshroyer/scroll-down ()
+  "Scroll down one line"
+  (interactive)
+  (scroll-up 1))
+
+(defun mshroyer/scroll-up ()
+  "Scroll up one line"
+  (interactive)
+  (scroll-down 1))
 
 
 ;;; EDITOR SERVERS
