@@ -789,6 +789,9 @@ future."
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
+; Keep the prompt at the bottom of the window
+(erc-scrolltobottom-mode 1)
+
 ; Only add ERC channels to the modeline when your nick is mentioned (taken
 ; from http://www.emacswiki.org/emacs/ErcChannelTracking)
 (setq erc-format-query-as-channel-p t
@@ -802,6 +805,7 @@ future."
                                       erc-dangerous-host-face
                                       erc-notice-face
                                       erc-prompt-face))
+
 ; Enable chat logging
 (add-to-list 'erc-modules 'log)
 (setq erc-log-channels-directory "~/log/"
