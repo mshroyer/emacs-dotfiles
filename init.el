@@ -366,6 +366,19 @@
 (setq eval-expression-print-length nil
       eval-expression-print-level  nil)
 
+;; Toggle the current window's dedication state -- taken from
+;; http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
+(defun toggle-current-window-dedication ()
+  (interactive)
+  (let* ((window    (selected-window))
+         (dedicated (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated))
+    (message "Window %sdedicated to %s"
+             (if dedicated "no longer " "")
+             (buffer-name))))
+
+(global-set-key "\C-ce" 'toggle-current-window-dedication)
+
 
 ;;; EDITING OPTIONS
 
