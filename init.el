@@ -578,33 +578,66 @@
 
 ;;; GDB
 
-(defun gdb-many-windows-select-header (header)
-  (interactive)
-  (let* ((buffer-names (case header
-                         ('locals      '(gdb-locals-buffer-name
-                                         gdb-registers-buffer-name))
-                         ('registers   '(gdb-registers-buffer-name
-                                         gdb-locals-buffer-name))
-                         ('breakpoints '(gdb-breakpoints-buffer-name
-                                         gdb-threads-buffer-name))
-                         ('threads     '(gdb-threads-buffer-name
-                                         gdb-breakpoints-buffer-name))))
-         (buffer (case header
-                   ('locals      'gdb-locals-buffer)
-                   ('registers   'gdb-registers-buffer)
-                   ('breakpoints 'gdb-breakpoints-buffer)
-                   ('threads     'gdb-threads-buffer)))
-         (w (when buffer-names
-              (or (get-buffer-window (funcall (first buffer-names)))
-                  (get-buffer-window (funcall (second buffer-names)))))))
-    (when w
-      (let ((was-dedicated (window-dedicated-p w)))
-        (select-window w)
-        (set-window-dedicated-p w nil)
-        (switch-to-buffer
-         (gdb-get-buffer-create buffer))
-        (setq header-line-format (gdb-set-header buffer))
-        (set-window-dedicated-p w was-dedicated)))))
+;; For the consistency of gdb-select-window's calling convention...
+(defun gdb-comint-buffer-name ()
+  (buffer-name gud-comint-buffer))
+(defun gdb-source-buffer-name ()
+  (buffer-name (window-buffer gdb-source-window)))
+
+(defun gdb-select-window (header)
+  "Switch directly to the specified GDB window.
+Moves the cursor to the requested window, switching between
+`gdb-many-windows' \"tabs\" if necessary in order to get there.
+
+Recognized window header names are: 'comint, 'locals, 'registers,
+'stack, 'breakpoints, 'threads, and 'source."
+
+  (interactive "Sheader: ")
+
+  (let* ((header-alternate (case header
+                             ('locals      'registers)
+                             ('registers   'locals)
+                             ('breakpoints 'threads)
+                             ('threads     'breakpoints)))
+         (buffer (intern (concat "gdb-" (symbol-name header) "-buffer")))
+         (buffer-names (mapcar (lambda (header)
+                                 (funcall (intern (concat "gdb-"
+                                                          (symbol-name header)
+                                                          "-buffer-name"))))
+                               (if (null header-alternate)
+                                   (list header)
+                                 (list header header-alternate))))
+         (window (if (eql header 'source)
+                     gdb-source-window
+                   (or (get-buffer-window (car buffer-names))
+                       (when (not (null (cadr buffer-names)))
+                         (get-buffer-window (cadr buffer-names)))))))
+
+    (when (not (null window))
+      (let ((was-dedicated (window-dedicated-p window)))
+        (select-window window)
+        (set-window-dedicated-p window nil)
+        (when (member header '(locals registers breakpoints threads))
+          (switch-to-buffer (gdb-get-buffer-create buffer))
+          (setq header-line-format (gdb-set-header buffer)))
+        (set-window-dedicated-p window was-dedicated))
+      t)))
+
+;; Use global keybindings for the window selection functions so that they
+;; work from the source window too...
+(mapcar (lambda (setting)
+          (lexical-let ((key    (car setting))
+                        (header (cdr setting)))
+            (global-set-key (concat "\C-c\C-g" key) #'(lambda ()
+                                                        (interactive)
+                                                        (gdb-select-window header)))))
+        '(("c" . comint)
+          ("l" . locals)
+          ("r" . registers)
+          ("u" . source)
+          ("s" . stack)
+          ("b" . breakpoints)
+          ("t" . threads)))
 
 
 ;;; ORG MODE / DIARY
