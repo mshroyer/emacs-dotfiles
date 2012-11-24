@@ -576,6 +576,37 @@
             (mrc-setup-frame (selected-frame))))
 
 
+;;; GDB
+
+(defun gdb-many-windows-select-header (header)
+  (interactive)
+  (let* ((buffer-names (case header
+                         ('locals      '(gdb-locals-buffer-name
+                                         gdb-registers-buffer-name))
+                         ('registers   '(gdb-registers-buffer-name
+                                         gdb-locals-buffer-name))
+                         ('breakpoints '(gdb-breakpoints-buffer-name
+                                         gdb-threads-buffer-name))
+                         ('threads     '(gdb-threads-buffer-name
+                                         gdb-breakpoints-buffer-name))))
+         (buffer (case header
+                   ('locals      'gdb-locals-buffer)
+                   ('registers   'gdb-registers-buffer)
+                   ('breakpoints 'gdb-breakpoints-buffer)
+                   ('threads     'gdb-threads-buffer)))
+         (w (when buffer-names
+              (or (get-buffer-window (funcall (first buffer-names)))
+                  (get-buffer-window (funcall (second buffer-names)))))))
+    (when w
+      (let ((was-dedicated (window-dedicated-p w)))
+        (select-window w)
+        (set-window-dedicated-p w nil)
+        (switch-to-buffer
+         (gdb-get-buffer-create buffer))
+        (setq header-line-format (gdb-set-header buffer))
+        (set-window-dedicated-p w was-dedicated)))))
+
+
 ;;; ORG MODE / DIARY
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
