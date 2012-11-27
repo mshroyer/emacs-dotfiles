@@ -149,8 +149,6 @@
 (require 'git-blame)
 (require 'tramp)
 (require 'android)
-(require 'semantic)
-(require 'semantic/ia)
 (require 'folding)
 
 ;; Autoload features
@@ -231,6 +229,8 @@
 (require 'color-theme-solarized nil t)
 (require 'color-theme-wombat nil t)
 (require 'nyan-mode nil t)
+(require 'semantic nil t)
+(require 'semantic/ia nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
@@ -480,14 +480,15 @@
 
 ;;; CEDET
 
-(global-semantic-idle-completions-mode 1)
-(global-semantic-decoration-mode 0)
-(global-semantic-highlight-func-mode 0)
-(global-semantic-show-unmatched-syntax-mode 0)
+(when (featurep 'semantic)
+  (global-semantic-idle-completions-mode 1)
+  (global-semantic-decoration-mode 0)
+  (global-semantic-highlight-func-mode 0)
+  (global-semantic-show-unmatched-syntax-mode 0)
 
-(global-ede-mode 1)
+  (global-ede-mode 1)
 
-(define-key semantic-mode-map (kbd "C-c , .") 'semantic-ia-fast-jump)
+  (define-key semantic-mode-map (kbd "C-c , .") 'semantic-ia-fast-jump))
 
 
 ;;; ECB
@@ -564,10 +565,8 @@
   (set-variable 'color-theme-is-global nil)
   (select-frame frame)
   (cond
-   ((window-system)
-    (mrc-xwin-look frame)
-    (tool-bar-mode -1))
-   (t (mrc-terminal-look frame))))
+   (window-system (mrc-xwin-look frame) (tool-bar-mode -1))
+   (t             (mrc-terminal-look frame))))
 
 (add-hook 'after-make-frame-functions 'mrc-setup-frame)
 
