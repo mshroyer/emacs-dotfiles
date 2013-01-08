@@ -471,6 +471,7 @@
 (global-set-key "\C-cm" 'timestamp-insert)
 (global-set-key "\C-cg" 'create-tags)
 (global-set-key "\C-cp" 'compile)
+(global-set-key "\C-cf" 'auto-fill-mode)
 
 
 ;;; EXTERNAL PROGRAMS
