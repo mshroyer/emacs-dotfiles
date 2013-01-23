@@ -1194,6 +1194,22 @@ future."
 
 ;;; CUSTOM EXTENDED COMMANDS
 
+(defun dump-variables ()
+  "Dumps values of all symbols bound within the current scope."
+
+  (let ((variables (loop for x being the symbols
+                         if (boundp x)
+                         collect (cons (symbol-name x)
+                                       (eval (car (read-from-string (symbol-name x))))))))
+    variables))
+
+(defun print-variables ()
+  "Prints values of all symbols bound within the current scope."
+
+  (interactive)
+  (loop for var in (dump-variables)
+        do (insert (format "%s = %s" (car var) (cdr var)))))
+
 ;; Show an ASCII table
 ;; (Inspired by http://www-cdf.fnal.gov/~sthrlnd/emacs_help.html)
 (defun ascii-table ()
