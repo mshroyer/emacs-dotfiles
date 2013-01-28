@@ -51,6 +51,12 @@ our @externals = (
         repo   => 'svn://svn.forge.ocamlcore.org/svn/tuareg/trunk',
     },
     {
+        path   => 'elisp/python',
+        vcs    => 'git',
+        repo   => 'https://github.com/fgallina/python.el.git',
+        branch => 'emacs23',
+    },
+    {
         path   => 'elisp/pymacs',
         vcs    => 'git',
         repo   => 'git://github.com/pinard/Pymacs.git',
