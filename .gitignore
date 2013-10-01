@@ -28,6 +28,7 @@ elisp/nxhtml/
 elisp/python/
 elisp/pymacs/
 elisp/magit/
+elisp/git-modes/
 elisp/egg/
 elisp/monky/
 elisp/color-theme-solarized/

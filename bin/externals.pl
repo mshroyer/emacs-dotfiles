@@ -137,6 +137,12 @@ our @externals = (
         branch => 'master',
     },
     {
+        path   => 'elisp/git-modes',
+        vcs    => 'git',
+        repo   => 'git://github.com/magit/git-modes.git',
+        branch => 'master',
+    },
+    {
         path   => 'elisp/egg',
         vcs    => 'git',
         repo   => 'git://github.com/byplayer/egg.git',

@@ -121,6 +121,7 @@
                     ("lua")
                     ("android-mode")
                     ("magit")
+                    ("git-modes")
                     ("egg")
                     ("monky")
                     ("color-theme-solarized")
@@ -134,6 +135,11 @@
                                    (flatten-path-tree user-elisp))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
+
+;; Add backported cl-lib to the load-path if we aren't on at least Emacs 24
+(when (< emacs-major-version 24)
+  (add-to-list 'load-path (concat user-elisp-directory "/cl-lib"))
+  (require 'cl-lib))
 
 
 ;;; EMACS EXTENSIONS
