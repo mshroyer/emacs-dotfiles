@@ -127,6 +127,7 @@
                     ("color-theme-solarized")
                     ("color-theme-wombat")
                     ("nyan-mode")
+                    ("multi-web-mode")
                     ("tuareg-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -239,6 +240,7 @@
 (require 'color-theme-solarized nil t)
 (require 'color-theme-wombat nil t)
 (require 'nyan-mode nil t)
+(require 'multi-web-mode nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
@@ -856,6 +858,15 @@ future."
 (setq diary-display-function 'diary-fancy-display)
 (add-hook 'list-diary-entries-hook 'include-other-diary-files)
 (add-hook 'mark-diary-entries-hook 'mark-included-diary-files)
+
+;; multi-web-mode...
+(when (featurep 'multi-web-mode)
+  (setq mweb-default-major-mode 'html-mode)
+  (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+                    (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+                    (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+  (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+  (multi-web-global-mode 1))
 
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
