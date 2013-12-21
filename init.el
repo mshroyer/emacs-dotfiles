@@ -1152,6 +1152,7 @@ future."
 (define-key text-mode-map "\C-m" 'newline)
 (define-key text-mode-map "\C-j" 'newline-and-indent)
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
+(define-key text-mode-map "\C-c\C-o" 'org-open-at-point)
 (add-hook 'text-mode-hook
           (lambda ()
             (setq tab-width 8
