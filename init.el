@@ -90,6 +90,10 @@
            (not (getenv "HOME")))
   (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
 
+;; Package archives
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/"
       user-elisp-directory (concat user-emacs-directory "elisp/")
@@ -935,6 +939,8 @@ future."
 
 ;; C mode...
 (setq-default c-block-comment-prefix "* ")
+(when (featurep 'smart-tabs-mode)
+  (smart-tabs-insinuate 'c))
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
   (let* ((anchor (c-langelem-pos c-syntactic-element))
