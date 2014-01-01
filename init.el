@@ -965,15 +965,13 @@ future."
 (add-hook 'c-initialization-hook
           (lambda ()
             (define-key c-mode-base-map "\C-m" 'c-context-line-break)
-            (setq c-default-style "ilchymis")))
+            (setq c-default-style "linux-tabs-only")))
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
             (setq paragraph-start
                   "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
-            (setq indent-tabs-mode nil
-                  show-trailing-whitespace t
-                  ac-sources (append '(ac-source-semantic) ac-sources))
+            (setq show-trailing-whitespace t)
             (semantic-mode t)))
 
 ;; GUD mode...
