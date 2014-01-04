@@ -254,6 +254,9 @@
 (require 'nyan-mode nil t)
 (require 'multi-web-mode nil t)
 
+;; ELPA/MELPA optional features
+(require 'smart-tabs-mode nil t)
+
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
   (load nxhtml-init t))
@@ -425,7 +428,7 @@
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
-;; ;; Use spaces for indentation, not tab chracters
+;; Use spaces for indentation, not tab chracters
 (setq-default indent-tabs-mode nil
               tab-width 8)
 (setq standard-indent 4
@@ -974,7 +977,7 @@ future."
 (add-hook 'c-initialization-hook
           (lambda ()
             (define-key c-mode-base-map "\C-m" 'c-context-line-break)
-            (setq c-default-style "linux-tabs-only")))
+            (setq c-default-style "linux")))
 (add-hook 'c-mode-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
