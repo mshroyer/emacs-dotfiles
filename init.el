@@ -99,7 +99,12 @@
 ;; Package archives
 (load (concat user-emacs-directory "elpa/package.el") t)
 (when (featurep 'package)
-  (package-initialize))
+  (package-initialize)
+
+  (unless (boundp 'package-archives)
+  (setq package-archives nil))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/")))
+
 
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
