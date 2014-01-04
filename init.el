@@ -117,7 +117,6 @@
                     ("swank-chicken")
                     ("clojure-mode")
                     ("swank-clojure")
-                    ("fuel")
                     ("python")
                     ("pymacs")
                     ("org-mode/lisp")
@@ -232,7 +231,6 @@
   "egg"
   "Open an Egg status buffer"
   t)
-(load-file (concat user-elisp-directory "fuel/fu.el"))
 
 ;; Optional features
 (require 'evil nil t)
@@ -553,10 +551,11 @@
 
 ;;; Factor FUEL
 
-(add-hook 'fuel-listener-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+(when (featurep 'fuel)
+  (add-hook 'fuel-listener-mode-hook
+            (lambda ()
+              (make-local-variable 'scroll-margin)
+              (setq scroll-margin 0))))
 
 
 ;;; TRAMP
