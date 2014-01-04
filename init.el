@@ -90,16 +90,17 @@
            (not (getenv "HOME")))
   (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
 
-;; Package archives
-(if (featurep 'package)
-    (add-to-list 'package-archives
-		 '("melpa" . "http://melpa.milkbox.net/packages/")))
-
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/"
       user-elisp-directory (concat user-emacs-directory "elisp/")
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
+
+;; Package archives
+(when
+    (load
+     (expand-file-name (concat user-emacs-directory "elpa/package.el")))
+  (package-initialize))
 
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
@@ -1627,3 +1628,14 @@ for example.
  '(fixed-pitch ((t (:inherit nil)))))
 
 
+
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
