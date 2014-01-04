@@ -8,6 +8,7 @@ tramp
 loaddefs.el
 elpa/
 semanticdb/
+elisp/elpa-emacs23/
 elisp/auto-complete/
 elisp/ecb/
 elisp/ess/

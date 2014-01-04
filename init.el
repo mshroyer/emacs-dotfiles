@@ -104,6 +104,7 @@
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
 ;; to the load path, but will not be scanned recursively.
 (setq user-elisp `((,user-elisp-directory
+                    ("elpa-emacs23")
                     ("ecb")
                     ("evil")
                     ("auto-complete")
@@ -167,6 +168,10 @@
 (require 'folding)
 
 ;; Autoload features
+(autoload 'package
+  "pkg-el23"
+  "ELPA for Emacs 23"
+  t)
 (autoload 'markdown-mode
   "markdown-mode.el"
   "Major mode for editing Markdown files."

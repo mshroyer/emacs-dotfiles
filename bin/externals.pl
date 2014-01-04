@@ -11,6 +11,11 @@ use Cwd;
 
 our @externals = (
     {
+        path   => 'elisp/elpa-emacs23',
+        vcs    => 'wget',
+        repo   => 'http://bit.ly/pkg-el23',
+    },
+    {
         path   => 'elisp/evil',
         vcs    => 'git',
         repo   => 'git://gitorious.org/evil/evil.git',
@@ -280,6 +285,20 @@ sub vcs_git_update {
         `git pull origin ${branch}`;
     }
     popd();
+}
+
+sub vcs_wget_checkout {
+    my ($path, $repo) = @_;
+
+    mkdir($path);
+    pushd($path);
+    `wget ${repo}`;
+    popd();
+}
+
+sub vcs_wget_update {
+    my ($path, $repo) = @_;
+    vcs_wget_checkout($path, $repo);
 }
 
 sub get_vcs_cmd {
