@@ -97,13 +97,11 @@
 				      "loaddefs.el"))
 
 ;; Package archives
-(load (concat user-emacs-directory "elpa/package.el") t)
-(when (featurep 'package)
-  (package-initialize)
-
-  (unless (boundp 'package-archives)
-  (setq package-archives nil))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/")))
+(when (< emacs-major-version 24)
+  (load (concat user-elisp-directory "package.el"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
 
 
 ;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
