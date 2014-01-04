@@ -1534,6 +1534,42 @@ for example.
   (scroll-down 1))
 
 
+;;; LOCAL SETTINGS
+
+;; Retrieve any local configurations from ~/.emacs.local.el, if the file
+;; exists on this system
+(let ((local-settings "~/.emacs.local.el"))
+  (if (file-exists-p local-settings)
+      (load-file local-settings)))
+
+;; Borrowed from: http://goo.gl/Q3qpr
+(defun mrc-xwin-look (frame)
+  "Setup to use if running in an X window"
+  (when (and (boundp 'color-theme-local)
+             (not (null color-theme-local)))
+    (require 'color-theme)
+    (color-theme-initialize)
+    (funcall color-theme-local)))
+
+(defun mrc-terminal-look (frame)
+  "Setup to use if running in a terminal")
+
+(defun mrc-setup-frame (frame)
+  (set-variable 'color-theme-is-global nil)
+  (select-frame frame)
+  (cond
+   ((window-system)
+    (mrc-xwin-look frame)
+    (tool-bar-mode -1))
+   (t (mrc-terminal-look frame))))
+
+(add-hook 'after-make-frame-functions 'mrc-setup-frame)
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (mrc-setup-frame (selected-frame))))
+
+
 ;;; EDITOR SERVERS
 
 ;; Builtin Emacs server
@@ -1595,39 +1631,3 @@ for example.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(fixed-pitch ((t (:inherit nil)))))
-
-
-;;; LOCAL SETTINGS
-
-;; Retrieve any local configurations from ~/.emacs.local.el, if the file
-;; exists on this system
-(let ((local-settings "~/.emacs.local.el"))
-  (if (file-exists-p local-settings)
-      (load-file local-settings)))
-
-;; Borrowed from: http://goo.gl/Q3qpr
-(defun mrc-xwin-look (frame)
-  "Setup to use if running in an X window"
-  (when (and (boundp 'color-theme-local)
-             (not (null color-theme-local)))
-    (require 'color-theme)
-    (color-theme-initialize)
-    (funcall color-theme-local)))
-
-(defun mrc-terminal-look (frame)
-  "Setup to use if running in a terminal")
-
-(defun mrc-setup-frame (frame)
-  (set-variable 'color-theme-is-global nil)
-  (select-frame frame)
-  (cond
-   ((window-system)
-    (mrc-xwin-look frame)
-    (tool-bar-mode -1))
-   (t (mrc-terminal-look frame))))
-
-(add-hook 'after-make-frame-functions 'mrc-setup-frame)
-
-(add-hook 'after-init-hook
-          (lambda ()
-            (mrc-setup-frame (selected-frame))))
