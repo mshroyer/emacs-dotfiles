@@ -91,8 +91,9 @@
   (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
 
 ;; Package archives
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
+(if (featurep 'package)
+    (add-to-list 'package-archives
+		 '("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d/"
