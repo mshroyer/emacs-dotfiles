@@ -546,6 +546,16 @@
               (slime-mode t))))
 
 
+;;; GEISER
+
+(when (featurep 'geiser)
+  (add-paredit-hook geiser-repl-mode)
+  (add-hook 'geiser-repl-mode-hook
+            (lambda ()
+              (make-local-variable 'scroll-margin)
+              (setq scroll-margin 0))))
+
+
 ;;; PYMACS
 
 (when (featurep 'pymacs)
