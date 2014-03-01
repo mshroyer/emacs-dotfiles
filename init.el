@@ -167,8 +167,6 @@
 (require 'git-blame)
 (require 'tramp)
 (require 'android)
-(require 'semantic)
-(require 'semantic/ia)
 (require 'folding)
 
 ;; Autoload features
@@ -234,6 +232,8 @@
   t)
 
 ;; Optional features
+(require 'semantic nil t)
+(require 'semantic/ia nil t)
 (require 'evil nil t)
 (require 'auto-complete-config nil t)
 (require 'ess-site nil t)
@@ -507,14 +507,15 @@
 
 ;;; CEDET
 
-(global-semantic-idle-completions-mode 1)
-(global-semantic-decoration-mode 0)
-(global-semantic-highlight-func-mode 0)
-(global-semantic-show-unmatched-syntax-mode 0)
+(when (featurep 'semantic)
+  (global-semantic-idle-completions-mode 1)
+  (global-semantic-decoration-mode 0)
+  (global-semantic-highlight-func-mode 0)
+  (global-semantic-show-unmatched-syntax-mode 0)
 
-(global-ede-mode 1)
+  (global-ede-mode 1)
 
-(define-key semantic-mode-map (kbd "C-c , .") 'semantic-ia-fast-jump)
+  (define-key semantic-mode-map (kbd "C-c , .") 'semantic-ia-fast-jump))
 
 
 ;;; ECB
