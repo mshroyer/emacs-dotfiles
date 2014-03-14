@@ -527,7 +527,7 @@
 ;;; SLIME
 
 ;; Use Paredit in Inferior SLIME
-(when (featurep 'slime)
+(when (featurep 'slime-repl)
   (add-paredit-hook slime-repl-mode)
   (add-hook 'slime-repl-mode-hook
             (lambda ()
