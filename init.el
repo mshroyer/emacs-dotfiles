@@ -505,6 +505,13 @@
 (defvar ctags-program-name "ctags")
 
 
+;;; PAREDIT
+
+(add-hook 'paredit-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-[") 'paredit-wrap-square)))
+
+
 ;;; CEDET
 
 (when (featurep 'semantic)
