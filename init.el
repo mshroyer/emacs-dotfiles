@@ -168,6 +168,7 @@
 (require 'tramp)
 (require 'android)
 (require 'folding)
+(require 'google-c-style)
 
 ;; Autoload features
 (autoload 'package
