@@ -958,6 +958,15 @@ future."
                        (arglist-cont  . 0)
                        (arglist-close . 0)))
    (c-basic-offset  . 4)))
+(c-add-style "my-c++" 
+	     '("stroustrup"
+	       (indent-tabs-mode . nil)        ; use spaces rather than tabs
+	       (c-basic-offset . 4)            ; indent by four spaces
+	       (c-offsets-alist . ((inline-open . 0)  ; custom indentation rules
+				   (brace-list-open . 0)
+				   (statement-case-open . +)
+                                   (innamespace . 0)))
+               (c-hanging-braces-alist . ((namespace-open after)))))
 (setq c-default-style "linux")
 (add-hook 'c-initialization-hook
           (lambda ()
@@ -969,6 +978,44 @@ future."
                   "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
             (setq show-trailing-whitespace t)
             (semantic-mode t)))
+
+;; C++ mode...
+
+;; Taken from: https://gist.github.com/benzap/2895437#file-emacs-el-L338
+;;fix issues with c++11 variables not being understood
+(defun --copy-face (new-face face)
+  "Define NEW-FACE from existing FACE."
+  (copy-face face new-face)
+  (eval `(defvar ,new-face nil))
+  (set new-face new-face))
+(--copy-face 'font-lock-label-face  ; labels, case, public, private, proteced, namespace-tags
+             'font-lock-keyword-face)
+(--copy-face 'font-lock-doc-markup-face ; comment markups such as Javadoc-tags
+             'font-lock-doc-face)
+(--copy-face 'font-lock-doc-string-face ; comment markups
+             'font-lock-comment-face)
+(add-hook 'c++-mode-hook
+          '(lambda()
+             (font-lock-add-keywords
+              nil '(;; complete some fundamental keywords
+                    ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
+                    ;; add the new C++11 keywords
+                    ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
+                    ("\\<\\(char[0-9]+_t\\)\\>" . font-lock-keyword-face)
+                    ;; PREPROCESSOR_CONSTANT
+                    ("\\<[A-Z]+[A-Z_]+\\>" . font-lock-constant-face)
+                    ;; hexadecimal numbers
+                    ("\\<0[xX][0-9A-Fa-f]+\\>" . font-lock-constant-face)
+                    ;; integer/float/scientific numbers
+                    ("\\<[\\-+]*[0-9]*\\.?[0-9]+\\([ulUL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . font-lock-constant-face)
+                    ;; user-types (customize!)
+                    ("\\<[A-Za-z_]+[A-Za-z_0-9]*_\\(t\\|type\\|ptr\\)\\>" . font-lock-type-face)
+                    ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
+                    ))
+             ) t)
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (c-set-style "my-c++")))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
