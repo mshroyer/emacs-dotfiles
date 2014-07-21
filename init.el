@@ -491,6 +491,9 @@
                                yas/no-prompt))
   (yas/load-directory (concat user-elisp-directory "yasnippet/snippets/")))
 
+;; Default compile command-I don't like make -k
+(setq-default compile-command "make ")
+
 
 ;;; CUSTOM COMMANDS
 
