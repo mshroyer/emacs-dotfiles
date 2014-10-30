@@ -1235,6 +1235,7 @@ future."
 (define-key text-mode-map "\C-j" 'newline-and-indent)
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
 (define-key text-mode-map "\C-c\C-o" 'org-open-at-point)
+(define-key text-mode-map "\C-ct" 'artist-mode)
 (add-hook 'text-mode-hook
           (lambda ()
             (setq tab-width 8
