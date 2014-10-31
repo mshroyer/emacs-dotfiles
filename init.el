@@ -242,7 +242,6 @@
 
 (require 'semantic nil t)
 (require 'semantic/ia nil t)
-(require 'dot-mode nil t)
 (require 'auto-complete-config nil t)
 (require 'ess-site nil t)
 (require 'pymacs nil t)
@@ -371,10 +370,6 @@
 ;; Don't use transient mark mode / Zmacs mode (note that this disables
 ;; region highlighting)
 (transient-mark-mode 0)
-
-;; Enable dot mode if it is installed
-(when (featurep 'dot-mode)
-  (add-hook 'find-file-hooks 'dot-mode-on))
 
 ;; Don't mess around with this disabled commands nonsense
 (setq disabled-command-hook nil)
