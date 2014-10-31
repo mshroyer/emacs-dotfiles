@@ -233,9 +233,16 @@
   t)
 
 ;; Optional features
+
+;; Must be set before Evil is required, so that the tab key doesn't break
+;; in Org Mode.  See:
+;; http://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
+(setq evil-want-C-i-jump nil)
+(require 'evil nil t)
+
 (require 'semantic nil t)
 (require 'semantic/ia nil t)
-(require 'evil nil t)
+(require 'dot-mode nil t)
 (require 'auto-complete-config nil t)
 (require 'ess-site nil t)
 (require 'pymacs nil t)
@@ -365,6 +372,10 @@
 ;; region highlighting)
 (transient-mark-mode 0)
 
+;; Enable dot mode if it is installed
+(when (featurep 'dot-mode)
+  (add-hook 'find-file-hooks 'dot-mode-on))
+
 ;; Don't mess around with this disabled commands nonsense
 (setq disabled-command-hook nil)
 
@@ -435,6 +446,9 @@
               tab-width 8)
 (setq standard-indent 4
       c-indent-level 4)
+
+;; Use tab key for completion too
+(setq tab-always-indent 'complete)
 
 ;; Always use auto-fill in text mode; wrap to 75 characters by default
 (setq-default fill-column 75)
@@ -821,6 +835,11 @@ future."
       org-agenda-window-setup 'current-window)
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
+
+;; Help mode...
+(add-hook 'help-mode-hook
+  (lambda ()
+    (define-key help-mode-map "l" 'help-go-back)))
 
 ;; Calendar mode...
 (global-set-key "\C-cl" 'calendar)

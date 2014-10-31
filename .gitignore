@@ -41,3 +41,4 @@ swank/
 .DS_Store
 ac-comphist.dat
 ede-projects.el
+.org-id-locations
