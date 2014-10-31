@@ -1257,8 +1257,12 @@ future."
 (define-key text-mode-map "\C-ct" 'artist-mode)
 (add-hook 'text-mode-hook
           (lambda ()
+            (make-local-variable 'tab-stop-list)
+            (make-local-variable 'indent-line-function)
             (setq tab-width 8
-                  indent-tabs-mode t)
+                  tab-stop-list '(4 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120)
+                  indent-tabs-mode t
+                  indent-line-function 'tab-to-tab-stop)
             (auto-fill-mode 1)))
 
 ;; Paragraph indent text mode...
