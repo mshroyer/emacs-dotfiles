@@ -672,6 +672,13 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 (global-set-key "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
 (global-set-key "\C-ci" 'mshroyer/org-show-inbox)
 
+(add-hook 'org-mode-hook
+          (lambda ()
+            (make-local-variable 'indent-line-function)
+            (setq indent-line-function 'indent-relative
+                  indent-tabs-mode nil)
+            (auto-fill-mode 1)))
+
 (setq org-agenda-files (mapcar (lambda (file)
                                  (concat org-directory file))
                                '("/todo.org"))
