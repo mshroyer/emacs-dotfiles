@@ -674,9 +674,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (make-local-variable 'indent-line-function)
-            (setq indent-line-function 'indent-relative
-                  indent-tabs-mode nil)
+            (setq indent-tabs-mode nil)
             (auto-fill-mode 1)))
 
 (setq org-agenda-files (mapcar (lambda (file)
@@ -1257,14 +1255,13 @@ future."
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
 (define-key text-mode-map "\C-c\C-o" 'org-open-at-point)
 (define-key text-mode-map "\C-ct" 'artist-mode)
+(define-key text-mode-map (kbd "TAB") 'tab-to-tab-stop)
 (add-hook 'text-mode-hook
           (lambda ()
             (make-local-variable 'tab-stop-list)
-            (make-local-variable 'indent-line-function)
             (setq tab-width 8
                   tab-stop-list '(4 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120)
-                  indent-tabs-mode t
-                  indent-line-function 'tab-to-tab-stop)
+                  indent-tabs-mode t)
             (auto-fill-mode 1)))
 
 ;; Paragraph indent text mode...
