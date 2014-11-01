@@ -5,7 +5,7 @@
 ;;; My global Emacs configuration file.
 ;;;
 ;;; Mark Shroyer
-;;; http://markshroyer.com/
+;;; https://markshroyer.com/
 
 (require 'cl)
 
