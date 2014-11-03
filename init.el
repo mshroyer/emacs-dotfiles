@@ -328,11 +328,11 @@
   (menu-bar-mode 0)
   (xterm-mouse-mode 1))
 
-;; Use C-x <arrowkey> to navigate directionally between windows
-(global-set-key (kbd "C-x <up>") 'windmove-up)
-(global-set-key (kbd "C-x <down>") 'windmove-down)
-(global-set-key (kbd "C-x <left>") 'windmove-left)
-(global-set-key (kbd "C-x <right>") 'windmove-right)
+;; Use C-x C-w C-[pnfb] to navigate directionally between windows
+(global-set-key "\C-c\C-w\C-p" 'windmove-up)
+(global-set-key "\C-c\C-w\C-n" 'windmove-down)
+(global-set-key "\C-c\C-w\C-b" 'windmove-left)
+(global-set-key "\C-c\C-w\C-f" 'windmove-right)
 
 ;; Specify Unix system EOL mnemonics (these settings won't be the default
 ;; on Windows versions of Emacs)
