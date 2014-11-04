@@ -186,10 +186,6 @@
   "visual-basic-mode"
   "Visual Basic mode."
   t)
-(autoload 'powershell-mode
-  "powershell-mode"
-  "Major mode for editing PowerShell scripts."
-  t)
 (autoload 'php-mode
   "php-mode"
   "Major mode for editing php code."
@@ -1242,8 +1238,9 @@ future."
 (setq visual-basic-mode-indent 4)
 
 ;; PowerShell mode...
-(setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
-                              auto-mode-alist))
+(when (featurep 'powershell-mode)
+  (setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
+                                auto-mode-alist)))
 
 ;; PHP mode...
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
