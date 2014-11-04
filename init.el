@@ -168,7 +168,6 @@
 (require 'tramp)
 (require 'android)
 (require 'folding)
-(require 'popup)
 (require 'google-c-style)
 
 ;; Autoload features
@@ -241,6 +240,7 @@
 (setq evil-want-C-i-jump nil)
 (require 'evil nil t)
 
+(require 'popup nil t)
 (require 'semantic nil t)
 (require 'semantic/ia nil t)
 (require 'auto-complete-config nil t)
@@ -1643,49 +1643,52 @@ for example.
   (interactive)
   (message "Word count: %s" (how-many "\\w+" (point-min) (point-max))))
 
-;; From http://www.emacswiki.org/FlySpell
-(defun flyspell-emacs-popup-textual (event poss word)
-  "A textual flyspell popup menu."
-  (let* ((corrects (if flyspell-sort-corrections
-                       (sort (car (cdr (cdr poss))) 'string<)
-                     (car (cdr (cdr poss)))))
-         (cor-menu (if (consp corrects)
-                       (mapcar (lambda (correct)
-                                 (list correct correct))
-                               corrects)
-                     '()))
-         (affix (car (cdr (cdr (cdr poss)))))
-         show-affix-info
-         (base-menu  (let ((save (if (and (consp affix) show-affix-info)
-                                     (list
-                                      (list (concat "Save affix: " (car affix))
-                                            'save)
-                                      '("Accept (session)" session)
-                                      '("Accept (buffer)" buffer))
-                                   '(("Save word" save)
-                                     ("Accept (session)" session)
-                                     ("Accept (buffer)" buffer)))))
-                       (if (consp cor-menu)
-                           (append cor-menu (cons "" save))
-                         save)))
-         (menu (mapcar
-                (lambda (arg) (if (consp arg) (car arg) arg))
-                base-menu)))
-    (cadr (assoc (popup-menu* menu :scroll-bar t) base-menu))))
+;; Support flyspell correction menus on the command line with popup.el if
+;; it is available.
+(when (featurep 'popup)
+  ;; From http://www.emacswiki.org/FlySpell
+  (defun flyspell-emacs-popup-textual (event poss word)
+    "A textual flyspell popup menu."
+    (let* ((corrects (if flyspell-sort-corrections
+                         (sort (car (cdr (cdr poss))) 'string<)
+                       (car (cdr (cdr poss)))))
+           (cor-menu (if (consp corrects)
+                         (mapcar (lambda (correct)
+                                   (list correct correct))
+                                 corrects)
+                       '()))
+           (affix (car (cdr (cdr (cdr poss)))))
+           show-affix-info
+           (base-menu  (let ((save (if (and (consp affix) show-affix-info)
+                                       (list
+                                        (list (concat "Save affix: " (car affix))
+                                              'save)
+                                        '("Accept (session)" session)
+                                        '("Accept (buffer)" buffer))
+                                     '(("Save word" save)
+                                       ("Accept (session)" session)
+                                       ("Accept (buffer)" buffer)))))
+                         (if (consp cor-menu)
+                             (append cor-menu (cons "" save))
+                           save)))
+           (menu (mapcar
+                  (lambda (arg) (if (consp arg) (car arg) arg))
+                  base-menu)))
+      (cadr (assoc (popup-menu* menu :scroll-bar t) base-menu))))
 
-;; (eval-after-load "flyspell"
-;;   '(progn
-;;      (fset 'flyspell-emacs-popup 'flyspell-emacs-popup-textual)))
+  ;; (eval-after-load "flyspell"
+  ;;   '(progn
+  ;;      (fset 'flyspell-emacs-popup 'flyspell-emacs-popup-textual)))
 
-(eval-after-load "flyspell"
-  '(progn
-     (defadvice flyspell-emacs-popup (around flyspell-emacs-popup-choose
-                                             (event poss word))
-       "Use popup.el for flyspell correction if windowing system is absent."
-       (if (window-system)
-           ad-do-it
-         (flyspell-emacs-popup-textual event poss word)))
-     (ad-activate 'flyspell-emacs-popup)))
+  (eval-after-load "flyspell"
+    '(progn
+       (defadvice flyspell-emacs-popup (around flyspell-emacs-popup-choose
+                                               (event poss word))
+         "Use popup.el for flyspell correction if windowing system is absent."
+         (if (window-system)
+             ad-do-it
+           (flyspell-emacs-popup-textual event poss word)))
+       (ad-activate 'flyspell-emacs-popup))))
 
 ;; Consolidate flyspell commands
 (defun flyspell-enable ()
