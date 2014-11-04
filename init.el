@@ -1217,7 +1217,8 @@ future."
 (add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8))
 
 ;; C# mode...
-(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+(when (featurep 'csharp-mode)
+  (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode)))
 
 ;; F# mode...
 (when (featurep 'fsharp-mode)
