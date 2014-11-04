@@ -181,10 +181,6 @@
   "yaml-mode.el"
   "Major mode for editing YAML files."
   t)
-(autoload 'visual-basic-mode
-  "visual-basic-mode"
-  "Visual Basic mode."
-  t)
 (autoload 'php-mode
   "php-mode"
   "Major mode for editing php code."
@@ -1230,9 +1226,10 @@ future."
             (setq scroll-margin 0)))
 
 ;; Visual Basic mode...
-(setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
-                                visual-basic-mode)) auto-mode-alist))
-(setq visual-basic-mode-indent 4)
+(when (featurep 'visual-basic-mode)
+  (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
+                                   visual-basic-mode)) auto-mode-alist))
+  (setq visual-basic-mode-indent 4))
 
 ;; PowerShell mode...
 (when (featurep 'powershell-mode)
