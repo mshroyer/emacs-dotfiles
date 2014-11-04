@@ -162,8 +162,6 @@
 (require 'calendar)
 (require 'diary-lib)
 (require 'paredit)
-(require 'git)
-(require 'git-blame)
 (require 'tramp)
 (require 'google-c-style)
 
