@@ -199,14 +199,6 @@
   "vala-mode"
   "Major mode for editing Vala code."
   t)
-(autoload 'fsharp-mode
-  "fsharp"
-  "Major mode for editing F# code."
-  t)
-(autoload 'run-fsharp
-  "inf-fsharp"
-  "Run an inferior F# process."
-  t)
 (autoload 'tuareg-mode
   "tuareg"
   "Major mode for editing OCaml code."
@@ -1229,11 +1221,12 @@ future."
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
 ;; F# mode...
-(add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
-(add-hook 'inferior-fsharp-mode-hooks
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+(when (featurep 'fsharp-mode)
+ (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
+ (add-hook 'inferior-fsharp-mode-hooks
+           (lambda ()
+             (make-local-variable 'scroll-margin)
+             (setq scroll-margin 0))))
 
 ;; Tuareg mode...
 (setq auto-mode-alist (append '(("\\.ml[iylp]?$" . tuareg-mode))
