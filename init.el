@@ -1185,8 +1185,9 @@ future."
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 ;; Groovy mode...
-(add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
-(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+(when (featurep 'groovy-mode)
+  (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
+  (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode)))
 
 ;; Haskell mode...
 (load "haskell-site-file" t)
