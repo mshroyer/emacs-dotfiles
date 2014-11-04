@@ -168,10 +168,6 @@
   "pkg-el23"
   "ELPA for Emacs 23"
   t)
-(autoload 'markdown-mode
-  "markdown-mode.el"
-  "Major mode for editing Markdown files."
-  t)
 (autoload 'tuareg-mode
   "tuareg"
   "Major mode for editing OCaml code."
@@ -906,13 +902,14 @@ future."
 ;;                          (when (eq major-mode 'erc-mode) t))))
 
 ;; Markdown mode...
-(setq auto-mode-alist
-      (append '(("\\.mk?d$" . markdown-mode)
-                ("\\.markdown$" . markdown-mode))
-              auto-mode-alist))
-(add-hook 'markdown-mode-hook
+(when (featurep 'markdown-mode)
+  (setq auto-mode-alist
+        (append '(("\\.mk?d$" . markdown-mode)
+                  ("\\.markdown$" . markdown-mode))
+                auto-mode-alist))
+  (add-hook 'markdown-mode-hook
           (lambda ()
-            (auto-fill-mode t)))
+            (auto-fill-mode t))))
 
 ;; YAML mode...
 (when (featurep 'yaml-mode)
