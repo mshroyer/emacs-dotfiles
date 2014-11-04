@@ -1,6 +1,6 @@
 ;;; -*- Mode: Emacs-Lisp; -*-
 ;;;
-;;; ~/.emacs
+;;; ~/.emacs.d/init.el
 ;;;
 ;;; My global Emacs configuration file.
 ;;;
