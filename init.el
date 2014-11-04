@@ -166,7 +166,6 @@
 (require 'git)
 (require 'git-blame)
 (require 'tramp)
-(require 'folding)
 (require 'google-c-style)
 
 ;; Autoload features
