@@ -166,7 +166,6 @@
 (require 'git)
 (require 'git-blame)
 (require 'tramp)
-(require 'android)
 (require 'folding)
 (require 'google-c-style)
 
