@@ -225,7 +225,6 @@
 (require 'ess-site nil t)
 (require 'pymacs nil t)
 (require 'slime nil t)
-(require 'eperiodic nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
 (require 'edit-server nil t)
