@@ -123,7 +123,6 @@
                     ("org-mode/lisp")
                     ("org-mode/contrib/lisp")
                     ("haskellmode-emacs")
-                    ("erlang")
                     ("cperl-mode")
                     ("emacs_chrome/servers")
                     ("yasnippet")
@@ -1187,11 +1186,12 @@ future."
             (setq scroll-margin 0)))
 
 ;; Erlang mode...
-(add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
-(add-hook 'erlang-shell-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+(when (featurep 'erlang-mode)
+  (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
+  (add-hook 'erlang-shell-mode-hook
+            (lambda ()
+              (make-local-variable 'scroll-margin)
+              (setq scroll-margin 0))))
 
 ;; Vala mode...
 (when (featurep 'vala-mode)
