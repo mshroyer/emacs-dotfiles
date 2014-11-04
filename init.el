@@ -181,10 +181,6 @@
   "yaml-mode.el"
   "Major mode for editing YAML files."
   t)
-(autoload 'php-mode
-  "php-mode"
-  "Major mode for editing php code."
-  t)
 (autoload 'tuareg-mode
   "tuareg"
   "Major mode for editing OCaml code."
@@ -1236,8 +1232,9 @@ future."
                                 auto-mode-alist)))
 
 ;; PHP mode...
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+(when (featurep 'php-mode)
+  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode)))
 
 ;; Text mode...
 (define-key text-mode-map "\C-m" 'newline)
