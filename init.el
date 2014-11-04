@@ -189,10 +189,6 @@
   "php-mode"
   "Major mode for editing php code."
   t)
-(autoload 'vala-mode
-  "vala-mode"
-  "Major mode for editing Vala code."
-  t)
 (autoload 'tuareg-mode
   "tuareg"
   "Major mode for editing OCaml code."
@@ -1207,10 +1203,11 @@ future."
             (setq scroll-margin 0)))
 
 ;; Vala mode...
-(add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
-(add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
-(add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
-(add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8))
+(when (featurep 'vala-mode)
+  (add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
+  (add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
+  (add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
+  (add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8)))
 
 ;; C# mode...
 (when (featurep 'csharp-mode)
