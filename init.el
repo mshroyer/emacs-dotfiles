@@ -123,7 +123,6 @@
                     ("org-mode/lisp")
                     ("org-mode/contrib/lisp")
                     ("haskellmode-emacs")
-                    ("erlang")
                     ("cperl-mode")
                     ("emacs_chrome/servers")
                     ("yasnippet")
@@ -134,8 +133,6 @@
                     ("git-modes")
                     ("egg")
                     ("monky")
-                    ("color-theme-solarized")
-                    ("color-theme-wombat")
                     ("nyan-mode")
                     ("multi-web-mode")
                     ("tuareg-mode"))))
@@ -163,49 +160,13 @@
 (require 'calendar)
 (require 'diary-lib)
 (require 'paredit)
-(require 'git)
-(require 'git-blame)
 (require 'tramp)
-(require 'android)
-(require 'folding)
 (require 'google-c-style)
 
 ;; Autoload features
 (autoload 'package
   "pkg-el23"
   "ELPA for Emacs 23"
-  t)
-(autoload 'markdown-mode
-  "markdown-mode.el"
-  "Major mode for editing Markdown files."
-  t)
-(autoload 'yaml-mode
-  "yaml-mode.el"
-  "Major mode for editing YAML files."
-  t)
-(autoload 'visual-basic-mode
-  "visual-basic-mode"
-  "Visual Basic mode."
-  t)
-(autoload 'powershell-mode
-  "powershell-mode"
-  "Major mode for editing PowerShell scripts."
-  t)
-(autoload 'php-mode
-  "php-mode"
-  "Major mode for editing php code."
-  t)
-(autoload 'vala-mode
-  "vala-mode"
-  "Major mode for editing Vala code."
-  t)
-(autoload 'fsharp-mode
-  "fsharp"
-  "Major mode for editing F# code."
-  t)
-(autoload 'run-fsharp
-  "inf-fsharp"
-  "Run an inferior F# process."
   t)
 (autoload 'tuareg-mode
   "tuareg"
@@ -247,7 +208,6 @@
 (require 'ess-site nil t)
 (require 'pymacs nil t)
 (require 'slime nil t)
-(require 'eperiodic nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
 (require 'edit-server nil t)
@@ -258,8 +218,6 @@
 (require 'python nil t)
 (require 'pymacs nil t)
 (require 'monky nil t)
-(require 'color-theme-solarized nil t)
-(require 'color-theme-wombat nil t)
 (require 'nyan-mode nil t)
 (require 'multi-web-mode nil t)
 
@@ -944,23 +902,25 @@ future."
 ;;                          (when (eq major-mode 'erc-mode) t))))
 
 ;; Markdown mode...
-(setq auto-mode-alist
-      (append '(("\\.mk?d$" . markdown-mode)
-                ("\\.markdown$" . markdown-mode))
-              auto-mode-alist))
-(add-hook 'markdown-mode-hook
+(when (featurep 'markdown-mode)
+  (setq auto-mode-alist
+        (append '(("\\.mk?d$" . markdown-mode)
+                  ("\\.markdown$" . markdown-mode))
+                auto-mode-alist))
+  (add-hook 'markdown-mode-hook
           (lambda ()
-            (auto-fill-mode t)))
+            (auto-fill-mode t))))
 
 ;; YAML mode...
-(setq auto-mode-alist
-      (append '(("\\.yaml$" . yaml-mode))
-              auto-mode-alist))
-(add-hook 'yaml-mode-hook
-          (lambda ()
-            (local-set-key "\C-cn" 'new-yaml-ab-entry)
-            (make-local-variable 'tab-stop-list)
-            (setq tab-stop-list (simple-tab-stop-list 2 75))))
+(when (featurep 'yaml-mode)
+  (setq auto-mode-alist
+        (append '(("\\.yaml$" . yaml-mode))
+                auto-mode-alist))
+  (add-hook 'yaml-mode-hook
+            (lambda ()
+              (local-set-key "\C-cn" 'new-yaml-ab-entry)
+              (make-local-variable 'tab-stop-list)
+              (setq tab-stop-list (simple-tab-stop-list 2 75)))))
 
 ;; C mode...
 (setq-default c-block-comment-prefix "* ")
@@ -1198,8 +1158,9 @@ future."
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 ;; Groovy mode...
-(add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
-(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+(when (featurep 'groovy-mode)
+  (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
+  (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode)))
 
 ;; Haskell mode...
 (load "haskell-site-file" t)
@@ -1213,27 +1174,31 @@ future."
             (setq scroll-margin 0)))
 
 ;; Erlang mode...
-(add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
-(add-hook 'erlang-shell-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+(when (featurep 'erlang-mode)
+  (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
+  (add-hook 'erlang-shell-mode-hook
+            (lambda ()
+              (make-local-variable 'scroll-margin)
+              (setq scroll-margin 0))))
 
 ;; Vala mode...
-(add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
-(add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
-(add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
-(add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8))
+(when (featurep 'vala-mode)
+  (add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
+  (add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
+  (add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
+  (add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8)))
 
 ;; C# mode...
-(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+(when (featurep 'csharp-mode)
+  (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode)))
 
 ;; F# mode...
-(add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
-(add-hook 'inferior-fsharp-mode-hooks
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+(when (featurep 'fsharp-mode)
+ (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
+ (add-hook 'inferior-fsharp-mode-hooks
+           (lambda ()
+             (make-local-variable 'scroll-margin)
+             (setq scroll-margin 0))))
 
 ;; Tuareg mode...
 (setq auto-mode-alist (append '(("\\.ml[iylp]?$" . tuareg-mode))
@@ -1244,17 +1209,20 @@ future."
             (setq scroll-margin 0)))
 
 ;; Visual Basic mode...
-(setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
-                                visual-basic-mode)) auto-mode-alist))
-(setq visual-basic-mode-indent 4)
+(when (featurep 'visual-basic-mode)
+  (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
+                                   visual-basic-mode)) auto-mode-alist))
+  (setq visual-basic-mode-indent 4))
 
 ;; PowerShell mode...
-(setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
-                              auto-mode-alist))
+(when (featurep 'powershell-mode)
+  (setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
+                                auto-mode-alist)))
 
 ;; PHP mode...
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+(when (featurep 'php-mode)
+  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode)))
 
 ;; Text mode...
 (define-key text-mode-map "\C-m" 'newline)
@@ -1723,7 +1691,8 @@ for example.
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)
   "Setup to use if running in an X window"
-  (when (and (boundp 'color-theme-local)
+  (when (and (featurep 'color-theme)
+             (boundp 'color-theme-local)
              (not (null color-theme-local)))
     (require 'color-theme)
     (color-theme-initialize)
