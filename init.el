@@ -222,6 +222,7 @@
 (require 'monky nil t)
 (require 'nyan-mode nil t)
 (require 'multi-web-mode nil t)
+(require 'markdown-mode nil t)
 
 ;; ELPA/MELPA optional features
 (require 'smart-tabs-mode nil t)
