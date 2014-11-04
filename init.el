@@ -133,8 +133,6 @@
                     ("git-modes")
                     ("egg")
                     ("monky")
-                    ("color-theme-solarized")
-                    ("color-theme-wombat")
                     ("nyan-mode")
                     ("multi-web-mode")
                     ("tuareg-mode"))))
@@ -224,8 +222,6 @@
 (require 'python nil t)
 (require 'pymacs nil t)
 (require 'monky nil t)
-(require 'color-theme-solarized nil t)
-(require 'color-theme-wombat nil t)
 (require 'nyan-mode nil t)
 (require 'multi-web-mode nil t)
 
@@ -1698,7 +1694,8 @@ for example.
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)
   "Setup to use if running in an X window"
-  (when (and (boundp 'color-theme-local)
+  (when (and (featurep 'color-theme)
+             (boundp 'color-theme-local)
              (not (null color-theme-local)))
     (require 'color-theme)
     (color-theme-initialize)
