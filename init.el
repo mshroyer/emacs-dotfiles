@@ -176,10 +176,6 @@
   "markdown-mode.el"
   "Major mode for editing Markdown files."
   t)
-(autoload 'yaml-mode
-  "yaml-mode.el"
-  "Major mode for editing YAML files."
-  t)
 (autoload 'tuareg-mode
   "tuareg"
   "Major mode for editing OCaml code."
@@ -925,14 +921,15 @@ future."
             (auto-fill-mode t)))
 
 ;; YAML mode...
-(setq auto-mode-alist
-      (append '(("\\.yaml$" . yaml-mode))
-              auto-mode-alist))
-(add-hook 'yaml-mode-hook
-          (lambda ()
-            (local-set-key "\C-cn" 'new-yaml-ab-entry)
-            (make-local-variable 'tab-stop-list)
-            (setq tab-stop-list (simple-tab-stop-list 2 75))))
+(when (featurep 'yaml-mode)
+  (setq auto-mode-alist
+        (append '(("\\.yaml$" . yaml-mode))
+                auto-mode-alist))
+  (add-hook 'yaml-mode-hook
+            (lambda ()
+              (local-set-key "\C-cn" 'new-yaml-ab-entry)
+              (make-local-variable 'tab-stop-list)
+              (setq tab-stop-list (simple-tab-stop-list 2 75)))))
 
 ;; C mode...
 (setq-default c-block-comment-prefix "* ")
