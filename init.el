@@ -294,6 +294,12 @@
 (global-set-key "\C-cwb" 'windmove-left)
 (global-set-key "\C-cwf" 'windmove-right)
 
+;; Also allow C-x w C-[pnfb] because this feels a little more like my tmux config
+(global-set-key "\C-cw\C-p" 'windmove-up)
+(global-set-key "\C-cw\C-n" 'windmove-down)
+(global-set-key "\C-cw\C-b" 'windmove-left)
+(global-set-key "\C-cw\C-f" 'windmove-right)
+
 ;; Specify Unix system EOL mnemonics (these settings won't be the default
 ;; on Windows versions of Emacs)
 (setq eol-mnemonic-unix ":"
