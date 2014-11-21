@@ -114,8 +114,6 @@
                     ("evil")
                     ("auto-complete")
                     ("ess/lisp")
-                    ("slime")
-                    ("swank-chicken")
                     ("clojure-mode")
                     ("swank-clojure")
                     ("python")
@@ -164,6 +162,7 @@
 (require 'paredit)
 (require 'tramp)
 (require 'google-c-style)
+;(require 'desktop)
 
 ;; Autoload features
 (autoload 'package
@@ -209,20 +208,19 @@
 (require 'auto-complete-config nil t)
 (require 'ess-site nil t)
 (require 'pymacs nil t)
-(require 'slime nil t)
 (require 'sudoku nil t)
 (require 'epa-file nil t)
 (require 'edit-server nil t)
 (require 'yasnippet nil t)
 (require 'scala-mode nil t)
 (require 'android-mode nil t)
-(require 'chicken-slime nil t)
 (require 'python nil t)
 (require 'pymacs nil t)
 (require 'monky nil t)
 (require 'nyan-mode nil t)
 (require 'multi-web-mode nil t)
 (require 'markdown-mode nil t)
+(require 'color-theme nil t)
 
 ;; ELPA/MELPA optional features
 (require 'smart-tabs-mode nil t)
@@ -515,24 +513,17 @@
 ;;; SLIME
 
 ;; Use Paredit in Inferior SLIME
-(when (featurep 'slime-repl)
-  (add-paredit-hook slime-repl-mode)
-  (add-hook 'slime-repl-mode-hook
-            (lambda ()
-              (make-local-variable 'scroll-margin)
-              (setq scroll-margin 0)))
-  (slime-setup '(slime-repl)))
+(eval-after-load "slime-repl"
+  '(progn
+     (add-paredit-hook slime-repl-mode)
+     (add-hook 'slime-repl-mode-hook
+               (lambda ()
+                 (make-local-variable 'scroll-margin)
+                 (setq scroll-margin 0)))
+     (slime-setup '(slime-repl))))
 
 ;; For connecting to swank-clojure
 (setq slime-net-coding-system 'utf-8-unix)
-
-;; Settings for swank-chicken if it's installed
-(when (featurep 'chicken-slime)
-  (setq swank-chicken-path (concat user-elisp-directory
-                                   "swank-chicken/swank-chicken.scm"))
-  (add-hook 'scheme-mode-hook
-            (lambda ()
-              (slime-mode t))))
 
 
 ;;; GEISER
@@ -1696,8 +1687,8 @@ for example.
   "Setup to use if running in an X window"
   (when (and (featurep 'color-theme)
              (boundp 'color-theme-local)
-             (not (null color-theme-local)))
-    (require 'color-theme)
+             (not (null color-theme-local))
+             (window-system))
     (color-theme-initialize)
     (funcall color-theme-local)))
 
@@ -1763,6 +1754,11 @@ for example.
             (lambda ()
               (auto-fill-mode nil)
               (longlines-mode t))))
+
+
+;;; RESTORE DESKTOP
+
+;(desktop-save-mode 1)
 
 
 ;; Custom variables from the Emacs configuration editor
