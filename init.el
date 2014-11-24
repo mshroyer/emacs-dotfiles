@@ -1037,6 +1037,10 @@ future."
           (lambda ()
             (c-set-style "my-c++")))
 
+;; Java mode...
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace nil)))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
