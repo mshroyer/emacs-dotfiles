@@ -1040,7 +1040,8 @@ future."
 ;; Java mode...
 (add-hook 'java-mode-hook
           (lambda ()
-            (setq show-trailing-whitespace nil)))
+            (setq show-trailing-whitespace nil)
+            (set-fill-column 100)))
 
 ;; GUD mode...
 (add-hook 'gud-mode-hook
