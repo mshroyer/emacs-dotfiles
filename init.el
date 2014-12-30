@@ -490,6 +490,10 @@
 (defvar ctags-program-name "ctags")
 
 
+;;; EDIFF
+
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;;; PAREDIT
 
 (add-hook 'paredit-mode-hook
