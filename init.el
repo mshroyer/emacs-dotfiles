@@ -868,7 +868,9 @@ future."
             (set (make-local-variable 'sgml-basic-offset) 2)
             (sgml-guess-indent)
             (local-set-key "\C-m" 'newline-and-indent)
-            (local-set-key "\C-j" 'newline)))
+            (local-set-key "\C-j" 'newline)
+            (local-set-key (kbd "TAB") 'indent-according-to-mode)
+            (electric-indent-mode 1)))
 
 ;; ERC mode...
 (require 'erc)
