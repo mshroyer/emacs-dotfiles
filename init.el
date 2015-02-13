@@ -861,6 +861,7 @@ future."
 
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.ng$" . html-mode))
 (add-hook 'html-mode-hook
           (lambda ()
             (auto-fill-mode 0)
@@ -871,6 +872,9 @@ future."
             (local-set-key "\C-j" 'newline)
             (local-set-key (kbd "TAB") 'indent-according-to-mode)
             (electric-indent-mode 1)))
+
+;; CSS mode...
+(add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
 
 ;; ERC mode...
 (require 'erc)
