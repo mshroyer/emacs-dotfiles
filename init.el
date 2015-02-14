@@ -862,6 +862,7 @@ future."
 ;; HTML mode...
 (add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.ng$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.soy$" . html-mode))
 (add-hook 'html-mode-hook
           (lambda ()
             (auto-fill-mode 0)
