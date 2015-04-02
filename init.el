@@ -671,10 +671,25 @@ Recognized window header names are: 'comint, 'locals, 'registers,
           (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
-          (org-agenda-prefix-format "%16T: %b")
+          (org-agenda-prefix-format "%16T: %(mshroyer/org-get-project-prefix)")
           (org-agenda-todo-keyword-format "")
           (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
         ("p" "Project action items" todo-tree "TODO")))
+
+(defun mshroyer/org-path-to-project (path)
+  "Get a project name for the given org path
+
+Returns a project name corresponding to the given org path (as
+defined by my personal todo.org layout), or nil if the item at
+point is not part of a project."
+  (if (equal (car path) "Projects")
+      (cadr path)
+    nil))
+
+(defun mshroyer/org-get-project-prefix ()
+  "Format the project name for the TODO item at point"
+  (let ((project (mshroyer/org-path-to-project (org-get-outline-path))))
+    (if project (concat " [" project "]") "")))
 
 (defun mshroyer/org-todo-active-p ()
   "Determines whether the current todo item is active
