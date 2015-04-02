@@ -671,9 +671,10 @@ Recognized window header names are: 'comint, 'locals, 'registers,
           (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
-          (org-agenda-prefix-format "%16T:")
+          (org-agenda-prefix-format "%16T: %b")
           (org-agenda-todo-keyword-format "")
-          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))))
+          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
+        ("p" "Project action items" todo-tree "TODO")))
 
 (defun mshroyer/org-todo-active-p ()
   "Determines whether the current todo item is active
