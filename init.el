@@ -682,9 +682,9 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 Returns a project name corresponding to the given org path (as
 defined by my personal todo.org layout), or nil if the item at
 point is not part of a project."
-  (if (equal (car path) "Projects")
-      (cadr path)
-    nil))
+  (let ((heading (car path)))
+    (if (equal heading "Misc") nil
+      heading)))
 
 (defun mshroyer/org-get-project-prefix ()
   "Format the project name for the TODO item at point"
