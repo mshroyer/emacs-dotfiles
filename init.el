@@ -683,16 +683,30 @@ Returns a project name corresponding to the given org path (as
 defined by my personal todo.org layout), or nil if the item at
 point is not part of a project."
   (let ((heading (car path)))
-    (if (equal heading "Misc") nil
+    (if (string= heading "Misc") nil
       heading)))
 
+(defun mshroyer/visually-join-strings (strings)
+  "Visually join strings with the given separator
+This function differs from the behavior of mapconcat 'identity in that here
+we do not add a separator between empty strings, but instead treats them as
+non-existent."
+  (mapconcat 'identity (remove-if (lambda (str)
+                                    (string= str "")) strings)
+             " "))
+
 (defun mshroyer/org-agenda-todo-prefix ()
-  (let ((project       (mshroyer/org-project-for-path (org-get-outline-path)))
-        (extra-context (apply 'concat
-                              (mapcar (lambda (tagname)
-                                        (concat tagname ": "))
-                                      (cdr (reverse (org-get-tags)))))))
-    (if project (concat " " extra-context "[" project "]") "")))
+  (let* ((project       (mshroyer/org-project-for-path (org-get-outline-path)))
+         (extra-context (mapcar (lambda (tagname)
+                                  (concat tagname ":"))
+                                (cdr (reverse (org-get-tags)))))
+         (prefix        (mshroyer/visually-join-strings
+                         (append extra-context
+                                 (if project
+                                     (list (concat "[" project "]")))))))
+    (if (string= "" prefix)
+        ""
+      (concat " " prefix))))
 
 (defun mshroyer/org-todo-active-p ()
   "Determines whether the current todo item is active
