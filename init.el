@@ -686,27 +686,20 @@ point is not part of a project."
     (if (string= heading "Misc") nil
       heading)))
 
-(defun mshroyer/visually-join-strings (strings)
-  "Visually join strings with the given separator
-This function differs from the behavior of mapconcat 'identity in that here
-we do not add a separator between empty strings, but instead treats them as
-non-existent."
-  (mapconcat 'identity (remove-if (lambda (str)
-                                    (string= str "")) strings)
-             " "))
-
 (defun mshroyer/org-agenda-todo-prefix ()
-  (let* ((project       (mshroyer/org-project-for-path (org-get-outline-path)))
-         (extra-context (mapcar (lambda (tagname)
-                                  (concat tagname ":"))
-                                (cdr (reverse (org-get-tags)))))
-         (prefix        (mshroyer/visually-join-strings
-                         (append extra-context
-                                 (if project
-                                     (list (concat "[" project "]")))))))
-    (if (string= "" prefix)
-        ""
-      (concat " " prefix))))
+  "Generate Org agenda prefix with extra context
+
+Builds TODO item prefixes including the project name, if any, and
+any non-final tags."
+  (let ((project       (mshroyer/org-project-for-path (org-get-outline-path)))
+        (extra-context (mapcar (lambda (tagname)
+                                 (concat tagname ":"))
+                               (cdr (reverse (org-get-tags))))))
+    (mapconcat (lambda (str)
+                 (concat " " str))
+               (append extra-context (if project
+                                         (list (concat "[" project "]"))))
+               "")))
 
 (defun mshroyer/org-todo-active-p ()
   "Determines whether the current todo item is active
