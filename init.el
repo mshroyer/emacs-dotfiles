@@ -655,7 +655,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
   (interactive "P")
   (if arg
       (org-insert-todo-heading-respect-content)
-    (org-insert-heading-respect-content)))
+    (org-meta-return)))  ; Calls org-insert-heading or org-table-wrap-region
 
 ; Use C-ct as an alternative for C-cC-t, so that we don't have to use quite
 ; as many keystrokes with GNU Screen's escape bound to C-t
