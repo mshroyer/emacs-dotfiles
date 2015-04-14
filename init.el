@@ -635,11 +635,39 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 ;;; ORG MODE / DIARY
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
 (global-set-key "\C-ci" 'mshroyer/org-show-inbox)
+
+;; Terminal compatibility
+
+; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
+(define-key org-mode-map "\M-[z" 'org-shifttab)
+
+; Because we can't use C-return and C-S-return in the terminal:
+(define-key org-mode-map (kbd "C-M-j") 'mshroyer/org-insert-heading)
+
+(defun mshroyer/org-insert-heading (&optional arg)
+  "Invoke desired heading function depending on parameter"
+  (interactive "P")
+  (if arg
+      (org-insert-todo-heading-respect-content)
+    (org-insert-heading-respect-content)))
+
+; Use C-ct as an alternative for C-cC-t, so that we don't have to use quite
+; as many keystrokes with GNU Screen's escape bound to C-t
+(define-key org-mode-map "\C-ct" 'org-todo)
+(setq org-cycle-separator-lines 2
+      org-special-ctrl-a/e t
+      org-agenda-start-on-weekday 0
+      org-completion-use-ido t
+      org-agenda-window-setup 'current-window)
+
+; Always show context when creating sparse trees:
+(setq org-show-siblings t)
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -815,21 +843,6 @@ future."
 
 
 ;;; EDITING MODE HOOKS AND SETTINGS
-
-;; Org mode...
-
-; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
-(define-key org-mode-map "\M-[z" 'org-shifttab)
-; Use C-ct as an alternative for C-cC-t, so that we don't have to use quite
-; as many keystrokes with GNU Screen's escape bound to C-t
-(define-key org-mode-map "\C-ct" 'org-todo)
-(setq org-cycle-separator-lines 2
-      org-special-ctrl-a/e t
-      org-agenda-start-on-weekday 0
-      org-completion-use-ido t
-      org-agenda-window-setup 'current-window)
-; Always show context when creating sparse trees:
-(setq org-show-siblings t)
 
 ;; Help mode...
 (add-hook 'help-mode-hook
