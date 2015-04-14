@@ -254,12 +254,17 @@
 (setq make-backup-files t
       backup-by-copying t)
 
-;; Keep versioned backups in ~/.emacs.d/backups
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
-      version-control t
+;; Backup file settings
+(setq version-control t
       kept-new-versions 6
       kept-old-versions 2
       delete-old-versions t)
+
+;; Always store backup and auto-save files under tmp
+(setq backup-directory-alist
+        `((".*" . ,(concat user-emacs-directory "backups")))
+      auto-save-file-name-transforms
+        `((".*" ,(concat user-emacs-directory "autosaves") t)))
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
