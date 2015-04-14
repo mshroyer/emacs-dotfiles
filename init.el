@@ -9,6 +9,15 @@
 
 (require 'cl)
 
+;;; LOCAL SETTINGS
+
+;; Retrieve any local configurations from ~/.emacs.local.el, if the file
+;; exists on this system
+(let ((local-settings "~/.emacs.local.el"))
+  (if (file-exists-p local-settings)
+      (load-file local-settings)))
+
+
 ;;; UTILITY FUNCTIONS
 
 (defun char (str i)
@@ -807,7 +816,7 @@ future."
         org-refile-use-outline-path t
         org-outline-path-complete-in-steps nil
         org-refile-targets
-        '((("~/org/todo.org") . (:level . 1))))
+        `(((,(concat org-directory "/todo.org")) . (:level . 1))))
   (define-key global-map "\C-cc" 'org-capture))
 
 ; Only show holidays that I actually care about
@@ -1738,15 +1747,6 @@ for example.
   "Scroll up one line"
   (interactive)
   (scroll-down 1))
-
-
-;;; LOCAL SETTINGS
-
-;; Retrieve any local configurations from ~/.emacs.local.el, if the file
-;; exists on this system
-(let ((local-settings "~/.emacs.local.el"))
-  (if (file-exists-p local-settings)
-      (load-file local-settings)))
 
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)
