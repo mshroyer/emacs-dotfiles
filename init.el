@@ -353,9 +353,11 @@
 (global-set-key (kbd "C-.") #'mshroyer/scroll-up)
 (global-set-key (kbd "C-,") #'mshroyer/scroll-down)
 
-;; Don't use transient mark mode / Zmacs mode (note that this disables
-;; region highlighting)
-(transient-mark-mode 0)
+;; Use transient mark mode / Zmacs mode.
+(transient-mark-mode t)
+
+;; Allow repeated pops from the mark ring with C-u C-SPC C-SPC ...
+(setq set-mark-command-repeat-pop t)
 
 ;; Don't mess around with this disabled commands nonsense
 (setq disabled-command-hook nil)
