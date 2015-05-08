@@ -1131,8 +1131,7 @@ future."
 (when (featurep 'go-mode)
   (add-hook 'go-mode-hook
             (lambda ()
-              (flyspell-prog-mode)
-              (set-fill-column 100))))
+              (flyspell-prog-mode))))
 
 ;; Perl mode...
 (defalias 'perl-mode 'cperl-mode)
