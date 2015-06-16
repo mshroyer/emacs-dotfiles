@@ -140,7 +140,6 @@
                     ("egg")
                     ("monky")
                     ("nyan-mode")
-                    ("multi-web-mode")
                     ("tuareg-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -225,9 +224,9 @@
 (require 'pymacs nil t)
 (require 'monky nil t)
 (require 'nyan-mode nil t)
-(require 'multi-web-mode nil t)
 (require 'markdown-mode nil t)
 (require 'color-theme nil t)
+(require 'web-mode nil t)
 
 ;; ELPA/MELPA optional features
 (require 'smart-tabs-mode nil t)
@@ -906,19 +905,13 @@ future."
 (add-hook 'list-diary-entries-hook 'include-other-diary-files)
 (add-hook 'mark-diary-entries-hook 'mark-included-diary-files)
 
-;; multi-web-mode...
-(when (featurep 'multi-web-mode)
-  (setq mweb-default-major-mode 'html-mode)
-  (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-                    (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-                    (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-  (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-  (multi-web-global-mode 1))
-
 ;; HTML mode...
-(add-to-list 'auto-mode-alist '("\\.mtml$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.ng$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.soy$" . html-mode))
+(let ((mode (if (featurep 'web-mode) 'web-mode 'html-mode)))
+  (add-to-list 'auto-mode-alist (cons "\\.mtml$" mode))
+  (add-to-list 'auto-mode-alist (cons "\\.ng$" mode))
+  (add-to-list 'auto-mode-alist (cons "\\.soy$" mode))
+  (add-to-list 'auto-mode-alist (cons "\\.html?\\'" mode)))
+
 (add-hook 'html-mode-hook
           (lambda ()
             (auto-fill-mode 0)

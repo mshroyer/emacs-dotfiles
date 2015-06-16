@@ -126,12 +126,6 @@ our @externals = (
         branch => 'master',
     },
     {
-        path   => 'elisp/multi-web-mode',
-        vcs    => 'git',
-        repo   => 'https://github.com/fgallina/multi-web-mode.git',
-        branch => 'master',
-    },
-    {
         path   => 'elisp/nxhtml',
         vcs    => 'bzr',
         repo   => 'https://code.launchpad.net/~nxhtml/nxhtml/main',
