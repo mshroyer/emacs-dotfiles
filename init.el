@@ -680,6 +680,9 @@ Recognized window header names are: 'comint, 'locals, 'registers,
       org-completion-use-ido t
       org-agenda-window-setup 'current-window)
 
+; Don't re-evaluate code blocks when exporting.
+(setq org-export-babel-evaluate nil)
+
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
 
