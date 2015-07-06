@@ -294,10 +294,9 @@
     (tool-bar-mode 0))
 
 ;; By default, if we aren't running in a window system, turn off the menu
-;; bar but enable xterm mouse control.
+;; bar.
 (when (not window-system)
-  (menu-bar-mode 0)
-  (xterm-mouse-mode 1))
+  (menu-bar-mode 0))
 
 ;; Use C-x w [pnfb] to navigate directionally between windows
 (global-set-key "\C-cwp" 'windmove-up)
