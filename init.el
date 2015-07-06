@@ -1832,7 +1832,8 @@ for example.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
- '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t)))))
+ '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
+ '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
