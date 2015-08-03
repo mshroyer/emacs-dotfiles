@@ -108,10 +108,17 @@
 ;; Package archives
 (when (< emacs-major-version 24)
   (load (concat user-elisp-directory "package.el"))
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+
+;; The ELPA package repository is not available over HTTPS, but it provides
+;; GPG package signatures.  On the other hand, Marmalade is available over
+;; HTTPS but does not sign with GPG.  Using allow-unsigned here means we
+;; will be prompted whether we want to install an unsigned package from
+;; Marmalade, which appears to be the best we can do since this behavior
+;; cannot be configured per-repository.
+(setq package-check-signature 'allow-unsigned)
 (package-initialize)
 
 
