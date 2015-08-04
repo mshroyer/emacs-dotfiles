@@ -138,7 +138,6 @@
                     ("scala-mode")
                     ("lua")
                     ("android-mode")
-                    ("magit")
                     ("git-modes")
                     ("egg")
                     ("monky")
@@ -194,10 +193,6 @@
 (autoload 'lua-mode
   "lua-mode"
   "Lua editing mode."
-  t)
-(autoload 'magit-status
-  "magit"
-  "Open a Magit status buffer"
   t)
 (autoload 'egg-status
   "egg"
