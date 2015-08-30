@@ -1,8 +1,6 @@
 ;;; -*- Mode: Emacs-Lisp; -*-
 ;;;
-;;; ~/.emacs.d/init.el
-;;;
-;;; My global Emacs configuration file.
+;;; My global configuration for GNU Emacs 23 and newer.
 ;;;
 ;;; Mark Shroyer
 ;;; https://markshroyer.com/
@@ -94,8 +92,7 @@
 ;; The HOME environment variable may not necessarily be set on Windows
 ;; systems.  If it isn't already set, try to synthesize it from other
 ;; standard Windows environment variables.
-(when (and (or (eql system-type 'windows-nt)
-               (eql system-type 'msdos))
+(when (and (member system-type '(windows-nt msdos))
            (not (getenv "HOME")))
   (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
 
@@ -105,15 +102,24 @@
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
 
+;; TLS program defaults that will result in validated server connections
+;; and, in the case of GnuTLS, certificate pinning, given sufficiently
+;; recent software versions.  These default settings should be verified on
+;; each system where used and customized if necessary.
+(setq tls-program '("xgnutls-cli --strict-tofu -p %p %h"
+                    "xopenssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p")
+      tls-checktrust nil)
+
 ;; Package archives
 (when (< emacs-major-version 24)
   (load (concat user-elisp-directory "package.el")))
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("marmalade" . "https://marmalade-repo.org/packages/")))
+
 ;; Don't check for package signatures, since Marmalade does not currently
-;; support signed packages.  We're still protected against MITM because we
-;; access both repos over HTTPS.
+;; support signed packages.  We're already protected against MITM because
+;; we access both Marmalade and ELPA over HTTPS.
 (setq package-check-signature nil)
 (package-initialize)
 
