@@ -150,10 +150,15 @@
                     ("nyan-mode")
                     ("tuareg-mode"))))
 
+;; Tree(s) of paths containing submodule Emacs Lisp files.
+(setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
+                          ("web-mode"))))
+
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
 (let ((my-load-path (remove-if-not #'file-exists-p
-                                   (flatten-path-tree user-elisp))))
+                                   (append (flatten-path-tree user-elisp)
+                                           (flatten-path-tree submodules-elisp)))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
