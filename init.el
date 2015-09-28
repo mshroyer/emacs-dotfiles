@@ -152,6 +152,7 @@
 
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
 (setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
+                          ("magit")
                           ("web-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
