@@ -152,7 +152,8 @@
 
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
 (setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
-                          ("magit")
+                          ("dash")
+                          ("magit" ("lisp"))
                           ("web-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -240,6 +241,9 @@
 
 ;; ELPA/MELPA optional features
 (require 'smart-tabs-mode nil t)
+
+;; Submodules optional features
+(require 'magit nil t)
 
 ;; Initialization
 (let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
