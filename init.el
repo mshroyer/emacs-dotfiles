@@ -102,17 +102,16 @@
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
 
-;; TLS program defaults that will result in validated server connections
+;; TLS program defaults that should result in validated server connections
 ;; and, in the case of GnuTLS, certificate pinning, given sufficiently
 ;; recent software versions.  These default settings should be verified on
 ;; each system where used and customized if necessary.
 (setq tls-program '("xgnutls-cli --strict-tofu -p %p %h"
-                    "xopenssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p")
-      tls-checktrust nil)
+                    "xopenssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p"))
 
 ;; Package archives
 (when (< emacs-major-version 24)
-  (load (concat user-elisp-directory "package.el")))
+  (load (concat user-elisp-directory "polyfill/package.el")))
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("marmalade" . "https://marmalade-repo.org/packages/")))
@@ -123,33 +122,6 @@
 (setq package-check-signature nil)
 (package-initialize)
 
-
-;; Tree(s) of paths containing user Emacs Lisp files.  These will be added
-;; to the load path, but will not be scanned recursively.
-(setq user-elisp `((,user-elisp-directory
-                    ("elpa-emacs23")
-                    ("ecb")
-                    ("evil")
-                    ("auto-complete")
-                    ("ess/lisp")
-                    ("clojure-mode")
-                    ("swank-clojure")
-                    ("python")
-                    ("pymacs")
-                    ("org-mode/lisp")
-                    ("org-mode/contrib/lisp")
-                    ("haskellmode-emacs")
-                    ("cperl-mode")
-                    ("emacs_chrome/servers")
-                    ("scala-mode")
-                    ("lua")
-                    ("android-mode")
-                    ("git-modes")
-                    ("egg")
-                    ("monky")
-                    ("nyan-mode")
-                    ("tuareg-mode"))))
-
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
 (setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
                           ("dash")
@@ -159,8 +131,8 @@
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
 (let ((my-load-path (remove-if-not #'file-exists-p
-                                   (append (flatten-path-tree user-elisp)
-                                           (flatten-path-tree submodules-elisp)))))
+                                   (cons user-elisp-directory
+					 (flatten-path-tree submodules-elisp)))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
@@ -168,7 +140,7 @@
 (when (or (< emacs-major-version 24)
           (and (= emacs-major-version 24)
                (< emacs-minor-version 3)))
-  (add-to-list 'load-path (concat user-elisp-directory "/cl-lib"))
+  (add-to-list 'load-path (concat user-elisp-directory "/polyfill/cl-lib"))
   (require 'cl-lib))
 
 
