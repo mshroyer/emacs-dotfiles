@@ -367,12 +367,6 @@
 ;; Show trailing whitespace
 (setq show-trailing-whitespace t)
 
-;; Swap to C-j for raw newline, C-m for newline-and-indent because we will
-;; typically want to indent when we press the Enter key
-(global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key "\C-j" 'newline)
-(global-set-key (kbd "<C-M-return>") 'indent-new-comment-line)
-
 ;; Shortcut to enable flyspell for buffer
 (global-set-key "\C-cs" 'flyspell-enable)
 
@@ -751,9 +745,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (setq tab-width 4)
             (make-local-variable 'tab-stop-list)
             (setq tab-stop-list (simple-tab-stop-list 4 75))
-            (local-set-key (kbd "TAB") 'tab-to-tab-stop)
-            (local-set-key "\C-m" 'newline-and-indent)
-            (local-set-key "\C-j" 'newline)))
+            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 
 ;; Go mode...
 (when (featurep 'go-mode)
@@ -819,8 +811,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (setq scroll-margin 0)))
 
 ;; Text mode...
-(define-key text-mode-map "\C-m" 'newline)
-(define-key text-mode-map "\C-j" 'newline-and-indent)
 (define-key text-mode-map "\C-cn" 'new-journal-entry)
 (define-key text-mode-map "\C-c\C-o" 'org-open-at-point)
 (define-key text-mode-map "\C-ct" 'artist-mode)
@@ -840,8 +830,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 (when (featurep 'tex-site)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
-              (local-set-key "\C-m" 'newline-and-indent)
-              (local-set-key "\C-j" 'newline)
               (setq tab-width        8
                     indent-tabs-mode nil)
               (auto-fill-mode 1))))
