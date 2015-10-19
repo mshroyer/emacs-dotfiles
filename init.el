@@ -156,29 +156,9 @@
 (require 'paredit)
 (require 'tramp)
 (require 'google-c-style)
-;(require 'desktop)
-
-;; Autoload features
-(autoload 'package
-  "pkg-el23"
-  "ELPA for Emacs 23"
-  t)
-(autoload 'tuareg-mode
-  "tuareg"
-  "Major mode for editing OCaml code."
-  t)
-(autoload 'tuareg-run-ocaml
-  "tuareg"
-  "Run an inferior OCaml process."
-  t)
-(autoload 'ocamldebug
-  "ocamldebug"
-  "Run the OCaml debugger"
-  t)
-(autoload 'egg-status
-  "egg"
-  "Open an Egg status buffer"
-  t)
+(require 'sudoku)
+(require 'web-mode)
+(require 'magit)
 
 ;; Optional features
 
@@ -186,36 +166,9 @@
 ;; in Org Mode.  See:
 ;; http://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
 (setq evil-want-C-i-jump nil)
+
 (require 'evil nil t)
-
-(require 'popup nil t)
-(require 'semantic nil t)
-(require 'semantic/ia nil t)
-(require 'auto-complete-config nil t)
-(require 'ess-site nil t)
-(require 'pymacs nil t)
-(require 'sudoku nil t)
-(require 'epa-file nil t)
-(require 'edit-server nil t)
-(require 'scala-mode nil t)
-(require 'android-mode nil t)
-(require 'python nil t)
-(require 'pymacs nil t)
-(require 'monky nil t)
-(require 'nyan-mode nil t)
-(require 'markdown-mode nil t)
 (require 'color-theme nil t)
-(require 'web-mode nil t)
-
-;; ELPA/MELPA optional features
-(require 'smart-tabs-mode nil t)
-
-;; Submodules optional features
-(require 'magit nil t)
-
-;; Initialization
-(let ((nxhtml-init (concat user-elisp-directory "nxhtml/autostart.el")))
-  (load nxhtml-init t))
 
 
 ;;; MAC OS X-SPECIFIC CONFIGURATIONS
@@ -321,7 +274,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Scroll one line at a time, like Vim
-(setq scroll-conservatively 2)
+;(setq scroll-conservatively 2)
 
 ;; Show at least three lines of context around the cursor while scrolling
 ;; (like :set scrolloff=3 in Vim)
@@ -330,9 +283,6 @@
 ;; Custom key bindings for line scrolling without moving point
 (global-set-key (kbd "C-.") #'mshroyer/scroll-up)
 (global-set-key (kbd "C-,") #'mshroyer/scroll-down)
-
-;; Use transient mark mode / Zmacs mode.
-(transient-mark-mode t)
 
 ;; Allow repeated pops from the mark ring with C-u C-SPC C-SPC ...
 (setq set-mark-command-repeat-pop t)
@@ -415,8 +365,7 @@
 (setq-default fill-column 75)
 
 ;; Show trailing whitespace
-(if (>= emacs-major-version 21)
-    (setq show-trailing-whitespace t))
+(setq show-trailing-whitespace t)
 
 ;; Swap to C-j for raw newline, C-m for newline-and-indent because we will
 ;; typically want to indent when we press the Enter key
@@ -643,54 +592,8 @@ Recognized window header names are: 'comint, 'locals, 'registers,
   (add-to-list 'auto-mode-alist (cons "\\.soy$" mode))
   (add-to-list 'auto-mode-alist (cons "\\.html?\\'" mode)))
 
-(add-hook 'html-mode-hook
-          (lambda ()
-            (auto-fill-mode 0)
-            (setq indent-tabs-mode nil)
-            (set (make-local-variable 'sgml-basic-offset) 2)
-            (sgml-guess-indent)
-            (local-set-key "\C-m" 'newline-and-indent)
-            (local-set-key "\C-j" 'newline)
-            (local-set-key (kbd "TAB") 'indent-according-to-mode)
-            (electric-indent-mode 1)))
-
 ;; CSS mode...
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
-
-;; ERC mode...
-(require 'erc)
-(add-hook 'erc-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
-
-; Keep the prompt at the bottom of the window
-(erc-scrolltobottom-mode 1)
-
-; Only add ERC channels to the modeline when your nick is mentioned (taken
-; from http://www.emacswiki.org/emacs/ErcChannelTracking)
-(setq erc-format-query-as-channel-p t
-      erc-track-priority-faces-only 'all
-      erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
-      erc-track-faces-priority-list '(erc-error-face
-                                      erc-current-nick-face
-                                      erc-keyword-face
-                                      erc-nick-msg-face
-                                      erc-direct-msg-face
-                                      erc-dangerous-host-face
-                                      erc-notice-face
-                                      erc-prompt-face))
-
-; Enable chat logging
-(add-to-list 'erc-modules 'log)
-(setq erc-log-channels-directory "~/log/"
-      erc-save-buffer-on-part t
-      erc-log-insert-log-on-open nil)
-
-; Automatically save ERC buffers when exiting Emacs
-;; (defadvice save-buffers-kill-emacs (before save-logs (arg) activate)
-;;   (save-some-buffers t (lambda ()
-;;                          (when (eq major-mode 'erc-mode) t))))
 
 ;; Markdown mode...
 (when (featurep 'markdown-mode)
