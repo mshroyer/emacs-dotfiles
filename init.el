@@ -175,10 +175,6 @@
   "ocamldebug"
   "Run the OCaml debugger"
   t)
-(autoload 'lua-mode
-  "lua-mode"
-  "Lua editing mode."
-  t)
 (autoload 'egg-status
   "egg"
   "Open an Egg status buffer"
@@ -516,48 +512,6 @@
 
 (when (featurep 'ecb)
   (setq ecb-tip-of-the-day nil))
-
-
-;;; SLIME
-
-;; Use Paredit in Inferior SLIME
-(eval-after-load "slime-repl"
-  '(progn
-     (add-paredit-hook slime-repl-mode)
-     (add-hook 'slime-repl-mode-hook
-               (lambda ()
-                 (make-local-variable 'scroll-margin)
-                 (setq scroll-margin 0)))
-     (slime-setup '(slime-repl))))
-
-;; For connecting to swank-clojure
-(setq slime-net-coding-system 'utf-8-unix)
-
-
-;;; GEISER
-
-(when (featurep 'geiser)
-  (add-paredit-hook geiser-repl-mode)
-  (add-hook 'geiser-repl-mode-hook
-            (lambda ()
-              (make-local-variable 'scroll-margin)
-              (setq scroll-margin 0))))
-
-
-;;; PYMACS
-
-(when (featurep 'pymacs)
-  (pymacs-load "ropemacs" "rope-")
-  (setq ropemacs-enable-autoimport t))
-
-
-;;; Factor FUEL
-
-(when (featurep 'fuel)
-  (add-hook 'fuel-listener-mode-hook
-            (lambda ()
-              (make-local-variable 'scroll-margin)
-              (setq scroll-margin 0))))
 
 
 ;;; TRAMP
@@ -904,26 +858,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (lambda ()
               (flyspell-prog-mode))))
 
-;; Perl mode...
-(defalias 'perl-mode 'cperl-mode)
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm][wW]?\\|al\\|t\\)\\'" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
-(setq cperl-close-paren-offset -4
-      cperl-continued-statement-offset 4
-      cperl-indent-level 4
-      cperl-indent-parens-as-block t
-      cperl-tab-always-indent t)
-(add-hook 'cperl-mode-hook
-          (lambda ()
-            (set-fill-column 78)
-            (setq cperl-indent-level 4)
-            (setq cperl-continued-statement-offset 8)
-            (abbrev-mode 0)
-            (local-set-key "\C-cj" 'perl-doc-sub)
-            (local-set-key "\C-cp" 'perl-doc-pod)))
-
 ;; Python mode...
 (add-hook 'python-mode-hook
           (lambda ()
@@ -962,48 +896,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 		     ,@(remove (cons ?\C-j 'paredit-newline)
 			       paredit-mode-map))))))
 
-;; Common Lisp mode...
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (setq lisp-indent-function 'common-lisp-indent-function)))
-(add-paredit-hook lisp-mode)
-
-;; Scheme mode...
-(add-hook 'scheme-mode-hook
-          (lambda ()
-            (setq lisp-indent-function 'scheme-indent-function)))
-(add-paredit-hook scheme-mode)
-(add-hook 'inferior-scheme-mode-hook
-          (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
-(add-paredit-hook inferior-scheme-mode)
-
-;; Clojure mode...
-(add-paredit-hook clojure-mode)
-
-;; Scala mode...
-(when (featurep 'scala-mode)
-  (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
-  (add-hook 'scala-mode-hook
-            (lambda ()
-              (local-set-key (kbd "RET") 'reindent-then-newline-and-indent)))
-  (when (featurep 'yasnippet)
-    (yas/load-directory (concat user-elisp-directory
-                                "scala-mode/contrib/yasnippet/"))
-    (add-hook 'scala-mode-hook
-              (lambda ()
-                (yas/minor-mode-on)))))
-
-;; Lua mode...
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
-
-;; Groovy mode...
-(when (featurep 'groovy-mode)
-  (add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
-  (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode)))
-
 ;; Haskell mode...
 (load "haskell-site-file" t)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -1015,33 +907,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
-;; Erlang mode...
-(when (featurep 'erlang-mode)
-  (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
-  (add-hook 'erlang-shell-mode-hook
-            (lambda ()
-              (make-local-variable 'scroll-margin)
-              (setq scroll-margin 0))))
-
-;; Vala mode...
-(when (featurep 'vala-mode)
-  (add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
-  (add-to-list 'auto-mode-alist '("\\.vapi$" . vala-mode))
-  (add-to-list 'file-coding-system-alist '("\\.vala$" . utf-8))
-  (add-to-list 'file-coding-system-alist '("\\.vapi$" . utf-8)))
-
-;; C# mode...
-(when (featurep 'csharp-mode)
-  (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode)))
-
-;; F# mode...
-(when (featurep 'fsharp-mode)
- (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
- (add-hook 'inferior-fsharp-mode-hooks
-           (lambda ()
-             (make-local-variable 'scroll-margin)
-             (setq scroll-margin 0))))
-
 ;; Tuareg mode...
 (setq auto-mode-alist (append '(("\\.ml[iylp]?$" . tuareg-mode))
                               auto-mode-alist))
@@ -1049,22 +914,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
           (lambda ()
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
-
-;; Visual Basic mode...
-(when (featurep 'visual-basic-mode)
-  (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|vbs\\|cls\\)$" .
-                                   visual-basic-mode)) auto-mode-alist))
-  (setq visual-basic-mode-indent 4))
-
-;; PowerShell mode...
-(when (featurep 'powershell-mode)
-  (setq auto-mode-alist (append '(("\\.\\ps1$" . powershell-mode))
-                                auto-mode-alist)))
-
-;; PHP mode...
-(when (featurep 'php-mode)
-  (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode)))
 
 ;; Text mode...
 (define-key text-mode-map "\C-m" 'newline)
@@ -1083,13 +932,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 ;; Paragraph indent text mode...
 (add-to-list 'auto-mode-alist '("\\.txt$" . text-mode))
-
-;; Octave mode...
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
-(add-hook 'inferior-octave-mode-hook #'zero-scroll-margin)
-
-;; ESS / R-mode...
-(add-hook 'inferior-ess-mode-hook #'zero-scroll-margin)
 
 ;; AUCTeX / LaTeX mode...
 (when (featurep 'tex-site)
@@ -1114,24 +956,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
 (add-hook 'term-mode-hook #'zero-scroll-margin)
-
-
-;;; HACKED BUILTIN FUNCTIONS
-
-;; Modify this asm-mode function so that FASM "private" labels (beginning
-;; with a period) are also indented correctly...
-(defun asm-colon ()
-  "Insert a colon; if it follows a label, delete the label's indentation."
-  (interactive)
-  (let ((labelp nil))
-    (save-excursion
-      (skip-syntax-backward "w_.")
-      (skip-syntax-backward " ")
-      (if (setq labelp (bolp)) (delete-horizontal-space)))
-    (call-interactively 'self-insert-command)
-    (when labelp
-      (delete-horizontal-space)
-      (tab-to-tab-stop))))
 
 
 ;;; CUSTOM EXTENDED COMMANDS
@@ -1240,98 +1064,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
                    dir-file))))
 
 
-(defun prompt-user-selection (choices &optional message)
-  "Prompt user to make selection from given set of choices
-
-The selection is specified as an assoc list of single-character
-strings to choice descriptions, e.g.:
-
-\(prompt-user-selection '((\"1\" . \"one\")
-                         (\"2\" . \"two\"))\)
-
-Choices are case-sensitive.  The function keeps prompting until
-user makes a valid selection, or presses the quit keystroke.  The
-return value is the chosen assoc list element; to get just the
-user's choice, take the car of the return value.  An optional
-message argument causes this function to display the given
-message as a prompt above the list of choices.
-"
-
-  (let ((answer nil))
-    (while (null answer)
-
-      ;; Show a list of choices
-      (unless (null message)
-        (princ (concat message "\n\n") t))
-      (dolist (option choices)
-        (princ (concat (car option)
-                       ": "
-                       (cdr option)
-                       "\n")
-               t))
-
-      ;; Wait for the user to make a selection
-      (setq answer (assoc (char-to-string (read-char))
-                          choices)))
-    answer))
-
-
-(defun perl-doc-sub ()
-  "Insert standard comment for a Perl sub
-
-Creates a comment for the current sub, if any, which follows the
-basic format outlined in _Perl Best Practices_.
-"
-
-  (interactive)
-  (move-end-of-line nil)
-  (if (search-backward-regexp "^sub\s")
-      (let* ((sub-choices '(("c" . "CLASS METHOD")
-                            ("i" . "INSTANCE METHOD")
-                            ("s" . "INTERFACE SUB")
-                            ("u" . "INTERNAL UTILITY")))
-             (sub-label (cdr (prompt-user-selection sub-choices
-                                                    "Choose subroutine type:"))))
-        (progn (insert "### " sub-label " ###\n"
-                       "# Purpose    : \n"
-                       "# Returns    : \n"
-                       "# Parameters : \n"
-                       "# Throws     : No exceptions\n"
-                       "# Comments   : None\n"
-                       "# See Also   : N/A\n")
-               (previous-line 6)
-               (move-end-of-line nil)))))
-
-
-(defun perl-doc-pod ()
-  "Insert a Perl POD documentation template for the current module"
-
-  (interactive)
-  (let* ((doc-choices '(("m" . "MODULE")
-                        ("a" . "APPLICATION")))
-         (doc-type (car (prompt-user-selection doc-choices
-                                               "Choose POD documentation template:")))
-         (doc-template-dir (concat user-emacs-directory "templates/documentation/"))
-         (doc-template-file (cond
-                             ((equal doc-type "m") "perl-pod-module")
-                             ((equal doc-type "a") "perl-pod-application")))
-         (lic-choices '(("n" . "NONE")
-                        ("p" . "PERL ARTISTIC")
-                        ("a" . "APACHE")))
-         (lic-type (car (prompt-user-selection lic-choices
-                                               "Choose a software license:")))
-         (lic-template-dir (concat user-emacs-directory "templates/license/"))
-         (lic-template-file (cond
-                             ((equal lic-type "p") "perl-artistic")
-                             ((equal lic-type "a") "apache"))))
-    (end-of-buffer)
-    (insert-file-contents (concat doc-template-dir doc-template-file))
-    (if lic-template-file
-        (progn
-          (end-of-buffer)
-          (insert-file-contents (concat lic-template-dir lic-template-file))))))
-
-
 (defun calendar-zone-to-tz-offset (minutes)
   "Converts minutes off from UTC into a TZ offset string
 
@@ -1406,46 +1138,6 @@ for example.
   (insert (timestamp-string))
   (dotimes (i 2)
     (newline)))
-
-
-;; New YAML address book item
-(defun new-yaml-ab-entry ()
-  "Make a new entry in a YAML address book"
-
-  (interactive)
-
-  (if (re-search-backward "^\\\.\\\.\\\.$" nil t)
-      (next-line)
-    (beginning-of-buffer))
-  (insert "---")
-  (newline)
-
-  (mapcar (lambda (item)
-            (let ((name   (car item))
-                  (tabify (cdr item)))
-              (when tabify
-                (tab-to-tab-stop))
-              (insert (concat name ": "))
-              (newline)))
-          '(("name"      . nil)
-            ("family"    . t)
-            ("given"     . t)
-            ("email"     . nil)
-            ("telephone" . nil)
-            ("mobile"    . t)
-            ("address"   . nil)
-            ("street"    . t)
-            ("city"      . t)
-            ("state"     . t)
-            ("zip"       . t)))
-
-  (insert "...")
-  (newline)
-
-  (re-search-backward "^---$")
-  (dotimes (i 2)
-    (next-line))
-  (end-of-line))
 
 
 ;; Count words in region (like M-= except for words)
