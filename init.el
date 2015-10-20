@@ -218,6 +218,7 @@
 
 (global-set-key "\C-ch" 'helm-command-prefix)
 (helm-mode 1)
+(helm-autoresize-mode t)
 
 
 ;;; GENERAL INTERFACE SETTINGS
