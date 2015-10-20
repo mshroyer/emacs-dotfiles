@@ -1,0 +1,9 @@
+[submodule "submodules/web-mode"]
+	path = submodules/web-mode
+	url = https://github.com/fxbois/web-mode.git
+[submodule "submodules/magit"]
+	path = submodules/magit
+	url = https://github.com/magit/magit.git
+[submodule "submodules/dash"]
+	path = submodules/dash
+	url = https://github.com/magnars/dash.el.git
