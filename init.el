@@ -1196,6 +1196,7 @@ for example.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
+ '(helm-split-window-in-side-p t)
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
