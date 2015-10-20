@@ -114,6 +114,7 @@
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
 (setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
                           ("dash")
+                          ("expand-region")
                           ("magit" ("lisp"))
                           ("web-mode"))))
 
@@ -146,6 +147,7 @@
 (require 'tramp)
 (require 'google-c-style)
 (require 'sudoku)
+(require 'expand-region)
 (require 'web-mode)
 (require 'magit)
 
@@ -324,6 +326,9 @@
 (setq-default abbrev-mode t)
 (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs")
       save-abbrevs     t)
+
+;; expand-region
+(global-set-key "\C-c=" 'er/expand-region)
 
 ;; Quick entry for commonly used symbols
 (defconst specialchar-en-dash #x2013)

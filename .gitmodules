@@ -7,3 +7,6 @@
 [submodule "submodules/dash"]
 	path = submodules/dash
 	url = https://github.com/magnars/dash.el.git
+[submodule "submodules/expand-region"]
+	path = submodules/expand-region
+	url = https://github.com/magnars/expand-region.el.git
