@@ -225,6 +225,11 @@
 ;; Don't use helm for M-x.
 (add-to-list 'helm-completing-read-handlers-alist '(execute-extended-command . nil))
 
+;; Additional bindings.
+(global-set-key "\M-y" 'helm-show-kill-ring)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match t)
+
 
 ;;; GENERAL INTERFACE SETTINGS
 
