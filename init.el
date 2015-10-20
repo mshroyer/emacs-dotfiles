@@ -115,6 +115,8 @@
 (setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
                           ("dash")
                           ("expand-region")
+                          ("emacs-async")
+                          ("helm")
                           ("magit" ("lisp"))
                           ("web-mode"))))
 
@@ -148,6 +150,9 @@
 (require 'google-c-style)
 (require 'sudoku)
 (require 'expand-region)
+(require 'async)
+(require 'helm)
+(require 'helm-config)
 (require 'web-mode)
 (require 'magit)
 
@@ -202,12 +207,17 @@
 (setq require-final-newline t)
 
 ;; ido mode for switching buffers and finding files
-(ido-mode 1)
 (setq ido-enable-flex-matching t
       ido-max-directory-size 1000000
       ido-auto-merge-work-directories-length -1
       ido-default-file-method 'selected-window
       ido-default-buffer-method ido-default-file-method)
+
+
+;;; HELM
+
+(global-set-key "\C-ch" 'helm-command-prefix)
+(helm-mode 1)
 
 
 ;;; GENERAL INTERFACE SETTINGS

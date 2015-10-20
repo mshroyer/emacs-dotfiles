@@ -10,3 +10,9 @@
 [submodule "submodules/expand-region"]
 	path = submodules/expand-region
 	url = https://github.com/magnars/expand-region.el.git
+[submodule "submodules/helm"]
+	path = submodules/helm
+	url = https://github.com/emacs-helm/helm.git
+[submodule "submodules/emacs-async"]
+	path = submodules/emacs-async
+	url = https://github.com/jwiegley/emacs-async.git
