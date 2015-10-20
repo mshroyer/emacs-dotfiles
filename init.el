@@ -218,7 +218,12 @@
 
 (global-set-key "\C-ch" 'helm-command-prefix)
 (helm-mode 1)
+
+;; Automatically scale helm window to fit its contents.
 (helm-autoresize-mode t)
+
+;; Don't use helm for M-x.
+(add-to-list 'helm-completing-read-handlers-alist '(execute-extended-command . nil))
 
 
 ;;; GENERAL INTERFACE SETTINGS
