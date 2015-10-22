@@ -214,6 +214,10 @@
       ido-default-buffer-method ido-default-file-method)
 
 
+;;; Magit
+
+(global-set-key "\C-ct" 'magit-status)
+
 ;;; HELM
 
 (global-set-key "\C-ch" 'helm-command-prefix)
