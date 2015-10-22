@@ -95,8 +95,8 @@
 ;; and, in the case of GnuTLS, certificate pinning, given sufficiently
 ;; recent software versions.  These default settings should be verified on
 ;; each system where used and customized if necessary.
-(setq tls-program '("xgnutls-cli --strict-tofu -p %p %h"
-                    "xopenssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p"))
+(setq tls-program '("gnutls-cli --strict-tofu -p %p %h"
+                    "openssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p"))
 
 ;; Package archives
 (when (< emacs-major-version 24)
