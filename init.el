@@ -577,7 +577,8 @@ Recognized window header names are: 'comint, 'locals, 'registers,
                                       erc-direct-msg-face
                                       erc-dangerous-host-face
                                       erc-notice-face
-                                      erc-prompt-face))
+                                      erc-prompt-face)
+      erc-fill-column 100)
 
 ;; Enable chat logging
 (add-to-list 'erc-modules 'log)
