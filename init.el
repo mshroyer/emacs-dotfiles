@@ -224,6 +224,7 @@
 
 (global-set-key "\C-ch" 'helm-command-prefix)
 (helm-mode 1)
+(global-set-key "\C-xb" 'helm-mini)
 
 ;; Automatically scale helm window to fit its contents.
 (helm-autoresize-mode t)
