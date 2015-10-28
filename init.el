@@ -802,6 +802,13 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 ;; NASM mode...
 (add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
+(add-hook 'nasm-mode-hook
+          (lambda ()
+            (make-local-variable 'tab-stop-list)
+            (make-local-variable 'tab-always-indent)
+            (setq tab-stop-list 8
+                  tab-always-indent nil
+                  indent-tabs-mode t)))
 
 ;; Go mode...
 (when (featurep 'go-mode)
