@@ -16,3 +16,6 @@
 [submodule "submodules/emacs-async"]
 	path = submodules/emacs-async
 	url = https://github.com/jwiegley/emacs-async.git
+[submodule "submodules/nasm-mode"]
+	path = submodules/nasm-mode
+	url = https://github.com/skeeto/nasm-mode.git

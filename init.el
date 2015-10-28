@@ -118,6 +118,7 @@
                           ("emacs-async")
                           ("helm")
                           ("magit" ("lisp"))
+                          ("nasm-mode")
                           ("web-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -153,6 +154,7 @@
 (require 'async)
 (require 'helm)
 (require 'helm-config)
+(require 'nasm-mode)
 (require 'web-mode)
 (require 'magit)
 
@@ -798,15 +800,8 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
-;; ASM mode...
-(setq asm-comment-char 59)
-(add-hook 'asm-mode-hook
-          (lambda ()
-            (setq fill-prefix ";; ")
-            (setq tab-width 4)
-            (make-local-variable 'tab-stop-list)
-            (setq tab-stop-list (simple-tab-stop-list 4 75))
-            (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
+;; NASM mode...
+(add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
 
 ;; Go mode...
 (when (featurep 'go-mode)
