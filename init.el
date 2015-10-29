@@ -569,6 +569,9 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 ;; Don't show join/part messages.
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
+;; Better completion.
+(setq erc-pcomplete-nick-postfix ": ")
+
 ;; Only add ERC channels to the modeline when your nick is mentioned (taken
 ;; from http://www.emacswiki.org/emacs/ErcChannelTracking)
 (setq erc-format-query-as-channel-p t
