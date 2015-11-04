@@ -208,6 +208,9 @@
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
 
+;; Find file at point
+(global-set-key "\C-co" 'find-file-at-point)
+
 ;; ido mode for switching buffers and finding files
 (setq ido-enable-flex-matching t
       ido-max-directory-size 1000000
