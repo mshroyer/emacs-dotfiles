@@ -914,6 +914,17 @@ Recognized window header names are: 'comint, 'locals, 'registers,
             (previous-line)
             (open-line 1)))
 
+;; Gnus
+
+;; (require 'epa-file)
+;; (epa-file-enable)
+;; (setq epg-debug t)
+
+(setq mm-decrypt-option 'always)
+(setq mm-verify-option 'always)
+(setq gnus-buttonized-mime-types '("multipart/encrypted" "multipart/signed"))
+(setq mml-smime-use 'epg)
+
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
 (add-hook 'term-mode-hook #'zero-scroll-margin)
@@ -1264,7 +1275,9 @@ for example.
  '(ecb-options-version "2.40")
  '(helm-split-window-in-side-p t)
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
- '(send-mail-function (quote smtpmail-send-it)))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
