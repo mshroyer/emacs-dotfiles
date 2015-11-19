@@ -920,10 +920,13 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 ;; (epa-file-enable)
 ;; (setq epg-debug t)
 
-(setq mm-decrypt-option 'always)
-(setq mm-verify-option 'always)
-(setq gnus-buttonized-mime-types '("multipart/encrypted" "multipart/signed"))
-(setq mml-smime-use 'epg)
+(setq mm-decrypt-option 'always
+      mm-verify-option 'always
+      mml-smime-use 'epg
+      gnus-buttonized-mime-types '("multipart/encrypted" "multipart/signed")
+
+      gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil)
 
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
