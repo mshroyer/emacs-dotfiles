@@ -819,6 +819,8 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 ;; Go mode...
 (when (featurep 'go-mode)
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook #'gofmt-before-save)
   (add-hook 'go-mode-hook
             (lambda ()
               (flyspell-prog-mode))))
