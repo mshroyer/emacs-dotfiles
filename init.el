@@ -579,7 +579,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 ;; from http://www.emacswiki.org/emacs/ErcChannelTracking)
 (setq erc-format-query-as-channel-p t
       erc-track-priority-faces-only 'all
-      erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
+      ;erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
       erc-track-faces-priority-list '(erc-error-face
                                       erc-current-nick-face
                                       erc-keyword-face
@@ -590,11 +590,11 @@ Recognized window header names are: 'comint, 'locals, 'registers,
                                       erc-prompt-face)
       erc-fill-column 100)
 
-;; Enable chat logging
-(add-to-list 'erc-modules 'log)
-(setq erc-log-channels-directory "~/erclog/"
-      erc-save-buffer-on-part t
-      erc-log-insert-log-on-open nil)
+;; ;; Enable chat logging
+;; (add-to-list 'erc-modules 'log)
+;; (setq erc-log-channels-directory "~/erclog/"
+;;       erc-save-buffer-on-part t
+;;       erc-log-insert-log-on-open nil)
 
 ;; Automatically save ERC buffers when exiting Emacs
 ;; (defadvice save-buffers-kill-emacs (before save-logs (arg) activate)
