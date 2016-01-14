@@ -209,7 +209,10 @@
 (setq require-final-newline t)
 
 ;; Find file at point
-(global-set-key "\C-co" 'find-file-at-point)
+(global-set-key "\C-cof" 'find-file-at-point)
+
+;; Other file
+(global-set-key "\C-coo" 'ff-find-other-file)
 
 ;; ido mode for switching buffers and finding files
 (setq ido-enable-flex-matching t
