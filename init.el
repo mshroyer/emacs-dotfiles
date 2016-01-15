@@ -238,6 +238,7 @@
 ;; Don't use helm for M-x.
 (add-to-list 'helm-completing-read-handlers-alist '(execute-extended-command . nil))
 (add-to-list 'helm-completing-read-handlers-alist '(ff-find-other-file . nil))
+(add-to-list 'helm-completing-read-handlers-alist '(woman . nil))
 
 ;; Additional bindings.
 (global-set-key "\M-y" 'helm-show-kill-ring)
