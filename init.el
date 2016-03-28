@@ -942,6 +942,12 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 ;;; CUSTOM EXTENDED COMMANDS
 
+(defun kill-file-name ()
+  "Copies the full path of the current buffer."
+
+  (interactive)
+  (kill-new (buffer-file-name)))
+
 (defun dump-variables ()
   "Dumps values of all symbols bound within the current scope."
 
