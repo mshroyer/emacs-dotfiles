@@ -2,8 +2,8 @@
 
 all: magit helm
 
-magit:
-	cd magit && $(MAKE)
+magit: with-editor
+	cd magit && $(MAKE) lisp
 
 helm:
 	cd helm && $(MAKE)
