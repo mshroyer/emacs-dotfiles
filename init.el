@@ -117,6 +117,7 @@
                           ("expand-region")
                           ("emacs-async")
                           ("helm")
+			  ("with-editor")
                           ("magit" ("lisp"))
                           ("nasm-mode")
                           ("web-mode"))))

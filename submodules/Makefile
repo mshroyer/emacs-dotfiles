@@ -7,3 +7,6 @@ magit:
 
 helm:
 	cd helm && $(MAKE)
+
+with-editor:
+	cd with-editor && $(MAKE) lisp

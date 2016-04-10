@@ -19,3 +19,6 @@
 [submodule "submodules/nasm-mode"]
 	path = submodules/nasm-mode
 	url = https://github.com/skeeto/nasm-mode.git
+[submodule "submodules/with-editor"]
+	path = submodules/with-editor
+	url = https://github.com/magit/with-editor.git
