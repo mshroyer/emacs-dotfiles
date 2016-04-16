@@ -202,9 +202,10 @@
 
 ;; Always store backup and auto-save files under tmp
 (setq backup-directory-alist
-        `((".*" . ,(concat user-emacs-directory "backups")))
+      `((".*" . ,(concat user-emacs-directory "backups")))
+
       auto-save-file-name-transforms
-        `((".*" ,(concat user-emacs-directory "autosaves") t)))
+      `((".*" ,(concat user-emacs-directory "autosaves/") t)))
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
