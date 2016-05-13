@@ -120,6 +120,7 @@
 			  ("with-editor")
                           ("magit" ("lisp"))
                           ("nasm-mode")
+                          ("undo-tree")
                           ("web-mode"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -158,6 +159,7 @@
 (require 'nasm-mode)
 (require 'web-mode)
 (require 'magit)
+(require 'undo-tree)
 
 ;; Optional features
 
@@ -360,6 +362,9 @@
 
 
 ;;; EDITING OPTIONS
+
+;; Use undo-tree
+(global-undo-tree-mode 1)
 
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)

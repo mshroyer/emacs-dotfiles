@@ -22,3 +22,6 @@
 [submodule "submodules/with-editor"]
 	path = submodules/with-editor
 	url = https://github.com/magit/with-editor.git
+[submodule "submodules/undo-tree"]
+	path = submodules/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
