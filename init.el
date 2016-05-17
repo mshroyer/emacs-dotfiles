@@ -240,6 +240,9 @@
 ;; Automatically scale helm window to fit its contents.
 (helm-autoresize-mode t)
 
+;; Increase the width of the buffer name column.
+(setq helm-buffer-max-length 32)
+
 ;; Don't use helm for M-x.
 (add-to-list 'helm-completing-read-handlers-alist '(execute-extended-command . nil))
 (add-to-list 'helm-completing-read-handlers-alist '(ff-find-other-file . nil))
