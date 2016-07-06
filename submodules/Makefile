@@ -1,6 +1,6 @@
-.PHONY: magit helm
+.PHONY: magit helm with-editor
 
-all: magit helm
+all: magit helm with-editor
 
 magit: with-editor
 	cd magit && $(MAKE) lisp
