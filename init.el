@@ -121,7 +121,8 @@
                           ("magit" ("lisp"))
                           ("nasm-mode")
                           ("undo-tree")
-                          ("web-mode"))))
+                          ("web-mode")
+                          ("emacs-eclim"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -160,6 +161,7 @@
 (require 'web-mode)
 (require 'magit)
 (require 'undo-tree)
+(require 'eclim)
 
 ;; Optional features
 

@@ -25,3 +25,6 @@
 [submodule "submodules/undo-tree"]
 	path = submodules/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule "submodules/emacs-eclim"]
+	path = submodules/emacs-eclim
+	url = https://github.com/senny/emacs-eclim.git
