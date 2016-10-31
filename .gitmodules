@@ -28,3 +28,6 @@
 [submodule "submodules/emacs-eclim"]
 	path = submodules/emacs-eclim
 	url = https://github.com/senny/emacs-eclim.git
+[submodule "submodules/lua-mode"]
+	path = submodules/lua-mode
+	url = https://github.com/immerrr/lua-mode.git

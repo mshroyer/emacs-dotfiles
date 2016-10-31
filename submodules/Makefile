@@ -1,6 +1,6 @@
-.PHONY: magit helm with-editor
+.PHONY: magit helm with-editor lua-mode
 
-all: magit helm with-editor
+all: magit helm lua-mode
 
 magit: with-editor
 	cd magit && $(MAKE) lisp
@@ -10,3 +10,6 @@ helm:
 
 with-editor:
 	cd with-editor && $(MAKE) lisp
+
+lua-mode:
+	cd lua-mode && $(MAKE)
