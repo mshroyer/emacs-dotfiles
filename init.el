@@ -954,6 +954,22 @@ Recognized window header names are: 'comint, 'locals, 'registers,
       gnus-save-newsrc-file nil
       gnus-read-newsrc-file nil)
 
+(setq gnus-parameters
+      '((".*"
+         (gcc-self . none))))
+
+;; Copied from https://www.emacswiki.org/emacs/GnusFormatting
+(setq-default gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+              gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+              gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+              gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+              gnus-sum-thread-tree-false-root ""
+              gnus-sum-thread-tree-indent " "
+              gnus-sum-thread-tree-leaf-with-other "├► "
+              gnus-sum-thread-tree-root ""
+              gnus-sum-thread-tree-single-leaf "╰► "
+              gnus-sum-thread-tree-vertical "│")
+
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
 (add-hook 'term-mode-hook #'zero-scroll-margin)
