@@ -958,8 +958,9 @@ Recognized window header names are: 'comint, 'locals, 'registers,
       '((".*"
          (gcc-self . none))))
 
-;; Copied from https://www.emacswiki.org/emacs/GnusFormatting
-(setq-default gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+;; Inspired by https://www.emacswiki.org/emacs/GnusFormatting
+(setq-default gnus-group-line-format "%M%S%p%P%8y:%B%(%g%)\n"
+              gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
               gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
               gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
               gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
