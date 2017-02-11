@@ -122,7 +122,8 @@
                           ("nasm-mode")
                           ("undo-tree")
                           ("web-mode")
-                          ("lua-mode"))))
+                          ("lua-mode")
+                          ("slime"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -162,6 +163,7 @@
 (require 'magit)
 (require 'undo-tree)
 (require 'lua-mode)
+(require 'slime)
 
 ;; Optional features
 

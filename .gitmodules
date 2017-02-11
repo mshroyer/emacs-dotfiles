@@ -31,3 +31,6 @@
 [submodule "submodules/lua-mode"]
 	path = submodules/lua-mode
 	url = https://github.com/immerrr/lua-mode.git
+[submodule "submodules/slime"]
+	path = submodules/slime
+	url = https://github.com/slime/slime.git
