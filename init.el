@@ -866,10 +866,10 @@ Recognized window header names are: 'comint, 'locals, 'registers,
   (setq ropemacs-enable-autoimport t))
 (setq python-check-command "pyflakes")
 
-;; Slime...
+;; Lisp...
 (setq slime-contribs '(slime-fancy))
-(add-hook 'slime-repl-mode-hook (lambda ()
-                                  (paredit-mode +1)))
+(add-paredit-hook slime-repl-mode)
+(add-paredit-hook lisp-mode)
 
 ;; JavaScript mode...
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
