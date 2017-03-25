@@ -1332,13 +1332,14 @@ for example.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(helm-split-window-in-side-p t)
+ '(package-selected-packages (quote (eclim)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
- '(smtpmail-smtp-service 587 t))
+ '(smtpmail-smtp-service 587))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
