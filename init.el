@@ -474,11 +474,6 @@
 (global-set-key "\C-cf" 'auto-fill-mode)
 
 
-;;; EXTERNAL PROGRAMS
-
-(defvar ctags-program-name "ctags")
-
-
 ;;; EDIFF
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -1079,21 +1074,13 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 
 ;; Generate tags for directory with Exuberant Ctags
-(defun create-tags (dir-name)
-  "Create tags file with Exuberant Ctags."
-  (interactive "DDirectory: ")
-
-  ;; We have to manually expand the tilde for Windows...
-  (let ((dir-file (replace-regexp-in-string "^~"
-                                            (replace-regexp-in-string "\\\\"
-                                                                      "/"
-                                                                      (getenv "HOME"))
-                                            (directory-file-name dir-name))))
-    (shell-command (format "\"%s\" -f \"%s/TAGS\" -e -R \"%s\""
-                   ctags-program-name
-                   dir-file
-                   dir-file))))
-
+(defun create-tags ()
+  "Create tags file with etags."
+  (interactive)
+  (let ((etags-command (read-shell-command
+                        "Run etags (like this): "
+                        (format "cd '%s'; find . -type f -name '*.[ch]' | etags -" default-directory))))
+    (eshell-command etags-command)))
 
 (defun calendar-zone-to-tz-offset (minutes)
   "Converts minutes off from UTC into a TZ offset string
