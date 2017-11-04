@@ -34,3 +34,6 @@
 [submodule "submodules/slime"]
 	path = submodules/slime
 	url = https://github.com/slime/slime.git
+[submodule "submodules/rust-mode"]
+	path = submodules/rust-mode
+	url = https://github.com/rust-lang/rust-mode.git

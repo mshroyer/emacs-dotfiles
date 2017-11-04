@@ -123,6 +123,7 @@
                           ("undo-tree")
                           ("web-mode")
                           ("lua-mode")
+                          ("rust-mode")
                           ("slime"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
@@ -163,6 +164,7 @@
 (require 'magit)
 (require 'undo-tree)
 (require 'lua-mode)
+(require 'rust-mode)
 (require 'slime)
 
 ;; Optional features
