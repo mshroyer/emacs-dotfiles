@@ -37,3 +37,6 @@
 [submodule "submodules/rust-mode"]
 	path = submodules/rust-mode
 	url = https://github.com/rust-lang/rust-mode.git
+[submodule "submodules/tomatinho"]
+	path = submodules/tomatinho
+	url = https://github.com/konr/tomatinho.git

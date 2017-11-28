@@ -124,7 +124,8 @@
                           ("web-mode")
                           ("lua-mode")
                           ("rust-mode")
-                          ("slime"))))
+                          ("slime")
+                          ("tomatinho"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -166,6 +167,7 @@
 (require 'lua-mode)
 (require 'rust-mode)
 (require 'slime)
+(require 'tomatinho)
 
 ;; Optional features
 
