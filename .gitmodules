@@ -21,7 +21,7 @@
 	url = https://github.com/skeeto/nasm-mode.git
 [submodule "submodules/with-editor"]
 	path = submodules/with-editor
-	url = https://github.com/magit/with-editor.git
+	url = https://github.com/mshroyer/with-editor.git
 [submodule "submodules/undo-tree"]
 	path = submodules/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
