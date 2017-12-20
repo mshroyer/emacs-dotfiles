@@ -1235,6 +1235,9 @@ for example.
   (interactive)
   (scroll-down 1))
 
+(add-to-list 'custom-theme-load-path
+             (concat user-emacs-directory "submodules/replace-colorthemes"))
+
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)
   "Setup to use if running in an X window"
@@ -1321,6 +1324,10 @@ for example.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
+ '(custom-enabled-themes (quote (classic)))
+ '(custom-safe-themes
+   (quote
+    ("b8c5adfc0230bd8e8d73450c2cd4044ad7ba1d24458e37b6dec65607fc392980" default)))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)

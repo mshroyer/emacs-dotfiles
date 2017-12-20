@@ -40,3 +40,6 @@
 [submodule "submodules/tomatinho"]
 	path = submodules/tomatinho
 	url = https://github.com/konr/tomatinho.git
+[submodule "submodules/replace-colorthemes"]
+	path = submodules/replace-colorthemes
+	url = https://github.com/emacs-jp/replace-colorthemes.git
