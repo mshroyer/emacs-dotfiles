@@ -139,8 +139,10 @@
 (when (or (< emacs-major-version 24)
           (and (= emacs-major-version 24)
                (< emacs-minor-version 3)))
-  (add-to-list 'load-path (concat user-elisp-directory "/polyfill/cl-lib"))
+  (add-to-list 'load-path (concat user-elisp-directory "polyfill/cl-lib"))
   (require 'cl-lib))
+
+(add-to-list 'load-path (concat user-elisp-directory "color-theme"))
 
 
 ;;; EMACS EXTENSIONS
