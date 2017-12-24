@@ -203,13 +203,6 @@
 ;; Other file
 (global-set-key "\C-coo" 'ff-find-other-file)
 
-;; ido mode for switching buffers and finding files
-(setq ido-enable-flex-matching t
-      ido-max-directory-size 1000000
-      ido-auto-merge-work-directories-length -1
-      ido-default-file-method 'selected-window
-      ido-default-buffer-method ido-default-file-method)
-
 
 ;;; Magit
 
