@@ -5,7 +5,7 @@
 ;;; Mark Shroyer
 ;;; https://markshroyer.com/
 
-(require 'cl)
+(require 'cl-lib)
 
 ;;; LOCAL SETTINGS
 
@@ -129,9 +129,9 @@
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
-(let ((my-load-path (remove-if-not #'file-exists-p
-                                   (cons user-elisp-directory
-					 (flatten-path-tree submodules-elisp)))))
+(let ((my-load-path (cl-remove-if-not #'file-exists-p
+				      (cons user-elisp-directory
+					    (flatten-path-tree submodules-elisp)))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
