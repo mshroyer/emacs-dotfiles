@@ -1,6 +1,6 @@
 ;;; -*- Mode: Emacs-Lisp; -*-
 ;;;
-;;; My global configuration for GNU Emacs 23 and newer.
+;;; My global configuration for GNU Emacs 25.
 ;;;
 ;;; Mark Shroyer
 ;;; https://markshroyer.com/
