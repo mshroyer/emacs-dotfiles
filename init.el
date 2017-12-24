@@ -433,15 +433,6 @@
   (setq ac-auto-start nil)
   (ac-set-trigger-key "TAB"))
 
-;; Yasnippet options
-(when (featurep 'yasnippet)
-  (setq yas/prompt-functions '(yas/dropdown-prompt
-                               yas/ido-prompt
-                               yas/x-prompt
-                               yas/completing-prompt
-                               yas/no-prompt))
-  (yas/load-directory (concat user-elisp-directory "yasnippet/snippets/")))
-
 ;; Default compile command-I don't like make -k
 (setq-default compile-command "make ")
 
