@@ -1238,22 +1238,9 @@ for example.
                 (switch-to-buffer-other-frame server-buf))))
 
   ;; ...and clean up when we're done with the client.
-  (add-hook 'server-done-hook
-            (if (>= emacs-major-version 23)
-
-                ;; It seems that Emacs 23 takes care of closing the
-                ;; emacslcient frame for us, so if we're using that version
-                ;; we don't need to explicitly delete the frame; doing so
-                ;; will inadvertently delete the last used GUI emacsclient
-                ;; frame as well.
-                (lambda ()
-                  (kill-buffer nil)
-                  (redraw-display))
-
-              (lambda ()
-                (kill-buffer nil)
-                (delete-frame)
-                (redraw-display)))))
+  (add-hook 'server-done-hook (lambda ()
+                                (kill-buffer nil)
+                                (redraw-display))))
 
 
 ;;; RESTORE DESKTOP
