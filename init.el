@@ -1262,19 +1262,6 @@ for example.
                 (delete-frame)
                 (redraw-display)))))
 
-;; Chrome "Edit with Emacs" server
-;; https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
-(when (and (featurep 'edit-server)
-           (should-start-server :chrome-edit))
-
-  (edit-server-start)
-
-  ;; Enable word wrap in the edit window
-  (add-hook 'edit-server-text-mode-hook
-            (lambda ()
-              (auto-fill-mode nil)
-              (longlines-mode t))))
-
 
 ;;; RESTORE DESKTOP
 
