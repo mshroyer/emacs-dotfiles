@@ -89,8 +89,6 @@
                     "openssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p"))
 
 ;; Package archives
-(when (< emacs-major-version 24)
-  (load (concat user-elisp-directory "polyfill/package.el")))
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("marmalade" . "https://marmalade-repo.org/packages/")))
@@ -124,13 +122,6 @@
 					    (flatten-path-tree submodules-elisp)))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
-
-;; Add backported cl-lib to the load-path if we aren't on at least Emacs 24.3
-(when (or (< emacs-major-version 24)
-          (and (= emacs-major-version 24)
-               (< emacs-minor-version 3)))
-  (add-to-list 'load-path (concat user-elisp-directory "polyfill/cl-lib"))
-  (require 'cl-lib))
 
 (add-to-list 'load-path (concat user-elisp-directory "color-theme"))
 
