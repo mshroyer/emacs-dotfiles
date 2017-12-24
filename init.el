@@ -26,16 +26,6 @@
   "Return last character in str"
   (char str (- (length str) 1)))
 
-;; Generate a simple list of tab stops, 'stop-width characters in between
-;; and up to 'text-width characters long in total.
-(defun simple-tab-stop-list (stop-width text-width)
-  "Generate a simple list of tab stops"
-
-  (do ((stop stop-width (+ stop stop-width))
-        (stop-list nil))
-      ((> stop text-width) stop-list)
-    (setq stop-list (append stop-list (list stop)))))
-
 ;; Install the paredit minor mode as a hook for the given mode name, but
 ;; only if paredit is available.
 (defmacro add-paredit-hook (mode-name)
@@ -704,8 +694,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
   (add-hook 'yaml-mode-hook
             (lambda ()
               (local-set-key "\C-cn" 'new-yaml-ab-entry)
-              (make-local-variable 'tab-stop-list)
-              (setq tab-stop-list (simple-tab-stop-list 2 75)))))
+              (make-local-variable 'tab-stop-list))))
 
 ;; C mode...
 (setq-default c-block-comment-prefix "* ")
