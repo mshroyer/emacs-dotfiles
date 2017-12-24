@@ -163,12 +163,6 @@
 
 ;; Optional features
 
-;; Must be set before Evil is required, so that the tab key doesn't break
-;; in Org Mode.  See:
-;; http://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
-(setq evil-want-C-i-jump nil)
-
-(require 'evil nil t)
 (require 'color-theme nil t)
 
 
