@@ -380,7 +380,7 @@
 (setq show-trailing-whitespace t)
 
 ;; Shortcut to enable flyspell for buffer
-(global-set-key "\C-cs" 'flyspell-enable)
+(global-set-key "\C-cs" 'mshroyer-flyspell-enable)
 
 ;; Another keystroke alias for this command, which should work reliably in
 ;; the terminal.
@@ -420,7 +420,7 @@
 
 (global-set-key "\C-cu" 'calc)
 (global-set-key "\C-cm" 'mshroyer-insert-timestamp)
-(global-set-key "\C-cg" 'create-tags)
+(global-set-key "\C-cg" 'mshroyer-create-tags)
 (global-set-key "\C-cp" 'compile)
 (global-set-key "\C-cf" 'auto-fill-mode)
 
@@ -796,7 +796,7 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 (add-hook 'mail-mode-hook
           (lambda ()
             (set-fill-column 72)
-            (flyspell-enable)
+            (mshroyer-flyspell-enable)
             (search-forward "-- ")
             (previous-line)
             (open-line 1)))
@@ -811,56 +811,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
 
 ;;; CUSTOM EXTENDED COMMANDS
 
-(defun kill-file-name ()
-  "Copies the full path of the current buffer."
-
-  (interactive)
-  (kill-new (buffer-file-name)))
-
-(defun dump-variables ()
-  "Dumps values of all symbols bound within the current scope."
-
-  (let ((variables (loop for x being the symbols
-                         if (boundp x)
-                         collect (cons (symbol-name x)
-                                       (eval (car (read-from-string (symbol-name x))))))))
-    variables))
-
-(defun print-variables ()
-  "Prints values of all symbols bound within the current scope."
-
-  (interactive)
-  (loop for var in (dump-variables)
-        do (insert (format "%s = %s" (car var) (cdr var)))))
-
-
-
-;; Yoinked from http://stackoverflow.com/questions/1242352/get-font-face-under-cursor-in-emacs
-(defun what-face (pos)
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (message "Face: %s" face) (message "No face at %d" pos))))
-
-
-;; Generate tags for directory with Exuberant Ctags
-(defun create-tags ()
-  "Create tags file with etags."
-  (interactive)
-  (let ((etags-command (read-shell-command
-                        "Run etags (like this): "
-                        (format "cd '%s'; find . -type f -name '*.[ch]' | etags -" default-directory))))
-    (eshell-command etags-command)))
-
-
-;; Consolidate flyspell commands
-(defun flyspell-enable ()
-  "Enable flyspell for the current buffer"
-
-  (interactive)
-
-  (flyspell-mode 1)
-  (flyspell-buffer))
 
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)

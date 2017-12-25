@@ -140,4 +140,59 @@ for example.
     (newline)))
 
 
+;; Yoinked from http://stackoverflow.com/questions/1242352/get-font-face-under-cursor-in-emacs
+(defun mshroyer-what-face (pos)
+  "Describes the font face under the cursor"
+  
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+
+(defun mshroyer-kill-file-name ()
+  "Copies the full path of the current buffer."
+
+  (interactive)
+  (kill-new (buffer-file-name)))
+
+
+(defun mshroyer-dump-variables ()
+  "Dumps values of all symbols bound within the current scope."
+
+  (let ((variables (loop for x being the symbols
+                         if (boundp x)
+                         collect (cons (symbol-name x)
+                                       (eval (car (read-from-string (symbol-name x))))))))
+    variables))
+
+
+(defun mshroyer-print-variables ()
+  "Prints values of all symbols bound within the current scope."
+
+  (interactive)
+  (loop for var in (dump-variables)
+        do (insert (format "%s = %s" (car var) (cdr var)))))
+
+
+;; Consolidate flyspell commands
+(defun mshroyer-flyspell-enable ()
+  "Enable flyspell for the current buffer"
+
+  (interactive)
+
+  (flyspell-mode 1)
+  (flyspell-buffer))
+
+
+;; Generate tags for directory with Exuberant Ctags
+(defun mshroyer-create-tags ()
+  "Create tags file with etags."
+  (interactive)
+  (let ((etags-command (read-shell-command
+                        "Run etags (like this): "
+                        (format "cd '%s'; find . -type f -name '*.[ch]' | etags -" default-directory))))
+    (eshell-command etags-command)))
+
+
 (provide 'mshroyer-lib)
