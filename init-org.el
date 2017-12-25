@@ -3,8 +3,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key "\C-ck" 'mshroyer/org-show-unblocked-todo-tree)
-(global-set-key "\C-ci" 'mshroyer/org-show-inbox)
+(global-set-key "\C-ck" 'mshroyer-org-show-unblocked-todo-tree)
+(global-set-key "\C-ci" 'mshroyer-org-show-inbox)
 
 ;; Terminal compatibility
 
@@ -12,9 +12,9 @@
 (define-key org-mode-map "\M-[z" 'org-shifttab)
 
 ; Because we can't use C-return and C-S-return in the terminal:
-(define-key org-mode-map (kbd "C-M-j") 'mshroyer/org-insert-heading)
+(define-key org-mode-map (kbd "C-M-j") 'mshroyer-org-insert-heading)
 
-(defun mshroyer/org-insert-heading (&optional arg)
+(defun mshroyer-org-insert-heading (&optional arg)
   "Invoke desired heading function depending on parameter"
   (interactive "P")
   (if arg
@@ -63,15 +63,15 @@
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
           (org-agenda-prefix-format "")
           (org-agenda-todo-keyword-format "")
-          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
+          (org-agenda-skip-function 'mshroyer-org-skip-inactive)))
         ("d" "Non-dated action items by context" todo "TODO"
          ((org-agenda-sorting-strategy '(todo-state-up tag-up time-up))
-          (org-agenda-prefix-format "%16T: %(mshroyer/org-agenda-todo-prefix)")
+          (org-agenda-prefix-format "%16T: %(mshroyer-org-agenda-todo-prefix)")
           (org-agenda-todo-keyword-format "")
-          (org-agenda-skip-function 'mshroyer/org-skip-inactive)))
+          (org-agenda-skip-function 'mshroyer-org-skip-inactive)))
         ("p" "Project action items" todo-tree "TODO")))
 
-(defun mshroyer/org-project-for-path (path)
+(defun mshroyer-org-project-for-path (path)
   "Get a project name for the given org path
 
 Returns a project name corresponding to the given org path (as
@@ -81,12 +81,12 @@ point is not part of a project."
     (if (string= heading "Misc") nil
       heading)))
 
-(defun mshroyer/org-agenda-todo-prefix ()
+(defun mshroyer-org-agenda-todo-prefix ()
   "Generate Org agenda prefix with extra context
 
 Builds TODO item prefixes including the project name, if any, and
 any non-final tags."
-  (let ((project       (mshroyer/org-project-for-path (org-get-outline-path)))
+  (let ((project       (mshroyer-org-project-for-path (org-get-outline-path)))
         (extra-context (mapcar (lambda (tagname)
                                  (concat tagname ":"))
                                (cdr (reverse (org-get-tags))))))
@@ -96,7 +96,7 @@ any non-final tags."
                                          (list (concat "[" project "]"))))
                "")))
 
-(defun mshroyer/org-todo-active-p ()
+(defun mshroyer-org-todo-active-p ()
   "Determines whether the current todo item is active
 
 Returns non-nil if the todo item currently under the point can
@@ -134,20 +134,20 @@ it doesn't work for future timestamps on the current date."
            (not (and scheduled-time
                      (funcall time> scheduled-time (org-current-time))))))))
 
-(defun mshroyer/org-skip-inactive ()
-  "Skip function based on mshroyer/org-todo-active-p"
+(defun mshroyer-org-skip-inactive ()
+  "Skip function based on mshroyer-org-todo-active-p"
   (let ((subtree-end (save-excursion
                        (org-end-of-subtree t))))
-    (if (mshroyer/org-todo-active-p)
+    (if (mshroyer-org-todo-active-p)
         nil
       subtree-end)))
 
-(defun mshroyer/org-show-inbox ()
+(defun mshroyer-org-show-inbox ()
   "Show the Org Mode GTD inbox file"
   (interactive)
   (find-file (concat org-directory "/inbox.org")))
 
-(defun mshroyer/org-show-unblocked-todo-tree ()
+(defun mshroyer-org-show-unblocked-todo-tree ()
   "Show currently unblocked action items
 
 Builds a sparse tree which highlights only action items which are
@@ -157,7 +157,7 @@ future."
   (find-file (concat org-directory "/todo.org"))
   (org-occur (concat "^" org-outline-regexp " *" org-not-done-regexp)
              nil
-             'mshroyer/org-todo-active-p))
+             'mshroyer-org-todo-active-p))
 
 ;; Setup org capture, but only if we're using a newer version of Org Mode
 ;; that includes this feature...
