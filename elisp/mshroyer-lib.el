@@ -64,6 +64,21 @@
   (beginning-of-buffer))
 
 
+(defun mshroyer--calendar-zone-to-tz-offset (minutes)
+  "Converts minutes off from UTC into a TZ offset string
+
+Converts from a number of minutes off from UTC (as in the
+calendar-time-zone variable) to a timezone specification in the
+format returned by (format-time-string \"%z\" now).
+"
+
+  (let ((sign ""))
+    (when (< minutes 0)
+      (setq minutes (* minutes -1)
+            sign    "-"))
+    (concat sign (format "%02d%02d" (floor minutes 60) (mod minutes 60)))))
+
+
 (defun mshroyer-timestamp-string ()
   "Returns a Unix date(1)-format timestamp
 
@@ -81,22 +96,22 @@ for example.
          (str-year (format-time-string "%Y" now))
          (str-tz (if (> (length sys-tz) 0)
                      sys-tz
-                     (let ((off-tz (format-time-string "%z" now)))
-                       (cond ((equal off-tz
-                                     (calendar-zone-to-tz-offset
-                                      calendar-time-zone))
-                              calendar-standard-time-zone-name)
+                   (let ((off-tz (format-time-string "%z" now)))
+                     (cond ((equal off-tz
+                                   (mshroyer--calendar-zone-to-tz-offset
+                                    calendar-time-zone))
+                            calendar-standard-time-zone-name)
 
-                             ((equal off-tz
-                                     (calendar-zone-to-tz-offset
-                                      (+ 60 calendar-time-zone)))
-                              calendar-daylight-time-zone-name)
+                           ((equal off-tz
+                                   (mshroyer--calendar-zone-to-tz-offset
+                                    (+ 60 calendar-time-zone)))
+                            calendar-daylight-time-zone-name)
 
-                             (t
-                              nil))))))
+                           (t
+                            nil))))))
     (if str-tz
         (concat str-date " " str-time " " str-tz " " str-year)
-        (concat str-date " " str-time " " str-year))))
+      (concat str-date " " str-time " " str-year))))
 
 
 (defun mshroyer-insert-timestamp ()

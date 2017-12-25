@@ -852,20 +852,6 @@ Recognized window header names are: 'comint, 'locals, 'registers,
                         (format "cd '%s'; find . -type f -name '*.[ch]' | etags -" default-directory))))
     (eshell-command etags-command)))
 
-(defun calendar-zone-to-tz-offset (minutes)
-  "Converts minutes off from UTC into a TZ offset string
-
-Converts from a number of minutes off from UTC (as in the
-calendar-time-zone variable) to a timezone specification in the
-format returned by (format-time-string \"%z\" now).
-"
-
-  (let ((sign ""))
-    (when (< minutes 0)
-      (setq minutes (* minutes -1)
-            sign    "-"))
-    (concat sign (format "%02d%02d" (floor minutes 60) (mod minutes 60)))))
-
 
 ;; Consolidate flyspell commands
 (defun flyspell-enable ()
