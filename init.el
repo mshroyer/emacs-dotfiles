@@ -435,12 +435,6 @@
             (local-set-key (kbd "M-[") 'paredit-wrap-square)))
 
 
-;;; ECB
-
-(when (featurep 'ecb)
-  (setq ecb-tip-of-the-day nil))
-
-
 ;;; TRAMP
 
 ;; Assume SCP if no explicit method
