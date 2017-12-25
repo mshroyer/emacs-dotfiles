@@ -301,8 +301,8 @@
 (setq scroll-margin 3)
 
 ;; Custom key bindings for line scrolling without moving point
-(global-set-key (kbd "C-.") #'mshroyer/scroll-up)
-(global-set-key (kbd "C-,") #'mshroyer/scroll-down)
+(global-set-key (kbd "C-.") #'scroll-up-line)
+(global-set-key (kbd "C-,") #'scroll-down-line)
 
 ;; Allow repeated pops from the mark ring with C-u C-SPC C-SPC ...
 (setq set-mark-command-repeat-pop t)
@@ -1099,18 +1099,6 @@ for example.
 
   (flyspell-mode 1)
   (flyspell-buffer))
-
-;; Taken from: http://www.emacswiki.org/emacs/Scrolling
-;; (Emacs 23 doesn't have scroll-down-line?)
-(defun mshroyer/scroll-down ()
-  "Scroll down one line"
-  (interactive)
-  (scroll-up 1))
-
-(defun mshroyer/scroll-up ()
-  "Scroll up one line"
-  (interactive)
-  (scroll-down 1))
 
 ;; Borrowed from: http://goo.gl/Q3qpr
 (defun mrc-xwin-look (frame)
