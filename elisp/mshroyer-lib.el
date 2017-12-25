@@ -175,7 +175,6 @@ for example.
         do (insert (format "%s = %s" (car var) (cdr var)))))
 
 
-;; Consolidate flyspell commands
 (defun mshroyer-flyspell-enable ()
   "Enable flyspell for the current buffer"
 
@@ -193,6 +192,19 @@ for example.
                         "Run etags (like this): "
                         (format "cd '%s'; find . -type f -name '*.[ch]' | etags -" default-directory))))
     (eshell-command etags-command)))
+
+
+;; http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
+(defun mshroyer-toggle-current-window-dedication ()
+  "Toggle the current window's dedication state"
+
+  (interactive)
+  (let* ((window    (selected-window))
+         (dedicated (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated))
+    (message "Window %sdedicated to %s"
+             (if dedicated "no longer " "")
+             (buffer-name))))
 
 
 (provide 'mshroyer-lib)
