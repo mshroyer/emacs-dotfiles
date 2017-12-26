@@ -171,10 +171,10 @@
 
 ;; Always store backup and auto-save files under tmp
 (setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory "backups")))
+      `((".*" . ,(concat user-emacs-directory "/backups")))
 
       auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory "autosaves/") t)))
+      `((".*" ,(concat user-emacs-directory "/autosaves") t)))
 
 ;; Make sure the last line of a file ends in a carriage return
 (setq require-final-newline t)
@@ -312,7 +312,7 @@
 
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)
-(setq abbrev-file-name (concat user-emacs-directory "abbrev_defs")
+(setq abbrev-file-name (concat user-emacs-directory "/abbrev_defs")
       save-abbrevs     t)
 
 ;; expand-region
@@ -376,7 +376,7 @@
 ;; Auto complete options
 (when (featurep 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories (concat user-elisp-directory
-                                                  "auto-complete/dict"))
+                                                  "/auto-complete/dict"))
   (ac-config-default)
 
   (setq ac-auto-start nil)
