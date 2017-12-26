@@ -2,6 +2,33 @@
 ;;;
 ;;; My custom Emacs functions.
 
+(defun mshroyer--char (str i)
+  "Return character at position i in str"
+  (string-to-char (substring str i)))
+
+(defun mshroyer--last-char (str)
+  "Return last character in str"
+  (mshroyer--char str (- (length str) 1)))
+
+(defun mshroyer-flatten-path-tree (path-tree)
+  "Flatten an assoc-list tree of paths.
+Flattens an assoc-list tree of paths, such as the user-elisp
+paths used in my emacs init, depth first into a plain list of
+paths."
+  (if (null path-tree)
+      nil
+    (let* ((sub-tree  (car path-tree))
+           (this-dir  (if (eql (mshroyer--last-char (car sub-tree))
+                               (string-to-char "/"))
+                          (car sub-tree)
+                        (concat (car sub-tree) "/"))))
+      (cons this-dir
+            (append (if (not (null (cdr sub-tree)))
+                        (mapcar (lambda (sub-path)
+                                  (concat this-dir sub-path))
+                                (mshroyer-flatten-path-tree (cdr sub-tree))))
+                    (mshroyer-flatten-path-tree (cdr path-tree)))))))
+
 ;; (Inspired by http://www-cdf.fnal.gov/~sthrlnd/emacs_help.html)
 (defun mshroyer-ascii-table ()
   "Show a table of ASCII characters by decimal, hex, and octal value."

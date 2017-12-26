@@ -1,72 +1,33 @@
-;;; -*- Mode: Emacs-Lisp; -*-
-;;;
-;;; My global configuration for GNU Emacs 25.
-;;;
-;;; Mark Shroyer
-;;; https://markshroyer.com/
+;;; init.el --- mshroyer's emacs init
+
+;; Intended for use with Emacs 25 or newer.
+
+;;;; Language dependencies.
 
 (require 'cl-lib)
 
-;;; LOCAL SETTINGS
+;;;; Local settings.
 
 ;; Retrieve any local configurations from ~/.emacs.local.el, if the file
-;; exists on this system
+;; exists on this system.
 (let ((local-settings "~/.emacs.local.el"))
   (if (file-exists-p local-settings)
       (load-file local-settings)))
 
+;;;; Operating system support.
 
-;;; UTILITY FUNCTIONS
+;;; MacOS.
 
-(defun char (str i)
-  "Return character at position i in str"
-  (string-to-char (substring str i)))
+(when (eq system-type 'darwin)
+  ;; Use the Option/Alt key for Meta in Emacs.app
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'meta)
 
-(defun last-char (str)
-  "Return last character in str"
-  (char str (- (length str) 1)))
+  ;; Rig up cmd-H so that it hides the application window, rather than mark
+  ;; the current paragraph...
+  (global-set-key "\M-h" 'ns-do-hide-emacs))
 
-;; Install the paredit minor mode as a hook for the given mode name, but
-;; only if paredit is available.
-(defmacro add-paredit-hook (mode-name)
-  (let* ((hook-name (concat (symbol-name mode-name)
-                            "-hook"))
-         (hook (intern hook-name)))
-    `(if (or (featurep 'paredit) (fboundp 'paredit-mode))
-         (add-hook (quote ,hook)
-                   (lambda ()
-                     (paredit-mode t))))))
-
-;; Flattens an assoc-list tree of paths (such as the user-elisp paths)
-;; depth-first into a plain list of paths
-(defun flatten-path-tree (path-tree)
-  (if (null path-tree)
-      nil
-    (let* ((sub-tree  (car path-tree))
-           (this-dir  (if (eql (last-char (car sub-tree))
-                               (string-to-char "/"))
-                          (car sub-tree)
-                        (concat (car sub-tree) "/"))))
-      (cons this-dir
-            (append (if (not (null (cdr sub-tree)))
-                        (mapcar (lambda (sub-path)
-                                  (concat this-dir sub-path))
-                                (flatten-path-tree (cdr sub-tree))))
-                    (flatten-path-tree (cdr path-tree)))))))
-
-;; Check local-server-selection variable (possibly set in ~/.emacs.local.el)
-;; to decide whether we should run the server in question
-(defun should-start-server (server-name)
-  (and (boundp 'local-server-selection)
-       (member server-name local-server-selection)))
-
-(defun zero-scroll-margin ()
-  "Zeros the scroll margin in the current buffer"
-  (make-local-variable 'scroll-margin)
-  (setq scroll-margin 0))
-
-
-;;; SYSTEM
+;;; Windows.
 
 ;; The HOME environment variable may not necessarily be set on Windows
 ;; systems.  If it isn't already set, try to synthesize it from other
@@ -75,11 +36,15 @@
            (not (getenv "HOME")))
   (setenv "HOME" "$HOMEDRIVE$HOMEPATH" t))
 
+;;;; Dependencies.
+
 ;; User Emacs directories
-(setq user-emacs-directory "~/.emacs.d/"
-      user-elisp-directory (concat user-emacs-directory "elisp/")
+(setq user-emacs-directory "~/.emacs.d"
+      user-elisp-directory (concat user-emacs-directory "/elisp")
       generated-autoload-file (concat user-emacs-directory
 				      "loaddefs.el"))
+
+(require 'mshroyer-lib (concat user-elisp-directory "/mshroyer-lib.el"))
 
 ;; TLS program defaults that should result in validated server connections
 ;; and, in the case of GnuTLS, certificate pinning, given sufficiently
@@ -100,7 +65,7 @@
 (package-initialize)
 
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
-(setq submodules-elisp `((,(concat user-emacs-directory "submodules/")
+(setq submodules-elisp `((,(concat user-emacs-directory "/submodules")
                           ("dash")
                           ("expand-region")
                           ("emacs-async")
@@ -118,20 +83,21 @@
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
 (let ((my-load-path (cl-remove-if-not #'file-exists-p
-				      (cons user-elisp-directory
-					    (flatten-path-tree submodules-elisp)))))
+                                      (cons
+                                       user-elisp-directory
+                                       (mshroyer-flatten-path-tree submodules-elisp)))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
-(add-to-list 'load-path (concat user-elisp-directory "color-theme"))
-
-
-;;; EMACS EXTENSIONS
+(add-to-list 'load-path (concat user-elisp-directory "/color-theme"))
 
 ;; Contains autoloads processed from the user-elisp tree.
 (load generated-autoload-file)
 
-;; Required features
+;;; Required features.
+
+(require 'mshroyer-lib)
+(require 'mshroyer-gdb)
 (require 'org)
 (require 'calendar)
 (require 'diary-lib)
@@ -151,24 +117,34 @@
 (require 'rust-mode)
 (require 'slime)
 (require 'tomatinho)
-(require 'mshroyer-lib)
-(require 'mshroyer-gdb)
 
-;; Optional features
+;;; Optional features.
 
 (require 'color-theme nil t)
 
+;;; UTILITY FUNCTIONS
 
-;;; MAC OS X-SPECIFIC CONFIGURATIONS
+;; Install the paredit minor mode as a hook for the given mode name, but
+;; only if paredit is available.
+(defmacro add-paredit-hook (mode-name)
+  (let* ((hook-name (concat (symbol-name mode-name)
+                            "-hook"))
+         (hook (intern hook-name)))
+    `(if (or (featurep 'paredit) (fboundp 'paredit-mode))
+         (add-hook (quote ,hook)
+                   (lambda ()
+                     (paredit-mode t))))))
 
-(when (eq system-type 'darwin)
-  ;; Use the Option/Alt key for Meta in Emacs.app
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'meta)
+;; Check local-server-selection variable (possibly set in ~/.emacs.local.el)
+;; to decide whether we should run the server in question
+(defun should-start-server (server-name)
+  (and (boundp 'local-server-selection)
+       (member server-name local-server-selection)))
 
-  ;; Rig up cmd-H so that it hides the application window, rather than mark
-  ;; the current paragraph...
-  (global-set-key "\M-h" 'ns-do-hide-emacs))
+(defun zero-scroll-margin ()
+  "Zeros the scroll margin in the current buffer"
+  (make-local-variable 'scroll-margin)
+  (setq scroll-margin 0))
 
 
 ;;; FILE HANDLING
@@ -454,12 +430,8 @@
 
 ;;; ORG MODE / DIARY
 
-(load-file (concat user-emacs-directory "init-org.el"))
-(load-file (concat user-emacs-directory "init-diary.el"))
-
-
-;;; ERC
-(load-file (concat user-emacs-directory "init-gnus.el"))
+(load-file (concat user-emacs-directory "/init-org.el"))
+(load-file (concat user-emacs-directory "/init-diary.el"))
 
 
 ;;; EDITING MODE HOOKS AND SETTINGS
@@ -748,7 +720,7 @@
             (open-line 1)))
 
 ;; Gnus
-(load-file (concat user-emacs-directory "init-gnus.el"))
+(load-file (concat user-emacs-directory "/init-gnus.el"))
 
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
