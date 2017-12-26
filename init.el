@@ -38,12 +38,16 @@
 
 ;;;; Dependencies.
 
+;;; Load paths and package sources.
+
 ;; User Emacs directories
 (setq user-emacs-directory "~/.emacs.d"
       user-elisp-directory (concat user-emacs-directory "/elisp")
       generated-autoload-file (concat user-emacs-directory
-				      "loaddefs.el"))
+				      "/loaddefs.el"))
 
+;; Functions defined in mshroyer-lib are required for constructing the full
+;; set of load paths, so we must explicitly load it first.
 (require 'mshroyer-lib (concat user-elisp-directory "/mshroyer-lib.el"))
 
 ;; TLS program defaults that should result in validated server connections
