@@ -230,10 +230,13 @@
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode 0))
 
-;; By default, if we aren't running in a window system, turn off the menu
-;; bar.
-(when (not window-system)
-  (menu-bar-mode 0))
+;; Enable menu-bar-mode, but hide the menu bar on non-graphical frames.
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (let ((menu-bar-lines (case (framep frame)
+                                    ('t 0)
+                                    (otherwise 1))))
+              (set-frame-parameter frame 'menu-bar-lines menu-bar-lines))))
 
 ;; Use C-x w [pnfb] to navigate directionally between windows
 (global-set-key "\C-cwp" 'windmove-up)
