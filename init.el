@@ -247,6 +247,9 @@
 ;; Don't display startup message
 (setq inhibit-startup-message t)
 
+;; I don't like bells.
+(setq ring-bell-function 'ignore)
+
 ;; Get rid of the toolbar, if applicable
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode 0))
