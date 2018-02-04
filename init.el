@@ -257,11 +257,7 @@
   (let ((menu-bar-lines (if (display-graphic-p frame) 1 0)))
     (set-frame-parameter frame 'menu-bar-lines menu-bar-lines)))
 
-(add-hook 'after-make-frame-functions #'conditionally-set-menu-bar-lines)
-
-;; Also set this for the current frame, since the hook has already been
-;; invoked.
-(conditionally-set-menu-bar-lines (window-frame))
+(mshroyer-add-frame-hook #'conditionally-set-menu-bar-lines)
 
 ;; Use C-x w [pnfb] to navigate directionally between windows
 (global-set-key "\C-cwp" 'windmove-up)
