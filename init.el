@@ -47,16 +47,30 @@
 (defvar local-frame-font "Source Code Pro-10"
   "Font to be used for GUI frames.")
 
+(defvar local-color-theme 'color-theme-classic
+  "Color theme to be used for GUI frames.")
+
 ;; Retrieve any local configurations from ~/.emacs.local.el, if the file
 ;; exists on this system.
 (let ((local-settings "~/.emacs.local.el"))
   (if (file-exists-p local-settings)
       (load-file local-settings)))
 
-(mshroyer-add-frame-hook
- (lambda (frame)
-   (when (and frame (assoc 'font-backend (frame-parameters frame)))
-     (set-frame-font local-frame-font nil t))))
+;; Apply color theme on a per-frame basis.
+(set-variable 'color-theme-is-global nil)
+
+(defun local-frame-setup (frame)
+  "Apply local settings to a frame."
+  (with-selected-frame frame
+    (when (and frame (assoc 'font-backend (frame-parameters)))
+      (set-frame-font local-frame-font nil t))
+    (when (and (featurep 'color-theme)
+               (display-graphic-p)
+               (not (null local-color-theme)))
+      (color-theme-initialize)
+      (funcall local-color-theme))))
+
+(mshroyer-add-frame-hook #'local-frame-setup)
 
 ;;;; Packages.
 
@@ -746,38 +760,6 @@
 ;; Shell and Term mode...
 (add-hook 'shell-mode-hook #'zero-scroll-margin)
 (add-hook 'term-mode-hook #'zero-scroll-margin)
-
-
-;;; CUSTOM EXTENDED COMMANDS
-
-
-;; Borrowed from: http://goo.gl/Q3qpr
-(defun mrc-xwin-look (frame)
-  "Setup to use if running in an X window"
-  (when (and (featurep 'color-theme)
-             (boundp 'color-theme-local)
-             (not (null color-theme-local))
-             (window-system))
-    (color-theme-initialize)
-    (funcall color-theme-local)))
-
-(defun mrc-terminal-look (frame)
-  "Setup to use if running in a terminal")
-
-(defun mrc-setup-frame (frame)
-  (set-variable 'color-theme-is-global nil)
-  (select-frame frame)
-  (cond
-   ((window-system)
-    (mrc-xwin-look frame)
-    (tool-bar-mode -1))
-   (t (mrc-terminal-look frame))))
-
-(add-hook 'after-make-frame-functions 'mrc-setup-frame)
-
-(add-hook 'after-init-hook
-          (lambda ()
-            (mrc-setup-frame (selected-frame))))
 
 
 ;;; EDITOR SERVERS
