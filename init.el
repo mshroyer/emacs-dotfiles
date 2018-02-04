@@ -231,12 +231,18 @@
     (tool-bar-mode 0))
 
 ;; Enable menu-bar-mode, but hide the menu bar on non-graphical frames.
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (let ((menu-bar-lines (case (framep frame)
-                                    ('t 0)
-                                    (otherwise 1))))
-              (set-frame-parameter frame 'menu-bar-lines menu-bar-lines))))
+(defun conditionally-set-menu-bar-lines (frame)
+  "Set menu-bar-lines depending on whether the frame is graphical."
+  (let ((menu-bar-lines (case (framep frame)
+                          ('t 0)
+                          (otherwise 1))))
+    (set-frame-parameter frame 'menu-bar-lines menu-bar-lines)))
+
+(add-hook 'after-make-frame-functions #'conditionally-set-menu-bar-lines)
+
+;; Also set this for the current frame, since the hook has already been
+;; invoked.
+(conditionally-set-menu-bar-lines (window-frame))
 
 ;; Use C-x w [pnfb] to navigate directionally between windows
 (global-set-key "\C-cwp" 'windmove-up)
