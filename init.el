@@ -50,6 +50,9 @@
 (defvar local-color-theme 'color-theme-classic
   "Color theme to be used for GUI frames.")
 
+(defvar local-server-selection '(:emacs)
+  "Server types to be launched at emacs startup.")
+
 ;; Retrieve any local configurations from ~/.emacs.local.el, if the file
 ;; exists on this system.
 (let ((local-settings "~/.emacs.local.el"))
@@ -162,12 +165,6 @@
          (add-hook (quote ,hook)
                    (lambda ()
                      (paredit-mode t))))))
-
-;; Check local-server-selection variable (possibly set in ~/.emacs.local.el)
-;; to decide whether we should run the server in question
-(defun should-start-server (server-name)
-  (and (boundp 'local-server-selection)
-       (member server-name local-server-selection)))
 
 (defun zero-scroll-margin ()
   "Zeros the scroll margin in the current buffer"
@@ -763,6 +760,12 @@
 
 
 ;;; EDITOR SERVERS
+
+;; Check local-server-selection variable (possibly set in ~/.emacs.local.el)
+;; to decide whether we should run the server in question
+(defun should-start-server (server-name)
+  (and (boundp 'local-server-selection)
+       (member server-name local-server-selection)))
 
 ;; Builtin Emacs server
 (when (should-start-server :emacs)
