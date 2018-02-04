@@ -243,9 +243,7 @@
 ;; Enable menu-bar-mode, but hide the menu bar on non-graphical frames.
 (defun conditionally-set-menu-bar-lines (frame)
   "Set menu-bar-lines depending on whether the frame is graphical."
-  (let ((menu-bar-lines (case (framep frame)
-                          ('t 0)
-                          (otherwise 1))))
+  (let ((menu-bar-lines (if (display-graphic-p frame) 1 0)))
     (set-frame-parameter frame 'menu-bar-lines menu-bar-lines)))
 
 (add-hook 'after-make-frame-functions #'conditionally-set-menu-bar-lines)
