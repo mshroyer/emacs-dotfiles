@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+;;;
 ;;; mshroyer-lib.el
 ;;;
 ;;; My custom Emacs functions.
@@ -28,6 +30,15 @@ paths."
                                   (concat this-dir sub-path))
                                 (mshroyer-flatten-path-tree (cdr sub-tree))))
                     (mshroyer-flatten-path-tree (cdr path-tree)))))))
+
+(defun mshroyer-add-frame-hook (hook)
+  "Add a hook for all new frames, including during init.
+Adds a hook to be run for all new frames, including the initial
+frame being created during init."
+  (add-hook 'after-make-frame-functions hook)
+  (let ((frame (window-frame)))
+    (add-hook 'after-init-hook (lambda ()
+                                 (funcall hook frame)))))
 
 ;; (Inspired by http://www-cdf.fnal.gov/~sthrlnd/emacs_help.html)
 (defun mshroyer-ascii-table ()

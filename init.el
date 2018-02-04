@@ -6,14 +6,6 @@
 
 (require 'cl-lib)
 
-;;;; Local settings.
-
-;; Retrieve any local configurations from ~/.emacs.local.el, if the file
-;; exists on this system.
-(let ((local-settings "~/.emacs.local.el"))
-  (if (file-exists-p local-settings)
-      (load-file local-settings)))
-
 ;;;; Operating system support.
 
 ;;; MacOS.
@@ -49,6 +41,24 @@
 ;; Functions defined in mshroyer-lib are required for constructing the full
 ;; set of load paths, so we must explicitly load it first.
 (require 'mshroyer-lib (concat user-elisp-directory "/mshroyer-lib.el"))
+
+;;;; Local settings.
+
+(defvar local-frame-font "Source Code Pro-10"
+  "Font to be used for GUI frames.")
+
+;; Retrieve any local configurations from ~/.emacs.local.el, if the file
+;; exists on this system.
+(let ((local-settings "~/.emacs.local.el"))
+  (if (file-exists-p local-settings)
+      (load-file local-settings)))
+
+(mshroyer-add-frame-hook
+ (lambda (frame)
+   (when (and frame (assoc 'font-backend (frame-parameters frame)))
+     (set-frame-font local-frame-font nil t))))
+
+;;;; Packages.
 
 ;; TLS program defaults that should result in validated server connections
 ;; and, in the case of GnuTLS, certificate pinning, given sufficiently
