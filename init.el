@@ -465,6 +465,11 @@
 (load-file (concat user-emacs-directory "/init-diary.el"))
 
 
+;;; ERC
+
+(load-file (concat user-emacs-directory "/init-erc.el"))
+
+
 ;;; EDITING MODE HOOKS AND SETTINGS
 
 ;; Help mode...
