@@ -1,8 +1,9 @@
 (require 'erc)
+
 (add-hook 'erc-mode-hook
           (lambda ()
-            (make-local-variable 'scroll-margin)
-            (setq scroll-margin 0)))
+            (set (make-local-variable 'scroll-margin) 0)
+            (set (make-local-variable 'scroll-conservatively) 100)))
 
 ;; Keep the prompt at the bottom of the window
 (erc-scrolltobottom-mode 1)
