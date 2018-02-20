@@ -79,7 +79,8 @@
 
 ;; Package archives
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
 (package-initialize)
 
