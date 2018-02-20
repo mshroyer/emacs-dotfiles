@@ -24,7 +24,13 @@
 
   ;; Rig up cmd-H so that it hides the application window, rather than mark
   ;; the current paragraph...
-  (global-set-key "\M-h" 'ns-do-hide-emacs))
+  (global-set-key "\M-h" 'ns-do-hide-emacs)
+
+  ;; As of version 25.3, Emacs doesn't seem able to find the root
+  ;; certificate store on MacOS on its own.  This is necessary in order to
+  ;; load packages over HTTPS.
+  (require 'gnutls)
+  (add-to-list 'gnutls-trustfiles "/etc/ssl/cert.pem"))
 
 ;;; Windows.
 
