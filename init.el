@@ -77,22 +77,10 @@
 
 ;;;; Packages.
 
-;; TLS program defaults that should result in validated server connections
-;; and, in the case of GnuTLS, certificate pinning, given sufficiently
-;; recent software versions.  These default settings should be verified on
-;; each system where used and customized if necessary.
-(setq tls-program '("gnutls-cli --strict-tofu -p %p %h"
-                    "openssl s_client -no_ssl2 -verify 0 -verify_return_erro -connect %h:%p"))
-
 ;; Package archives
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
 
-;; Don't check for package signatures, since Marmalade does not currently
-;; support signed packages.  We're already protected against MITM because
-;; we access both Marmalade and ELPA over HTTPS.
-(setq package-check-signature nil)
 (package-initialize)
 
 ;; Tree(s) of paths containing submodule Emacs Lisp files.
@@ -804,8 +792,8 @@
  '(ecb-options-version "2.40")
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
- '(helm-split-window-in-side-p t)
- '(package-selected-packages (quote (eclim)))
+ '(helm-split-window-inside-p t)
+ '(package-selected-packages (quote (auctex)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
