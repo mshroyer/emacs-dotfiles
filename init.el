@@ -4,6 +4,13 @@
 
 ;;;; Language dependencies.
 
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (require 'cl-lib)
 
 ;;;; Operating system support.
@@ -77,42 +84,21 @@
 
 ;;;; Packages.
 
-;; Package archives
-(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
-
-(package-initialize)
-
-;; Tree(s) of paths containing submodule Emacs Lisp files.
-(setq submodules-elisp `((,(concat user-emacs-directory "/submodules")
-                          ("dash")
-                          ("expand-region")
-                          ("emacs-async")
-                          ("helm")
-			  ("with-editor")
-                          ("magit" ("lisp"))
-                          ("nasm-mode")
-                          ("undo-tree")
-                          ("web-mode")
-                          ("lua-mode")
-                          ("rust-mode")
-                          ("slime")
-                          ("tomatinho"))))
+;; Tree(s) of paths containing Emacs Lisp files.
+(setf elisp-tree `((,user-elisp-directory
+		    ("color-theme"))))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
 (let ((my-load-path (cl-remove-if-not #'file-exists-p
-                                      (cons
-                                       user-elisp-directory
-                                       (mshroyer-flatten-path-tree submodules-elisp)))))
+                                      (mshroyer-flatten-path-tree elisp-tree))))
   (setq load-path (append my-load-path load-path))
   (apply #'update-directory-autoloads my-load-path))
 
-(add-to-list 'load-path (concat user-elisp-directory "/color-theme"))
-
 ;; Contains autoloads processed from the user-elisp tree.
 (load generated-autoload-file)
+
+(load-file (concat user-emacs-directory "/init-packages.el"))
 
 ;;; Required features.
 
@@ -125,18 +111,6 @@
 (require 'tramp)
 (require 'google-c-style)
 (require 'sudoku)
-(require 'expand-region)
-(require 'async)
-(require 'helm)
-(require 'helm-config)
-(require 'nasm-mode)
-(require 'web-mode)
-(require 'magit)
-(require 'undo-tree)
-(require 'lua-mode)
-(require 'rust-mode)
-(require 'slime)
-(require 'tomatinho)
 
 ;;; Optional features.
 
@@ -194,41 +168,6 @@
 
 ;; Other file
 (global-set-key "\C-coo" 'ff-find-other-file)
-
-
-;;; Magit
-
-(global-set-key "\C-ct" 'magit-status)
-
-;;; HELM
-
-(global-set-key "\C-ch" 'helm-command-prefix)
-(helm-mode 1)
-(global-set-key "\C-xb" 'helm-mini)
-(global-set-key "\C-x\C-f" 'helm-find-files)
-
-;; Automatically scale helm window to fit its contents.
-(helm-autoresize-mode t)
-
-;; Increase the width of the buffer name column.
-(setq helm-buffer-max-length 32)
-
-;; Don't use helm for M-x.
-(add-to-list 'helm-completing-read-handlers-alist '(execute-extended-command . nil))
-(add-to-list 'helm-completing-read-handlers-alist '(ff-find-other-file . nil))
-(add-to-list 'helm-completing-read-handlers-alist '(woman . nil))
-
-;; Additional bindings.
-(global-set-key "\M-y" 'helm-show-kill-ring)
-(setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match t)
-
-;; Show helm at the bottom of the frame
-(add-to-list 'display-buffer-alist
-             `(,(rx bos "*helm" (* not-newline) "*" eos)
-               (display-buffer-in-side-window)
-               (inhibit-same-window . t)
-               (window-height . 0.4)))
 
 
 ;;; GENERAL INTERFACE SETTINGS
@@ -323,16 +262,10 @@
 
 ;;; EDITING OPTIONS
 
-;; Use undo-tree
-(global-undo-tree-mode 1)
-
 ;; Text mode abbreviations
 (setq-default abbrev-mode t)
 (setq abbrev-file-name (concat user-emacs-directory "/abbrev_defs")
       save-abbrevs     t)
-
-;; expand-region
-(global-set-key "\C-c=" 'er/expand-region)
 
 ;; Quick entry for commonly used symbols
 (defconst specialchar-en-dash #x2013)
@@ -630,16 +563,6 @@
             (make-local-variable 'scroll-margin)
             (setq scroll-margin 0)))
 
-;; NASM mode...
-(add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
-(add-hook 'nasm-mode-hook
-          (lambda ()
-            (make-local-variable 'tab-stop-list)
-            (make-local-variable 'tab-always-indent)
-            (setq tab-stop-list 8
-                  tab-always-indent nil
-                  indent-tabs-mode t)))
-
 ;; Go mode...
 (when (featurep 'go-mode)
   (setq gofmt-command "goimports")
@@ -794,7 +717,9 @@
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(helm-split-window-inside-p t)
- '(package-selected-packages (quote (auctex)))
+ '(package-selected-packages
+   (quote
+    (expand-region helm lua-mode nasm-mode undo-tree web-mode magit auctex)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
