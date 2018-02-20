@@ -719,7 +719,7 @@
  '(helm-split-window-inside-p t)
  '(package-selected-packages
    (quote
-    (expand-region helm lua-mode nasm-mode undo-tree web-mode magit auctex)))
+    (markdown-mode expand-region helm lua-mode nasm-mode undo-tree web-mode magit auctex)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
