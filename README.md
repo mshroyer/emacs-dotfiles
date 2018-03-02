@@ -25,36 +25,14 @@ HOMEPATH variables, but I don't know how reliable this method is.
 External Dependencies
 ---------------------
 
-There are several optional, third-party Emacs extensions that I use on my
-main computer, but which are not included directly in this repository
-because I want to keep down the repository's size for computers where these
-extensions are not necessary, and also so that I can keep these externals
-up to date with their latest upstream versions.
+External dependencies are installed from the ELPA and MELPA Stable
+repositories, and are managed using the selected packages mechanism.  When
+setting up this configuration on a new machine, install these dependencies
+by running:
 
-The Perl 5 script `externals.pl` in the `bin/` subdirectory can be used to
-selectively install these optional externals, as well as to update all
-presently installed such externals.  (Unfortunately I couldn't just use git
-submodules here because many of these external features are stored in other
-version control systems.)  To install externals, change to your newly
-checked-out `~/.emacs.d` directory and run the script with the `checkout`
-command:
+    M-x package-install-selected-packages
 
-    $ cd ~/.emacs.d
-    $ bin/externals.pl checkout
-
-And then follow the directions on the screen.  Update installed externals
-as follows:
-
-    $ cd ~/.emacs.d
-    $ bin/externals.pl update
-
-**Note:** I've found that CVSNT badly mangles the line endings of checkouts
-from the SLIME CVS repository, resulting in the checked out Emacs Lisp
-sources being saved in a line ending mode conflicting with the file mode
-specified in `slime.el`'s file variables and thereby causing errors in the
-Emacs startup script.  For this reason, I recommend running this script
-from within Cygwin if you're running Windows, at least as far as CVS is
-concerned.
+Then restart Emacs.
 
 
 Local Customizations
@@ -85,13 +63,7 @@ prove useful:
 
 ### Specify edit servers to run ###
 
-    (setq local-server-selection '(:emacs :chrome-edit))
-
-### Spell checker ###
-
-    (setq ispell-program-name "C:/cygwin/bin/aspell.exe"
-	  ispell-list-command "list"
-	  ispell-extra-args '("--sug-mode=ultra"))
+    (setq local-server-selection '(:emacs))
 
 ### PostScript printing on Windows ###
 
@@ -111,15 +83,9 @@ Adjust `ps-lpr-command` for your machine's `gswin32c.exe` executable path.
 	  calendar-standard-time-zone-name "EST"
 	  calendar-daylight-time-zone-name "EDT")
 
-### Emacs frame styling ###
-
-    (setq default-frame-alist '((width . 90)
-				(height . 46)
-				(font . "Consolas-10.5")))
-
 ### Enable a color theme ###
 
-    (setq color-theme-local 'color-theme-classic)
+    (setq local-color-theme 'color-theme-classic)
 
 ### M-x sudoku skill level ###
 
