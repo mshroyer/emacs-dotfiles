@@ -4,6 +4,8 @@
 ;;;
 ;;; My custom Emacs functions.
 
+(require 'cl-lib)
+
 (defun mshroyer--char (str i)
   "Return character at position i in str"
   (string-to-char (substring str i)))
@@ -99,57 +101,12 @@ frame being created during init."
               (setq char (cdr (car special-chars))))
           (insert (format (concat line char "\n") i i i i))
           (setq i (+ i 1))))))
-  (beginning-of-buffer))
-
-
-(defun mshroyer--calendar-zone-to-tz-offset (minutes)
-  "Converts minutes off from UTC into a TZ offset string
-
-Converts from a number of minutes off from UTC (as in the
-calendar-time-zone variable) to a timezone specification in the
-format returned by (format-time-string \"%z\" now).
-"
-
-  (let ((sign ""))
-    (when (< minutes 0)
-      (setq minutes (* minutes -1)
-            sign    "-"))
-    (concat sign (format "%02d%02d" (floor minutes 60) (mod minutes 60)))))
+  (goto-char (point-min)))
 
 
 (defun mshroyer-timestamp-string ()
-  "Returns a Unix date(1)-format timestamp
-
-Will try figure out the timezone name from your
-calendar-standard-time-zone-name and
-calendar-daylight-time-zone-name variables if the system doesn't
-return a time zone name -- as with NT Emacs as of version 23.2,
-for example.
-"
-
-  (let* ((now (current-time))
-         (str-date (format-time-string "%a %b %e" now))
-         (str-time (format-time-string "%H:%M:%S" now))
-         (sys-tz   (format-time-string "%Z" now))
-         (str-year (format-time-string "%Y" now))
-         (str-tz (if (> (length sys-tz) 0)
-                     sys-tz
-                   (let ((off-tz (format-time-string "%z" now)))
-                     (cond ((equal off-tz
-                                   (mshroyer--calendar-zone-to-tz-offset
-                                    calendar-time-zone))
-                            calendar-standard-time-zone-name)
-
-                           ((equal off-tz
-                                   (mshroyer--calendar-zone-to-tz-offset
-                                    (+ 60 calendar-time-zone)))
-                            calendar-daylight-time-zone-name)
-
-                           (t
-                            nil))))))
-    (if str-tz
-        (concat str-date " " str-time " " str-tz " " str-year)
-      (concat str-date " " str-time " " str-year))))
+  "Returns a Unix date(1)-format timestamp"
+  (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
 
 
 (defun mshroyer-insert-timestamp ()
@@ -164,17 +121,17 @@ for example.
   "Make a new journal entry with a Unix `date`-style timestamp"
 
   (interactive)
-  (end-of-buffer)
+  (goto-char (point-max))
   (if (re-search-backward "[^ \t\n]" nil t)
       (progn
         (end-of-line)
         (let ((beg (point)))
-          (end-of-buffer)
+          (goto-char (point-max))
           (delete-region beg (point)))
-        (dotimes (i 3)
+        (dotimes (_ 3)
           (newline))))
   (insert (mshroyer-timestamp-string))
-  (dotimes (i 2)
+  (dotimes (_ 2)
     (newline)))
 
 
@@ -198,10 +155,10 @@ for example.
 (defun mshroyer-dump-variables ()
   "Dumps values of all symbols bound within the current scope."
 
-  (let ((variables (loop for x being the symbols
-                         if (boundp x)
-                         collect (cons (symbol-name x)
-                                       (eval (car (read-from-string (symbol-name x))))))))
+  (let ((variables (cl-loop for x being the symbols
+                            if (boundp x)
+                            collect (cons (symbol-name x)
+                                          (eval (car (read-from-string (symbol-name x))))))))
     variables))
 
 
@@ -209,8 +166,8 @@ for example.
   "Prints values of all symbols bound within the current scope."
 
   (interactive)
-  (loop for var in (dump-variables)
-        do (insert (format "%s = %s" (car var) (cdr var)))))
+  (cl-loop for var in (mshroyer-dump-variables)
+           do (insert (format "%s = %s" (car var) (cdr var)))))
 
 
 (defun mshroyer-flyspell-enable ()
