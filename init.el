@@ -109,7 +109,6 @@
 ;;; Required features.
 
 (require 'mshroyer-lib)
-(require 'mshroyer-gdb)
 (require 'org)
 (require 'calendar)
 (require 'diary-lib)
