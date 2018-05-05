@@ -39,24 +39,34 @@
                  (inhibit-same-window . t)
                  (window-height . 0.4))))
 
-(when (require 'magit nil t)
-  (global-set-key "\C-ct" 'magit-status))
+(when (featurep 'use-package)
 
-(when (require 'undo-tree nil t)
-  (global-undo-tree-mode 1))
+  (use-package magit
+    :ensure t
+    :bind ("C-c t" . magit-status))
 
-(when (require 'expand-region nil t)
-  (global-set-key "\C-c=" 'er/expand-region))
+  (use-package undo-tree
+    :ensure t
+    :config
+    (global-undo-tree-mode 1))
 
-(when (require 'nasm-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
-  (add-hook 'nasm-mode-hook
-            (lambda ()
-              (make-local-variable 'tab-stop-list)
-              (make-local-variable 'tab-always-indent)
-              (setq tab-stop-list 8
-                    tab-always-indent nil
-                    indent-tabs-mode t))))
+  (use-package expand-region
+    :ensure t
+    :bind ("C-c =" . er/expand-region))
 
-(require 'lua-mode nil t)
-(require 'web-mode nil t)
+  (use-package nasm-mode
+    :ensure t
+    :init
+    (add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
+    (add-hook 'nasm-mode-hook (lambda ()
+				(make-local-variable 'tab-stop-list)
+				(make-local-variable 'tab-always-indent)
+				(setq tab-stop-list 8
+				      tab-always-indent nil
+				      indent-tabs-mode t))))
+
+  (use-package lua-mode
+    :ensure t)
+
+  (use-package web-mode
+    :ensure t))
