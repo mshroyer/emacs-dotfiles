@@ -64,4 +64,7 @@
     :ensure t)
 
   (use-package web-mode
+    :ensure t)
+
+  (use-package elpy
     :ensure t))

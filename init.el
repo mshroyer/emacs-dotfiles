@@ -722,9 +722,7 @@
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(helm-split-window-inside-p t)
- '(package-selected-packages
-   (quote
-    (use-package)))
+ '(package-selected-packages (quote (use-package)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
