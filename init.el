@@ -733,4 +733,5 @@
  ;; If there is more than one, they won't work right.
  '(fixed-pitch ((t (:inherit nil))))
  '(isearch ((t (:background "pale violet red" :foreground "white"))))
+ '(markdown-code-face ((t (:inherit fixed-pitch))))
  '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
