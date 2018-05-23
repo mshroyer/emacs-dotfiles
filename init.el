@@ -715,6 +715,9 @@
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(helm-split-window-inside-p t)
