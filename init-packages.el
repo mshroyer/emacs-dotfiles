@@ -66,6 +66,9 @@
   (use-package web-mode
     :ensure t)
 
+  (use-package markdown-mode
+    :ensure t)
+
   (use-package elpy
     :ensure t
     :config
