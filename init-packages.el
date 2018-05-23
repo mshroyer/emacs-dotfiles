@@ -67,4 +67,6 @@
     :ensure t)
 
   (use-package elpy
-    :ensure t))
+    :ensure t
+    :config
+    (elpy-enable)))
