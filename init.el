@@ -586,10 +586,6 @@
             (make-local-variable 'scroll-margin)
             (setq scroll-margin         0
                   comint-process-echoes t)))
-(when (featurep 'pymacs)
-  (pymacs-load "ropemacs" "rope-")
-  (setq ropemacs-enable-autoimport t))
-(setq python-check-command "pyflakes")
 
 ;; Lisp...
 (setq slime-contribs '(slime-fancy))
