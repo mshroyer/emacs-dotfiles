@@ -720,6 +720,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
+ '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
  '(package-selected-packages (quote (use-package)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))

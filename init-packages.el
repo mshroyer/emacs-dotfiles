@@ -77,4 +77,7 @@
   (use-package elpy
     :ensure t
     :config
-    (elpy-enable)))
+    (elpy-enable))
+
+  (use-package go-mode
+    :ensure t))
