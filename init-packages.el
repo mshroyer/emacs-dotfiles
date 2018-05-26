@@ -10,8 +10,12 @@
 (package-initialize)
 
 (when (featurep 'use-package)
+  (use-package diminish
+    :ensure t)
+
   (use-package helm
     :ensure t
+    :diminish helm-mode
     :bind (("C-c h" . helm-command-prefix)
            ("C-x b" . helm-mini)
            ("C-x C-f" . helm-find-files)
@@ -42,6 +46,7 @@
 
   (use-package undo-tree
     :ensure t
+    :diminish undo-tree-mode
     :config
     (global-undo-tree-mode 1))
 
