@@ -60,9 +60,6 @@
 (defvar local-frame-font "Source Code Pro-10"
   "Font to be used for GUI frames.")
 
-(defvar local-color-theme 'color-theme-classic
-  "Color theme to be used for GUI frames.")
-
 (defvar local-server-selection '(:emacs)
   "Server types to be launched at emacs startup.")
 
@@ -72,27 +69,17 @@
   (if (file-exists-p local-settings)
       (load-file local-settings)))
 
-;; Apply color theme on a per-frame basis.
-(set-variable 'color-theme-is-global nil)
-
 (defun local-frame-setup (frame)
   "Apply local settings to a frame."
   (with-selected-frame frame
     (when (and frame (assoc 'font-backend (frame-parameters)))
-      (set-frame-font local-frame-font nil t))
-    (when (and (featurep 'color-theme)
-               (display-graphic-p)
-               (not (null local-color-theme)))
-      (color-theme-initialize)
-      (funcall local-color-theme))))
+      (set-frame-font local-frame-font nil t))))
 
 (mshroyer-add-frame-hook #'local-frame-setup)
 
 ;;;; Packages.
 
-;; Tree(s) of paths containing Emacs Lisp files.
-(setf elisp-tree `((,user-elisp-directory
-		    ("color-theme"))))
+(setf elisp-tree `((,user-elisp-directory)))
 
 ;; Prepend user elisp directories to the elisp load path.  Then, prepare
 ;; any autoloads contained in our user load paths.
@@ -116,10 +103,6 @@
 (require 'tramp)
 (require 'google-c-style)
 (require 'sudoku)
-
-;;; Optional features.
-
-(require 'color-theme nil t)
 
 ;;; UTILITY FUNCTIONS
 
