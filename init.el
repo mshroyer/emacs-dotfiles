@@ -575,6 +575,12 @@
 (add-to-list 'python-shell-completion-native-disabled-interpreters
              "jupyter")
 
+;; Sh mode...
+(setf sh-basic-offset 8)
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (setf indent-tabs-mode t)))
+
 ;; Lisp...
 (setq slime-contribs '(slime-fancy))
 (add-paredit-hook slime-repl-mode)
@@ -701,13 +707,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes (quote (wombat)))
+ '(custom-safe-themes
+   (quote
+    ("b8c5adfc0230bd8e8d73450c2cd4044ad7ba1d24458e37b6dec65607fc392980" default)))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
