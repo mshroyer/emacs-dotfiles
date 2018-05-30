@@ -718,6 +718,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
+ '(custom-enabled-themes (quote (wombat)))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
  '(elpy-modules
