@@ -572,8 +572,9 @@
 (setf python-shell-interpreter "jupyter"
       python-shell-interpreter-args "console --simple-prompt"
       python-shell-prompt-detect-failure-warning nil)
-(add-to-list 'python-shell-completion-native-disabled-interpreters
-             "jupyter")
+(when (featurep 'python)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+               "jupyter"))
 
 ;; Sh mode...
 (setf sh-basic-offset 8)
@@ -718,7 +719,7 @@
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
