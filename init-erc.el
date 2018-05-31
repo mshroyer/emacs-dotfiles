@@ -8,17 +8,15 @@
 ;; Keep the prompt at the bottom of the window
 (erc-scrolltobottom-mode 1)
 
-;; Don't show join/part messages.
-(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-
 ;; Better completion.
-(setq erc-pcomplete-nick-postfix ": ")
+(setf erc-pcomplete-nick-postfix ": ")
 
 ;; Only add ERC channels to the modeline when your nick is mentioned (taken
 ;; from http://www.emacswiki.org/emacs/ErcChannelTracking)
-(setq erc-format-query-as-channel-p t
+(setf erc-format-query-as-channel-p t
+      erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
       erc-track-priority-faces-only 'all
-      ;erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
+      erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
       erc-track-faces-priority-list '(erc-error-face
                                       erc-current-nick-face
                                       erc-keyword-face
