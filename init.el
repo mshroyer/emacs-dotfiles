@@ -572,8 +572,9 @@
 (setf python-shell-interpreter "jupyter"
       python-shell-interpreter-args "console --simple-prompt"
       python-shell-prompt-detect-failure-warning nil)
-(add-to-list 'python-shell-completion-native-disabled-interpreters
-             "jupyter")
+(when (featurep 'python)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+               "jupyter"))
 
 ;; Sh mode...
 (setf sh-basic-offset 8)
