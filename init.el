@@ -709,6 +709,9 @@
  '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(compilation-error-regexp-alist
+   (quote
+    (google3-build-log-parser-info google3-build-log-parser-warning google3-build-log-parser-error google3-build-log-parser-python-traceback google-blaze-error google-log-error google-log-warning google-log-info google-log-fatal-message google-forge-python gunit-stack-trace absoft ada aix ant bash borland python-tracebacks-and-caml cmake cmake-info comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line clang-include clang-include gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line)))
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
@@ -718,7 +721,7 @@
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
