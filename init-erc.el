@@ -25,7 +25,7 @@
                                       erc-dangerous-host-face
                                       erc-notice-face
                                       erc-prompt-face)
-      erc-fill-column 100)
+      erc-fill-column 90)
 
 ;; ;; Enable chat logging
 ;; (add-to-list 'erc-modules 'log)
