@@ -13,9 +13,7 @@
 
 ;; Only add ERC channels to the modeline when your nick is mentioned (taken
 ;; from http://www.emacswiki.org/emacs/ErcChannelTracking)
-(setf erc-format-query-as-channel-p t
-      erc-hide-list '()
-      erc-track-priority-faces-only 'all
+(setf erc-track-priority-faces-only 'all
       erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
       erc-track-faces-priority-list '(erc-error-face
                                       erc-current-nick-face
@@ -23,7 +21,6 @@
                                       erc-nick-msg-face
                                       erc-direct-msg-face
                                       erc-dangerous-host-face
-                                      erc-notice-face
                                       erc-prompt-face)
       erc-fill-column 90)
 
