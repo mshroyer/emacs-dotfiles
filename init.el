@@ -563,7 +563,8 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (abbrev-mode 0)
-            (setq show-trailing-whitespace t)))
+            (setq show-trailing-whitespace t)
+            (local-set-key (kbd "C-c b") #'python-shell-send-buffer)))
 (add-hook 'inferior-python-mode-hook
           (lambda ()
             (make-local-variable 'scroll-margin)
