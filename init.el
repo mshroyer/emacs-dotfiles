@@ -721,7 +721,7 @@
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(global-mark-ring-max 8)
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
@@ -745,4 +745,6 @@
  '(fixed-pitch ((t (:inherit nil))))
  '(isearch ((t (:background "pale violet red" :foreground "white"))))
  '(markdown-code-face ((t (:inherit fixed-pitch))))
+ '(org-level-1 ((t (:inherit outline-1 :foreground "yellow green"))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "LightGoldenrod1"))))
  '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
