@@ -9,7 +9,7 @@
 
 (package-initialize)
 
-(when (featurep 'use-package)
+(when (require 'use-package nil t)
   (use-package diminish
     :ensure t)
 
