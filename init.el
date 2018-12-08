@@ -105,6 +105,9 @@
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
+ '(package-selected-packages
+   (quote
+    (use-package go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")

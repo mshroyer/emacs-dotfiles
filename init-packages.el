@@ -9,8 +9,6 @@
 
 (package-initialize)
 
-(add-to-list 'package-selected-packages 'use-package)
-
 (defmacro ensure-package (name &rest args)
   "Use the package and ensure it is installed.
 
