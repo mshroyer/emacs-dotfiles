@@ -9,12 +9,31 @@
 
 (package-initialize)
 
-(when (require 'use-package nil t)
-  (use-package diminish
-    :ensure t)
+(add-to-list 'package-selected-packages 'use-package)
 
-  (use-package helm
-    :ensure t
+(defmacro ensure-package (name &rest args)
+  "Use the package and ensure it is installed.
+
+This macro wraps `use-package` to ensure the given package is
+installed, and also that it is included in
+`package-selected-packages` so that it will not be removed by
+`package-autoremove`.
+
+In theory, use-package should make sure ensured packages get
+added to package-selected-packages automatically. However, this
+doesn't work out with Emacs 26.1 and use-package 2.4. This may be
+https://github.com/jwiegley/use-package/issues/327, but I didn't
+dig too deeply.
+
+So I'll just keep using this macro for now. It's cool."
+  (macroexp-progn
+   `((use-package ,name :ensure t ,@args)
+     (add-to-list 'package-selected-packages ',name))))
+
+(when (require 'use-package nil t)
+  (ensure-package diminish)
+
+  (ensure-package helm
     :diminish helm-mode
     :bind (("C-c h" . helm-command-prefix)
            ("C-x b" . helm-mini)
@@ -40,22 +59,18 @@
                    (inhibit-same-window . t)
                  (window-height . 0.4))))
 
-  (use-package magit
-    :ensure t
+  (ensure-package magit
     :bind ("C-c t" . magit-status))
 
-  (use-package undo-tree
-    :ensure t
+  (ensure-package undo-tree
     :diminish undo-tree-mode
     :config
     (global-undo-tree-mode 1))
 
-  (use-package expand-region
-    :ensure t
+  (ensure-package expand-region
     :bind ("C-c =" . er/expand-region))
 
-  (use-package nasm-mode
-    :ensure t
+  (ensure-package nasm-mode
     :init
     (add-to-list 'auto-mode-alist '("\\.\\(asm\\|s\\)$" . nasm-mode))
     (add-hook 'nasm-mode-hook (lambda ()
@@ -65,19 +80,14 @@
 				      tab-always-indent nil
 				      indent-tabs-mode t))))
 
-  (use-package lua-mode
-    :ensure t)
+  (ensure-package lua-mode)
 
-  (use-package web-mode
-    :ensure t)
+  (ensure-package web-mode)
 
-  (use-package markdown-mode
-    :ensure t)
+  (ensure-package markdown-mode)
 
-  (use-package elpy
-    :ensure t
+  (ensure-package elpy
     :config
     (elpy-enable))
 
-  (use-package go-mode
-    :ensure t))
+  (ensure-package go-mode))

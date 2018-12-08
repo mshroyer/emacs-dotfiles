@@ -77,6 +77,57 @@
 
 (mshroyer-add-frame-hook #'local-frame-setup)
 
+;;;; Custom variables.
+
+;; Custom variables from the Emacs configuration editor
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(compilation-error-regexp-alist
+   (quote
+    (google3-build-log-parser-info google3-build-log-parser-warning google3-build-log-parser-error google3-build-log-parser-python-traceback google-blaze-error google-log-error google-log-warning google-log-info google-log-fatal-message google-forge-python gunit-stack-trace absoft ada aix ant bash borland python-tracebacks-and-caml cmake cmake-info comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line clang-include clang-include gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line)))
+ '(custom-enabled-themes (quote (wombat)))
+ '(custom-safe-themes
+   (quote
+    ("b8c5adfc0230bd8e8d73450c2cd4044ad7ba1d24458e37b6dec65607fc392980" default)))
+ '(ecb-layout-window-sizes nil)
+ '(ecb-options-version "2.40")
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
+ '(global-mark-ring-max 8)
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
+ '(gnus-treat-display-smileys nil)
+ '(gofmt-command "~/go/bin/goimports")
+ '(helm-split-window-inside-p t)
+ '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ediff-even-diff-A ((t (:background "dim gray"))))
+ '(ediff-even-diff-Ancestor ((t (:background "dim gray"))))
+ '(ediff-even-diff-B ((t (:background "dim gray"))))
+ '(ediff-even-diff-C ((t (:background "dim gray"))))
+ '(ediff-odd-diff-A ((t (:background "dim gray"))))
+ '(ediff-odd-diff-B ((t (:background "dim gray"))))
+ '(ediff-odd-diff-C ((t (:background "dim gray"))))
+ '(fixed-pitch ((t (:inherit nil))))
+ '(isearch ((t (:background "pale violet red" :foreground "white"))))
+ '(markdown-code-face ((t (:inherit fixed-pitch))))
+ '(org-level-1 ((t (:inherit outline-1 :foreground "yellow green"))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "LightGoldenrod1"))))
+ '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
+
 ;;;; Packages.
 
 (setf elisp-tree `((,user-elisp-directory)))
@@ -697,54 +748,3 @@
 ;;; RESTORE DESKTOP
 
 ;(desktop-save-mode 1)
-
-
-;; Custom variables from the Emacs configuration editor
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(LaTeX-verbatim-environments (quote ("verbatim" "verbatim*" "Verbatim")))
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(compilation-error-regexp-alist
-   (quote
-    (google3-build-log-parser-info google3-build-log-parser-warning google3-build-log-parser-error google3-build-log-parser-python-traceback google-blaze-error google-log-error google-log-warning google-log-info google-log-fatal-message google-forge-python gunit-stack-trace absoft ada aix ant bash borland python-tracebacks-and-caml cmake cmake-info comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line clang-include clang-include gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line)))
- '(custom-enabled-themes (quote (wombat)))
- '(custom-safe-themes
-   (quote
-    ("b8c5adfc0230bd8e8d73450c2cd4044ad7ba1d24458e37b6dec65607fc392980" default)))
- '(ecb-layout-window-sizes nil)
- '(ecb-options-version "2.40")
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
- '(global-mark-ring-max 8)
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
- '(gnus-treat-display-smileys nil)
- '(gofmt-command "~/go/bin/goimports")
- '(helm-split-window-inside-p t)
- '(package-selected-packages (quote (use-package)))
- '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
- '(send-mail-function (quote smtpmail-send-it))
- '(smtpmail-smtp-server "smtp.gmail.com")
- '(smtpmail-smtp-service 587))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ediff-even-diff-A ((t (:background "dim gray"))))
- '(ediff-even-diff-Ancestor ((t (:background "dim gray"))))
- '(ediff-even-diff-B ((t (:background "dim gray"))))
- '(ediff-even-diff-C ((t (:background "dim gray"))))
- '(ediff-odd-diff-A ((t (:background "dim gray"))))
- '(ediff-odd-diff-B ((t (:background "dim gray"))))
- '(ediff-odd-diff-C ((t (:background "dim gray"))))
- '(fixed-pitch ((t (:inherit nil))))
- '(isearch ((t (:background "pale violet red" :foreground "white"))))
- '(markdown-code-face ((t (:inherit fixed-pitch))))
- '(org-level-1 ((t (:inherit outline-1 :foreground "yellow green"))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "LightGoldenrod1"))))
- '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
