@@ -105,9 +105,10 @@
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
+ '(mark-ring-max 8)
  '(package-selected-packages
    (quote
-    (use-package go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish)))
+    (go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish use-package cider)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
@@ -427,6 +428,12 @@
 
 (load-file (concat user-emacs-directory "/init-org.el"))
 (load-file (concat user-emacs-directory "/init-diary.el"))
+
+;; Override org-mode keybindings so M-h still hides emacs on macOS.
+(when (eq system-type 'darwin)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (local-set-key "\M-h" 'ns-do-hide-emacs))))
 
 
 ;;; ERC
