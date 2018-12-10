@@ -435,6 +435,8 @@
             (lambda ()
               (local-set-key "\M-h" 'ns-do-hide-emacs))))
 
+(setf org-checkbox-hierarchical-statistics nil)
+
 
 ;;; ERC
 
