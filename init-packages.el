@@ -88,4 +88,6 @@ So I'll just keep using this macro for now. It's cool."
     :config
     (elpy-enable))
 
-  (ensure-package go-mode))
+  (ensure-package go-mode)
+
+  (ensure-package auctex))

@@ -101,14 +101,14 @@
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(global-mark-ring-max 8)
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
  '(mark-ring-max 8)
  '(package-selected-packages
    (quote
-    (go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish use-package cider)))
+    (auctex go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish use-package cider)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
