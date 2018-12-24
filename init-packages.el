@@ -57,6 +57,9 @@ So I'll just keep using this macro for now. It's cool."
                    (inhibit-same-window . t)
                  (window-height . 0.4))))
 
+  (ensure-package helm-org-rifle
+                  :bind ("C-c f" . helm-org-rifle))
+
   (ensure-package magit
     :bind ("C-c t" . magit-status))
 
