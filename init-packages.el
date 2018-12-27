@@ -92,4 +92,7 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package go-mode)
 
-  (ensure-package auctex))
+  ;; AucTeX doesn't provide its package name.
+  (use-package tex
+    :ensure auctex)
+  (add-to-list 'package-selected-packages 'auctex))
