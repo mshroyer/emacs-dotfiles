@@ -433,7 +433,8 @@
 (when (eq system-type 'darwin)
   (add-hook 'org-mode-hook
             (lambda ()
-              (local-set-key "\M-h" 'ns-do-hide-emacs))))
+              (local-set-key (kbd "M-h") 'ns-do-hide-emacs)
+              (local-set-key (kbd "C-c f") 'helm-org-rifle))))
 
 (setf org-checkbox-hierarchical-statistics nil)
 
