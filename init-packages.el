@@ -92,6 +92,10 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package go-mode)
 
+  (ensure-package rust-mode)
+
+  (ensure-package tuareg)
+
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
