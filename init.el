@@ -336,7 +336,7 @@
 (setq tab-always-indent 'complete)
 
 ;; Always use auto-fill in text mode; wrap to 75 characters by default
-(setq-default fill-column 75)
+(setq-default fill-column 78)
 
 ;; Show trailing whitespace
 (setq show-trailing-whitespace t)
