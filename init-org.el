@@ -21,6 +21,10 @@
       (org-insert-todo-heading-respect-content)
     (org-meta-return)))  ; Calls org-insert-heading or org-table-wrap-region
 
+; Don't allow org-mode to override the C-c , binding for going to the next
+; misspelled word.
+(define-key org-mode-map (kbd "C-c ,") #'flyspell-goto-next-error)
+
 ; Use C-ct as an alternative for C-cC-t, so that we don't have to use quite
 ; as many keystrokes with GNU Screen's escape bound to C-t
 (define-key org-mode-map "\C-ct" 'org-todo)
