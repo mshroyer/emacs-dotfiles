@@ -33,6 +33,9 @@
 ; Don't re-evaluate code blocks when exporting.
 (setq org-export-babel-evaluate nil)
 
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((shell . t)))
+
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
 
