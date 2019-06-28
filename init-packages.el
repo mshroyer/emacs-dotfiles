@@ -62,6 +62,18 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package helm-org-rifle)
 
+  (ensure-package helm-projectile
+                  :config
+                  (helm-projectile-on))
+
+  (ensure-package projectile
+                  :diminish projectile-mode
+                  :init
+                  (setf projectile-keymap-prefix (kbd "C-c p"))
+                  :config
+                  (projectile-global-mode)
+                  (setf projectile-completion-system 'helm))
+
   (ensure-package magit
                   :bind ("C-c t" . magit-status))
 

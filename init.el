@@ -101,14 +101,14 @@
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(global-mark-ring-max 8)
- '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)))
+ '(gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-date)) t)
  '(gnus-treat-display-smileys nil)
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
  '(mark-ring-max 8)
  '(package-selected-packages
    (quote
-    (rust-mode tuareg fireplace helm-org-rifle auctex go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit helm diminish use-package cider)))
+    (clojure-mode helm web-mode use-package undo-tree tuareg rust-mode nasm-mode markdown-mode magit lua-mode helm-projectile helm-org-rifle haskell-mode go-mode fireplace expand-region elpy diminish cider auctex)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
@@ -383,7 +383,6 @@
 (global-set-key "\C-cu" 'calc)
 (global-set-key "\C-cm" 'mshroyer-insert-timestamp)
 (global-set-key "\C-cg" 'mshroyer-create-tags)
-(global-set-key "\C-cp" 'compile)
 (global-set-key "\C-cf" 'auto-fill-mode)
 
 
