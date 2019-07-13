@@ -380,10 +380,11 @@
 
 ;;; CUSTOM COMMANDS
 
-(global-set-key "\C-cu" 'calc)
-(global-set-key "\C-cm" 'mshroyer-insert-timestamp)
-(global-set-key "\C-cg" 'mshroyer-create-tags)
-(global-set-key "\C-cf" 'auto-fill-mode)
+(global-set-key (kbd "C-c f") 'auto-fill-mode)
+(global-set-key (kbd "C-c u") 'calc)
+(global-set-key (kbd "C-c m p") 'compile)
+(global-set-key (kbd "C-c m t") 'mshroyer-insert-timestamp)
+(global-set-key (kbd "C-c m g") 'mshroyer-create-tags)
 
 
 ;;; EDIFF
