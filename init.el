@@ -108,7 +108,7 @@
  '(mark-ring-max 8)
  '(package-selected-packages
    (quote
-    (use-package)))
+    (auctex clojure-mode cider tuareg haskell-mode rust-mode go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit projectile helm-org-rifle helm diminish use-package)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
