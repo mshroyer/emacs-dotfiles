@@ -107,6 +107,8 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package rust-mode)
 
+  (ensure-package haskell-mode)
+
   (ensure-package tuareg)
 
   (ensure-package cider)
