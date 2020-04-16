@@ -106,9 +106,7 @@
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
  '(mark-ring-max 8)
- '(package-selected-packages
-   (quote
-    (use-package)))
+ '(package-selected-packages (quote (use-package)))
  '(safe-local-variable-values (quote ((TeX-master . "manual") (TeX-master . t))))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
