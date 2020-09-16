@@ -127,8 +127,6 @@
  '(fixed-pitch ((t (:inherit nil))))
  '(isearch ((t (:background "pale violet red" :foreground "white"))))
  '(markdown-code-face ((t (:inherit fixed-pitch))))
- '(org-level-1 ((t (:inherit outline-1 :foreground "yellow green"))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "DarkGoldenrod3"))))
  '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
 
 ;;;; Packages.
