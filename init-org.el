@@ -81,7 +81,7 @@
 Returns a project name corresponding to the given org path (as
 defined by my personal todo.org layout), or nil if the item at
 point is not part of a project."
-  (let ((heading (car path)))
+  (let ((heading (car (last path))))
     (if (string= heading "Misc") nil
       heading)))
 
