@@ -104,6 +104,11 @@
  '(gofmt-command "~/go/bin/goimports")
  '(helm-split-window-inside-p t)
  '(mark-ring-max 8)
+ '(org-agenda-prefix-format
+   '((agenda . " %i %-12:c%?-12t% s%b ")
+     (todo . " %i %-12:c")
+     (tags . " %i %-12:c")
+     (search . " %i %-12:c")))
  '(package-selected-packages '(use-package))
  '(safe-local-variable-values '((TeX-master . "manual") (TeX-master . t)))
  '(send-mail-function 'smtpmail-send-it)
