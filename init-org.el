@@ -40,6 +40,8 @@
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
 
+(add-hook 'auto-save-hook #'org-save-all-org-buffers)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
