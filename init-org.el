@@ -77,6 +77,12 @@
           (org-agenda-skip-function 'mshroyer-org-skip-inactive)))
         ("p" "Project action items" todo-tree "TODO")))
 
+;; From https://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command
+(defun mshroyer-org-archive-done-tasks ()
+  "Archive only done tasks in the subtree"
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file))
+
 (defun mshroyer-org-project-for-path (path)
   "Get a project name for the given org path
 
