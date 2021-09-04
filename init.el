@@ -100,7 +100,7 @@
  '(erc-join-buffer 'bury)
  '(frame-background-mode nil)
  '(global-mark-ring-max 8)
- '(gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
+ '(gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date) t)
  '(gnus-treat-display-smileys nil)
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(gofmt-command "~/go/bin/goimports")
@@ -112,7 +112,7 @@
      (tags . " %i %-12:c")
      (search . " %i %-12:c")))
  '(package-selected-packages
-   '(org-roam auctex clojure-mode cider tuareg haskell-mode rust-mode go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit projectile helm-org-rifle helm diminish use-package))
+   '(erlang erlang-mode org-roam auctex clojure-mode cider tuareg haskell-mode rust-mode go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit projectile helm-org-rifle helm diminish use-package))
  '(safe-local-variable-values '((TeX-master . "manual") (TeX-master . t)))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")

@@ -126,6 +126,8 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package clojure-mode)
 
+  (ensure-package erlang)
+
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
