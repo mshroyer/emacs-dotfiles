@@ -128,6 +128,9 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package erlang)
 
+  ;; For chicken.
+  (ensure-package geiser)
+
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
