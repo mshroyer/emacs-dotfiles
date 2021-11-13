@@ -134,4 +134,13 @@ So I'll just keep using this macro for now. It's cool."
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
-  (add-to-list 'package-selected-packages 'auctex))
+  (add-to-list 'package-selected-packages 'auctex)
+
+  ;; Don't need `ensure-package` because the mode is provided in ./elisp.
+  (use-package dtrace-script-mode
+    :config
+    (add-to-list 'auto-mode-alist
+                 '("\\.d$" . dtrace-script-mode))
+    (add-hook 'dtrace-script-mode-hook
+              (lambda ()
+                (setf indent-tabs-mode t)))))
