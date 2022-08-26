@@ -398,12 +398,6 @@
                              (kill-buffer ediff-buffer-B)
                              (kill-buffer ediff-buffer-C)))
 
-;;; PAREDIT
-
-(add-hook 'paredit-mode-hook
-          (lambda ()
-            (local-set-key (kbd "M-[") 'paredit-wrap-square)))
-
 
 ;;; TRAMP
 
