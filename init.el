@@ -393,6 +393,11 @@
 ;;; EDIFF
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(add-hook 'ediff-quit-hook (lambda ()
+                             (kill-buffer ediff-buffer-A)
+                             (kill-buffer ediff-buffer-B)
+                             (kill-buffer ediff-buffer-C)
+                             (kill-buffer ediff-buffer-D)))
 
 ;;; PAREDIT
 
