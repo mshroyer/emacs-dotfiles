@@ -131,6 +131,8 @@ So I'll just keep using this macro for now. It's cool."
   ;; For chicken.
   (ensure-package geiser)
 
+  (ensure-package hack-mode)
+
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
