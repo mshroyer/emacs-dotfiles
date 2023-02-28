@@ -99,7 +99,7 @@
    '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
  '(erc-join-buffer 'bury)
  '(frame-background-mode nil)
- '(geiser-active-implementations '(chicken))
+ '(geiser-active-implementations '(chicken) t)
  '(global-mark-ring-max 8)
  '(gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date) t)
  '(gnus-treat-display-smileys nil)
@@ -113,7 +113,7 @@
      (tags . " %i %-12:c")
      (search . " %i %-12:c")))
  '(package-selected-packages
-   '(geiser erlang erlang-mode org-roam auctex clojure-mode cider tuareg haskell-mode rust-mode go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit projectile helm-org-rifle helm diminish use-package))
+   '(flycheck yasnippet company lsp-ui rustic lsp-mode hack-mode geiser erlang erlang-mode org-roam auctex clojure-mode cider tuareg haskell-mode rust-mode go-mode elpy markdown-mode web-mode lua-mode nasm-mode expand-region undo-tree magit projectile helm-org-rifle helm diminish use-package))
  '(safe-local-variable-values '((TeX-master . "manual") (TeX-master . t)))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")
@@ -763,3 +763,4 @@
 ;;; RESTORE DESKTOP
 
 ;(desktop-save-mode 1)
+(put 'downcase-region 'disabled nil)
