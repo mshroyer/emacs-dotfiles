@@ -155,9 +155,9 @@ So I'll just keep using this macro for now. It's cool."
                               ("C-c C-c s" . lsp-rust-analyzer-status))
                   :config
                   ;; uncomment for less flashiness
-                  ;; (setq lsp-eldoc-hook nil)
-                  ;; (setq lsp-enable-symbol-highlighting nil)
-                  ;; (setq lsp-signature-auto-activate nil)
+                  (setq lsp-eldoc-hook nil)
+                  (setq lsp-enable-symbol-highlighting nil)
+                  (setq lsp-signature-auto-activate nil)
 
                   ;; comment to disable rustfmt on save
                   (setq rustic-format-on-save t)
