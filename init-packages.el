@@ -112,7 +112,7 @@ So I'll just keep using this macro for now. It's cool."
                   (lsp-eldoc-render-all t)
                   (lsp-idle-delay 0.6)
                   ;; enable / disable the hints as you prefer:
-                  (lsp-rust-analyzer-server-display-inlay-hints t)
+                  (lsp-rust-analyzer-server-display-inlay-hints nil)
                   (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
                   (lsp-rust-analyzer-display-chaining-hints t)
                   (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
