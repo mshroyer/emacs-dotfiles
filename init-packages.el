@@ -100,7 +100,7 @@ So I'll just keep using this macro for now. It's cool."
                             (lambda ()
                               (make-local-variable 'tab-stop-list)
                               (make-local-variable 'tab-always-indent)
-                              (setq tab-stop-list 8
+                              (setq tab-width 24
                                     tab-always-indent nil
                                     indent-tabs-mode t))))
 
