@@ -87,7 +87,8 @@ So I'll just keep using this macro for now. It's cool."
   (ensure-package undo-tree
                   :diminish undo-tree-mode
                   :config
-                  (global-undo-tree-mode 1))
+                  (global-undo-tree-mode 1)
+                  (setq undo-tree-auto-save-history nil))
 
   (ensure-package expand-region
                   :bind ("C-c =" . er/expand-region))
