@@ -29,6 +29,8 @@ So I'll just keep using this macro for now. It's cool."
 (when (require 'use-package nil t)
   (ensure-package diminish)
 
+  (ensure-package color-theme-modern)
+
   (ensure-package helm
                   :diminish helm-mode
                   :bind (("C-c h" . helm-command-prefix)
