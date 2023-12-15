@@ -13,7 +13,9 @@ semanticdb/
 ac-comphist.dat
 ede-projects.el
 .org-id-locations
+org-roam.db
 bookmarks
 recentf
 projectile-bookmarks.eld
+projectile.cache
 .lsp-session-v1
