@@ -83,6 +83,9 @@ So I'll just keep using this macro for now. It's cool."
                   :config
                   (projectile-global-mode))
 
+  (ensure-package rg)
+  (ensure-package helm-rg)
+
   (ensure-package magit
                   :bind ("C-c t" . magit-status))
 
