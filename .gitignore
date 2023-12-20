@@ -2,6 +2,7 @@
 \#*\#
 auto-save-list/
 eshell/
+elpy/
 server/
 transient/
 session.*
