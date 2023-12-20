@@ -699,7 +699,6 @@
 ;; Text mode...
 ;(define-key text-mode-map "\C-cn" 'mshroyer-new-journal-entry)
 (define-key text-mode-map "\C-c\C-o" 'org-open-at-point)
-(define-key text-mode-map "\C-ct" 'artist-mode)
 (define-key text-mode-map (kbd "TAB") 'tab-to-tab-stop)
 (add-hook 'text-mode-hook
           (lambda ()
