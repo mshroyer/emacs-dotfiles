@@ -40,7 +40,9 @@
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
 
-(add-hook 'auto-save-hook #'org-save-all-org-buffers)
+(add-hook 'auto-save-hook (lambda ()
+                            (let ((inhibit-message t))
+                              (org-save-all-org-buffers))))
 
 (add-hook 'org-mode-hook
           (lambda ()
