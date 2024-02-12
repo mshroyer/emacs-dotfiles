@@ -44,6 +44,14 @@
                             (let ((inhibit-message t))
                               (org-save-all-org-buffers))))
 
+; Recalculate buffer tables automatically before saving.
+(defun mshroyer/maybe-recalculate-org-buffer-tables ()
+  (when (eq major-mode 'org-mode)
+    (org-table-recalculate-buffer-tables)))
+
+(add-hook 'before-save-hook
+          #'mshroyer/maybe-recalculate-org-buffer-tables)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
