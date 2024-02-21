@@ -57,7 +57,7 @@
 
 ;;;; Local settings.
 
-(defvar local-frame-font "Source Code Pro-10"
+(defvar local-frame-font nil
   "Font to be used for GUI frames.")
 
 (defvar local-server-selection '(:emacs)
@@ -72,7 +72,7 @@
 (defun local-frame-setup (frame)
   "Apply local settings to a frame."
   (with-selected-frame frame
-    (when (and frame (assoc 'font-backend (frame-parameters)))
+    (when (and frame local-frame-font (assoc 'font-backend (frame-parameters)))
       (set-frame-font local-frame-font nil t))))
 
 (mshroyer-add-frame-hook #'local-frame-setup)
