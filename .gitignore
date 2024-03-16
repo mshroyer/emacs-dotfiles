@@ -3,6 +3,7 @@
 auto-save-list/
 eshell/
 elpy/
+eln-cache/
 server/
 transient/
 session.*
