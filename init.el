@@ -135,6 +135,9 @@
  '(ediff-odd-diff-C ((t (:background "dim gray"))))
  '(fixed-pitch ((t (:inherit nil))))
  '(isearch ((t (:background "pale violet red" :foreground "white"))))
+ '(lsp-headerline-breadcrumb-path-face ((t (:foreground "black" :inherit font-lock-string-face))))
+ '(lsp-headerline-breadcrumb-project-prefix-face ((t (:weight bold :foreground "black" :inherit font-lock-string-face))))
+ '(lsp-headerline-breadcrumb-symbols-face ((t (:weight bold :foreground "black" :inherit font-lock-doc-face))))
  '(markdown-code-face ((t (:inherit fixed-pitch))))
  '(trailing-whitespace ((t (:background "khaki3" :foreground "black")))))
 
