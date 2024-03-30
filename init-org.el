@@ -40,6 +40,9 @@
 ; Always show context when creating sparse trees:
 (setq org-show-siblings t)
 
+; Allow image widths to be configured with ATTR_* keywords:
+(setq org-image-actual-width nil)
+
 ; Recalculate buffer tables automatically before saving.
 (defun mshroyer/maybe-recalculate-org-buffer-tables ()
   (when (eq major-mode 'org-mode)
