@@ -347,6 +347,9 @@
 ;; Show trailing whitespace
 (setq show-trailing-whitespace t)
 
+;; Set dictionary language
+(setenv "DICTIONARY" "en_US")
+
 ;; Shortcut to enable flyspell for buffer
 (global-set-key "\C-cs" 'mshroyer-flyspell-enable)
 
