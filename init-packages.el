@@ -115,7 +115,8 @@ So I'll just keep using this macro for now. It's cool."
                   :custom
                   ;; what to use when checking on-save. "check" is default, I prefer clippy
                   (lsp-rust-analyzer-cargo-watch-command "clippy")
-                  (lsp-eldoc-render-all t)
+                  (lsp-eldoc-render-all nil)
+                  (lsp-eldoc-enable-hover nil)
                   (lsp-idle-delay 0.6)
                   ;; enable / disable the hints as you prefer:
                   (lsp-rust-analyzer-server-display-inlay-hints nil)
@@ -166,17 +167,7 @@ So I'll just keep using this macro for now. It's cool."
                   (setq lsp-signature-auto-activate nil)
 
                   ;; comment to disable rustfmt on save
-                  (setq rustic-format-on-save t)
-                  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
-
-  (defun rk/rustic-mode-hook ()
-    ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-    ;; save rust buffers that are not file visiting. Once
-    ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-    ;; no longer be necessary.
-    (when buffer-file-name
-      (setq-local buffer-save-without-query t))
-    (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+                  (setq rustic-format-trigger 'on-save))
 
   (ensure-package company
     :custom
