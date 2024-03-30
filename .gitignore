@@ -9,6 +9,7 @@ session.*
 tramp
 loaddefs.el
 elpa/
+org-persist/
 semanticdb/
 .DS_Store
 ac-comphist.dat
