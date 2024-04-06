@@ -254,6 +254,10 @@
 (global-set-key "\C-cw\C-b" 'windmove-left)
 (global-set-key "\C-cw\C-f" 'windmove-right)
 
+;; Prefer UTF-8.  This seems to be necessary to prevent some utf-8 org files
+;; from being misinterpreted as latin-1, as of emacs 29.3 on Windows.
+(prefer-coding-system 'utf-8)
+
 ;; Specify Unix system EOL mnemonics (these settings won't be the default
 ;; on Windows versions of Emacs)
 (setq eol-mnemonic-unix ":"
