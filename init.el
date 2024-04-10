@@ -32,6 +32,11 @@
   (require 'gnutls)
   (add-to-list 'gnutls-trustfiles "/etc/ssl/cert.pem"))
 
+;;; Unix.
+
+(unless (member system-type '(windows-nt msdos))
+  (xterm-mouse-mode 1))
+
 ;;; Windows.
 
 ;; The HOME environment variable may not necessarily be set on Windows
