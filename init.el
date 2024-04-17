@@ -261,7 +261,7 @@
 
 ;; Prefer UTF-8.  This seems to be necessary to prevent some utf-8 org files
 ;; from being misinterpreted as latin-1, as of emacs 29.3 on Windows.
-(prefer-coding-system 'utf-8)
+(prefer-coding-system 'utf-8-unix)
 
 ;; Specify Unix system EOL mnemonics (these settings won't be the default
 ;; on Windows versions of Emacs)
