@@ -146,7 +146,11 @@ So I'll just keep using this macro for now. It's cool."
                   :config
                   (elpy-enable))
 
-  (ensure-package go-mode)
+  (ensure-package go-mode
+                  :config
+                  (add-hook 'go-mode-hook
+                            (lambda ()
+                              (add-hook 'before-save-hook #'gofmt-before-save nil))))
 
   (ensure-package rust-mode)
 
