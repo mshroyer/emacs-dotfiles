@@ -210,6 +210,10 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package hack-mode)
 
+  ;; Needed to prevent package signature check errors when accessing ELPA from
+  ;; an older Emacs package.
+  (ensure-package gnu-elpa-keyring-update)
+
   ;; AucTeX doesn't provide its package name.
   (use-package tex
     :ensure auctex)
