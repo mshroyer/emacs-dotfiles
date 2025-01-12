@@ -194,6 +194,10 @@
 
 ;;; FILE HANDLING
 
+;; Don't create lock files, this causes problems when opening files on pilgrim
+;; via SMB from Emacs 27.2 on EL 9.
+(setq-default create-lockfiles nil)
+
 ;; Auto-save every four minutes, and delete auto-save files when the buffer
 ;; is saved or killed
 (setq auto-save-interval 240
