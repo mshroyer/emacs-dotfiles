@@ -203,13 +203,8 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package erlang)
 
-  ;; For chicken.
-  (ensure-package geiser)
-
   (ensure-package slime)
   (ensure-package helm-slime)
-
-  (ensure-package hack-mode)
 
   ;; Needed to prevent package signature check errors when accessing ELPA from
   ;; an older Emacs package.
