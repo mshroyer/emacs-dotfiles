@@ -26,6 +26,11 @@ So I'll just keep using this macro for now. It's cool."
    `((use-package ,name :ensure t ,@args)
      (add-to-list 'package-selected-packages ',name))))
 
+;; The ensure-package invocations below will ensure their targets are
+;; dynamically added to package-selected-packages, but use-package itself must
+;; be added to guard it against package-autoremove.
+(add-to-list 'package-selected-packages 'use-package)
+
 (when (require 'use-package nil t)
   (ensure-package diminish)
 
