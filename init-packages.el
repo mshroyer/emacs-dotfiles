@@ -67,19 +67,6 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package helm-org-rifle)
 
-  (ensure-package org-roam
-                  :bind (("C-c n l" . org-roam-buffer-toggle)
-                         ("C-c n f" . org-roam-node-find)
-                         ("C-c n i" . org-roam-node-insert))
-
-                  :init
-                  ;; Suppress notification about migrating to v2.
-                  (setq org-roam-v2-ack t)
-
-                  :config
-                  (org-roam-setup)
-                  (org-roam-db-autosync-mode))
-
   (ensure-package projectile
                   :diminish projectile-mode
                   :init
@@ -201,12 +188,6 @@ So I'll just keep using this macro for now. It's cool."
   (ensure-package haskell-mode)
 
   (ensure-package tuareg)
-
-  (ensure-package cider)
-
-  (ensure-package clojure-mode)
-
-  (ensure-package erlang)
 
   (ensure-package slime)
   (ensure-package helm-slime)
