@@ -134,6 +134,12 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package markdown-mode)
 
+  (ensure-package yaml-mode
+                  :config
+                  (add-hook 'yaml-mode-hook
+                            (lambda ()
+                              (setq indent-tabs-mode nil))))
+
   (ensure-package elpy
                   :config
                   (elpy-enable))
