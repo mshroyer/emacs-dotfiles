@@ -158,6 +158,10 @@
 ;; Contains autoloads processed from the user-elisp tree.
 (load generated-autoload-file)
 
+;; Don't save package-selected-packages in init.el.
+(defun package--save-selected-packages (&optional value)
+  nil)
+
 (load-file (concat user-emacs-directory "/init-packages.el"))
 
 ;;; Required features.
