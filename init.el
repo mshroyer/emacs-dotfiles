@@ -1,6 +1,6 @@
 ;;; init.el --- mshroyer's emacs init
 
-;; Intended for use with Emacs 25 or newer.
+;; Intended for use with Emacs 27 or newer.
 
 ;;;; Language dependencies.
 
