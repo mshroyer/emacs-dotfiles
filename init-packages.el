@@ -140,6 +140,10 @@ So I'll just keep using this macro for now. It's cool."
                             (lambda ()
                               (setq indent-tabs-mode nil))))
 
+  (ensure-package ruff-format
+                  :config
+                  (add-hook 'python-mode-hook 'ruff-format-on-save-mode))
+
   (ensure-package go-mode
                   :config
                   (add-hook 'go-mode-hook
