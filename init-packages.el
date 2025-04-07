@@ -140,7 +140,8 @@ So I'll just keep using this macro for now. It's cool."
                   :config
                   (add-hook 'yaml-mode-hook
                             (lambda ()
-                              (setq indent-tabs-mode nil))))
+                              (setq indent-tabs-mode nil)
+                              (auto-fill-mode 0))))
 
   (ensure-package ruff-format
                   :config
