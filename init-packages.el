@@ -118,6 +118,8 @@ So I'll just keep using this macro for now. It's cool."
                   (lsp-rust-analyzer-display-closure-return-type-hints t)
                   (lsp-rust-analyzer-display-parameter-hints nil)
                   (lsp-rust-analyzer-display-reborrow-hints nil)
+                  :hook
+                  ((python-mode . lsp))
                   :config
                   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
