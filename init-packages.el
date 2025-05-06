@@ -134,7 +134,12 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package web-mode)
 
-  (ensure-package markdown-mode)
+  (ensure-package markdown-mode
+                  :config
+                  (add-hook 'markdown-mode-hook
+                            (lambda ()
+                              (auto-fill-mode 0)
+                              (visual-line-mode t))))
 
   (ensure-package yaml-mode
                   :config

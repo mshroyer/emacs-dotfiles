@@ -498,10 +498,7 @@
   (setq auto-mode-alist
         (append '(("\\.mk?d$" . markdown-mode)
                   ("\\.markdown$" . markdown-mode))
-                auto-mode-alist))
-  (add-hook 'markdown-mode-hook
-          (lambda ()
-            (auto-fill-mode t))))
+                auto-mode-alist)))
 
 ;; YAML mode...
 (when (featurep 'yaml-mode)
