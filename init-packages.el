@@ -177,6 +177,9 @@ So I'll just keep using this macro for now. It's cool."
                   (setq lsp-enable-symbol-highlighting nil)
                   (setq lsp-signature-auto-activate nil)
 
+                  ;; Use nightly for unstable features
+                  (setq rustic-rustfmt-args "+nightly")
+
                   ;; comment to disable rustfmt on save
                   (setq rustic-format-trigger 'on-save))
 
