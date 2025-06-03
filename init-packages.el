@@ -105,8 +105,8 @@ So I'll just keep using this macro for now. It's cool."
   (ensure-package lsp-mode
                   :commands lsp
                   :custom
-                  ;; what to use when checking on-save. "check" is default, I prefer clippy
-                  (lsp-rust-analyzer-cargo-watch-command "clippy")
+                  ;; what to use when checking on-save. "check" is default, "clippy" is another option
+                  (lsp-rust-analyzer-cargo-watch-command "check")
                   (lsp-eldoc-render-all nil)
                   (lsp-eldoc-enable-hover nil)
                   (lsp-idle-delay 0.6)
