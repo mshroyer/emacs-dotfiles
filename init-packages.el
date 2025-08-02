@@ -132,7 +132,9 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package lua-mode)
 
-  (ensure-package web-mode)
+  (ensure-package web-mode
+                  :config
+                  (setq web-mode-markup-indent-offset 2))
 
   (ensure-package markdown-mode)
 
