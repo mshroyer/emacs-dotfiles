@@ -118,8 +118,6 @@ So I'll just keep using this macro for now. It's cool."
                   (lsp-rust-analyzer-display-closure-return-type-hints t)
                   (lsp-rust-analyzer-display-parameter-hints nil)
                   (lsp-rust-analyzer-display-reborrow-hints nil)
-                  :hook
-                  ((python-mode . lsp))
                   :config
                   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
@@ -144,6 +142,13 @@ So I'll just keep using this macro for now. It's cool."
                             (lambda ()
                               (setq indent-tabs-mode nil)
                               (auto-fill-mode 0))))
+
+  (ensure-package lsp-pyright
+    :ensure t
+    :custom (lsp-pyright-langserver-command "pyright")
+    :hook (python-mode . (lambda ()
+                            (require 'lsp-pyright)
+                            (lsp))))  ; or lsp-deferred
 
   (ensure-package ruff-format
                   :config
