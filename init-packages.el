@@ -46,6 +46,8 @@ So I'll just keep using this macro for now. It's cool."
                   (setf helm-buffer-max-length 32
                         helm-buffers-fuzzy-matching t
                         helm-recentf-fuzzy-match t)
+                  :custom
+                  (helm-move-to-line-cycle-in-source nil)
                   :config
                   (helm-mode 1)
                   (helm-autoresize-mode t)
