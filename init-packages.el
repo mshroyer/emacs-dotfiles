@@ -160,7 +160,8 @@ So I'll just keep using this macro for now. It's cool."
                   :config
                   (add-hook 'go-mode-hook
                             (lambda ()
-                              (add-hook 'before-save-hook #'gofmt-before-save nil))))
+                              (add-hook 'before-save-hook #'gofmt-before-save nil)
+                              (lsp))))
 
   (ensure-package rust-mode)
 
