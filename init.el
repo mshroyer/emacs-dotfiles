@@ -13,6 +13,15 @@
 
 (require 'cl-lib)
 
+;;;; Theme.
+
+;; Use color-theme-modern to get the "classic" theme back.
+(load-theme 'wombat t t)
+; The theme gets reset later during initialization if we enable it inline.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (enable-theme 'wombat)))
+
 ;;;; Operating system support.
 
 ;;; MacOS.
