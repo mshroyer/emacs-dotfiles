@@ -202,4 +202,19 @@ frame being created during init."
              (buffer-name))))
 
 
+(defun mshroyer/toggle-comment ()
+  "Toggles commenting of the current line or active region"
+
+  (interactive)
+  (let ((beginning (if (region-active-p)
+                       (region-beginning)
+                     (line-beginning-position)))
+        (end (if (region-active-p)
+                 (region-end)
+               (line-end-position))))
+    (if (comment-only-p beginning end)
+        (uncomment-region beginning end)
+      (comment-region beginning end))))
+
+
 (provide 'mshroyer-lib)

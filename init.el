@@ -415,6 +415,7 @@
 
 (global-set-key (kbd "C-c f") 'auto-fill-mode)
 (global-set-key (kbd "C-c u") 'calc)
+(global-set-key (kbd "C-c m c") #'mshroyer/toggle-comment)
 (global-set-key (kbd "C-c m p") 'compile)
 (global-set-key (kbd "C-c m t") 'mshroyer-insert-timestamp)
 (global-set-key (kbd "C-c m g") 'mshroyer-create-tags)
