@@ -681,6 +681,7 @@
 
 ;; JavaScript mode...
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(setq js-indent-level 2)
 
 ;; Emacs Lisp mode...
 (add-paredit-hook emacs-lisp-mode)
