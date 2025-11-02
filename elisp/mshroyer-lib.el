@@ -217,4 +217,30 @@ frame being created during init."
       (comment-region beginning end))))
 
 
+(defun mshroyer/clang-format-enabled-here-p ()
+  (and (executable-find (or (bound-and-true-p clang-format-executable)
+                            "clang-format"))
+       (locate-dominating-file default-directory ".clang-format")))
+
+
+(defun mshroyer/clang-format-before-save ()
+  (when (and (derived-mode-p 'c-mode 'c++-mode 'objc-mode)
+             (mshroyer/clang-format-enabled-here-p))
+    (clang-format-buffer)))
+
+
+(defun mshroyer/clang-format-or-indent ()
+  (interactive)
+  (if (mshroyer/clang-format-enabled-here-p)
+      (if (region-active-p)
+          (clang-format)
+        (progn
+          (save-excursion
+           (let ((beg (line-beginning-position))
+                 (end (line-end-position)))
+             (clang-format beg end)))
+          (back-to-indentation)))
+    (call-interactively #'indent-for-tab-command)))
+
+
 (provide 'mshroyer-lib)

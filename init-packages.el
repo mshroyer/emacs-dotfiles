@@ -104,6 +104,11 @@ So I'll just keep using this macro for now. It's cool."
                                     tab-always-indent nil
                                     indent-tabs-mode t))))
 
+  (ensure-package clang-format
+                  :commands (clang-format-buffer clang-format-region clang-format-dwim)
+                  :init
+                  (setq clang-format-style-option "file"))
+
   (ensure-package lsp-mode
                   :commands lsp
                   :custom

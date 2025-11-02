@@ -555,13 +555,22 @@
 (add-hook 'c-initialization-hook
           (lambda ()
             (define-key c-mode-base-map "\C-m" 'c-context-line-break)))
-(add-hook 'c-mode-hook
+
+(add-hook 'c-mode-common-hook
           (lambda ()
             (make-local-variable 'paragraph-start)
             (setq paragraph-start
                   "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|@[a-zA-Z].*\\)\\|^\f")
             (setq show-trailing-whitespace t)
-            (semantic-mode t)))
+            (semantic-mode t)
+
+            ;; Use the project style if present:
+            (setq-local clang-format-style-option "file")
+            ;; Format on save (buffer-local):
+            (add-hook 'before-save-hook #'mshroyer/clang-format-before-save nil t)
+            ;; Convenient keybinds:
+            (local-set-key (kbd "C-c C-f") #'clang-format-buffer)
+            (local-set-key (kbd "TAB") #'mshroyer/clang-format-or-indent)))))
 
 ;; C++ mode...
 
