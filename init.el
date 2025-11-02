@@ -570,7 +570,7 @@
             (add-hook 'before-save-hook #'mshroyer/clang-format-before-save nil t)
             ;; Convenient keybinds:
             (local-set-key (kbd "C-c C-f") #'clang-format-buffer)
-            (local-set-key (kbd "TAB") #'mshroyer/clang-format-or-indent)))))
+            (local-set-key (kbd "TAB") #'mshroyer/clang-format-or-indent)))
 
 ;; C++ mode...
 
