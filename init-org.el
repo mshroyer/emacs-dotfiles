@@ -6,6 +6,10 @@
 (global-set-key "\C-ck" 'mshroyer-org-show-unblocked-todo-tree)
 (global-set-key "\C-ci" 'mshroyer-org-show-inbox)
 
+;; Outline color customization
+
+(set-face-foreground 'outline-1 "orange1")
+
 ;; Terminal compatibility
 
 ; Backtab in terminal emulators such as gnome-terminal, konsole, etc.:
