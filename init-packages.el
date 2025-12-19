@@ -139,7 +139,9 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package web-mode
                   :config
-                  (setq web-mode-markup-indent-offset 2))
+                  (setq web-mode-markup-indent-offset 2)
+                  :hook (web-mode . (lambda ()
+                                      (setq visual-line-mode t))))
 
   (ensure-package markdown-mode)
 
