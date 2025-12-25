@@ -512,11 +512,12 @@
             (setq scroll-margin 0)))
 
 ;; HTML mode...
-(let ((mode (if (featurep 'web-mode) 'web-mode 'html-mode)))
+(let ((mode (if (featurep 'web-mode) 'web-mode 'mhtml-mode)))
   (add-to-list 'auto-mode-alist (cons "\\.mtml$" mode))
   (add-to-list 'auto-mode-alist (cons "\\.ng$" mode))
   (add-to-list 'auto-mode-alist (cons "\\.soy$" mode))
-  (add-to-list 'auto-mode-alist (cons "\\.html?\\'" mode)))
+  (add-to-list 'auto-mode-alist (cons "\\.html?$\\'" mode))
+  (add-to-list 'auto-mode-alist (cons "\\.shtml?$\\'" mode)))
 
 ;; CSS mode...
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
