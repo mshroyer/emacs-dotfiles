@@ -60,7 +60,8 @@
 ;;; Load paths and package sources.
 
 ;; User Emacs directories
-(setq user-emacs-directory "~/.emacs.d"
+(setq user-emacs-directory (string-trim-right
+                            (file-name-directory user-init-file) "/")
       user-elisp-directory (concat user-emacs-directory "/elisp")
       generated-autoload-file (concat user-emacs-directory
 				      "/loaddefs.el"))
