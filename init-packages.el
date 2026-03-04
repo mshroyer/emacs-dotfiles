@@ -195,6 +195,8 @@ So I'll just keep using this macro for now. It's cool."
                   ;; comment to disable rustfmt on save
                   (setq rustic-format-trigger 'on-save))
 
+  (ensure-package sed-mode)
+
   (ensure-package company
     :custom
     (company-idle-delay 0.5) ;; how long to wait until popup
