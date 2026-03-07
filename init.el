@@ -803,6 +803,19 @@
   (and (boundp 'local-server-selection)
        (member server-name local-server-selection)))
 
+(defun mshroyer/tmp-server-file-p ()
+  (and buffer-file-name
+       (string-match-p "/tmp/" buffer-file-name)))
+
+(defun mshroyer/server-edit ()
+  "Wrap server-edit with auto-save functionality
+Acts like server-edit, but automatically saves /tmp/ files without
+prompting."
+  (interactive)
+  (when (mshroyer/tmp-server-file-p)
+    (save-buffer))
+  (server-edit))
+
 ;; Builtin Emacs server
 (when (should-start-server :emacs)
   (server-start)
@@ -814,10 +827,15 @@
                 (bury-buffer)
                 (switch-to-buffer-other-frame server-buf))))
 
+  ;; Use server-edit wrapper.
+  (add-hook 'server-visit-hook
+            (lambda ()
+              (local-set-key (kbd "C-x #") #'mshroyer/server-edit)))
+
   ;; ...and clean up when we're done with the client.
-  (add-hook 'server-done-hook (lambda ()
-                                (kill-buffer nil)
-                                (redraw-display))))
+  (add-hook 'server-done-hook
+            (lambda ()
+              (redraw-display))))
 
 
 ;;; RESTORE DESKTOP
