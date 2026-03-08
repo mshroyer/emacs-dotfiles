@@ -102,19 +102,42 @@
  ;; If there is more than one, they won't work right.
  '(LaTeX-verbatim-environments '("verbatim" "verbatim*" "Verbatim"))
  '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f"
+    "#f6f3e8"])
  '(calendar-latitude 37.4)
  '(calendar-location-name "Sunnyvale, CA")
  '(calendar-longitude -122.1)
  '(compilation-error-regexp-alist
-   '(google3-build-log-parser-info google3-build-log-parser-warning google3-build-log-parser-error google3-build-log-parser-python-traceback google-blaze-error google-log-error google-log-warning google-log-info google-log-fatal-message google-forge-python gunit-stack-trace absoft ada aix ant bash borland python-tracebacks-and-caml cmake cmake-info comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line clang-include clang-include gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line))
+   '(google3-build-log-parser-info google3-build-log-parser-warning
+                                   google3-build-log-parser-error
+                                   google3-build-log-parser-python-traceback
+                                   google-blaze-error google-log-error
+                                   google-log-warning google-log-info
+                                   google-log-fatal-message
+                                   google-forge-python gunit-stack-trace
+                                   absoft ada aix ant bash borland
+                                   python-tracebacks-and-caml cmake cmake-info
+                                   comma cucumber msft edg-1 edg-2 epc ftnchek
+                                   iar ibm irix java jikes-file maven
+                                   jikes-line clang-include clang-include
+                                   gcc-include ruby-Test::Unit gnu lcc makepp
+                                   mips-1 mips-2 msft omake oracle perl php
+                                   rxp sparc-pascal-file sparc-pascal-line
+                                   sparc-pascal-example sun sun-ada watcom
+                                   4bsd gcov-file gcov-header gcov-nomark
+                                   gcov-called-line gcov-never-called
+                                   perl--Pod::Checker perl--Test perl--Test2
+                                   perl--Test::Harness weblint guile-file
+                                   guile-line))
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    '("b8c5adfc0230bd8e8d73450c2cd4044ad7ba1d24458e37b6dec65607fc392980" default))
  '(ecb-layout-window-sizes nil)
  '(ecb-options-version "2.40")
  '(elpy-modules
-   '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
+   '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv
+                         elpy-module-yasnippet elpy-module-django
+                         elpy-module-sane-defaults))
  '(erc-join-buffer 'bury)
  '(frame-background-mode nil)
  '(geiser-active-implementations '(chicken) t)
@@ -126,10 +149,9 @@
  '(helm-split-window-inside-p t)
  '(mark-ring-max 4)
  '(org-agenda-prefix-format
-   '((agenda . " %i %-12:c%?-12t% s%b ")
-     (todo . " %i %-12:c")
-     (tags . " %i %-12:c")
-     (search . " %i %-12:c")))
+   '((agenda . " %i %-12:c%?-12t% s%b ") (todo . " %i %-12:c")
+     (tags . " %i %-12:c") (search . " %i %-12:c")))
+ '(recentf-exclude '("^\\/tmp\\/" "^\\/var\\/run\\/user\\/"))
  '(safe-local-variable-values '((TeX-master . "manual") (TeX-master . t)))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.gmail.com")
