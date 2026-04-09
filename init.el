@@ -826,7 +826,10 @@
 
 (defun mshroyer/tmp-server-file-p ()
   (and buffer-file-name
-       (string-match-p "/tmp/" buffer-file-name)))
+       (or
+        (string-match-p "/tmp/" buffer-file-name)
+        ; git commit messages
+        (string-match-p "/COMMIT_EDITMSG" buffer-file-name))))
 
 (defun mshroyer/server-edit ()
   "Wrap server-edit with auto-save functionality
