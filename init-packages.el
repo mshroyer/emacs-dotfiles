@@ -127,6 +127,7 @@ So I'll just keep using this macro for now. It's cool."
                   (lsp-rust-analyzer-display-parameter-hints nil)
                   (lsp-rust-analyzer-display-reborrow-hints nil)
                   :config
+                  (define-key lsp-mode-map (kbd "C-c p") lsp-command-map)
                   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
   (ensure-package lsp-ui
