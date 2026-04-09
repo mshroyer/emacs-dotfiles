@@ -116,7 +116,8 @@ So I'll just keep using this macro for now. It's cool."
                   (lsp-rust-analyzer-cargo-watch-command "check")
                   (lsp-eldoc-render-all nil)
                   (lsp-eldoc-enable-hover nil)
-                  (lsp-idle-delay 0.6)
+                  (lsp-idle-delay 1.5)
+                  (eldoc-idle-delay 1.5)
                   ;; enable / disable the hints as you prefer:
                   (lsp-rust-analyzer-server-display-inlay-hints nil)
                   (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
@@ -133,6 +134,7 @@ So I'll just keep using this macro for now. It's cool."
                   :custom
                   (lsp-ui-peek-always-show t)
                   (lsp-ui-sideline-show-hover t)
+                  (lsp-ui-sideline-delay 1.5)
                   (lsp-ui-doc-enable nil))
 
   (ensure-package lua-mode)
