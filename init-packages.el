@@ -159,7 +159,7 @@ So I'll just keep using this macro for now. It's cool."
     :custom (lsp-pyright-langserver-command "pyright")
     :hook (python-mode . (lambda ()
                             (require 'lsp-pyright)
-                            (lsp))))  ; or lsp-deferred
+                            (lsp-deferred))))  ; or lsp
 
   (ensure-package ruff-format
                   :config
