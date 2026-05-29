@@ -859,8 +859,13 @@ prompting."
   ;; ...and clean up when we're done with the client.
   (add-hook 'server-done-hook
             (lambda ()
-              (redraw-display))))
+              (redraw-display)))
 
+  ;; Ensure new client frames appear in the foreground.  This is needed on at
+  ;; least Windows 11.
+  (add-hook 'server-after-make-frame-hook
+            (lambda ()
+              (select-frame-set-input-focus (selected-frame)))))
 
 ;;; RESTORE DESKTOP
 
