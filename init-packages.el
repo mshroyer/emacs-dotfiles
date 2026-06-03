@@ -7,6 +7,9 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
+;; Allow magit to require an upgraded version of transient.
+(setq package-install-upgrade-built-in t)
+
 (defmacro ensure-package (name &rest args)
   "Use the package and ensure it is installed.
 
