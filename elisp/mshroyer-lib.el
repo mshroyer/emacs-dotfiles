@@ -104,16 +104,27 @@ frame being created during init."
   (goto-char (point-min)))
 
 
-(defun mshroyer-timestamp-string ()
+(defun mshroyer/timestamp-string ()
   "Returns a Unix date(1)-format timestamp"
   (format-time-string "%a %b %e %H:%M:%S %Z %Y"))
 
 
-(defun mshroyer-insert-timestamp ()
+(defun mshroyer/insert-timestamp ()
   "Inserts a Unix date(1)-format timestamp in the current buffer"
 
   (interactive)
-  (insert (mshroyer-timestamp-string)))
+  (insert (mshroyer/timestamp-string)))
+
+
+(defun mshroyer/date-string ()
+  "Returns a YYYY-MM-DD string representing the current date"
+  (format-time-string "%Y-%m-%d"))
+
+
+(defun mshroyer/insert-date ()
+  "Inserts a YYYY-MM-DD string representing the current date"
+  (interactive)
+  (insert (mshroyer/date-string)))
 
 
 ;; Create a new journal entry
