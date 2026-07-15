@@ -76,9 +76,7 @@ So I'll just keep using this macro for now. It's cool."
                   :diminish projectile-mode
                   :init
                   (setf projectile-keymap-prefix (kbd "C-c p")
-                        projectile-completion-system 'helm)
-                  :config
-                  (projectile-global-mode))
+                        projectile-completion-system 'helm))
 
   (ensure-package rg)
   (ensure-package helm-rg)
