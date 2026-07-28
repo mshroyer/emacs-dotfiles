@@ -203,6 +203,8 @@ So I'll just keep using this macro for now. It's cool."
 
   (ensure-package powershell)
 
+  (ensure-package dockerfile-mode)
+
   (ensure-package company
     :custom
     (company-idle-delay 0.5) ;; how long to wait until popup
