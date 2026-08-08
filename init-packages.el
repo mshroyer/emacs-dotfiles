@@ -93,10 +93,20 @@ So I'll just keep using this macro for now. It's cool."
   (ensure-package expand-region
                   :bind ("C-c =" . er/expand-region))
 
-  (ensure-package nasm-mode
+  (ensure-package masm-mode
                   :init
                   (add-to-list 'auto-mode-alist
-                               '("\\.\\(asm\\|s\\)$" . nasm-mode))
+                               '("\\.\\(asm\\|s\\)$" . masm-mode))
+                  (add-hook 'masm-mode-hook
+                            (lambda ()
+                              (make-local-variable 'tab-stop-list)
+                              (make-local-variable 'tab-always-indent)
+                              (setq tab-width 10
+                                    tab-always-indent nil
+                                    indent-tabs-mode t)))))
+
+  (ensure-package nasm-mode
+                  :init
                   (add-hook 'nasm-mode-hook
                             (lambda ()
                               (make-local-variable 'tab-stop-list)
