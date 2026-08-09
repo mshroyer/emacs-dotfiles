@@ -103,7 +103,12 @@ So I'll just keep using this macro for now. It's cool."
                               (make-local-variable 'tab-always-indent)
                               (setq tab-width 10
                                     tab-always-indent nil
-                                    indent-tabs-mode t)))))
+                                    indent-tabs-mode t)))
+
+                  :config
+
+                  ; masm-colon mapping messes with typing options
+                  (define-key masm-mode-map ":" nil)))
 
   (ensure-package nasm-mode
                   :init
