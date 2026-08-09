@@ -108,7 +108,7 @@ So I'll just keep using this macro for now. It's cool."
                   :config
 
                   ; masm-colon mapping messes with typing options
-                  (define-key masm-mode-map ":" nil)))
+                  (define-key masm-mode-map ":" #'mshroyer/masm-colon)))
 
   (ensure-package nasm-mode
                   :init

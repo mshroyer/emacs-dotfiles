@@ -254,4 +254,17 @@ frame being created during init."
     (call-interactively #'indent-for-tab-command)))
 
 
+(defun mshroyer/masm-colon ()
+  "Insert a colon and convert the current line into a label, if appropriate.
+Avoids de-indenting declarations like `option casemap:none` as though
+they were labels, unlike masm-colon."
+  (interactive)
+  (call-interactively #'self-insert-command)
+  (save-excursion
+    (back-to-indentation)
+    (let ((line-rest (buffer-substring-no-properties (point) (line-end-position))))
+      (unless (string-match-p "[ \t]" line-rest)
+        (delete-horizontal-space)))))
+
+
 (provide 'mshroyer-lib)
