@@ -830,7 +830,9 @@
        (or
         (string-match-p "/tmp/" buffer-file-name)
         ; git commit messages
-        (string-match-p "/COMMIT_EDITMSG" buffer-file-name))))
+        (string-match-p "/COMMIT_EDITMSG" buffer-file-name)
+        ; Sapling commit messages
+        (string-match-p ".sl/edit-tmp/" buffer-file-name))))
 
 (defun mshroyer/server-edit ()
   "Wrap server-edit with auto-save functionality
