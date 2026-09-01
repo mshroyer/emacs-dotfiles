@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 (global-set-key "\C-ca" 'org-agenda)

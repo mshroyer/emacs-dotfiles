@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Diary mode...
 (defun diary-range (first &optional last on-sexps off-sexps)
   "Diary entry for a event spanning over a range of dates."

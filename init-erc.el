@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'erc)
 
 (add-hook 'erc-mode-hook

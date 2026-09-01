@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; init.el --- mshroyer's emacs init
 
 ;; Intended for use with Emacs 27 or newer.

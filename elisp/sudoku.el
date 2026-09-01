@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; sudoku.el -- Simple sudoku game, can download puzzles from the web.
 
 ;; Filename: sudoku.el

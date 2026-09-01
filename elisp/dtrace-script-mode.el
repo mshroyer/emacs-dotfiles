@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; dtrace-script-mode.el --- DTrace code editing commands for Emacs
 
 ;;; Commentary:

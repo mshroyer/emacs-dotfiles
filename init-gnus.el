@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; (require 'epa-file)
 ;; (epa-file-enable)
 ;; (setq epg-debug t)
