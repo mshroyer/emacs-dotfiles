@@ -161,7 +161,8 @@ So I'll just keep using this macro for now. It's cool."
                   (add-to-list 'auto-mode-alist
                                '("\\.html$" . web-mode))
                   :config
-                  (setq web-mode-markup-indent-offset 2)
+                  (setq web-mode-markup-indent-offset 2
+                        web-mode-enable-auto-closing t)
                   :hook (web-mode . (lambda ()
                                       (setq visual-line-mode t))))
 
