@@ -157,6 +157,9 @@ So I'll just keep using this macro for now. It's cool."
   (ensure-package lua-mode)
 
   (ensure-package web-mode
+                  :init
+                  (add-to-list 'auto-mode-alist
+                               '("\\.html$" . web-mode))
                   :config
                   (setq web-mode-markup-indent-offset 2)
                   :hook (web-mode . (lambda ()
