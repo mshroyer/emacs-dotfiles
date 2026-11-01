@@ -555,6 +555,11 @@
                   ("\\.markdown$" . markdown-mode))
                 auto-mode-alist)))
 
+;; RST mode...
+(add-hook 'rst-mode-hook
+          (lambda ()
+            (set-fill-column 100)))
+
 ;; YAML mode...
 (when (featurep 'yaml-mode)
   (setq auto-mode-alist
