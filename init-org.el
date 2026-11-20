@@ -60,7 +60,8 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (auto-fill-mode 1)))
+            (auto-fill-mode 1)
+            (set-fill-column 100)))
 
 (setq org-agenda-files (mapcar (lambda (file)
                                  (concat org-directory file))
