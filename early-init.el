@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Work around -mmacosx-version-min=18.0 compilation errors
 (when (eq system-type 'darwin)
   (setenv "MACOSX_DEPLOYMENT_TARGET"
